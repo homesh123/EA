@@ -1,28 +1,20 @@
 const QUESTIONS = [
-  {
-    id: "background",
-    q: "What is your current background?",
+  { id: "background", q: "What best describes you right now?", clarify: "Pick the one that fits you — no wrong answers.",
     options: [
-      { value: "swexp", label: "Software Engineer", desc: "Working in IT/software" },
-      { value: "fresher", label: "Fresher / Student", desc: "New to the field, still learning" },
-      { value: "mca", label: "MCA / BCA Graduate", desc: "Computer applications degree" },
-      { value: "careerchange", label: "Career Changer", desc: "From a non-IT field (accountant, teacher, etc.)" },
-      { value: "other", label: "Other Background", desc: "Anything else" }
-    ]
-  },
-  {
-    id: "experience",
-    q: "How much professional experience do you have?",
+      { value: "swexp", label: "Software Engineer", desc: "I already work in IT / software" },
+      { value: "fresher", label: "Fresher / Student", desc: "I am new, still learning" },
+      { value: "mca", label: "MCA / BCA Graduate", desc: "I have a computer applications degree" },
+      { value: "careerchange", label: "Career Changer", desc: "I come from a non-IT field (accountant, teacher, etc.)" },
+      { value: "other", label: "Other Background", desc: "Something else — that is fine" }
+    ]},
+  { id: "experience", q: "How many years of work experience do you have?", clarify: "0 is fine if you have not started working yet.",
     options: [
       { value: "0-2", label: "0–2 years", desc: "Fresher or early career" },
       { value: "2-5", label: "2–5 years", desc: "Individual contributor" },
       { value: "5-10", label: "5–10 years", desc: "Senior / lead engineer" },
       { value: "10+", label: "10+ years", desc: "Staff / principal engineer" }
-    ]
-  },
-  {
-    id: "domain",
-    q: "What domain do you currently work in?",
+    ]},
+  { id: "domain", q: "What kind of work do you currently do (if any)?", clarify: "If you have not worked yet, pick 'No domain yet'.",
     options: [
       { value: "backend", label: "Backend Services", desc: "APIs, microservices, servers" },
       { value: "frontend", label: "Frontend / Web Apps", desc: "React, Vue, UI engineering" },
@@ -32,11 +24,8 @@ const QUESTIONS = [
       { value: "mobile", label: "Mobile Development", desc: "iOS, Android, Flutter" },
       { value: "testing", label: "Testing / QA", desc: "Manual or automation testing" },
       { value: "none", label: "No domain yet", desc: "Just starting out" }
-    ]
-  },
-  {
-    id: "lang",
-    q: "Which programming languages are you comfortable with?",
+    ]},
+  { id: "lang", q: "Which programming languages are you comfortable with?", clarify: "If you know none yet, pick 'None yet' — we will handle it.",
     options: [
       { value: "python", label: "Python", desc: "Strong AI ecosystem" },
       { value: "js", label: "JavaScript / TypeScript", desc: "Web + full-stack" },
@@ -45,100 +34,41 @@ const QUESTIONS = [
       { value: "cpp", label: "C / C++", desc: "Systems, performance" },
       { value: "go", label: "Go / Rust", desc: "Cloud native" },
       { value: "none", label: "None yet", desc: "Starting from scratch" }
-    ]
-  },
-  {
-    id: "ml",
-    q: "What is your current experience with Machine Learning / AI?",
+    ]},
+  { id: "ml", q: "What is your experience with AI / Machine Learning so far?", clarify: "ML = teaching computers to learn from data. No experience is completely fine.",
     options: [
-      { value: "none", label: "None", desc: "No prior ML experience" },
-      { value: "use", label: "User of ML", desc: "Use APIs / prebuilt models" },
-      { value: "basic", label: "Basic", desc: "Trained simple models" },
-      { value: "adv", label: "Advanced", desc: "Production ML systems" }
-    ]
-  },
-  {
-    id: "math",
-    q: "How comfortable are you with math (linear algebra, statistics, calculus)?",
+      { value: "none", label: "None", desc: "I have not done any ML yet" },
+      { value: "use", label: "User of ML", desc: "I have used AI APIs or prebuilt models" },
+      { value: "basic", label: "Basic", desc: "I have trained simple models before" },
+      { value: "adv", label: "Advanced", desc: "I have built production ML systems" }
+    ]},
+  { id: "math", q: "How comfortable are you with math (statistics, algebra)?", clarify: "This helps us pick the right depth — weak is fine, we start easy.",
     options: [
-      { value: "weak", label: "Weak", desc: "Needs a refresher" },
-      { value: "ok", label: "Okay", desc: "Comfortable with basics" },
-      { value: "strong", label: "Strong", desc: "Familiar with advanced topics" }
-    ]
-  },
-  {
-    id: "interest",
-    q: "What excites you most about AI?",
+      { value: "weak", label: "Weak", desc: "I need to start from basics" },
+      { value: "ok", label: "Okay", desc: "I am comfortable with basics" },
+      { value: "strong", label: "Strong", desc: "I know advanced math topics" }
+    ]},
+  { id: "interest", q: "What part of AI excites you the most?", clarify: "Pick whatever sounds most interesting to you.",
     options: [
-      { value: "build", label: "Building AI features", desc: "Embed AI into products" },
-      { value: "model", label: "Training / tuning models", desc: "Research-adjacent work" },
-      { value: "data", label: "Working with data", desc: "Insights, pipelines" },
-      { value: "agents", label: "Autonomous agents / automation", desc: "LLM-powered workflows" },
-      { value: "infra", label: "AI infrastructure / MLOps", desc: "Scale & reliability" }
-    ]
-  },
-  {
-    id: "goal",
-    q: "What is your primary goal?",
+      { value: "build", label: "Building AI features", desc: "Adding AI into apps/products" },
+      { value: "model", label: "Training / tuning models", desc: "Teaching computers to learn" },
+      { value: "data", label: "Working with data", desc: "Cleaning and analyzing data" },
+      { value: "agents", label: "Autonomous agents", desc: "AI that plans and acts on its own" },
+      { value: "infra", label: "AI infrastructure", desc: "Running AI systems reliably at scale" }
+    ]},
+  { id: "goal", q: "What do you want to achieve?", clarify: "This decides whether we aim for a full switch or a side path.",
     options: [
-      { value: "switch", label: "Switch into an AI role", desc: "New career direction" },
-      { value: "upskill", label: "Upskill within current role", desc: "Add AI to current job" },
-      { value: "freelance", label: "Freelance / side projects", desc: "Build AI products" },
+      { value: "switch", label: "Switch into an AI role", desc: "Move fully into AI/ML" },
+      { value: "upskill", label: "Upskill in current role", desc: "Add AI to my existing job" },
+      { value: "freelance", label: "Freelance / side projects", desc: "Build AI products on the side" },
       { value: "start", label: "Start from scratch", desc: "Enter the field for the first time" }
-    ]
-  }
+    ]}
 ];
-
-const ROLES = {
-  "ml-engineer": {
-    title: "ML Engineer",
-    why: "Best fit when you have solid software engineering + want to build and ship models into products.",
-    skills: ["Python", "Scikit-learn / PyTorch", "Model serving", "MLOps basics", "SQL"],
-    roadmap: ["1. Refresh Python & statistics", "2. Learn classic ML (supervised/unsupervised)", "3. Build 2-3 portfolio projects (end-to-end)", "4. Learn model deployment (FastAPI, Docker)", "5. Apply to ML Engineer roles"]
-  },
-  "data-engineer-ai": {
-    title: "Data Engineer (AI focus)",
-    why: "Best fit when you already work with data pipelines and want to specialize in AI-ready data.",
-    skills: ["Python", "Spark / Airflow", "SQL", "Data warehouses", "Feature stores"],
-    roadmap: ["1. Strengthen data pipeline tooling (Airflow, dbt)", "2. Learn feature engineering for ML", "3. Understand data quality & labeling", "4. Build a streaming + batch pipeline project", "5. Target data platform teams in AI companies"]
-  },
-  "ai-product-engineer": {
-    title: "AI Product Engineer",
-    why: "Best fit for full-stack/frontend engineers who want to embed LLM features into user products.",
-    skills: ["JavaScript/TypeScript", "LLM APIs", "Vector DBs", "Prompt engineering", "Web frameworks"],
-    roadmap: ["1. Learn LLM API usage (OpenAI, Anthropic)", "2. Build RAG with a vector DB (Pinecone/pgvector)", "3. Study prompt engineering patterns", "4. Ship 3 AI feature demos in your stack", "5. Target AI product / full-stack roles"]
-  },
-  "mlops-engineer": {
-    title: "MLOps / AI Platform Engineer",
-    why: "Best fit for DevOps/SRE backgrounds who want to build reliable AI infrastructure.",
-    skills: ["Kubernetes", "CI/CD", "Python", "Model registries", "Observability"],
-    roadmap: ["1. Learn ML model packaging & serving", "2. Master K8s + Helm for model serving", "3. Build an MLOps pipeline (training -> deploy -> monitor)", "4. Study model monitoring & drift detection", "5. Target AI platform / MLOps roles"]
-  },
-  "llm-agent-engineer": {
-    title: "LLM / Agent Engineer",
-    why: "Best fit for engineers excited by autonomous agents and LLM-powered workflows.",
-    skills: ["Python", "LLM orchestration (LangChain/LlamaIndex)", "Vector DBs", "API design", "Evaluation"],
-    roadmap: ["1. Master LLM APIs and prompting", "2. Learn agent frameworks (LangGraph, AutoGen)", "3. Build an autonomous agent project", "4. Study evaluation & safety for agents", "5. Target agent/automation engineering roles"]
-  },
-  "ai-research-engineer": {
-    title: "AI Research Engineer",
-    why: "Best fit if you have strong math + want to train and tune models.",
-    skills: ["PyTorch", "Linear algebra", "Deep learning", "Experiment tracking", "HPC basics"],
-    roadmap: ["1. Strengthen math (linear algebra, calculus, stats)", "2. Deep dive into deep learning (CNNs, Transformers)", "3. Fine-tune open-source models (LoRA/PEFT)", "4. Contribute to a research project or paper", "5. Target research engineering / applied scientist roles"]
-  },
-  "ai-fresher": {
-    title: "AI Beginner (Start with ML Engineer)",
-    why: "You are new to the field. We'll start with the fundamentals and build up to an ML Engineer role.",
-    skills: ["Python", "Statistics", "Fundamentals of ML", "SQL", "Git"],
-    roadmap: ["1. Learn Python basics (syntax, data structures)", "2. Study statistics & linear algebra fundamentals", "3. Complete a beginner ML course (supervised learning)", "4. Build 1-2 simple portfolio projects (image classifier, chatbot)", "5. Apply for junior ML / AI trainee roles"]
-  }
-};
 
 function scoreRole(answers) {
   const scores = {};
   const add = (role, points) => { scores[role] = (scores[role] || 0) + points; };
 
-  // Background handling
   if (answers.background === "fresher" || answers.background === "mca" || answers.lang === "none" || answers.goal === "start") {
     return ["ai-fresher"];
   }
@@ -148,27 +78,19 @@ function scoreRole(answers) {
     }
   }
 
-  const ml = answers.ml;
-  const interest = answers.interest;
-  const domain = answers.domain;
-  const lang = answers.lang;
-  const math = answers.math;
-  const goal = answers.goal;
+  const ml = answers.ml, interest = answers.interest, domain = answers.domain, lang = answers.lang, math = answers.math, goal = answers.goal;
 
-  // ML experience baseline
   if (ml === "none") { add("ml-engineer", 2); add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
   if (ml === "use") { add("ai-product-engineer", 3); add("llm-agent-engineer", 3); add("ml-engineer", 2); }
   if (ml === "basic") { add("ml-engineer", 3); add("ai-research-engineer", 2); add("mlops-engineer", 1); }
   if (ml === "adv") { add("ai-research-engineer", 3); add("mlops-engineer", 3); add("ml-engineer", 2); }
 
-  // Interest signals
   if (interest === "build") { add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
   if (interest === "model") { add("ai-research-engineer", 3); add("ml-engineer", 2); }
   if (interest === "data") { add("data-engineer-ai", 3); add("ml-engineer", 1); }
   if (interest === "agents") { add("llm-agent-engineer", 3); add("ai-product-engineer", 1); }
   if (interest === "infra") { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
 
-  // Domain fit
   if (domain === "backend" || domain === "fullstack") { add("ml-engineer", 1); add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
   if (domain === "frontend") { add("ai-product-engineer", 2); }
   if (domain === "dataeng") { add("data-engineer-ai", 3); add("ml-engineer", 1); }
@@ -176,18 +98,14 @@ function scoreRole(answers) {
   if (domain === "mobile") { add("ai-product-engineer", 2); }
   if (domain === "testing") { add("ml-engineer", 1); add("mlops-engineer", 1); add("data-engineer-ai", 1); }
 
-  // Language fit
   if (lang === "python") { add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1); add("llm-agent-engineer", 1); }
   if (lang === "js") { add("ai-product-engineer", 2); }
   if (lang === "java" || lang === "csharp") { add("mlops-engineer", 1); add("ml-engineer", 1); }
   if (lang === "cpp") { add("ai-research-engineer", 1); add("mlops-engineer", 1); }
 
-  // Math comfort
   if (math === "strong") { add("ai-research-engineer", 2); add("ml-engineer", 1); }
   if (math === "weak") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); add("mlops-engineer", 1); }
 
-  // Goal adjustment
-  if (goal === "switch") { /* keep scores */ }
   if (goal === "upskill") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
   if (goal === "freelance") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
 
@@ -205,17 +123,20 @@ function renderForm() {
   qEl.className = "question";
   qEl.textContent = q.q;
   form.appendChild(qEl);
-
+  if (q.clarify) {
+    const c = document.createElement("p");
+    c.style.color = "var(--muted)";
+    c.style.fontSize = "13px";
+    c.textContent = q.clarify;
+    form.appendChild(c);
+  }
   const opts = document.createElement("div");
   opts.className = "options";
   q.options.forEach(opt => {
     const div = document.createElement("div");
     div.className = "option" + (state.answers[q.id] === opt.value ? " selected" : "");
     div.innerHTML = `<div class="dot"></div><div><div class="opt-text">${opt.label}</div><div class="opt-desc">${opt.desc}</div></div>`;
-    div.addEventListener("click", () => {
-      state.answers[q.id] = opt.value;
-      renderForm();
-    });
+    div.addEventListener("click", () => { state.answers[q.id] = opt.value; renderForm(); });
     opts.appendChild(div);
   });
   form.appendChild(opts);
@@ -241,7 +162,7 @@ function renderForm() {
 
   document.getElementById("currentStep").textContent = state.step + 1;
   document.getElementById("totalSteps").textContent = QUESTIONS.length;
-  document.getElementById("progressFill").style.width = ((state.step) / QUESTIONS.length * 100) + "%";
+  document.getElementById("progressFill").style.width = (state.step / QUESTIONS.length * 100) + "%";
 }
 
 function showResult() {
@@ -257,13 +178,17 @@ function showResult() {
     const role = ROLES[roleId];
     const card = document.createElement("div");
     card.className = "role-card result";
+    const steps = role.roadmap.map(r => `
+      <li><strong>Step ${r.step} - ${r.title}</strong> (${r.time})<br>
+      What: ${r.what}<br>
+      Why learn it: This is a core skill for the role.<br>
+      Sources: ${r.sources}<br>
+      When to do it: ${r.sequence}</li>`).join("");
     card.innerHTML = `
       <h2>${role.title}</h2>
       <p class="why">${role.why}</p>
-      <div class="skill-list">
-        ${role.skills.map(s => `<span class="skill">${s}</span>`).join("")}
-      </div>
-      <div class="roadmap"><strong>Learning roadmap:</strong><ol>${role.roadmap.map(r => `<li>${r}</li>`).join("")}</ol></div>
+      <div class="skill-list">${role.skills.map(s => `<span class="skill">${s}</span>`).join("")}</div>
+      <div class="roadmap"><strong>Learning roadmap (sequence, time, sources):</strong><ol>${steps}</ol></div>
     `;
     form.appendChild(card);
   });
@@ -272,7 +197,7 @@ function showResult() {
   note.style.color = "var(--muted)";
   note.style.fontSize = "13px";
   note.style.marginTop = "16px";
-  note.textContent = "Tip: Start with the first roadmap item of your top match, build one portfolio project, then apply.";
+  note.textContent = "Tip: Follow the roadmap in order. Build at least one portfolio project before applying.";
   form.appendChild(note);
 
   document.getElementById("progressFill").style.width = "100%";
