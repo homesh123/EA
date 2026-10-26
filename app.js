@@ -1,51 +1,92 @@
 const QUESTIONS = [
-  { id: "years", q: "How many years of professional software experience do you have?", options: [
-    { value: "0-2", label: "0–2 years (early career)", desc: "New grad or junior developer" },
-    { value: "2-5", label: "2–5 years", desc: "Solid individual contributor" },
-    { value: "5-10", label: "5–10 years", desc: "Senior / lead engineer" },
-    { value: "10+", label: "10+ years", desc: "Staff / principal engineer" }
-  ]},
-  { id: "domain", q: "What domain do you currently work in?", options: [
-    { value: "backend", label: "Backend services", desc: "APIs, microservices, servers" },
-    { value: "frontend", label: "Frontend / web apps", desc: "React, Vue, UI engineering" },
-    { value: "fullstack", label: "Full-stack", desc: "End-to-end application development" },
-    { value: "dataeng", label: "Data engineering", desc: "Pipelines, ETL, warehouses" },
-    { value: "devops", label: "DevOps / SRE / Cloud", desc: "Infrastructure, CI/CD, reliability" },
-    { value: "mobile", label: "Mobile development", desc: "iOS, Android, Flutter" },
-    { value: "other", label: "Other (QA, PM, etc.)", desc: "Adjacent software role" }
-  ]},
-  { id: "lang", q: "Which programming languages are you most comfortable with?", options: [
-    { value: "python", label: "Python", desc: "Strong AI ecosystem" },
-    { value: "js", label: "JavaScript / TypeScript", desc: "Web + full-stack" },
-    { value: "java", label: "Java", desc: "Enterprise backend" },
-    { value: "csharp", label: "C# / .NET", desc: "Enterprise & game dev" },
-    { value: "cpp", label: "C / C++", desc: "Systems, performance" },
-    { value: "go", label: "Go / Rust", desc: "Cloud native" },
-    { value: "other", label: "Other", desc: "PHP, Ruby, etc." }
-  ]},
-  { id: "ml", q: "What is your current experience with Machine Learning / AI?", options: [
-    { value: "none", label: "None", desc: "No prior ML experience" },
-    { value: "use", label: "User of ML", desc: "Use APIs / prebuilt models" },
-    { value: "basic", label: "Basic", desc: "Trained simple models" },
-    { value: "adv", label: "Advanced", desc: "Production ML systems" }
-  ]},
-  { id: "math", q: "How comfortable are you with math (linear algebra, stats, calculus)?", options: [
-    { value: "weak", label: "Weak", desc: "Needs a refresher" },
-    { value: "ok", label: "Okay", desc: "Comfortable with basics" },
-    { value: "strong", label: "Strong", desc: "Familiar with advanced topics" }
-  ]},
-  { id: "interest", q: "What excites you most about AI?", options: [
-    { value: "build", label: "Building AI features", desc: "Embed AI into products" },
-    { value: "model", label: "Training / tuning models", desc: "Research-adjacent work" },
-    { value: "data", label: "Working with data", desc: "Insights, pipelines" },
-    { value: "agents", label: "Autonomous agents / automation", desc: "LLM-powered workflows" },
-    { value: "infra", label: "AI infrastructure / MLOps", desc: "Scale & reliability" }
-  ]},
-  { id: "goal", q: "What is your primary goal?", options: [
-    { value: "switch", label: "Switch into an AI role", desc: "New career direction" },
-    { value: "upskill", label: "Upskill within current role", desc: "Add AI to current job" },
-    { value: "freelance", label: "Freelance / side projects", desc: "Build AI products" }
-  ]}
+  {
+    id: "background",
+    q: "What is your current background?",
+    options: [
+      { value: "swexp", label: "Software Engineer", desc: "Working in IT/software" },
+      { value: "fresher", label: "Fresher / Student", desc: "New to the field, still learning" },
+      { value: "mca", label: "MCA / BCA Graduate", desc: "Computer applications degree" },
+      { value: "careerchange", label: "Career Changer", desc: "From a non-IT field (accountant, teacher, etc.)" },
+      { value: "other", label: "Other Background", desc: "Anything else" }
+    ]
+  },
+  {
+    id: "experience",
+    q: "How much professional experience do you have?",
+    options: [
+      { value: "0-2", label: "0–2 years", desc: "Fresher or early career" },
+      { value: "2-5", label: "2–5 years", desc: "Individual contributor" },
+      { value: "5-10", label: "5–10 years", desc: "Senior / lead engineer" },
+      { value: "10+", label: "10+ years", desc: "Staff / principal engineer" }
+    ]
+  },
+  {
+    id: "domain",
+    q: "What domain do you currently work in?",
+    options: [
+      { value: "backend", label: "Backend Services", desc: "APIs, microservices, servers" },
+      { value: "frontend", label: "Frontend / Web Apps", desc: "React, Vue, UI engineering" },
+      { value: "fullstack", label: "Full-Stack", desc: "End-to-end application development" },
+      { value: "dataeng", label: "Data Engineering", desc: "Pipelines, ETL, warehouses" },
+      { value: "devops", label: "DevOps / SRE / Cloud", desc: "Infrastructure, CI/CD, reliability" },
+      { value: "mobile", label: "Mobile Development", desc: "iOS, Android, Flutter" },
+      { value: "testing", label: "Testing / QA", desc: "Manual or automation testing" },
+      { value: "none", label: "No domain yet", desc: "Just starting out" }
+    ]
+  },
+  {
+    id: "lang",
+    q: "Which programming languages are you comfortable with?",
+    options: [
+      { value: "python", label: "Python", desc: "Strong AI ecosystem" },
+      { value: "js", label: "JavaScript / TypeScript", desc: "Web + full-stack" },
+      { value: "java", label: "Java", desc: "Enterprise backend" },
+      { value: "csharp", label: "C# / .NET", desc: "Enterprise & game dev" },
+      { value: "cpp", label: "C / C++", desc: "Systems, performance" },
+      { value: "go", label: "Go / Rust", desc: "Cloud native" },
+      { value: "none", label: "None yet", desc: "Starting from scratch" }
+    ]
+  },
+  {
+    id: "ml",
+    q: "What is your current experience with Machine Learning / AI?",
+    options: [
+      { value: "none", label: "None", desc: "No prior ML experience" },
+      { value: "use", label: "User of ML", desc: "Use APIs / prebuilt models" },
+      { value: "basic", label: "Basic", desc: "Trained simple models" },
+      { value: "adv", label: "Advanced", desc: "Production ML systems" }
+    ]
+  },
+  {
+    id: "math",
+    q: "How comfortable are you with math (linear algebra, statistics, calculus)?",
+    options: [
+      { value: "weak", label: "Weak", desc: "Needs a refresher" },
+      { value: "ok", label: "Okay", desc: "Comfortable with basics" },
+      { value: "strong", label: "Strong", desc: "Familiar with advanced topics" }
+    ]
+  },
+  {
+    id: "interest",
+    q: "What excites you most about AI?",
+    options: [
+      { value: "build", label: "Building AI features", desc: "Embed AI into products" },
+      { value: "model", label: "Training / tuning models", desc: "Research-adjacent work" },
+      { value: "data", label: "Working with data", desc: "Insights, pipelines" },
+      { value: "agents", label: "Autonomous agents / automation", desc: "LLM-powered workflows" },
+      { value: "infra", label: "AI infrastructure / MLOps", desc: "Scale & reliability" }
+    ]
+  },
+  {
+    id: "goal",
+    q: "What is your primary goal?",
+    options: [
+      { value: "switch", label: "Switch into an AI role", desc: "New career direction" },
+      { value: "upskill", label: "Upskill within current role", desc: "Add AI to current job" },
+      { value: "freelance", label: "Freelance / side projects", desc: "Build AI products" },
+      { value: "start", label: "Start from scratch", desc: "Enter the field for the first time" }
+    ]
+  }
 ];
 
 const ROLES = {
@@ -84,21 +125,35 @@ const ROLES = {
     why: "Best fit if you have strong math + want to train and tune models.",
     skills: ["PyTorch", "Linear algebra", "Deep learning", "Experiment tracking", "HPC basics"],
     roadmap: ["1. Strengthen math (linear algebra, calculus, stats)", "2. Deep dive into deep learning (CNNs, Transformers)", "3. Fine-tune open-source models (LoRA/PEFT)", "4. Contribute to a research project or paper", "5. Target research engineering / applied scientist roles"]
+  },
+  "ai-fresher": {
+    title: "AI Beginner (Start with ML Engineer)",
+    why: "You are new to the field. We'll start with the fundamentals and build up to an ML Engineer role.",
+    skills: ["Python", "Statistics", "Fundamentals of ML", "SQL", "Git"],
+    roadmap: ["1. Learn Python basics (syntax, data structures)", "2. Study statistics & linear algebra fundamentals", "3. Complete a beginner ML course (supervised learning)", "4. Build 1-2 simple portfolio projects (image classifier, chatbot)", "5. Apply for junior ML / AI trainee roles"]
   }
 };
 
-const state = { answers: {}, step: 0 };
-
 function scoreRole(answers) {
   const scores = {};
+  const add = (role, points) => { scores[role] = (scores[role] || 0) + points; };
+
+  // Background handling
+  if (answers.background === "fresher" || answers.background === "mca" || answers.lang === "none" || answers.goal === "start") {
+    return ["ai-fresher"];
+  }
+  if (answers.background === "careerchange" || answers.background === "other") {
+    if (answers.ml === "none" || answers.ml === "use") {
+      return ["ai-fresher", "ai-product-engineer"];
+    }
+  }
+
   const ml = answers.ml;
   const interest = answers.interest;
   const domain = answers.domain;
   const lang = answers.lang;
   const math = answers.math;
   const goal = answers.goal;
-
-  const add = (role, points) => { scores[role] = (scores[role] || 0) + points; };
 
   // ML experience baseline
   if (ml === "none") { add("ml-engineer", 2); add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
@@ -119,6 +174,7 @@ function scoreRole(answers) {
   if (domain === "dataeng") { add("data-engineer-ai", 3); add("ml-engineer", 1); }
   if (domain === "devops") { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
   if (domain === "mobile") { add("ai-product-engineer", 2); }
+  if (domain === "testing") { add("ml-engineer", 1); add("mlops-engineer", 1); add("data-engineer-ai", 1); }
 
   // Language fit
   if (lang === "python") { add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1); add("llm-agent-engineer", 1); }
@@ -136,9 +192,10 @@ function scoreRole(answers) {
   if (goal === "freelance") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const top = sorted.slice(0, 2).map(s => s[0]);
-  return top;
+  return sorted.slice(0, 2).map(s => s[0]);
 }
+
+const state = { answers: {}, step: 0 };
 
 function renderForm() {
   const q = QUESTIONS[state.step];

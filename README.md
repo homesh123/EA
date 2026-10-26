@@ -1,11 +1,21 @@
-# AI Career Consult
+# AI Path Finder — Career Consultation
 
-A self-contained consultation page that helps experienced software engineers find the best AI/ML role and learning path based on their current background and goals.
+A self-contained consultation page that helps people find the best AI/ML role and
+learning path based on their background — whether they are a software engineer,
+an MCA fresher, a career changer from a non-IT field, or just starting out.
+
+## Who is this for
+
+- Software engineers (backend, frontend, full-stack, DevOps, mobile, QA, data)
+- Freshers / students / MCA / BCA graduates
+- Career changers from accounting, teaching, and other non-IT fields
+- Anyone new to software engineering or AI
 
 ## Features
 
-- 7-question interactive questionnaire
-- Role scoring engine maps your experience to the best-fit AI roles
+- 8-question interactive questionnaire covering background, experience, domain,
+  languages, ML experience, math comfort, interests, and goals
+- Role scoring engine maps your profile to the best-fit AI roles
 - Personalized learning roadmaps for each recommended role
 - No dependencies — runs entirely in the browser
 
@@ -17,6 +27,7 @@ A self-contained consultation page that helps experienced software engineers fin
 - MLOps / AI Platform Engineer
 - LLM / Agent Engineer
 - AI Research Engineer
+- AI Beginner (fresher path)
 
 ## Usage
 
