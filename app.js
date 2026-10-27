@@ -63,6 +63,42 @@ const QUESTIONS = [
       { value: "upskill", label: "Upskill in current role", desc: "Add AI to my existing job" },
       { value: "freelance", label: "Freelance / side projects", desc: "Build AI products on the side" },
       { value: "start", label: "Start from scratch", desc: "Enter the field for the first time" }
+    ]},
+  { id: "pythonLevel", q: "What is your Python comfort level?", clarify: "Python is the #1 language for AI. Be honest — this shapes your starting point.",
+    options: [
+      { value: "none", label: "None", desc: "I don't know Python yet" },
+      { value: "basic", label: "Basic", desc: "Variables, loops, functions" },
+      { value: "comfortable", label: "Comfortable", desc: "Pandas, NumPy, data manipulation" },
+      { value: "advanced", label: "Advanced", desc: "Classes, decorators, packaging, virtual environments" }
+    ]},
+  { id: "cloud", q: "What cloud experience do you have?", clarify: "Cloud skills matter for AI Platform / MLOps roles.",
+    options: [
+      { value: "none", label: "None", desc: "I haven't used cloud platforms" },
+      { value: "basic", label: "Basic", desc: "I've used AWS/Azure/GCP console briefly" },
+      { value: "comfortable", label: "Comfortable", desc: "EC2, S3, IAM, basic deployment" },
+      { value: "advanced", label: "Advanced", desc: "Kubernetes, Terraform, CI/CD, serverless" }
+    ]},
+  { id: "db", q: "What is your database experience?", clarify: "Data skills are critical for Data Engineer and AI Product roles.",
+    options: [
+      { value: "none", label: "None", desc: "No database experience" },
+      { value: "basic", label: "Basic", desc: "Simple SQL queries (SELECT, WHERE)" },
+      { value: "comfortable", label: "Comfortable", desc: "JOINs, aggregations, schema design" },
+      { value: "advanced", label: "Advanced", desc: "Optimization, partitioning, NoSQL, data warehouses" }
+    ]},
+  { id: "bizDomain", q: "What business domain do you know best?", clarify: "Domain expertise + AI = high-value roles (FinTech AI, HealthTech AI, etc.).",
+    options: [
+      { value: "none", label: "None / General", desc: "No specific domain expertise" },
+      { value: "finance", label: "Finance / Accounting", desc: "Banking, auditing, financial analysis" },
+      { value: "healthcare", label: "Healthcare", desc: "Hospitals, clinics, medical data" },
+      { value: "retail", label: "Retail / E-commerce", desc: "Online stores, inventory, sales" },
+      { value: "logistics", label: "Logistics / Supply Chain", desc: "Shipping, warehousing, transportation" },
+      { value: "other", label: "Other", desc: "Manufacturing, education, real estate, etc." }
+    ]},
+  { id: "learnStyle", q: "How do you prefer to learn?", clarify: "This helps shape the recommended resources.",
+    options: [
+      { value: "self", label: "Self-paced", desc: "Free tutorials, documentation, practice projects" },
+      { value: "structured", label: "Structured courses", desc: "Coursera, Udemy, bootcamps with syllabus" },
+      { value: "mixed", label: "Mix of both", desc: "Courses + hands-on projects" }
     ]}
 ];
 
@@ -111,6 +147,22 @@ function scoreRole(answers) {
 
   if (goal === "upskill") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
   if (goal === "freelance") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
+
+  // New question scoring
+  if (state.answers.pythonLevel === "python" || state.answers.pythonLevel === "comfortable" || state.answers.pythonLevel === "advanced") add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1);
+  if (state.answers.pythonLevel === "basic") add("ai-product-engineer", 1); add("llm-agent-engineer", 1);
+  if (state.answers.pythonLevel === "none") { add("ai-product-engineer", 1); add("ai-fresher", 1); }
+
+  if (state.answers.cloud === "advanced") { add("mlops-engineer", 2); add("ai-research-engineer", 1); }
+  if (state.answers.cloud === "comfortable") add("mlops-engineer", 1);
+  if (state.answers.cloud === "basic") add("mlops-engineer", 1);
+
+  if (state.answers.db === "advanced") { add("data-engineer-ai", 2); add("ml-engineer", 1); }
+  if (state.answers.db === "comfortable") add("data-engineer-ai", 1);
+
+  if (state.answers.bizDomain === "finance" || state.answers.bizDomain === "healthcare" || state.answers.bizDomain === "retail" || state.answers.bizDomain === "logistics") { add("ai-forward-deployed-engineer", 2); add("ai-product-engineer", 1); }
+
+  if (state.answers.learnStyle === "structured") { /* lighter self-paced load */ }
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   return sorted.slice(0, 2).map(s => s[0]);
