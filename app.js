@@ -335,6 +335,59 @@ function showResult() {
   gapDiv.innerHTML = "<strong style='color:var(--accent2)'>⚡ Gap analysis &amp; next steps:</strong><ul>" + gaps.map(g => "<li>" + g + "</li>").join("") + "</ul>";
   form.appendChild(gapDiv);
 
+  // Stay Updated section
+  const stayUpdatedDiv = document.createElement("div");
+  stayUpdatedDiv.style.marginTop = "24px";
+  stayUpdatedDiv.style.padding = "20px";
+  stayUpdatedDiv.style.background = "linear-gradient(135deg,#e3f2fd,#f3e8ff)";
+  stayUpdatedDiv.style.border = "1px solid var(--border)";
+  stayUpdatedDiv.style.borderRadius = "12px";
+  stayUpdatedDiv.style.boxShadow = "var(--shadow)";
+
+  stayUpdatedDiv.innerHTML =
+    '<h3 style="font-size:1rem;font-weight:700;margin:0 0 12px;color:#1d1d1f;text-transform:uppercase;letter-spacing:0.5px;">Stay Updated — AI Community & Resources</h3>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:12px;">' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">YouTube Channels</h4>' +
+    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
+    '<li><a href="https://youtube.com/@3Blue1Brown" target="_blank" rel="noopener">3Blue1Brown</a> (Math)</li>' +
+    '<li><a href="https://youtube.com/@sentdex" target="_blank" rel="noopener">sentdex</a> (Python/ML)</li>' +
+    '<li><a href="https://youtube.com/@AndrejKarpathy" target="_blank" rel="noopener">Andrej Karpathy</a> (Deep Learning)</li>' +
+    '<li><a href="https://youtube.com/@HuggingFace" target="_blank" rel="noopener">Hugging Face</a> (LLMs)</li>' +
+    '</ul>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">GitHub Repos</h4>' +
+    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
+    '<li><a href="https://github.com/huggingface/transformers" target="_blank" rel="noopener">huggingface/transformers</a></li>' +
+    '<li><a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">langchain-ai/langchain</a></li>' +
+    '<li><a href="https://github.com/pytorch/pytorch" target="_blank" rel="noopener">pytorch/pytorch</a></li>' +
+    '<li><a href="https://github.com/huggingface/datasets" target="_blank" rel="noopener">huggingface/datasets</a></li>' +
+    '</ul>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">People to Follow</h4>' +
+    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
+    '<li>Andrew Ng (@AndrewYNg)</li>' +
+    '<li>Yann LeCun (@ylecun)</li>' +
+    '<li>Andrej Karpathy (@karpathy)</li>' +
+    '<li>Jeremy Howard (@jeremyphoward)</li>' +
+    '</ul>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">Communities</h4>' +
+    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
+    '<li>r/MachineLearning (Reddit)</li>' +
+    '<li>r/LocalLLaMA (Reddit)</li>' +
+    '<li>Hugging Face Discord</li>' +
+    '<li>AI Twitter/X community</li>' +
+    '</ul>' +
+    '</div>' +
+    '</div>' +
+    '<p style="font-size:0.8rem;color:#aeaeb2;margin-top:12px;">Follow these to stay updated on the latest AI developments, papers, and tools for free.</p>';
+  stayUpdatedDiv.innerHTML = stayUpdatedHTML;
+  form.appendChild(stayUpdatedDiv);
+
   document.getElementById("progressFill").style.width = "100%";
 }
 
