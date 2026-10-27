@@ -1,533 +1,465 @@
-const QUESTIONS = [
-  { id: "background", q: "What best describes you right now?", clarify: "Pick the one that fits you — no wrong answers.",
-    options: [
-      { value: "swexp", label: "Software Engineer", desc: "I already work in IT / software" },
-      { value: "fresher", label: "Fresher / Student", desc: "I am new, still learning" },
-      { value: "mca", label: "MCA / BCA Graduate", desc: "I have a computer applications degree" },
-      { value: "careerchange", label: "Career Changer", desc: "I come from a non-IT field (accountant, teacher, etc.)" },
-      { value: "other", label: "Other Background", desc: "Something else — that is fine" }
-    ]},
-  { id: "experience", q: "How many years of work experience do you have?", clarify: "0 is fine if you have not started working yet.",
-    options: [
-      { value: "0-2", label: "0–2 years", desc: "Fresher or early career" },
-      { value: "2-5", label: "2–5 years", desc: "Individual contributor" },
-      { value: "5-10", label: "5–10 years", desc: "Senior / lead engineer" },
-      { value: "10+", label: "10+ years", desc: "Staff / principal engineer" }
-    ]},
-  { id: "domain", q: "What kind of work do you currently do (if any)?", clarify: "If you have not worked yet, pick 'No domain yet'.",
-    options: [
-      { value: "backend", label: "Backend Services", desc: "APIs, microservices, servers" },
-      { value: "frontend", label: "Frontend / Web Apps", desc: "React, Vue, UI engineering" },
-      { value: "fullstack", label: "Full-Stack", desc: "End-to-end application development" },
-      { value: "dataeng", label: "Data Engineering", desc: "Pipelines, ETL, warehouses" },
-      { value: "devops", label: "DevOps / SRE / Cloud", desc: "Infrastructure, CI/CD, reliability" },
-      { value: "mobile", label: "Mobile Development", desc: "iOS, Android, Flutter" },
-      { value: "testing", label: "Testing / QA", desc: "Manual or automation testing" },
-      { value: "none", label: "No domain yet", desc: "Just starting out" }
-    ]},
-  { id: "lang", q: "Which programming languages are you comfortable with?", clarify: "If you know none yet, pick 'None yet' — we will handle it.",
-    options: [
-      { value: "python", label: "Python", desc: "Strong AI ecosystem" },
-      { value: "js", label: "JavaScript / TypeScript", desc: "Web + full-stack" },
-      { value: "java", label: "Java", desc: "Enterprise backend" },
-      { value: "csharp", label: "C# / .NET", desc: "Enterprise & game dev" },
-      { value: "cpp", label: "C / C++", desc: "Systems, performance" },
-      { value: "go", label: "Go / Rust", desc: "Cloud native" },
-      { value: "none", label: "None yet", desc: "Starting from scratch" }
-    ]},
-  { id: "ml", q: "What is your experience with AI / Machine Learning so far?", clarify: "ML = teaching computers to learn from data. No experience is completely fine.",
-    options: [
-      { value: "none", label: "None", desc: "I have not done any ML yet" },
-      { value: "use", label: "User of ML", desc: "I have used AI APIs or prebuilt models" },
-      { value: "basic", label: "Basic", desc: "I have trained simple models before" },
-      { value: "adv", label: "Advanced", desc: "I have built production ML systems" }
-    ]},
-  { id: "math", q: "How comfortable are you with math (statistics, algebra)?", clarify: "This helps us pick the right depth — weak is fine, we start easy.",
-    options: [
-      { value: "weak", label: "Weak", desc: "I need to start from basics" },
-      { value: "ok", label: "Okay", desc: "I am comfortable with basics" },
-      { value: "strong", label: "Strong", desc: "I know advanced math topics" }
-    ]},
-  { id: "interest", q: "What part of AI excites you?", multi: true, clarify: "Select all that apply — you can pick more than one.",
-    options: [
-      { value: "build", label: "Building AI features", desc: "Adding AI into apps/products" },
-      { value: "model", label: "Training / tuning models", desc: "Teaching computers to learn" },
-      { value: "data", label: "Working with data", desc: "Cleaning and analyzing data" },
-      { value: "agents", label: "Autonomous agents", desc: "AI that plans and acts on its own" },
-      { value: "infra", label: "AI infrastructure", desc: "Running AI systems reliably at scale" },
-      { value: "solutions", label: "Client solutions", desc: "Solving real business problems with AI" }
-    ]},
-  { id: "goal", q: "What do you want to achieve?", clarify: "This decides whether we aim for a full switch or a side path.",
-    options: [
-      { value: "switch", label: "Switch into an AI role", desc: "Move fully into AI/ML" },
-      { value: "upskill", label: "Upskill in current role", desc: "Add AI to my existing job" },
-      { value: "freelance", label: "Freelance / side projects", desc: "Build AI products on the side" },
-      { value: "start", label: "Start from scratch", desc: "Enter the field for the first time" }
-    ]},
-  { id: "aiRoleComfort", q: "Are you already in an AI role? If yes, how comfortable are you?", clarify: "If youre already in AI but unhappy, we can find a better-fit role.",
-    options: [
-      { value: "none", label: "Not in AI yet", desc: "Im new to AI or not working in AI" },
-      { value: "comfortable", label: "Comfortable", desc: "Im happy in my current AI role" },
-      { value: "uncomfortable", label: "Not comfortable", desc: "Im in AI but want to switch to a different AI role" }
-    ]},
-  { id: "pythonLevel", q: "What is your Python comfort level?", clarify: "Python is the #1 language for AI. Be honest — this shapes your starting point.",
-    options: [
-      { value: "none", label: "None", desc: "I don't know Python yet" },
-      { value: "basic", label: "Basic", desc: "Variables, loops, functions" },
-      { value: "comfortable", label: "Comfortable", desc: "Pandas, NumPy, data manipulation" },
-      { value: "advanced", label: "Advanced", desc: "Classes, decorators, packaging, virtual environments" }
-    ]},
-  { id: "cloud", q: "What cloud experience do you have?", clarify: "Cloud skills matter for AI Platform / MLOps roles.",
-    options: [
-      { value: "none", label: "None", desc: "I haven't used cloud platforms" },
-      { value: "basic", label: "Basic", desc: "I've used AWS/Azure/GCP console briefly" },
-      { value: "comfortable", label: "Comfortable", desc: "EC2, S3, IAM, basic deployment" },
-      { value: "advanced", label: "Advanced", desc: "Kubernetes, Terraform, CI/CD, serverless" }
-    ]},
-  { id: "db", q: "What is your database experience?", clarify: "Data skills are critical for Data Engineer and AI Product roles.",
-    options: [
-      { value: "none", label: "None", desc: "No database experience" },
-      { value: "basic", label: "Basic", desc: "Simple SQL queries (SELECT, WHERE)" },
-      { value: "comfortable", label: "Comfortable", desc: "JOINs, aggregations, schema design" },
-      { value: "advanced", label: "Advanced", desc: "Optimization, partitioning, NoSQL, data warehouses" }
-    ]},
-  { id: "bizDomain", q: "What business domain do you know best?", clarify: "Domain expertise + AI = high-value roles (FinTech AI, HealthTech AI, etc.).",
-    options: [
-      { value: "none", label: "None / General", desc: "No specific domain expertise" },
-      { value: "finance", label: "Finance / Accounting", desc: "Banking, auditing, financial analysis" },
-      { value: "healthcare", label: "Healthcare", desc: "Hospitals, clinics, medical data" },
-      { value: "retail", label: "Retail / E-commerce", desc: "Online stores, inventory, sales" },
-      { value: "logistics", label: "Logistics / Supply Chain", desc: "Shipping, warehousing, transportation" },
-      { value: "other", label: "Other", desc: "Manufacturing, education, real estate, etc." }
-    ]},
-  { id: "learnStyle", q: "How do you prefer to learn?", clarify: "This helps shape the recommended resources.",
-    options: [
-      { value: "self", label: "Self-paced", desc: "Free tutorials, documentation, practice projects" },
-      { value: "structured", label: "Structured courses", desc: "Coursera, Udemy, bootcamps with syllabus" },
-      { value: "mixed", label: "Mix of both", desc: "Courses + hands-on projects" }
-    ]}
+// UI for the questionnaire and results. Data lives in questions.js / roles.js,
+// all recommendation logic in scoring.js.
+const STORE_KEY = "aipf:v2";
+const PROGRESS_KEY = "aipf:progress";
+const AUTO_ADVANCE_MS = 280;
+
+const STAY_UPDATED = [
+  { title: "YouTube", items: [
+    ["3Blue1Brown", "https://www.youtube.com/@3blue1brown", "Maths, visually"],
+    ["Andrej Karpathy", "https://www.youtube.com/@AndrejKarpathy", "Deep learning from scratch"],
+    ["StatQuest", "https://www.youtube.com/@statquest", "Statistics & ML, simply"],
+    ["Hugging Face", "https://www.youtube.com/@HuggingFace", "Open models & LLMs"]
+  ]},
+  { title: "GitHub repos", items: [
+    ["huggingface/transformers", "https://github.com/huggingface/transformers", "Open models"],
+    ["langchain-ai/langgraph", "https://github.com/langchain-ai/langgraph", "Agents"],
+    ["pytorch/pytorch", "https://github.com/pytorch/pytorch", "Deep learning"],
+    ["modelcontextprotocol", "https://github.com/modelcontextprotocol", "Tools for AI agents"]
+  ]},
+  { title: "Free courses", items: [
+    ["DeepLearning.AI short courses", "https://www.deeplearning.ai/short-courses/", "1–2 hour hands-on courses"],
+    ["fast.ai", "https://course.fast.ai/", "Practical deep learning"],
+    ["Google ML Crash Course", "https://developers.google.com/machine-learning/crash-course", "ML fundamentals"],
+    ["Hugging Face Learn", "https://huggingface.co/learn", "LLMs, agents, fine-tuning"]
+  ]},
+  { title: "Communities", items: [
+    ["r/MachineLearning", "https://www.reddit.com/r/MachineLearning/", "Research & industry"],
+    ["r/LocalLLaMA", "https://www.reddit.com/r/LocalLLaMA/", "Open models"],
+    ["Hugging Face Discord", "https://huggingface.co/join/discord", "Builders' community"],
+    ["DataTalksClub", "https://datatalks.club/", "Free zoomcamps & Slack"]
+  ]}
 ];
 
-function scoreRole(answers) {
-  const scores = {};
-  const add = (role, points) => { scores[role] = (scores[role] || 0) + points; };
+const MOTIVATION_MSG = {
+  outdated: "Good news: your experience is not wasted. This plan builds on what you already know, so you are upgrading your career, not starting over.",
+  growth: "AI roles are among the fastest-growing and best-paid in tech. This plan focuses on the skills employers are hiring for now.",
+  company: "Your company adopting AI is your best opportunity. Volunteer for the first AI project while you follow this plan — an internal move is often the fastest switch.",
+  curious: "Curiosity is the best fuel for learning AI. Build small things often and share them — that turns interest into a career.",
+  unhappy: "A sideways move inside AI is much faster than a fresh start. Your AI experience carries straight over to the roles below."
+};
 
-  // Freshers / students / absolute beginners with no language → AI Beginner path
-  if (answers.background === "fresher" || answers.background === "mca" || answers.goal === "start") {
-    return ["ai-fresher"];
-  }
-  // Career changers with no programming language → still route to AI Forward Deployed if domain expertise exists
-  if (answers.background === "careerchange" || answers.background === "other") {
-    if (answers.ml === "none" || answers.ml === "use") {
-      const bizScores = ["finance","healthcare","retail","logistics","other"];
-      const hasDomain = bizScores.includes(answers.bizDomain) && answers.bizDomain !== "none";
-      const interests = Array.isArray(answers.interest) ? answers.interest : (answers.interest ? [answers.interest] : []);
-      if (hasDomain && (interests.includes("solutions") || interests.includes("build") || interests.includes("data"))) {
-        return ["ai-forward-deployed-engineer", "ai-fresher"];
-      }
-      return ["ai-fresher", "ai-product-engineer"];
-    }
-  }
-  // If no language at all and not a career changer → beginner
-  if (answers.lang === "none") {
-    return ["ai-fresher", "ai-product-engineer"];
-  }
+// ---------- state ----------
+const storage = {
+  get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; } },
+  set(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* private mode */ } }
+};
+const freshState = () => ({ view: "intro", answers: {}, qid: null, roleId: null });
+let state = Object.assign(freshState(), storage.get(STORE_KEY) || {});
+let advanceTimer = null;
+const save = () => storage.set(STORE_KEY, state);
 
-  const ml = answers.ml, interest = answers.interest, domain = answers.domain, lang = answers.lang, math = answers.math, goal = answers.goal;
-  const interests = Array.isArray(interest) ? interest : (interest ? [interest] : []);
+const visibleQuestions = () => QUESTIONS.filter(q => !q.showIf || q.showIf(state.answers));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = sel => document.querySelector(sel);
+const hasAnswer = q => {
+  const v = state.answers[q.id];
+  return q.multi ? Array.isArray(v) && v.length > 0 : v !== undefined && v !== "";
+};
 
-  if (ml === "none") { add("ml-engineer", 2); add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
-  if (ml === "use") { add("ai-product-engineer", 3); add("llm-agent-engineer", 3); add("ml-engineer", 2); }
-  if (ml === "basic") { add("ml-engineer", 3); add("ai-research-engineer", 2); add("mlops-engineer", 1); }
-  if (ml === "adv") { add("ai-research-engineer", 4); add("mlops-engineer", 3); add("ml-engineer", 2); }
-
-  if (interests.includes("build")) { add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
-  if (interests.includes("model")) { add("ai-research-engineer", 4); add("ml-engineer", 2); add("mlops-engineer", 1); }
-  if (interests.includes("data")) { add("data-engineer-ai", 3); add("ml-engineer", 1); }
-  if (interests.includes("agents")) { add("llm-agent-engineer", 3); add("ai-product-engineer", 1); }
-  if (interests.includes("infra")) { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
-  if (interests.includes("solutions")) { add("ai-forward-deployed-engineer", 3); add("ai-product-engineer", 1); }
-
-  if (domain === "backend" || domain === "fullstack") { add("ml-engineer", 1); add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
-  if (domain === "frontend") { add("ai-product-engineer", 2); }
-  if (domain === "dataeng") { add("data-engineer-ai", 3); add("ml-engineer", 1); }
-  if (domain === "devops") { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
-  if (domain === "mobile") { add("ai-product-engineer", 2); }
-  if (domain === "testing") { add("ml-engineer", 1); add("mlops-engineer", 1); add("data-engineer-ai", 1); }
-
-  if (lang === "python") { add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1); add("llm-agent-engineer", 1); }
-  if (lang === "js") { add("ai-product-engineer", 2); }
-  if (lang === "java" || lang === "csharp") { add("mlops-engineer", 1); add("ml-engineer", 1); }
-  if (lang === "cpp") { add("ai-research-engineer", 1); add("mlops-engineer", 1); }
-
-  if (math === "strong") { add("ai-research-engineer", 2); add("ml-engineer", 1); }
-  if (math === "weak") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); add("mlops-engineer", 1); }
-
-  if (goal === "upskill") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
-  if (goal === "freelance") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
-
-  // New question scoring
-  const py = answers.pythonLevel;
-  if (py === "comfortable" || py === "advanced") { add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1); add("llm-agent-engineer", 1); }
-  if (py === "basic") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
-  if (py === "none") { add("ai-product-engineer", 1); add("ai-fresher", 1); }
-
-  const cloud = answers.cloud;
-  if (cloud === "advanced") { add("mlops-engineer", 2); add("ai-research-engineer", 1); }
-  if (cloud === "comfortable" || cloud === "basic") add("mlops-engineer", 1);
-
-  const db = answers.db;
-  if (db === "advanced") { add("data-engineer-ai", 2); add("ml-engineer", 1); }
-  if (db === "comfortable") add("data-engineer-ai", 1);
-  if (db === "basic") add("data-engineer-ai", 0.5);
-
-  const biz = answers.bizDomain;
-  if (biz === "finance" || biz === "healthcare" || biz === "retail" || biz === "logistics" || biz === "other") {
-    add("ai-forward-deployed-engineer", 2);
-    add("ai-product-engineer", 1);
-  }
-
-  // Data engineering domain always gets a strong data-engineer boost
-  if (domain === "dataeng") { add("data-engineer-ai", 4); add("ml-engineer", 1); }
-  if (lang === "python" && db !== "none" && db !== "basic") add("data-engineer-ai", 1);
-
-  if (answers.learnStyle === "structured") { /* lighter self-paced load */ }
-
-  // AI role comfort scoring
-  const comfort = answers.aiRoleComfort;
-  if (comfort === "uncomfortable") {
-    add("ai-product-engineer", 2);
-    add("ai-forward-deployed-engineer", 2);
-    add("mlops-engineer", 1);
-  }
-
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  return sorted.slice(0, 2).map(s => s[0]);
+function go(view, extra = {}) {
+  clearTimeout(advanceTimer);
+  Object.assign(state, { view }, extra);
+  save();
+  render();
+  const card = $("#app");
+  if (card.getBoundingClientRect().top < 0) card.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-const state = { answers: {}, step: 0 };
-
-function parseWeeks(s) {
-  const m = s.match(/(\d+)-(\d+)/);
-  return m ? [parseInt(m[1]), parseInt(m[2])] : [0, 0];
+function render() {
+  const app = $("#app");
+  app.className = "card view-" + state.view;
+  document.body.dataset.view = state.view;
+  $("#progressWrap").hidden = state.view !== "question";
+  if (state.view === "question") renderQuestion(app);
+  else if (state.view === "review") renderReview(app);
+  else if (state.view === "result") renderResult(app);
+  else renderIntro(app);
 }
 
-function totalWeeks(roadmap) {
-  let lo = 0, hi = 0;
-  roadmap.forEach(r => {
-    const [a, b] = parseWeeks(r.time);
-    lo += a; hi += b;
-  });
-  return [lo, hi];
+// ---------- intro ----------
+function renderIntro(app) {
+  const qs = visibleQuestions();
+  const answered = qs.filter(hasAnswer).length;
+  const resume = answered > 0;
+  app.innerHTML = `
+    <div class="intro">
+      <h2>Not sure which AI role fits you?</h2>
+      <p class="lead">Answer about 20 short questions about your background, skills, how you like to work and your goals. We'll match you to the AI roles that fit, show why, and give you a step-by-step plan based on your hours per week.</p>
+      <ul class="intro-points">
+        <li><strong>9 AI career paths</strong> compared: engineering, data, infrastructure, research, client-facing and product roles</li>
+        <li><strong>Builds on your experience</strong>: shows which of your current skills carry over, so you don't start from zero</li>
+        <li><strong>Checks your answers</strong>: 4 quick reasoning questions to double-check your self-ratings</li>
+        <li><strong>A realistic timeline</strong>: steps you already know are shortened, and the plan fits the hours you have</li>
+      </ul>
+      <p class="fine">About 4 minutes · No sign-up · Your answers stay in your browser</p>
+      <div class="nav nav-start">
+        ${resume ? `<button class="button btn-secondary" data-act="restart">Start over</button>` : ""}
+        <button class="button btn-primary" data-act="start">${resume ? `Continue (${answered}/${qs.length} answered)` : "Start the questionnaire"}</button>
+      </div>
+    </div>`;
+  app.querySelector('[data-act="start"]').onclick = () => {
+    const next = qs.find(q => !hasAnswer(q));
+    if (!next) return go("result");
+    go("question", { qid: next.id });
+  };
+  const r = app.querySelector('[data-act="restart"]');
+  if (r) r.onclick = restart;
 }
 
-function fmtDuration(weeks) {
-  const w = Math.round((weeks[0] + weeks[1]) / 2);
-  if (w < 6) return w + " weeks";
-  const months = w / 4.3;
-  if (months < 12) return months.toFixed(1) + " months";
-  return (months / 12).toFixed(1) + " years";
+function restart() {
+  if (!confirm("Clear your answers and start over?")) return;
+  state = freshState();
+  go("question", { qid: QUESTIONS[0].id });
 }
 
-function renderForm() {
-  const q = QUESTIONS[state.step];
-  const form = document.getElementById("form");
-  form.innerHTML = "";
-  const qEl = document.createElement("p");
-  qEl.className = "question";
-  qEl.textContent = q.q;
-  form.appendChild(qEl);
-  if (q.clarify) {
-    const c = document.createElement("p");
-    c.style.color = "var(--muted)";
-    c.style.fontSize = "13px";
-    c.textContent = q.clarify;
-    form.appendChild(c);
-  }
-  const opts = document.createElement("div");
-  opts.className = "options";
-  const current = state.answers[q.id];
-  const selectedSet = q.multi ? new Set(Array.isArray(current) ? current : (current ? [current] : [])) : null;
-  q.options.forEach(opt => {
-    const div = document.createElement("div");
-    const sel = q.multi ? selectedSet.has(opt.value) : (current === opt.value);
-    div.className = "option" + (sel ? " selected" : "");
-    div.innerHTML = `<div class="dot"></div><div><div class="opt-text">${opt.label}</div><div class="opt-desc">${opt.desc}</div></div>`;
-    div.addEventListener("click", () => {
-      if (q.multi) {
-        let arr = Array.isArray(current) ? [...current] : (current ? [current] : []);
-        const idx = arr.indexOf(opt.value);
-        if (idx >= 0) arr.splice(idx, 1); else arr.push(opt.value);
-        state.answers[q.id] = arr;
-      } else {
-        state.answers[q.id] = opt.value;
-      }
-      renderForm();
-    });
-    opts.appendChild(div);
-  });
-  form.appendChild(opts);
-
-  const nav = document.createElement("div");
-  nav.className = "nav";
-  const back = document.createElement("button");
-  back.className = "button btn-secondary";
-  if (state.step === 0) back.classList.add("hidden");
-  back.textContent = "Back";
-  back.disabled = state.step === 0;
-  back.addEventListener("click", () => { state.step--; renderForm(); });
-  const next = document.createElement("button");
-  next.className = "button btn-primary";
-  next.textContent = state.step === QUESTIONS.length - 1 ? "Find my exact path" : "Next";
+// ---------- questions ----------
+function renderQuestion(app) {
+  const qs = visibleQuestions();
+  let idx = qs.findIndex(q => q.id === state.qid);
+  if (idx < 0) idx = 0;
+  const q = qs[idx];
+  state.qid = q.id;
   const val = state.answers[q.id];
-  const hasAnswer = q.multi ? (Array.isArray(val) && val.length > 0) : !!val;
-  next.disabled = !hasAnswer;
-  next.addEventListener("click", () => {
-    if (state.step < QUESTIONS.length - 1) { state.step++; renderForm(); }
-    else showResult();
-  });
-  nav.appendChild(back);
-  nav.appendChild(next);
-  form.appendChild(nav);
+  const selected = q.multi ? new Set(Array.isArray(val) ? val : []) : null;
+  const isLast = idx === qs.length - 1;
+  const firstQuiz = q.quiz && !qs[idx - 1]?.quiz;
 
-  document.getElementById("currentStep").textContent = state.step + 1;
-  document.getElementById("totalSteps").textContent = QUESTIONS.length;
-  document.getElementById("progressFill").style.width = (state.step / QUESTIONS.length * 100) + "%";
+  $("#progressFill").style.width = Math.round((idx / qs.length) * 100) + "%";
+  $("#progressLabel").textContent = `${SECTIONS[q.section]} · Question ${idx + 1} of ${qs.length}`;
+
+  app.innerHTML = `
+    ${firstQuiz ? `<div class="callout"><strong>Quick reasoning check — 4 questions.</strong> These help us check your self-ratings, which makes the recommendation more accurate. There's no penalty for skipping.</div>` : ""}
+    <h2 class="question" id="qTitle" tabindex="-1">${esc(q.q)}</h2>
+    ${q.clarify ? `<p class="clarify">${esc(q.clarify)}</p>` : ""}
+    ${q.multi ? `<p class="multi-hint">Select all that apply</p>` : ""}
+    <div class="options${q.options.length > 6 ? " options-grid" : ""}" role="${q.multi ? "group" : "radiogroup"}" aria-labelledby="qTitle">
+      ${q.options.map((o, i) => {
+        const on = q.multi ? selected.has(o.value) : val === o.value;
+        return `<button type="button" class="option${on ? " selected" : ""}" role="${q.multi ? "checkbox" : "radio"}" aria-checked="${on}" data-value="${esc(o.value)}">
+          <span class="${q.multi ? "box" : "dot"}" aria-hidden="true"></span>
+          <span class="opt-body"><span class="opt-text">${esc(o.label)}</span>${o.desc ? `<span class="opt-desc">${esc(o.desc)}</span>` : ""}</span>
+          ${i < 9 ? `<kbd class="opt-key" aria-hidden="true">${i + 1}</kbd>` : ""}
+        </button>`;
+      }).join("")}
+    </div>
+    <div class="nav">
+      <button type="button" class="button btn-secondary" data-act="back">${idx === 0 ? "Home" : "Back"}</button>
+      <button type="button" class="button btn-primary" data-act="next" ${hasAnswer(q) ? "" : "disabled"}>${isLast ? "See my AI career path" : "Next"}</button>
+    </div>
+    <p class="kbd-hint">Tip: press <kbd>1</kbd>–<kbd>9</kbd> to choose and <kbd>Enter</kbd> to continue</p>`;
+
+  app.querySelectorAll(".option").forEach(btn => {
+    btn.onclick = () => choose(q, btn.dataset.value);
+  });
+  app.querySelector('[data-act="back"]').onclick = () => idx === 0 ? go("intro") : go("question", { qid: qs[idx - 1].id });
+  app.querySelector('[data-act="next"]').onclick = () => next(q);
+  $("#qTitle").focus({ preventScroll: true });
 }
 
-function showResult() {
-  const roles = scoreRole(state.answers);
-  const form = document.getElementById("form");
-  form.innerHTML = "";
-  const intro = document.createElement("p");
-  intro.className = "question";
-  intro.textContent = "Based on your experience, abilities, and interests, here is your exact AI career path:";
-  form.appendChild(intro);
-
-  // Role tabs (if 2 roles returned)
-  if (roles.length > 1) {
-    const tabs = document.createElement("div");
-    tabs.className = "role-tabs";
-    roles.forEach((rid, i) => {
-      const r = ROLES[rid];
-      const tab = document.createElement("div");
-      tab.className = "role-tab" + (i === 0 ? " active" : "");
-      tab.textContent = (i === 0 ? "🎯 " : "📊 ") + r.title;
-      tab.onclick = () => {
-        document.querySelectorAll(".role-tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        document.querySelectorAll(".role-card.result").forEach((c, idx) => {
-          c.style.display = idx === i ? "block" : "none";
-        });
-      };
-      tabs.appendChild(tab);
-    });
-    form.appendChild(tabs);
+function choose(q, value) {
+  clearTimeout(advanceTimer);
+  if (q.multi) {
+    let arr = Array.isArray(state.answers[q.id]) ? [...state.answers[q.id]] : [];
+    if (arr.includes(value)) arr = arr.filter(v => v !== value);
+    else if (q.exclusive && value === q.exclusive) arr = [value];
+    else arr = arr.filter(v => v !== q.exclusive).concat(value);
+    state.answers[q.id] = arr;
+    save();
+    render();
+  } else {
+    state.answers[q.id] = value;
+    save();
+    render();
+    advanceTimer = setTimeout(() => next(q), AUTO_ADVANCE_MS);
   }
-
-  roles.forEach((roleId, idx) => {
-    const role = ROLES[roleId];
-    const [lo, hi] = totalWeeks(role.roadmap);
-    const totalLabel = fmtDuration([lo, hi]);
-    const maxWeek = hi;
-    const steps = role.roadmap.map(r => {
-      const [a, b] = parseWeeks(r.time);
-      const endWeek = b || a;
-      const pct = maxWeek > 0 ? Math.round(endWeek / maxWeek * 100) : 0;
-      return `
-      <li data-step="${r.step}">
-        <div class="step-header">
-          <strong>Step ${r.step} — ${r.title}</strong>
-          <span class="step-toggle" onclick="this.parentElement.parentElement.querySelector('.step-body').classList.toggle('collapsed');this.classList.toggle('open')">+</span>
-        </div>
-        <div class="step-body">
-          <span class="step-time">⏱ ${r.time}</span>
-          <div class="step-what">${r.what}</div>
-          <div class="step-why"><em>Why this matters:</em> This is a core skill for the role. Mastering it gives you the ability employers look for.</div>
-          <div class="step-sources"><strong>Learn from:</strong> ${r.sources}</div>
-          <div class="step-seq"><strong>Do it when:</strong> ${r.sequence}</div>
-          <div class="step-subtopics"><span class="step-section-label">What you will learn</span><ul>${r.subTopics ? r.subTopics.map(st => `<li>${st}</li>`).join("") : ""}</ul></div>
-          <div class="step-mindnotes"><span class="step-section-label">Mind notes</span><ul>${r.mindNotes ? r.mindNotes.map(mn => `<li>${mn}</li>`).join("") : ""}</ul></div>
-          <div class="step-highlights"><span class="step-section-label">Must learn</span><ul>${r.keyHighlights ? r.keyHighlights.map(kh => `<li>${kh}</li>`).join("") : ""}</ul></div>
-          <div class="step-projects"><span class="step-section-label">Starter projects (GitHub)</span><ul>${r.starterProjects ? r.starterProjects.map(sp => `<li><strong>${sp.name}</strong> — ${sp.description}<br><small>Files: ${sp.files.join(", ")}</small> <a href="${sp.url}" target="_blank" rel="noopener">View on GitHub →</a></li>`).join("") : ""}</ul></div>
-        </div>
-      </li>`;
-    }).join("");
-
-    const card = document.createElement("div");
-    card.className = "role-card result" + (idx > 0 ? " collapsed-card" : "");
-    card.style.display = idx === 0 ? "block" : "none";
-    card.innerHTML = `
-      <h2>${role.title}</h2>
-      <p class="total-time">Total estimated learning time: <strong>${totalLabel}</strong> (approx. ${lo}–${hi} weeks)</p>
-      <p class="why">${role.why}</p>
-      <div class="week-timeline">
-        <span>📅 Timeline</span>
-        <div class="bar"><div class="fill" style="width:${Math.min(100, Math.round(hi/12*100))}%"></div></div>
-        <span>${lo}–${hi}w</span>
-      </div>
-      <div class="roadmap-progress">
-        <span>Progress</span>
-        <div class="roadmap-progress-bar"><div class="roadmap-progress-fill" style="width:0%"></div></div>
-        <span id="stepCounter">0 / ${role.roadmap.length}</span>
-      </div>
-      <div class="skills-highlight">
-        ${role.skills.map((s, i) => `<span class="skill-highlight${i < 3 ? ' top' : ''}">${s}</span>`).join("")}
-      </div>
-      <div class="roadmap"><strong>Step-by-step roadmap (follow in this exact order):</strong><ol>${steps}</ol></div>
-    `;
-    form.appendChild(card);
-
-    // Add progress click handlers
-    card.querySelectorAll(".roadmap li").forEach(li => {
-      li.addEventListener("click", function(e) {
-        if (e.target.tagName === 'A' || e.target.closest('a')) return;
-        this.classList.toggle("completed");
-        const total = card.querySelectorAll(".roadmap li").length;
-        const done = card.querySelectorAll(".roadmap li.completed").length;
-        const fill = card.querySelector(".roadmap-progress-fill");
-        const counter = card.querySelector("#stepCounter");
-        if (fill) fill.style.width = (done / total * 100) + "%";
-        if (counter) counter.textContent = done + " / " + total;
-      });
-    });
-  });
-
-  const note = document.createElement("p");
-  note.style.color = "#86868b";
-  note.style.fontSize = "13px";
-  note.style.marginTop = "16px";
-  note.textContent = "Tip: Click any step to mark it complete. Follow the roadmap in order — each step builds the ability needed for the next. Build at least one portfolio project before applying.";
-  form.appendChild(note);
-
-  // Gap analysis based on answers
-  const gapDiv = document.createElement("div");
-  gapDiv.style.marginTop = "20px";
-  gapDiv.style.padding = "16px";
-  gapDiv.style.background = "rgba(255,255,255,.04)";
-  gapDiv.style.borderRadius = "10px";
-  gapDiv.style.borderLeft = "4px solid var(--accent2)";
-  
-  const gaps = [];
-  if (state.answers.lang === "none" || state.answers.lang === "java" || state.answers.lang === "csharp" || state.answers.lang === "cpp") gaps.push("<strong>Learn Python first:</strong> Python is the #1 language in AI. Most ML/LLM libraries are Python-first. Start with CS50P or freeCodeCamp Python.");
-  if (state.answers.math === "weak") gaps.push("<strong>Refresh math:</strong> Linear algebra, statistics, and calculus are needed to understand how models work. Khan Academy and 3Blue1Brown are free.");
-  if (state.answers.ml === "none") gaps.push("<strong>Start with classic ML:</strong> Before LLMs, learn supervised learning (regression/classification) and evaluation metrics.");
-  if (state.answers.lang === "js" && state.answers.domain === "frontend") gaps.push("<strong>Leverage your frontend:</strong> AI Product Engineer is a strong fit — embed LLM features into web apps using JavaScript/TypeScript.");
-  if (state.answers.domain === "backend" || state.answers.domain === "devops") gaps.push("<strong>Leverage your backend:</strong> AI Platform/MLOps Engineer fits well — focus on model serving, Kubernetes, and observability.");
-  if (state.answers.experience === "5-10" || state.answers.experience === "10+") gaps.push("<strong>Consider AI Forward Deployed Engineer:</strong> With your experience, client-facing AI roles (OpenAI, Anthropic hire these) value domain knowledge + communication.");
-  if (state.answers.aiRoleComfort === "uncomfortable") gaps.push("<strong>Already in AI but unhappy?</strong> Consider switching to AI Product Engineer (build AI features), AI Forward Deployed Engineer (client-facing solutions), or MLOps Engineer (infrastructure). Your AI experience is valuable—just need to pivot to a better-fit role.");
-  
-  gapDiv.innerHTML = "<strong style='color:var(--accent2)'>⚡ Gap analysis &amp; next steps:</strong><ul>" + gaps.map(g => "<li>" + g + "</li>").join("") + "</ul>";
-  form.appendChild(gapDiv);
-
-  // Stay Updated section
-  const stayUpdatedDiv = document.createElement("div");
-  stayUpdatedDiv.style.marginTop = "24px";
-  stayUpdatedDiv.style.padding = "20px";
-  stayUpdatedDiv.style.background = "linear-gradient(135deg,#e3f2fd,#f3e8ff)";
-  stayUpdatedDiv.style.border = "1px solid var(--border)";
-  stayUpdatedDiv.style.borderRadius = "12px";
-  stayUpdatedDiv.style.boxShadow = "var(--shadow)";
-
-  stayUpdatedDiv.innerHTML =
-    '<h3 style="font-size:1rem;font-weight:700;margin:0 0 12px;color:#1d1d1f;text-transform:uppercase;letter-spacing:0.5px;">Stay Updated — AI Community & Resources</h3>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:12px;">' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">YouTube Channels</h4>' +
-    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
-    '<li><a href="https://youtube.com/@3Blue1Brown" target="_blank" rel="noopener">3Blue1Brown</a> (Math)</li>' +
-    '<li><a href="https://youtube.com/@sentdex" target="_blank" rel="noopener">sentdex</a> (Python/ML)</li>' +
-    '<li><a href="https://youtube.com/@AndrejKarpathy" target="_blank" rel="noopener">Andrej Karpathy</a> (Deep Learning)</li>' +
-    '<li><a href="https://youtube.com/@HuggingFace" target="_blank" rel="noopener">Hugging Face</a> (LLMs)</li>' +
-    '</ul>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">GitHub Repos</h4>' +
-    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
-    '<li><a href="https://github.com/huggingface/transformers" target="_blank" rel="noopener">huggingface/transformers</a></li>' +
-    '<li><a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener">langchain-ai/langchain</a></li>' +
-    '<li><a href="https://github.com/pytorch/pytorch" target="_blank" rel="noopener">pytorch/pytorch</a></li>' +
-    '<li><a href="https://github.com/huggingface/datasets" target="_blank" rel="noopener">huggingface/datasets</a></li>' +
-    '</ul>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">People to Follow</h4>' +
-    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
-    '<li>Andrew Ng (@AndrewYNg)</li>' +
-    '<li>Yann LeCun (@ylecun)</li>' +
-    '<li>Andrej Karpathy (@karpathy)</li>' +
-    '<li>Jeremy Howard (@jeremyphoward)</li>' +
-    '</ul>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">Communities</h4>' +
-    '<ul style="margin:0;padding-left:18px;font-size:0.875rem;color:#86868b;">' +
-    '<li>r/MachineLearning (Reddit)</li>' +
-    '<li>r/LocalLLaMA (Reddit)</li>' +
-    '<li>Hugging Face Discord</li>' +
-    '<li>AI Twitter/X community</li>' +
-    '</ul>' +
-    '</div>' +
-    '</div>' +
-    '<p style="font-size:0.8rem;color:#aeaeb2;margin-top:12px;">Follow these to stay updated on the latest AI developments, papers, and tools for free.</p>';
-  stayUpdatedDiv.innerHTML = stayUpdatedHTML;
-  form.appendChild(stayUpdatedDiv);
-
-  document.getElementById("progressFill").style.width = "100%";
 }
 
-renderForm();
+function next(q) {
+  clearTimeout(advanceTimer);
+  if (!hasAnswer(q)) return;
+  const qs = visibleQuestions();
+  const idx = qs.findIndex(x => x.id === q.id);
+  // Coming from the review screen, jump back there once all questions are answered.
+  if (state.returnToReview && qs.every(hasAnswer)) return go("review", { returnToReview: false });
+  if (idx < qs.length - 1) go("question", { qid: qs[idx + 1].id });
+  else go("result", { roleId: null });
+}
 
-  // Market insights section
-  const marketDiv = document.createElement("div");
-  marketDiv.style.marginTop = "24px";
-  marketDiv.style.padding = "20px";
-  marketDiv.style.background = "linear-gradient(180deg,#fdfbf7,#f9f5ea)";
-  marketDiv.style.border = "1px solid #e5d8c9";
-  marketDiv.style.borderRadius = "12px";
-  marketDiv.style.boxShadow = "var(--shadow)";
+document.addEventListener("keydown", e => {
+  if (state.view !== "question" || e.altKey || e.ctrlKey || e.metaKey) return;
+  const n = Number(e.key);
+  if (n >= 1 && n <= 9) {
+    const btn = document.querySelectorAll("#app .option")[n - 1];
+    if (btn) { e.preventDefault(); btn.click(); }
+  } else if (e.key === "Enter" && !(e.target instanceof HTMLButtonElement)) {
+    const nextBtn = $('#app [data-act="next"]');
+    if (nextBtn && !nextBtn.disabled) { e.preventDefault(); nextBtn.click(); }
+  }
+});
 
-  const marketHTML =
-    '<h3 style="font-size:1rem;font-weight:700;margin:0 0 12px;color:#1d1d1f;text-transform:uppercase;letter-spacing:0.5px;">Market Insights — AI Roles & Salaries (2026)</h3>' +
-    '<p style="color:#86868b;font-size:0.875rem;margin-bottom:12px;">Based on data from Levels.fyi, Glassdoor, and job postings at Google, Meta, Amazon, Apple, NVIDIA, Microsoft, OpenAI, Anthropic:</p>' +
-    '<div style="display:flex;flex-wrap:wrap;gap:16px;">' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">ML Engineer</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $280k–$400k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $180k–$300k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Python, PyTorch, MLOps, system design</p>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Product Engineer</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $250k–$350k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $160k–$260k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> LLM APIs, RAG, JavaScript, prompt engineering</p>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">MLOps / AI Platform</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $260k–$380k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $170k–$280k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Kubernetes, CI/CD, model serving, observability</p>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">LLM / Agent Engineer</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $300k–$450k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $200k–$350k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> LangChain/LangGraph, vector DBs, agent frameworks</p>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Forward Deployed</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $250k–$400k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $170k–$280k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Client solutions, LLM integration, data engineering</p>' +
-    '</div>' +
-    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
-    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Research Engineer</h4>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $350k–$600k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $220k–$380k TC</p>' +
-    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> PyTorch, deep learning, research papers, fine-tuning</p>' +
-    '</div>' +
-    '</div>' +
-    '<p style="font-size:0.8rem;color:#aeaeb2;margin-top:12px;">Sources: Levels.fyi, Glassdoor, company H-1B filings, job postings. Salaries are total compensation (base + equity + bonus) for US roles.</p>' +
-    '</div>';
-  form.appendChild(marketDiv);
+// ---------- review ----------
+function renderReview(app) {
+  const qs = visibleQuestions();
+  const label = q => {
+    const v = state.answers[q.id];
+    const vals = Array.isArray(v) ? v : [v];
+    const txt = vals.map(x => q.options.find(o => o.value === x)?.label).filter(Boolean).join(", ");
+    return txt || `<em class="muted">Not answered</em>`;
+  };
+  app.innerHTML = `
+    <h2 class="question">Review your answers</h2>
+    <p class="clarify">Change any answer and we'll update your recommendation straight away.</p>
+    <ol class="review-list">
+      ${qs.map(q => `<li><div><span class="review-q">${esc(q.q)}</span><span class="review-a">${q.quiz ? (hasAnswer(q) ? "Answered" : "<em class='muted'>Not answered</em>") : label(q)}</span></div>
+        <button type="button" class="link-btn" data-q="${q.id}">Change</button></li>`).join("")}
+    </ol>
+    <div class="nav"><button type="button" class="button btn-primary" data-act="done">See my updated results</button></div>`;
+  app.querySelectorAll("[data-q]").forEach(b => b.onclick = () => go("question", { qid: b.dataset.q, returnToReview: true }));
+  app.querySelector('[data-act="done"]').onclick = () => {
+    const missing = qs.find(q => !hasAnswer(q));
+    missing ? go("question", { qid: missing.id, returnToReview: true }) : go("result", { roleId: null });
+  };
+}
+
+// ---------- results ----------
+const progressStore = () => storage.get(PROGRESS_KEY) || {};
+const fitLabel = f => f >= 80 ? "Excellent fit" : f >= 60 ? "Strong fit" : f >= 40 ? "Possible fit" : "Weak fit";
+const fmtMonths = m => m < 1 ? `${Math.max(1, Math.round(m * 4.33))} weeks` : `${m} months`;
+const meter = (pct, cls = "") => `<span class="meter ${cls}" aria-hidden="true"><span style="width:${Math.max(3, pct)}%"></span></span>`;
+
+function renderResult(app) {
+  const { profile: p, results } = Scoring.rankRoles(state.answers);
+  const top = results[0];
+  const sel = results.find(r => r.id === state.roleId) || top;
+  const topRole = ROLES[top.id];
+  const quizQs = QUESTIONS.filter(q => q.quiz);
+
+  $("#progressFill").style.width = "100%";
+
+  app.innerHTML = `
+    <section class="result-hero">
+      <p class="eyebrow">Your best-fit AI path</p>
+      <h2>${esc(topRole.title)}</h2>
+      <p class="tagline">${esc(topRole.tagline)}</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-num">${top.fit}%</span><span class="stat-label">${fitLabel(top.fit)}</span></div>
+        <div class="stat"><span class="stat-num">${top.readiness}%</span><span class="stat-label">Skills you already have</span></div>
+        <div class="stat"><span class="stat-num">${fmtMonths(top.plan.months)}</span><span class="stat-label">To job-ready at ${p.hours} h/week</span></div>
+      </div>
+      ${top.reasons.length ? `<h3>Why this fits you</h3><ul class="reasons">${top.reasons.slice(0, 4).map(r => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
+      ${MOTIVATION_MSG[p.motivation] ? `<p class="motivation">${esc(MOTIVATION_MSG[p.motivation])}</p>` : ""}
+    </section>
+
+    <section class="block">
+      <h3>Your top matches</h3>
+      <p class="muted small">Pick a role to see its plan, gaps and roadmap.</p>
+      <div class="match-grid">
+        ${results.slice(0, 3).map((r, i) => matchCard(r, i, sel.id)).join("")}
+      </div>
+      <details class="all-roles">
+        <summary>Compare all ${results.length} AI paths</summary>
+        <ul>${results.map(r => `<li><button type="button" class="link-btn" data-role="${r.id}">${esc(ROLES[r.id].title)}</button>${meter(r.fit)}<span class="pct">${r.fit}%</span></li>`).join("")}</ul>
+      </details>
+    </section>
+
+    <section class="block profile">
+      <h3>How we read your profile</h3>
+      <div class="profile-cols">
+        <div>
+          <h4>Strengths you can build on</h4>
+          <ul class="ticks">${Scoring.strengths(p).map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+        </div>
+        <div>
+          <h4>Reasoning check</h4>
+          <ul class="quiz-results">${quizQs.map(q => {
+            const r = p.quiz[q.quiz];
+            const cls = r === null ? "skip" : r ? "ok" : "miss";
+            return `<li class="${cls}"><strong>${esc(q.skill)}</strong> — ${r === null ? "skipped" : r ? "correct" : "worth revisiting"}<br><span class="muted small">${esc(q.explain)}</span></li>`;
+          }).join("")}</ul>
+        </div>
+      </div>
+      ${p.notes.length ? `<div class="callout callout-info"><strong>We adjusted a few answers for accuracy:</strong><ul>${p.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
+    </section>
+
+    <section class="block role-detail" id="roleDetail" aria-live="polite">${roleDetail(sel, p, sel.id === top.id)}</section>
+
+    <section class="block stay">
+      <h3>Stay updated</h3>
+      <div class="stay-grid">
+        ${STAY_UPDATED.map(g => `<div class="stay-card"><h4>${esc(g.title)}</h4><ul>${g.items.map(([n, u, d]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a><span class="muted small"> — ${esc(d)}</span></li>`).join("")}</ul></div>`).join("")}
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="button" class="button btn-secondary" data-act="edit">Edit answers</button>
+      <button type="button" class="button btn-secondary" data-act="copy">Copy my plan</button>
+      <button type="button" class="button btn-secondary" data-act="print">Print / save PDF</button>
+      <button type="button" class="button btn-ghost" data-act="restart">Start over</button>
+    </div>`;
+
+  app.querySelectorAll("[data-role]").forEach(b => b.onclick = () => {
+    state.roleId = b.dataset.role;
+    save();
+    renderResult(app);
+    $("#roleDetail").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  app.querySelector('[data-act="edit"]').onclick = () => go("review");
+  app.querySelector('[data-act="restart"]').onclick = restart;
+  app.querySelector('[data-act="print"]').onclick = () => window.print();
+  app.querySelector('[data-act="copy"]').onclick = e => copyPlan(e.currentTarget, sel, p);
+  bindRoadmap(app, sel.id);
+}
+
+function matchCard(r, i, selId) {
+  const role = ROLES[r.id];
+  return `<button type="button" class="match${r.id === selId ? " active" : ""}" data-role="${r.id}" aria-pressed="${r.id === selId}">
+    <span class="match-rank">${i === 0 ? "Best match" : `#${i + 1}`}</span>
+    <span class="match-title">${esc(role.title)}</span>
+    <span class="match-tag">${esc(role.tagline)}</span>
+    <span class="match-meter">${meter(r.fit)}<span class="pct">${r.fit}% fit</span></span>
+    <span class="match-meta">${r.readiness}% ready · ~${fmtMonths(r.plan.months)}</span>
+  </button>`;
+}
+
+function roleDetail(r, p, isTop) {
+  const role = ROLES[r.id];
+  const pl = r.plan;
+  let timeline = "";
+  if (p.deadline && pl.months > p.deadline) {
+    const needHours = Math.ceil(pl.studyHours / (p.deadline * 4.33));
+    timeline = `<div class="callout callout-warn"><strong>Timeline check:</strong> at ${p.hours} h/week this plan takes about ${fmtMonths(pl.months)}, which is longer than your ${p.deadline}-month target. To hit it you'd need about <strong>${needHours} h/week</strong>, or treat the target as "interview-ready" and keep learning on the job.</div>`;
+  } else if (p.deadline) {
+    timeline = `<div class="callout callout-ok"><strong>Timeline check:</strong> about ${fmtMonths(pl.months)} at ${p.hours} h/week fits your ${p.deadline}-month target.</div>`;
+  }
+  const done = new Set(progressStore()[r.id] || []);
+  const doneCount = role.roadmap.filter(s => done.has(s.step)).length;
+  const firstOpen = pl.steps.find(s => !done.has(s.step) && !s.fast)?.step;
+
+  return `
+    <div class="detail-head">
+      <h2>${esc(role.title)}</h2>
+      <span class="fit-pill">${r.fit}% fit · ${fitLabel(r.fit)}</span>
+    </div>
+    <p class="why">${esc(role.why)}</p>
+    ${!isTop && r.reasons.length ? `<h4>Why it could fit you</h4><ul class="reasons">${r.reasons.slice(0, 4).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+    ${r.cautions.length ? `<div class="callout callout-warn"><strong>Watch-outs:</strong><ul>${r.cautions.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` : ""}
+    ${timeline}
+
+    <div class="detail-cols">
+      <div>
+        <h4>Job titles to search for</h4>
+        <div class="chips">${role.titles.map(t => `<span class="chip">${esc(t)}</span>`).join("")}</div>
+        <h4>Core skills</h4>
+        <div class="chips">${role.skills.map((s, i) => `<span class="chip${i < 3 ? " chip-key" : ""}">${esc(s)}</span>`).join("")}</div>
+      </div>
+      <div>
+        <h4>Market</h4>
+        <p class="small"><strong>Demand:</strong> ${esc(role.market.demand)}<br><strong>Pay (indicative):</strong> ${esc(role.market.pay)}</p>
+        <p class="muted tiny">US total compensation from public sources such as Levels.fyi. It varies a lot by country, city and company, so check local job boards.</p>
+      </div>
+    </div>
+
+    <h4>Your skill gaps for this role</h4>
+    ${r.gaps.length ? `<ul class="gaps">${r.gaps.map(g => `<li>
+        <div class="gap-head"><strong>${esc(g.label)}</strong>${g.need !== undefined ? `<span class="gap-meter">${meter((g.have / g.max) * 100, "have")}<span class="tiny muted">you: ${levelName(g.key, g.have)} → needed: ${levelName(g.key, g.need)}</span></span>` : ""}</div>
+        <p class="small">${esc(g.advice)}</p></li>`).join("")}</ul>`
+      : `<p class="small ok-text">No major gaps. You already meet the core skill levels, so focus on portfolio projects and applying.</p>`}
+
+    <div class="roadmap-head">
+      <h4>Your step-by-step roadmap</h4>
+      <span class="small muted">≈ ${pl.studyHours} study hours · ~${fmtMonths(pl.months)} at ${p.hours} h/week</span>
+    </div>
+    <div class="roadmap-progress">
+      <span class="small">Progress</span>${meter(role.roadmap.length ? (doneCount / role.roadmap.length) * 100 : 0, "progress")}
+      <span class="small" id="stepCounter">${doneCount} / ${role.roadmap.length}</span>
+    </div>
+    <ol class="roadmap">
+      ${pl.steps.map(s => stepItem(s, done.has(s.step), s.step === firstOpen)).join("")}
+    </ol>
+    <p class="muted small">Tick a step when you finish it. Your progress is saved in this browser. Steps marked <span class="badge-fast">Fast-track</span> cover skills you already have, so a quick revision is enough.</p>`;
+}
+
+const LEVEL_NAMES = {
+  py: ["none", "basic", "comfortable", "advanced"],
+  sql: ["none", "basic", "comfortable", "advanced"],
+  cloud: ["none", "basic", "comfortable", "advanced"],
+  ml: ["none", "used AI tools", "built with LLM APIs", "trained models", "shipped ML", "research"],
+  math: ["weak", "okay", "strong"]
+};
+const levelName = (k, v) => (LEVEL_NAMES[k] || [])[Math.floor(v)] ?? v;
+
+function stepItem(s, isDone, open) {
+  const list = (cls, title, items) => items && items.length ? `<div class="${cls}"><span class="step-label">${title}</span><ul>${items.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : "";
+  const time = s.studyWeeks === null ? s.time : s.fast ? `~${Math.max(1, Math.round(s.studyWeeks * 10))} h revision` : s.time;
+  return `<li class="step${isDone ? " done" : ""}${s.fast ? " fast" : ""}" data-step="${s.step}">
+    <label class="step-check" title="Mark step ${s.step} as done"><input type="checkbox" ${isDone ? "checked" : ""} aria-label="Mark step ${s.step} done"><span class="step-num">${s.step}</span></label>
+    <details ${open ? "open" : ""}>
+      <summary><span class="step-title">${esc(s.title)}</span><span class="step-badges">${s.fast ? `<span class="badge-fast">Fast-track</span>` : ""}<span class="badge-time">${esc(time)}</span></span></summary>
+      <div class="step-body">
+        <p>${esc(s.what)}</p>
+        ${s.why ? `<p class="step-why"><strong>Why it matters:</strong> ${esc(s.why)}</p>` : ""}
+        <p class="small"><strong>Learn from:</strong> ${esc(s.sources)}</p>
+        <p class="small muted"><strong>When:</strong> ${esc(s.sequence)}</p>
+        <div class="step-lists">
+          ${list("sub", "What you'll learn", s.subTopics)}
+          ${list("must", "Must-know", s.keyHighlights)}
+          ${list("notes", "Tips", s.mindNotes)}
+        </div>
+        ${s.starterProjects ? `<div class="projects"><span class="step-label">Project ideas</span>${s.starterProjects.map(sp => `
+          <div class="project"><strong>${esc(sp.name)}</strong> — ${esc(sp.description)}
+            <div class="tiny muted">Suggested files: ${sp.files.map(esc).join(", ")}</div>
+            <a class="small" href="https://github.com/search?q=${encodeURIComponent(sp.name)}&type=repositories" target="_blank" rel="noopener">Find similar projects on GitHub →</a></div>`).join("")}</div>` : ""}
+      </div>
+    </details>
+  </li>`;
+}
+
+function bindRoadmap(app, roleId) {
+  app.querySelectorAll(".roadmap .step input[type=checkbox]").forEach(cb => {
+    cb.onchange = () => {
+      const li = cb.closest(".step");
+      const step = Number(li.dataset.step);
+      const all = progressStore();
+      const set = new Set(all[roleId] || []);
+      cb.checked ? set.add(step) : set.delete(step);
+      all[roleId] = [...set];
+      storage.set(PROGRESS_KEY, all);
+      li.classList.toggle("done", cb.checked);
+      const total = app.querySelectorAll(".roadmap .step").length;
+      app.querySelector(".meter.progress span").style.width = Math.max(3, (set.size / total) * 100) + "%";
+      $("#stepCounter").textContent = `${set.size} / ${total}`;
+    };
+  });
+}
+
+function copyPlan(btn, r, p) {
+  const role = ROLES[r.id];
+  const text = [
+    `My AI career path: ${role.title} (${r.fit}% fit)`,
+    `Job-ready in ~${fmtMonths(r.plan.months)} at ${p.hours} h/week`,
+    "",
+    "Why it fits:", ...r.reasons.slice(0, 4).map(x => `- ${x}`),
+    "",
+    "Roadmap:", ...r.plan.steps.map(s => `${s.step}. ${s.title} (${s.fast ? "fast-track" : s.time})`),
+    "",
+    `Made with AI Path Finder — ${location.href.split("#")[0]}`
+  ].join("\n");
+  const done = () => { btn.textContent = "Copied ✓"; setTimeout(() => (btn.textContent = "Copy my plan"), 1800); };
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+  else fallbackCopy(text, done);
+}
+
+function fallbackCopy(text, done) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { /* ignore */ }
+  ta.remove();
+}
+
+// Open every roadmap step when printing so the PDF contains the full plan.
+window.addEventListener("beforeprint", () => document.querySelectorAll(".roadmap details").forEach(d => d.open = true));
+
+render();
