@@ -85,5 +85,17 @@ const ROLES = {
       { step: 4, title: "Contribute to a Research Project or Paper", what: "Publishing or contributing shows deep expertise. Start with small papers or Kaggle competitions.", time: "ongoing", sources: "arXiv (free), Kaggle competitions, GitHub", sequence: "After fine-tuning." },
       { step: 5, title: "Target Research Engineering / Applied Scientist Roles", what: "Apply for: AI Research Engineer, Applied Scientist, ML Scientist roles at labs and big tech.", time: "ongoing", sources: "Company career pages, LinkedIn", sequence: "After portfolio." }
     ]
+  , "ai-forward-deployed-engineer": {
+    title: "AI Forward Deployed Engineer (AI FD)",
+    why: "You work directly with customers to understand their legacy systems and integrate customized AI solutions. A mix of solution architect and product manager — companies like OpenAI and Anthropic hire these roles to deploy AI on client sites.",
+    skills: ["Python", "LLM APIs", "Solution design", "Client communication", "Compliance & security basics", "API integration"],
+    roadmap: [
+      { step: 1, title: "Learn LLM APIs and Prompting", what: "LLM = Large Language Model. Learn to call OpenAI, Anthropic, or open-source models via API and write good prompts. This is the technical foundation.", time: "1-2 weeks", sources: "OpenAI API docs (free), Anthropic API docs (free)", sequence: "Start here." },
+      { step: 2, title: "Study Solution Architecture for AI", what: "Learn how to map a client business problem to an AI solution. Understand legacy system integration, compliance, and security constraints.", time: "2-3 weeks", sources: "AWS/Azure AI solution guides (free), system design primers", sequence: "After LLM APIs." },
+      { step: 3, title: "Build Custom AI Integrations", what: "Integrate AI into real client workflows: RAG over their documents, AI assistants for their processes, automation of their tasks.", time: "3-4 weeks", sources: "LangChain tutorials (free), Pinecone/pgvector docs (free)", sequence: "After solution design." },
+      { step: 4, title: "Practice Client Communication and Presentation", what: "Forward deployed engineers spend significant time with clients. Practice explaining technical AI solutions to non-technical stakeholders.", time: "ongoing", sources: "Public speaking practice, case studies", sequence: "Parallel with step 3." },
+      { step: 5, title: "Target Forward Deployed / Solutions Roles", what: "Apply for: AI Forward Deployed Engineer, Solutions Engineer (AI), Customer Engineer (AI) at AI companies.", time: "ongoing", sources: "LinkedIn, AI company career pages", sequence: "After portfolio." }
+    ]
+  }
   }
 };

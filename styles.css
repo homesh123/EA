@@ -2,3 +2,11 @@
 .roadmap li { margin: 8px 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .roadmap li strong { color: var(--text); }
 .roadmap li br { content: ""; display: block; margin-bottom: 2px; }
+.step-time { display: inline-block; background: rgba(34, 211, 238, 0.15); color: var(--accent2); padding: 2px 8px; border-radius: 6px; font-size: 12px; margin-left: 8px; }
+.step-what { margin: 4px 0 2px; color: var(--text); font-size: 13px; }
+.step-why { margin: 2px 0; font-size: 12px; }
+.step-sources { margin: 2px 0; font-size: 12px; }
+.step-seq { margin: 2px 0 6px; font-size: 12px; }
+.roadmap li { margin: 10px 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.roadmap li strong { color: var(--text); }
+.total-time { color: var(--accent2); font-size: 14px; margin: 6px 0; }

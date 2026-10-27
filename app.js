@@ -48,13 +48,14 @@ const QUESTIONS = [
       { value: "ok", label: "Okay", desc: "I am comfortable with basics" },
       { value: "strong", label: "Strong", desc: "I know advanced math topics" }
     ]},
-  { id: "interest", q: "What part of AI excites you the most?", clarify: "Pick whatever sounds most interesting to you.",
+  { id: "interest", q: "What part of AI excites you?", multi: true, clarify: "Select all that apply — you can pick more than one.",
     options: [
       { value: "build", label: "Building AI features", desc: "Adding AI into apps/products" },
       { value: "model", label: "Training / tuning models", desc: "Teaching computers to learn" },
       { value: "data", label: "Working with data", desc: "Cleaning and analyzing data" },
       { value: "agents", label: "Autonomous agents", desc: "AI that plans and acts on its own" },
-      { value: "infra", label: "AI infrastructure", desc: "Running AI systems reliably at scale" }
+      { value: "infra", label: "AI infrastructure", desc: "Running AI systems reliably at scale" },
+      { value: "solutions", label: "Client solutions", desc: "Solving real business problems with AI" }
     ]},
   { id: "goal", q: "What do you want to achieve?", clarify: "This decides whether we aim for a full switch or a side path.",
     options: [
@@ -79,17 +80,19 @@ function scoreRole(answers) {
   }
 
   const ml = answers.ml, interest = answers.interest, domain = answers.domain, lang = answers.lang, math = answers.math, goal = answers.goal;
+  const interests = Array.isArray(interest) ? interest : (interest ? [interest] : []);
 
   if (ml === "none") { add("ml-engineer", 2); add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
   if (ml === "use") { add("ai-product-engineer", 3); add("llm-agent-engineer", 3); add("ml-engineer", 2); }
   if (ml === "basic") { add("ml-engineer", 3); add("ai-research-engineer", 2); add("mlops-engineer", 1); }
   if (ml === "adv") { add("ai-research-engineer", 3); add("mlops-engineer", 3); add("ml-engineer", 2); }
 
-  if (interest === "build") { add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
-  if (interest === "model") { add("ai-research-engineer", 3); add("ml-engineer", 2); }
-  if (interest === "data") { add("data-engineer-ai", 3); add("ml-engineer", 1); }
-  if (interest === "agents") { add("llm-agent-engineer", 3); add("ai-product-engineer", 1); }
-  if (interest === "infra") { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
+  if (interests.includes("build")) { add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
+  if (interests.includes("model")) { add("ai-research-engineer", 3); add("ml-engineer", 2); }
+  if (interests.includes("data")) { add("data-engineer-ai", 3); add("ml-engineer", 1); }
+  if (interests.includes("agents")) { add("llm-agent-engineer", 3); add("ai-product-engineer", 1); }
+  if (interests.includes("infra")) { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
+  if (interests.includes("solutions")) { add("ai-forward-deployed-engineer", 3); add("ai-product-engineer", 1); }
 
   if (domain === "backend" || domain === "fullstack") { add("ml-engineer", 1); add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
   if (domain === "frontend") { add("ai-product-engineer", 2); }
@@ -115,6 +118,28 @@ function scoreRole(answers) {
 
 const state = { answers: {}, step: 0 };
 
+function parseWeeks(s) {
+  const m = s.match(/(\d+)-(\d+)/);
+  return m ? [parseInt(m[1]), parseInt(m[2])] : [0, 0];
+}
+
+function totalWeeks(roadmap) {
+  let lo = 0, hi = 0;
+  roadmap.forEach(r => {
+    const [a, b] = parseWeeks(r.time);
+    lo += a; hi += b;
+  });
+  return [lo, hi];
+}
+
+function fmtDuration(weeks) {
+  const w = Math.round((weeks[0] + weeks[1]) / 2);
+  if (w < 6) return w + " weeks";
+  const months = w / 4.3;
+  if (months < 12) return months.toFixed(1) + " months";
+  return (months / 12).toFixed(1) + " years";
+}
+
 function renderForm() {
   const q = QUESTIONS[state.step];
   const form = document.getElementById("form");
@@ -132,11 +157,24 @@ function renderForm() {
   }
   const opts = document.createElement("div");
   opts.className = "options";
+  const current = state.answers[q.id];
+  const selectedSet = q.multi ? new Set(Array.isArray(current) ? current : (current ? [current] : [])) : null;
   q.options.forEach(opt => {
     const div = document.createElement("div");
-    div.className = "option" + (state.answers[q.id] === opt.value ? " selected" : "");
+    const sel = q.multi ? selectedSet.has(opt.value) : (current === opt.value);
+    div.className = "option" + (sel ? " selected" : "");
     div.innerHTML = `<div class="dot"></div><div><div class="opt-text">${opt.label}</div><div class="opt-desc">${opt.desc}</div></div>`;
-    div.addEventListener("click", () => { state.answers[q.id] = opt.value; renderForm(); });
+    div.addEventListener("click", () => {
+      if (q.multi) {
+        let arr = Array.isArray(current) ? [...current] : (current ? [current] : []);
+        const idx = arr.indexOf(opt.value);
+        if (idx >= 0) arr.splice(idx, 1); else arr.push(opt.value);
+        state.answers[q.id] = arr;
+      } else {
+        state.answers[q.id] = opt.value;
+      }
+      renderForm();
+    });
     opts.appendChild(div);
   });
   form.appendChild(opts);
@@ -150,8 +188,10 @@ function renderForm() {
   back.addEventListener("click", () => { state.step--; renderForm(); });
   const next = document.createElement("button");
   next.className = "button btn-primary";
-  next.textContent = state.step === QUESTIONS.length - 1 ? "Get my path" : "Next";
-  next.disabled = !state.answers[q.id];
+  next.textContent = state.step === QUESTIONS.length - 1 ? "Find my exact path" : "Next";
+  const val = state.answers[q.id];
+  const hasAnswer = q.multi ? (Array.isArray(val) && val.length > 0) : !!val;
+  next.disabled = !hasAnswer;
   next.addEventListener("click", () => {
     if (state.step < QUESTIONS.length - 1) { state.step++; renderForm(); }
     else showResult();
@@ -171,24 +211,30 @@ function showResult() {
   form.innerHTML = "";
   const intro = document.createElement("p");
   intro.className = "question";
-  intro.textContent = "Based on your answers, here are your best-fit AI paths:";
+  intro.textContent = "Based on your experience, abilities, and interests, here is your exact AI career path:";
   form.appendChild(intro);
 
   roles.forEach(roleId => {
     const role = ROLES[roleId];
+    const [lo, hi] = totalWeeks(role.roadmap);
+    const totalLabel = fmtDuration([lo, hi]);
+    const steps = role.roadmap.map(r => `
+      <li>
+        <strong>Step ${r.step} — ${r.title}</strong>
+        <span class="step-time">⏱ ${r.time}</span>
+        <div class="step-what">${r.what}</div>
+        <div class="step-why"><em>Why this matters:</em> This is a core skill for the role. Mastering it gives you the ability employers look for.</div>
+        <div class="step-sources"><strong>Learn from:</strong> ${r.sources}</div>
+        <div class="step-seq"><strong>Do it when:</strong> ${r.sequence}</div>
+      </li>`).join("");
     const card = document.createElement("div");
     card.className = "role-card result";
-    const steps = role.roadmap.map(r => `
-      <li><strong>Step ${r.step} - ${r.title}</strong> (${r.time})<br>
-      What: ${r.what}<br>
-      Why learn it: This is a core skill for the role.<br>
-      Sources: ${r.sources}<br>
-      When to do it: ${r.sequence}</li>`).join("");
     card.innerHTML = `
       <h2>${role.title}</h2>
+      <p class="total-time">Total estimated learning time: <strong>${totalLabel}</strong> (approx. ${lo}–${hi} weeks)</p>
       <p class="why">${role.why}</p>
       <div class="skill-list">${role.skills.map(s => `<span class="skill">${s}</span>`).join("")}</div>
-      <div class="roadmap"><strong>Learning roadmap (sequence, time, sources):</strong><ol>${steps}</ol></div>
+      <div class="roadmap"><strong>Step-by-step roadmap (follow in this exact order):</strong><ol>${steps}</ol></div>
     `;
     form.appendChild(card);
   });
@@ -197,7 +243,7 @@ function showResult() {
   note.style.color = "var(--muted)";
   note.style.fontSize = "13px";
   note.style.marginTop = "16px";
-  note.textContent = "Tip: Follow the roadmap in order. Build at least one portfolio project before applying.";
+  note.textContent = "Tip: Follow the roadmap in order — each step builds the ability needed for the next. Build at least one portfolio project before applying.";
   form.appendChild(note);
 
   document.getElementById("progressFill").style.width = "100%";
