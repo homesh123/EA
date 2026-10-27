@@ -246,6 +246,25 @@ function showResult() {
   note.textContent = "Tip: Follow the roadmap in order — each step builds the ability needed for the next. Build at least one portfolio project before applying.";
   form.appendChild(note);
 
+  // Gap analysis based on answers
+  const gapDiv = document.createElement("div");
+  gapDiv.style.marginTop = "20px";
+  gapDiv.style.padding = "16px";
+  gapDiv.style.background = "rgba(255,255,255,.04)";
+  gapDiv.style.borderRadius = "10px";
+  gapDiv.style.borderLeft = "4px solid var(--accent2)";
+  
+  const gaps = [];
+  if (state.answers.lang === "none" || state.answers.lang === "java" || state.answers.lang === "csharp" || state.answers.lang === "cpp") gaps.push("<strong>Learn Python first:</strong> Python is the #1 language in AI. Most ML/LLM libraries are Python-first. Start with CS50P or freeCodeCamp Python.");
+  if (state.answers.math === "weak") gaps.push("<strong>Refresh math:</strong> Linear algebra, statistics, and calculus are needed to understand how models work. Khan Academy and 3Blue1Brown are free.");
+  if (state.answers.ml === "none") gaps.push("<strong>Start with classic ML:</strong> Before LLMs, learn supervised learning (regression/classification) and evaluation metrics.");
+  if (state.answers.lang === "js" && state.answers.domain === "frontend") gaps.push("<strong>Leverage your frontend:</strong> AI Product Engineer is a strong fit — embed LLM features into web apps using JavaScript/TypeScript.");
+  if (state.answers.domain === "backend" || state.answers.domain === "devops") gaps.push("<strong>Leverage your backend:</strong> AI Platform/MLOps Engineer fits well — focus on model serving, Kubernetes, and observability.");
+  if (state.answers.experience === "5-10" || state.answers.experience === "10+") gaps.push("<strong>Consider AI Forward Deployed Engineer:</strong> With your experience, client-facing AI roles (OpenAI, Anthropic hire these) value domain knowledge + communication.");
+  
+  gapDiv.innerHTML = "<strong style='color:var(--accent2)'>⚡ Gap analysis &amp; next steps:</strong><ul>" + gaps.map(g => "<li>" + g + "</li>").join("") + "</ul>";
+  form.appendChild(gapDiv);
+
   document.getElementById("progressFill").style.width = "100%";
 }
 
