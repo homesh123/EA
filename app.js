@@ -291,6 +291,10 @@ function showResult() {
         <div class="step-why"><em>Why this matters:</em> This is a core skill for the role. Mastering it gives you the ability employers look for.</div>
         <div class="step-sources"><strong>Learn from:</strong> ${r.sources}</div>
         <div class="step-seq"><strong>Do it when:</strong> ${r.sequence}</div>
+        <div class="step-subtopics" style="margin-top:8px;"><strong>What you will learn:</strong><ul style="margin:4px 0 0 18px;">${r.subTopics ? r.subTopics.map(st => `<li>${st}</li>`).join("") : ""}</ul></div>
+        <div class="step-mindnotes" style="margin-top:8px;"><strong>Mind notes:</strong><ul style="margin:4px 0 0 18px;">${r.mindNotes ? r.mindNotes.map(mn => `<li>${mn}</li>`).join("") : ""}</ul></div>
+        <div class="step-highlights" style="margin-top:8px;"><strong>Must learn:</strong><ul style="margin:4px 0 0 18px;">${r.keyHighlights ? r.keyHighlights.map(kh => `<li>${kh}</li>`).join("") : ""}</ul></div>
+        <div class="step-projects" style="margin-top:8px;"><strong>Starter projects (GitHub):</strong><ul style="margin:4px 0 0 18px;">${r.starterProjects ? r.starterProjects.map(sp => `<li><strong>${sp.name}</strong> — ${sp.description}<br><small>Files: ${sp.files.join(", ")}</small><a href="${sp.url}" target="_blank" rel="noopener">View on GitHub →</a></li>`).join("") : ""}</ul></div>
       </li>`).join("");
     const card = document.createElement("div");
     card.className = "role-card result";

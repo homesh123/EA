@@ -425,3 +425,61 @@ body{
   .hero h1{font-size:2.25rem}
   .card,.role-card,.gap-card{padding:24px}
 }
+/* Detailed roadmap step styles */
+.step-subtopics {
+  margin-top: 8px;
+}
+.step-subtopics ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+.step-subtopics li {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.step-mindnotes {
+  margin-top: 8px;
+}
+.step-mindnotes ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+.step-mindnotes li {
+  color: #0b5ed7;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.step-highlights {
+  margin-top: 8px;
+}
+.step-highlights ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+.step-highlights li {
+  color: #d63384;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.step-projects {
+  margin-top: 8px;
+}
+.step-projects ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+.step-projects li {
+  color: #1d1d1f;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.step-projects li a {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.step-projects li a:hover {
+  text-decoration: underline;
+}
