@@ -483,3 +483,233 @@ body{
 .step-projects li a:hover {
   text-decoration: underline;
 }
+
+/* Professional UI enhancements */
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: #6e6e73;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+  line-height: 1.6;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d2d2d7;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+}
+
+.role-card {
+  background: #ffffff;
+  border: 1px solid #d2d2d7;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: all 0.2s ease;
+}
+
+.role-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  transform: translateY(-2px);
+}
+
+.role-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 8px;
+}
+
+.role-card .why {
+  color: #6e6e73;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.total-time {
+  color: #007aff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.skill {
+  background: #f2f2f7;
+  color: #007aff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #d2d2d7;
+}
+
+.roadmap {
+  margin-top: 24px;
+}
+
+.roadmap strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.roadmap ol {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.roadmap li {
+  background: #f5f5f7;
+  border: 1px solid #d2d2d7;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  color: #1d1d1f;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.roadmap li strong {
+  color: #1d1d1f;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.step-time {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #007aff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.step-what {
+  color: #1d1d1f;
+  font-size: 0.9375rem;
+  margin-bottom: 6px;
+}
+
+.step-why {
+  color: #6e6e73;
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.step-sources {
+  color: #1d1d1f;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.step-seq {
+  color: #6e6e73;
+  font-size: 0.8125rem;
+}
+
+.step-subtopics, .step-mindnotes, .step-highlights, .step-projects {
+  margin-top: 8px;
+}
+
+.step-subtopics ul, .step-mindnotes ul, .step-highlights ul, .step-projects ul {
+  margin: 4px 0 0 18px;
+  padding: 0;
+}
+
+.step-subtopics li, .step-mindnotes li, .step-highlights li, .step-projects li {
+  font-size: 0.875rem;
+  margin-bottom: 3px;
+}
+
+.step-subtopics li { color: #6e6e73; }
+.step-mindnotes li { color: #007aff; }
+.step-highlights li { color: #d63384; font-weight: 600; }
+.step-projects li { color: #1d1d1f; }
+
+.step-projects li a {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.step-projects li a:hover {
+  text-decoration: underline;
+}
+
+.gap-card {
+  background: linear-gradient(180deg, #fdfbf7, #f9f5ea);
+  border: 1px solid #e5d8c9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+  box-shadow: var(--shadow);
+}
+
+.gap-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gap-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.gap-card li {
+  color: #1d1d1f;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.gap-card li strong {
+  color: #1d1d1f;
+}
+
+.footer {
+  margin: 48px 0;
+  text-align: center;
+  color: #aeaeb2;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 20px 16px; }
+  .hero h1 { font-size: 2rem; }
+  .card, .role-card, .gap-card { padding: 20px; }
+}
