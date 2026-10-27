@@ -1,17 +1,21 @@
 // Role catalogue. Each role has:
 //  - requires: target skill levels (py/sql/cloud 0-3, ml 0-5, math 0-2) used for readiness and gaps
-//  - market: indicative demand and pay (US total compensation; varies widely by country and company)
+//  - market: indicative demand and pay (US total compensation, India CTC in LPA). Sources are
+//    salary aggregators (Levels.fyi, Glassdoor, AmbitionBox and 2026 salary guides) that disagree,
+//    so ranges are deliberately wide. Re-check them at least once a year.
 //  - roadmap steps: `time` assumes ~10 study hours a week; `fastTrack` lists skill levels that
 //    mean the learner probably knows this step already, so it is shortened to a quick revision.
 const ROLES = {
   "ai-fresher": {
+    slug: "ai-foundations-beginner",
     title: "AI Foundations Path",
     tagline: "Build the base, then land a junior AI / ML role",
+    bestFor: "Students, graduates and people new to coding",
     why: "You are early in your tech journey, so the fastest route is a solid foundation: Python, data, and core machine learning, proven with portfolio projects. This path leads to Junior ML Engineer, AI Engineer Trainee or Data Analyst (AI) roles.",
     skills: ["Python", "Statistics", "Machine learning basics", "SQL", "Git & GitHub"],
     requires: { py: 1, sql: 1, ml: 1, math: 1 },
     titles: ["Junior ML Engineer", "AI Engineer Trainee", "Data Analyst (AI)", "ML Intern"],
-    market: { demand: "Competitive — projects make the difference", pay: "Entry level; varies widely by country" },
+    market: { demand: "Competitive — projects make the difference", pay: "US junior roles: roughly $80k–$130k base", payIndia: "Freshers ₹4–10 LPA; ₹8–15 LPA with strong GenAI projects at product companies" },
     roadmap: [
       { step: 1, title: "Python Basics", what: "Variables, loops, functions, data structures. Python is the #1 language in AI because most ML libraries are written in it.", why: "Every later step is written in Python — without it nothing else sticks.", time: "3-4 weeks", fastTrack: { py: 2 }, sources: "CS50P Harvard (free), freeCodeCamp Python (free)", sequence: "Start here. Do not skip.", subTopics: ["Variables & data types", "Control flow (if/else, loops)", "Functions & parameters", "Lists, dictionaries, sets", "File I/O", "Basic error handling"], mindNotes: ["Code a little every day", "Understand logic rather than memorising syntax", "Use print() to debug step by step"], keyHighlights: ["Write clean, readable code", "Finish 2 mini projects (e.g. expense tracker)"] },
       { step: 2, title: "Git, GitHub & Data Handling", what: "Version control and working with data in Pandas and NumPy.", why: "Employers look at your GitHub first, and Pandas is how all AI work touches data.", time: "2 weeks", fastTrack: { py: 3 }, sources: "GitHub Skills (free), Kaggle Learn Pandas (free)", sequence: "After Python basics.", subTopics: ["git add / commit / push", "Pull requests", "Pandas DataFrames", "Cleaning missing values"], mindNotes: ["Commit every day you study — it builds a visible track record"], keyHighlights: ["Public GitHub profile", "Clean a real CSV dataset"] },
@@ -24,13 +28,15 @@ const ROLES = {
     ]
   },
   "ml-engineer": {
+    slug: "ml-engineer",
     title: "ML Engineer",
     tagline: "Build, train and ship ML models into real products",
+    bestFor: "Backend and data developers who enjoy data and maths",
     why: "Best fit when you have solid engineering skills and enjoy both data and code. ML Engineers turn models into reliable product features — the most established AI engineering role.",
     skills: ["Python", "Scikit-learn / PyTorch", "Feature engineering", "Model serving", "MLOps basics"],
     requires: { py: 2, sql: 2, ml: 3, math: 1, cloud: 1 },
     titles: ["Machine Learning Engineer", "Applied ML Engineer", "AI Engineer"],
-    market: { demand: "High", pay: "Big Tech $280k–$400k · Startups $180k–$300k" },
+    market: { demand: "High", pay: "Big Tech $280k–$400k · Startups $180k–$300k", payIndia: "₹6–12 LPA (0–2 yrs) · ₹12–28 LPA (3–6 yrs) · ₹25–50+ LPA (senior)" },
     roadmap: [
       { step: 1, title: "Python for Data & Statistics Refresh", what: "NumPy, Pandas, plotting and descriptive statistics.", why: "Data manipulation is 60% of real ML work — fluency here speeds up everything after.", time: "2-3 weeks", fastTrack: { py: 2, math: 1 }, sources: "Kaggle Learn (free), Python Data Science Handbook (free online)", sequence: "Start here.", subTopics: ["NumPy arrays", "Pandas DataFrames", "Groupby & joins", "Distributions & sampling"], mindNotes: ["Vectorise instead of looping"], keyHighlights: ["Master Pandas groupby", "Handle missing data"] },
       { step: 2, title: "Classic Machine Learning", what: "Regression, classification, trees and ensembles, clustering, cross-validation and metrics.", why: "Most production ML on tabular data is still gradient boosting, not deep learning.", time: "4-6 weeks", fastTrack: { ml: 3 }, sources: "Andrew Ng ML Specialization (audit free), Hands-On ML by Géron (book)", sequence: "After the refresh.", subTopics: ["Linear & logistic regression", "Random forests & XGBoost", "Cross-validation", "Precision / recall / ROC"], mindNotes: ["Always beat a simple baseline first"], keyHighlights: ["Train/test discipline", "Feature engineering"] },
@@ -42,13 +48,15 @@ const ROLES = {
     ]
   },
   "data-engineer-ai": {
+    slug: "ai-data-engineer",
     title: "Data Engineer (AI focus)",
     tagline: "Build the data pipelines every AI system depends on",
+    bestFor: "Data engineers, BI analysts and SQL-heavy developers",
     why: "Best fit when you like data, SQL and reliable systems. AI is only as good as its data, and teams need engineers who can deliver clean, fresh, well-governed data for models and RAG systems.",
     skills: ["SQL", "Python", "Spark / Airflow / dbt", "Data quality", "Vector & feature stores"],
     requires: { py: 2, sql: 3, cloud: 1, ml: 1 },
     titles: ["Data Engineer (AI/ML)", "ML Data Engineer", "Analytics Engineer", "AI Data Platform Engineer"],
-    market: { demand: "High and steady", pay: "Big Tech $220k–$350k · Startups $150k–$250k" },
+    market: { demand: "High and steady", pay: "Big Tech $220k–$400k · Startups $150k–$300k", payIndia: "₹6–12 LPA (early) · ₹15–30 LPA (mid) · ₹30–50+ LPA (senior)" },
     roadmap: [
       { step: 1, title: "SQL & Data Modelling Depth", what: "Advanced SQL, window functions, dimensional modelling, warehouses (BigQuery, Snowflake).", why: "SQL is the daily language of data engineering — interviews go deep on it.", time: "2-3 weeks", fastTrack: { sql: 3 }, sources: "Mode SQL tutorial (free), Kimball dimensional modelling (book)", sequence: "Start here.", subTopics: ["Window functions", "Star schemas", "Warehouse concepts", "Query tuning"], mindNotes: ["Model data for the questions people will ask"], keyHighlights: ["Window functions", "Fact vs dimension tables"] },
       { step: 2, title: "Pipeline Tooling: Airflow, dbt, Spark", what: "Orchestrate jobs with Airflow, transform data with dbt, process large data with Spark.", why: "These are the tools named in most data engineering job posts.", time: "3-4 weeks", fastTrack: { sql: 3, cloud: 2 }, sources: "Airflow tutorial (free), dbt Learn (free), DataTalksClub Data Engineering Zoomcamp (free)", sequence: "After SQL.", subTopics: ["Airflow DAGs", "dbt models & tests", "Spark DataFrames", "Scheduling & retries"], mindNotes: ["Pipelines must be idempotent"], keyHighlights: ["One Airflow DAG feeding dbt models"] },
@@ -59,13 +67,15 @@ const ROLES = {
     ]
   },
   "ai-product-engineer": {
+    slug: "ai-product-engineer",
     title: "AI Product Engineer",
     tagline: "Ship AI features users love — chat, search, copilots",
+    bestFor: "Frontend, full-stack and mobile developers",
     why: "Best fit for web, mobile and full-stack developers. You keep your app-building strength and add LLM APIs, RAG and evaluation on top. This is one of the fastest switches because most of the job is still product engineering.",
     skills: ["LLM APIs", "RAG & vector search", "TypeScript / Python", "Prompt design & evals", "Product sense"],
     requires: { py: 1, ml: 2, cloud: 1 },
     titles: ["AI Engineer", "AI Product Engineer", "Full-Stack Engineer (AI)", "Generative AI Developer"],
-    market: { demand: "Very high", pay: "Big Tech $250k–$350k · Startups $160k–$260k" },
+    market: { demand: "Very high", pay: "Big Tech $250k–$350k · Startups $160k–$260k", payIndia: "₹8–15 LPA (early) · ₹18–35 LPA (mid) · ₹35–60+ LPA (senior, GenAI premium)" },
     roadmap: [
       { step: 1, title: "LLM API Fundamentals", what: "Call Claude / GPT APIs, structure prompts, stream responses, handle tokens, costs and errors.", why: "This is the building block of every AI feature you will ship.", time: "1-2 weeks", fastTrack: { ml: 2 }, sources: "Anthropic API docs (free), OpenAI API docs (free), Vercel AI SDK docs (free)", sequence: "Start here.", subTopics: ["Messages & system prompts", "Streaming", "Structured (JSON) output", "Tool / function calling", "Cost & rate limits"], mindNotes: ["Track token costs from day one"], keyHighlights: ["Streaming chat UI", "Structured output"] },
       { step: 2, title: "Python Working Knowledge", what: "Enough Python to read AI examples, write small services and use AI SDKs.", why: "Most AI libraries and examples are Python-first, even if your product is in TypeScript.", time: "2 weeks", fastTrack: { py: 2 }, sources: "CS50P (free), Python for JavaScript developers guides (free)", sequence: "In parallel with step 1.", subTopics: ["Syntax for JS/Java developers", "Virtual environments", "FastAPI basics"], mindNotes: ["Map it to the language you already know"], keyHighlights: ["Build one small FastAPI endpoint"] },
@@ -76,13 +86,15 @@ const ROLES = {
     ]
   },
   "mlops-engineer": {
+    slug: "mlops-engineer",
     title: "MLOps / AI Platform Engineer",
     tagline: "Run AI reliably and cheaply at scale",
+    bestFor: "DevOps, cloud, SRE and infrastructure engineers",
     why: "Best fit for DevOps, cloud, SRE and backend engineers. Your infrastructure skills transfer almost directly — you add model serving, GPUs, LLM gateways and ML pipelines on top.",
     skills: ["Kubernetes", "Model serving (vLLM, Triton)", "CI/CD for ML", "Observability", "GPU & cost management"],
     requires: { py: 2, cloud: 3, ml: 2 },
     titles: ["MLOps Engineer", "AI Platform Engineer", "ML Infrastructure Engineer", "LLMOps Engineer"],
-    market: { demand: "High", pay: "Big Tech $260k–$380k · Startups $170k–$280k" },
+    market: { demand: "High", pay: "Big Tech $260k–$380k · Startups $170k–$280k", payIndia: "₹8–20 LPA (typical) · ₹25–45+ LPA (senior platform roles)" },
     roadmap: [
       { step: 1, title: "ML Concepts for Infra Engineers", what: "How training, inference, model artifacts and evaluation work — enough to talk to ML teams.", why: "You can't build a platform for a workload you don't understand.", time: "2-3 weeks", fastTrack: { ml: 3 }, sources: "Google ML Crash Course (free), Made With ML (free)", sequence: "Start here.", subTopics: ["Training vs inference", "Model artifacts", "Batch vs real-time", "GPU basics"], mindNotes: ["Learn the vocabulary of your future users"], keyHighlights: ["Train and serve one small model yourself"] },
       { step: 2, title: "Python for Automation", what: "Python scripting, packaging and testing at a level to work in ML codebases.", why: "ML platforms are built and glued together in Python.", time: "2 weeks", fastTrack: { py: 2 }, sources: "Automate the Boring Stuff (free), pytest docs (free)", sequence: "In parallel with step 1.", subTopics: ["Packaging", "CLIs", "Testing"], mindNotes: ["Treat it like any other production language"], keyHighlights: ["Package a small tool"] },
@@ -93,13 +105,15 @@ const ROLES = {
     ]
   },
   "llm-agent-engineer": {
+    slug: "llm-agent-engineer",
     title: "LLM / Agent Engineer",
     tagline: "Build AI agents that plan, use tools and get work done",
+    bestFor: "Backend developers and automation / QA engineers",
     why: "Best fit for backend and automation-minded engineers. Agents combine LLMs with tools, APIs and workflows — your experience building reliable services is exactly what makes agents work in production.",
     skills: ["Python", "LLM APIs & tool use", "Agent frameworks (LangGraph, Agent SDKs, MCP)", "Evaluation", "API design"],
     requires: { py: 2, ml: 2, cloud: 1 },
     titles: ["AI Agent Engineer", "LLM Engineer", "AI Automation Engineer", "Applied AI Engineer"],
-    market: { demand: "Very high and growing fast", pay: "Big Tech $300k–$450k · Startups $200k–$350k" },
+    market: { demand: "Very high and growing fast", pay: "Big Tech $300k–$450k · Startups $200k–$350k", payIndia: "₹10–20 LPA (early) · ₹25–45 LPA (mid) · ₹45–75 LPA (5–7 yrs, GenAI premium)" },
     roadmap: [
       { step: 1, title: "LLM APIs, Prompting & Tool Use", what: "Call LLM APIs, write system prompts, get structured output and let the model call your functions.", why: "Tool use is the foundation of every agent.", time: "1-2 weeks", fastTrack: { ml: 2 }, sources: "Anthropic tool use docs (free), OpenAI function calling docs (free)", sequence: "Start here.", subTopics: ["System prompts", "Structured output", "Tool / function calling", "Token & cost management"], mindNotes: ["Start with one tool, then add more"], keyHighlights: ["An LLM that calls a real API"] },
       { step: 2, title: "Python for AI Engineering", what: "Async Python, typing, Pydantic and FastAPI — the stack most agent frameworks use.", why: "Agent frameworks are Python-first; production agents need solid code.", time: "2 weeks", fastTrack: { py: 2 }, sources: "FastAPI docs (free), Pydantic docs (free)", sequence: "In parallel with step 1.", subTopics: ["async / await", "Pydantic models", "FastAPI"], mindNotes: ["Type everything an LLM produces"], keyHighlights: ["Validate model output with Pydantic"] },
@@ -110,13 +124,15 @@ const ROLES = {
     ]
   },
   "ai-research-engineer": {
+    slug: "ai-research-engineer",
     title: "AI Research Engineer",
     tagline: "Train, fine-tune and push the limits of models",
+    bestFor: "People with strong maths who love deep technical work",
     why: "Best fit if you have strong maths, love deep technical problems and want to work on how models learn. The bar is high and the path is longer, but it is the most technically deep AI role.",
     skills: ["PyTorch", "Linear algebra & probability", "Deep learning", "Fine-tuning (LoRA / PEFT)", "Distributed training"],
     requires: { py: 3, math: 2, ml: 4 },
     titles: ["Research Engineer", "Applied Scientist", "ML Scientist", "Model Training Engineer"],
-    market: { demand: "Selective — few roles, very high bar", pay: "Big Tech $350k–$600k · Startups $220k–$380k" },
+    market: { demand: "Selective — few roles, very high bar", pay: "Big Tech $350k–$600k · Startups $220k–$380k", payIndia: "₹15–30 LPA (early) · ₹40–80+ LPA at top labs and product companies" },
     roadmap: [
       { step: 1, title: "Strengthen the Maths", what: "Linear algebra, calculus and probability as used in ML.", why: "Research work means reading papers — the maths is the language they are written in.", time: "4-6 weeks", fastTrack: { math: 2 }, sources: "3Blue1Brown (free), Mathematics for Machine Learning (free book)", sequence: "Start here unless your maths is strong.", subTopics: ["Matrices & eigenvectors", "Gradients & chain rule", "Probability & distributions", "Optimisation"], mindNotes: ["Don't rush this foundation"], keyHighlights: ["Derive backprop for a small network"] },
       { step: 2, title: "Deep Learning in Depth", what: "CNNs, Transformers, optimisation and training dynamics in PyTorch.", why: "You need to know why models work, not just how to call them.", time: "6-8 weeks", fastTrack: { ml: 4 }, sources: "Karpathy Zero to Hero (free), Dive into Deep Learning (free book), fast.ai (free)", sequence: "After maths.", subTopics: ["Attention from scratch", "Optimisers", "Regularisation", "Scaling laws"], mindNotes: ["Implement, don't just read"], keyHighlights: ["Build a mini-GPT from scratch"] },
@@ -126,13 +142,15 @@ const ROLES = {
     ]
   },
   "ai-forward-deployed-engineer": {
+    slug: "ai-forward-deployed-engineer",
     title: "AI Forward Deployed Engineer",
     tagline: "Deploy AI inside real businesses, hands-on with customers",
+    bestFor: "Senior engineers who enjoy clients and know an industry",
     why: "Best fit for experienced engineers who like people as much as code, especially with industry knowledge. You work with customers to understand their systems and build custom AI solutions — part engineer, part solution architect, part consultant. AI labs and enterprise AI companies hire heavily for this.",
     skills: ["Python", "LLM APIs & RAG", "Solution design", "Client communication", "Systems integration & security"],
     requires: { py: 2, ml: 2, cloud: 1, sql: 1 },
     titles: ["Forward Deployed Engineer", "AI Solutions Engineer", "AI Solutions Architect", "Customer Engineer (AI)"],
-    market: { demand: "Very high at AI companies and consultancies", pay: "Big Tech $250k–$400k · Startups $170k–$280k" },
+    market: { demand: "Very high at AI companies and consultancies", pay: "Big Tech $250k–$400k · Startups $170k–$280k", payIndia: "₹15–30 LPA (mid) · ₹30–60+ LPA (senior, client-facing)" },
     roadmap: [
       { step: 1, title: "LLM APIs, RAG & Tool Use", what: "Build with LLM APIs: prompting, structured output, RAG over documents, and tool calling.", why: "This is the technical toolkit you will use on every customer engagement.", time: "3-4 weeks", fastTrack: { ml: 2 }, sources: "Anthropic / OpenAI docs (free), DeepLearning.AI short courses (free)", sequence: "Start here.", subTopics: ["Prompting", "RAG", "Tool use", "Evaluation basics"], mindNotes: ["Build a working prototype in a day — that is the job"], keyHighlights: ["Rapid prototyping"] },
       { step: 2, title: "Python Fluency", what: "Python good enough to prototype quickly and integrate with any system.", why: "FDEs write a lot of glue code under time pressure.", time: "2-3 weeks", fastTrack: { py: 2 }, sources: "CS50P (free), FastAPI tutorial (free)", sequence: "In parallel with step 1.", subTopics: ["Scripting", "APIs & auth", "Data wrangling"], mindNotes: ["Speed and clarity over cleverness"], keyHighlights: ["Integrate with a REST API end-to-end"] },
@@ -143,13 +161,15 @@ const ROLES = {
     ]
   },
   "ai-product-manager": {
+    slug: "ai-product-manager",
     title: "AI Product Manager",
     tagline: "Decide what AI should build — and make it succeed",
+    bestFor: "PMs, BAs, team leads and non-IT domain experts",
     why: "Best fit for product/project managers, business analysts, team leads and domain experts from non-IT fields. You don't need to code heavily: you need to understand what AI can and can't do, define the right problems, measure quality and lead teams to ship.",
     skills: ["AI literacy (LLMs, ML, limits)", "Problem framing", "AI evaluation & metrics", "No-code prototyping", "Stakeholder leadership"],
     requires: { ml: 2, sql: 1, math: 1 },
     titles: ["AI Product Manager", "AI Product Owner", "AI Business Analyst", "AI Transformation Lead"],
-    market: { demand: "High, especially for people with domain expertise", pay: "Big Tech $220k–$350k · Startups $150k–$250k" },
+    market: { demand: "High, especially for people with domain expertise", pay: "US median ≈ $305k total comp (AI labs pay more)", payIndia: "₹20–40 LPA (mid) · ₹40–70+ LPA (senior)" },
     roadmap: [
       { step: 1, title: "AI Literacy for Decision-Makers", what: "How LLMs and ML models work, what they're good and bad at, costs, risks and hallucinations.", why: "You can't make good product decisions about technology you don't understand.", time: "2-3 weeks", fastTrack: { ml: 3 }, sources: "AI for Everyone — Andrew Ng (audit free), Anthropic & OpenAI docs overviews (free)", sequence: "Start here.", subTopics: ["LLMs vs classic ML", "Tokens, context & cost", "Hallucinations", "Build vs buy"], mindNotes: ["Use AI tools every day to build intuition"], keyHighlights: ["Explain RAG and fine-tuning to a non-technical person"] },
       { step: 2, title: "Hands-On Prototyping (Low-Code)", what: "Build prototypes with prompting, no-code tools and simple scripts so you can test ideas yourself.", why: "PMs who can prototype get buy-in faster and earn engineers' respect.", time: "2-3 weeks", fastTrack: { ml: 2 }, sources: "Claude / ChatGPT projects, n8n or Zapier AI (free tiers), Streamlit (free)", sequence: "After AI literacy.", subTopics: ["Prompt design", "No-code workflows", "Simple RAG with tools", "Rapid user testing"], mindNotes: ["Prototype before you write a spec"], keyHighlights: ["3 working prototypes"] },

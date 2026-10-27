@@ -223,22 +223,42 @@ function renderReview(app) {
 }
 
 // ---------- results ----------
-const progressStore = () => storage.get(PROGRESS_KEY) || {};
 const fitLabel = f => f >= 80 ? "Excellent fit" : f >= 60 ? "Strong fit" : f >= 40 ? "Possible fit" : "Weak fit";
 const fmtMonths = m => m < 1 ? `${Math.max(1, Math.round(m * 4.33))} weeks` : `${m} months`;
 const meter = (pct, cls = "") => `<span class="meter ${cls}" aria-hidden="true"><span style="width:${Math.max(3, pct)}%"></span></span>`;
+const PACES = [4, 8, 15, 25];
+const DAY = 864e5;
+
+// Roadmap progress per role: { done: [stepNumbers], start: "YYYY-MM-DD" }. Older versions stored a bare array.
+function getProgress(roleId) {
+  const raw = (storage.get(PROGRESS_KEY) || {})[roleId];
+  const prog = Array.isArray(raw) ? { done: raw } : raw || { done: [] };
+  return { done: new Set(prog.done || []), start: prog.start || null };
+}
+function setProgress(roleId, prog) {
+  const all = storage.get(PROGRESS_KEY) || {};
+  all[roleId] = { done: [...prog.done], start: prog.start };
+  storage.set(PROGRESS_KEY, all);
+}
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+const isoDate = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const parseIso = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const addWeeks = (d, w) => new Date(d.getTime() + Math.round(w * 7) * DAY);
+const fmtDate = (d, year) => d.toLocaleDateString(undefined, year ? { day: "numeric", month: "short", year: "numeric" } : { day: "numeric", month: "short" });
 
 function renderResult(app) {
   const { profile: p, results } = Scoring.rankRoles(state.answers);
   const top = results[0];
   const sel = results.find(r => r.id === state.roleId) || top;
   const topRole = ROLES[top.id];
-  const quizQs = QUESTIONS.filter(q => q.quiz);
 
   $("#progressFill").style.width = "100%";
 
   app.innerHTML = `
-    <section class="result-hero">
+    <nav class="result-nav" aria-label="Result sections">
+      <a href="#sec-overview">Overview</a><a href="#sec-role">Role</a><a href="#sec-roadmap">Roadmap</a><a href="#sec-profile">Your profile</a><a href="#sec-resources">Resources</a>
+    </nav>
+    <section class="result-hero" id="sec-overview">
       <p class="eyebrow">Your best-fit AI path</p>
       <h2>${esc(topRole.title)}</h2>
       <p class="tagline">${esc(topRole.tagline)}</p>
@@ -249,6 +269,7 @@ function renderResult(app) {
       </div>
       ${top.reasons.length ? `<h3>Why this fits you</h3><ul class="reasons">${top.reasons.slice(0, 4).map(r => `<li>${esc(r)}</li>`).join("")}</ul>` : ""}
       ${MOTIVATION_MSG[p.motivation] ? `<p class="motivation">${esc(MOTIVATION_MSG[p.motivation])}</p>` : ""}
+      <a class="button btn-primary hero-cta" href="#sec-roadmap">See my step-by-step roadmap ↓</a>
     </section>
 
     <section class="block">
@@ -263,28 +284,11 @@ function renderResult(app) {
       </details>
     </section>
 
-    <section class="block profile">
-      <h3>How we read your profile</h3>
-      <div class="profile-cols">
-        <div>
-          <h4>Strengths you can build on</h4>
-          <ul class="ticks">${Scoring.strengths(p).map(s => `<li>${esc(s)}</li>`).join("")}</ul>
-        </div>
-        <div>
-          <h4>Reasoning check</h4>
-          <ul class="quiz-results">${quizQs.map(q => {
-            const r = p.quiz[q.quiz];
-            const cls = r === null ? "skip" : r ? "ok" : "miss";
-            return `<li class="${cls}"><strong>${esc(q.skill)}</strong> — ${r === null ? "skipped" : r ? "correct" : "worth revisiting"}<br><span class="muted small">${esc(q.explain)}</span></li>`;
-          }).join("")}</ul>
-        </div>
-      </div>
-      ${p.notes.length ? `<div class="callout callout-info"><strong>We adjusted a few answers for accuracy:</strong><ul>${p.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}
-    </section>
+    <section class="block role-detail" id="sec-role">${roleDetail(sel, p, sel.id === top.id)}</section>
+    <section class="block roadmap-section" id="sec-roadmap" aria-labelledby="rmTitle"></section>
+    <section class="block profile" id="sec-profile">${profileSection(p)}</section>
 
-    <section class="block role-detail" id="roleDetail" aria-live="polite">${roleDetail(sel, p, sel.id === top.id)}</section>
-
-    <section class="block stay">
+    <section class="block stay" id="sec-resources">
       <h3>Stay updated</h3>
       <div class="stay-grid">
         ${STAY_UPDATED.map(g => `<div class="stay-card"><h4>${esc(g.title)}</h4><ul>${g.items.map(([n, u, d]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a><span class="muted small"> — ${esc(d)}</span></li>`).join("")}</ul></div>`).join("")}
@@ -298,17 +302,21 @@ function renderResult(app) {
       <button type="button" class="button btn-ghost" data-act="restart">Start over</button>
     </div>`;
 
+  renderRoadmap(sel, p);
   app.querySelectorAll("[data-role]").forEach(b => b.onclick = () => {
     state.roleId = b.dataset.role;
     save();
     renderResult(app);
-    $("#roleDetail").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("#sec-role").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  app.querySelectorAll(".result-nav a, .hero-cta").forEach(a => a.onclick = e => {
+    e.preventDefault();
+    $(a.getAttribute("href")).scrollIntoView({ behavior: "smooth", block: "start" });
   });
   app.querySelector('[data-act="edit"]').onclick = () => go("review");
   app.querySelector('[data-act="restart"]').onclick = restart;
   app.querySelector('[data-act="print"]').onclick = () => window.print();
   app.querySelector('[data-act="copy"]').onclick = e => copyPlan(e.currentTarget, sel, p);
-  bindRoadmap(app, sel.id);
 }
 
 function matchCard(r, i, selId) {
@@ -322,20 +330,29 @@ function matchCard(r, i, selId) {
   </button>`;
 }
 
+function profileSection(p) {
+  const quizQs = QUESTIONS.filter(q => q.quiz);
+  return `
+    <h3>How we read your profile</h3>
+    <div class="profile-cols">
+      <div>
+        <h4>Strengths you can build on</h4>
+        <ul class="ticks">${Scoring.strengths(p).map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+      </div>
+      <div>
+        <h4>Reasoning check</h4>
+        <ul class="quiz-results">${quizQs.map(q => {
+          const r = p.quiz[q.quiz];
+          const cls = r === null ? "skip" : r ? "ok" : "miss";
+          return `<li class="${cls}"><strong>${esc(q.skill)}</strong> — ${r === null ? "skipped" : r ? "correct" : "worth revisiting"}<br><span class="muted small">${esc(q.explain)}</span></li>`;
+        }).join("")}</ul>
+      </div>
+    </div>
+    ${p.notes.length ? `<div class="callout callout-info"><strong>We adjusted a few answers for accuracy:</strong><ul>${p.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>` : ""}`;
+}
+
 function roleDetail(r, p, isTop) {
   const role = ROLES[r.id];
-  const pl = r.plan;
-  let timeline = "";
-  if (p.deadline && pl.months > p.deadline) {
-    const needHours = Math.ceil(pl.studyHours / (p.deadline * 4.33));
-    timeline = `<div class="callout callout-warn"><strong>Timeline check:</strong> at ${p.hours} h/week this plan takes about ${fmtMonths(pl.months)}, which is longer than your ${p.deadline}-month target. To hit it you'd need about <strong>${needHours} h/week</strong>, or treat the target as "interview-ready" and keep learning on the job.</div>`;
-  } else if (p.deadline) {
-    timeline = `<div class="callout callout-ok"><strong>Timeline check:</strong> about ${fmtMonths(pl.months)} at ${p.hours} h/week fits your ${p.deadline}-month target.</div>`;
-  }
-  const done = new Set(progressStore()[r.id] || []);
-  const doneCount = role.roadmap.filter(s => done.has(s.step)).length;
-  const firstOpen = pl.steps.find(s => !done.has(s.step) && !s.fast)?.step;
-
   return `
     <div class="detail-head">
       <h2>${esc(role.title)}</h2>
@@ -344,7 +361,6 @@ function roleDetail(r, p, isTop) {
     <p class="why">${esc(role.why)}</p>
     ${!isTop && r.reasons.length ? `<h4>Why it could fit you</h4><ul class="reasons">${r.reasons.slice(0, 4).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
     ${r.cautions.length ? `<div class="callout callout-warn"><strong>Watch-outs:</strong><ul>${r.cautions.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` : ""}
-    ${timeline}
 
     <div class="detail-cols">
       <div>
@@ -355,8 +371,12 @@ function roleDetail(r, p, isTop) {
       </div>
       <div>
         <h4>Market</h4>
-        <p class="small"><strong>Demand:</strong> ${esc(role.market.demand)}<br><strong>Pay (indicative):</strong> ${esc(role.market.pay)}</p>
-        <p class="muted tiny">US total compensation from public sources such as Levels.fyi. It varies a lot by country, city and company, so check local job boards.</p>
+        <dl class="market">
+          <dt>Demand</dt><dd>${esc(role.market.demand)}</dd>
+          <dt>US pay</dt><dd>${esc(role.market.pay)}</dd>
+          <dt>India pay</dt><dd>${esc(role.market.payIndia)}</dd>
+        </dl>
+        <p class="muted tiny">Indicative ranges from Levels.fyi, Glassdoor, AmbitionBox and 2026 salary guides. Sources disagree, and pay varies a lot by city and company type (product companies and AI startups pay well above IT services).</p>
       </div>
     </div>
 
@@ -365,19 +385,7 @@ function roleDetail(r, p, isTop) {
         <div class="gap-head"><strong>${esc(g.label)}</strong>${g.need !== undefined ? `<span class="gap-meter">${meter((g.have / g.max) * 100, "have")}<span class="tiny muted">you: ${levelName(g.key, g.have)} → needed: ${levelName(g.key, g.need)}</span></span>` : ""}</div>
         <p class="small">${esc(g.advice)}</p></li>`).join("")}</ul>`
       : `<p class="small ok-text">No major gaps. You already meet the core skill levels, so focus on portfolio projects and applying.</p>`}
-
-    <div class="roadmap-head">
-      <h4>Your step-by-step roadmap</h4>
-      <span class="small muted">≈ ${pl.studyHours} study hours · ~${fmtMonths(pl.months)} at ${p.hours} h/week</span>
-    </div>
-    <div class="roadmap-progress">
-      <span class="small">Progress</span>${meter(role.roadmap.length ? (doneCount / role.roadmap.length) * 100 : 0, "progress")}
-      <span class="small" id="stepCounter">${doneCount} / ${role.roadmap.length}</span>
-    </div>
-    <ol class="roadmap">
-      ${pl.steps.map(s => stepItem(s, done.has(s.step), s.step === firstOpen)).join("")}
-    </ol>
-    <p class="muted small">Tick a step when you finish it. Your progress is saved in this browser. Steps marked <span class="badge-fast">Fast-track</span> cover skills you already have, so a quick revision is enough.</p>`;
+    <p class="small guide-link"><a href="roles/${role.slug}.html">Read the full ${esc(role.title)} guide →</a></p>`;
 }
 
 const LEVEL_NAMES = {
@@ -389,14 +397,138 @@ const LEVEL_NAMES = {
 };
 const levelName = (k, v) => (LEVEL_NAMES[k] || [])[Math.floor(v)] ?? v;
 
-function stepItem(s, isDone, open) {
+// ---------- roadmap planner ----------
+function renderRoadmap(r, p, keepOpen) {
+  const sec = $("#sec-roadmap");
+  const role = ROLES[r.id];
+  const pl = r.plan;
+  const prog = getProgress(r.id);
+  const start = prog.start ? parseIso(prog.start) : today();
+  const finish = addWeeks(start, pl.totalWeeks);
+  const steps = pl.steps;
+  const doneCount = steps.filter(s => prog.done.has(s.step)).length;
+  const allDone = doneCount === steps.length;
+  const nextStep = steps.find(s => !prog.done.has(s.step));
+  const open = keepOpen || new Set(nextStep ? [nextStep.step] : []);
+  const total = pl.totalWeeks || 1;
+
+  let timeline = "";
+  if (p.deadline && pl.months > p.deadline) {
+    const needHours = Math.ceil(pl.studyHours / (p.deadline * 4.33));
+    timeline = `<div class="callout callout-warn"><strong>Timeline check:</strong> at ${p.hours} h/week this takes about ${fmtMonths(pl.months)}, longer than your ${p.deadline}-month target. You'd need about <strong>${needHours} h/week</strong> to hit it. Try a faster pace above, or treat the target as "interview-ready" and keep learning on the job.</div>`;
+  } else if (p.deadline) {
+    timeline = `<div class="callout callout-ok"><strong>On track:</strong> about ${fmtMonths(pl.months)} at ${p.hours} h/week fits your ${p.deadline}-month target.</div>`;
+  }
+
+  // Month ticks for the timeline axis
+  const ticks = [];
+  for (let m = 1; m * 4.33 < total; m++) ticks.push(`<span class="tick" style="left:${(m * 4.33 / total) * 100}%">${fmtDate(addWeeks(start, m * 4.33)).replace(/^\d+\s*/, "")}</span>`);
+
+  sec.innerHTML = `
+    <div class="rm-head">
+      <div>
+        <p class="eyebrow">Your roadmap</p>
+        <h3 id="rmTitle">${esc(role.title)}: ${steps.length} steps</h3>
+        <p class="muted small">≈ ${pl.studyHours} study hours · ${prog.start ? "started" : "starting"} ${fmtDate(start, true)} · finish around <strong>${fmtDate(finish, true)}</strong></p>
+      </div>
+      <div class="pace" role="group" aria-label="Study hours per week">
+        <span class="pace-label">Your pace</span>
+        ${PACES.map(h => `<button type="button" class="pace-btn${h === p.hours ? " active" : ""}" data-pace="${h}" aria-pressed="${h === p.hours}">${h} h/wk</button>`).join("")}
+      </div>
+    </div>
+    ${timeline}
+
+    <div class="rm-timeline" role="img" aria-label="Timeline: ${steps.length} steps from ${fmtDate(start, true)} to ${fmtDate(finish, true)}">
+      <div class="rm-bar">
+        ${steps.filter(s => s.endWeek > s.startWeek).map(s => `<button type="button" class="seg${prog.done.has(s.step) ? " done" : ""}${s.fast ? " fast" : ""}${nextStep && s.step === nextStep.step ? " next" : ""}"
+          style="width:${((s.endWeek - s.startWeek) / total) * 100}%" data-goto="${s.step}" title="Step ${s.step}: ${esc(s.title)}">${s.step}</button>`).join("")}
+      </div>
+      <div class="rm-axis"><span>${fmtDate(start)}</span>${ticks.join("")}<span>${fmtDate(finish)}</span></div>
+      <div class="rm-legend tiny muted"><span class="lg lg-todo"></span>To do <span class="lg lg-next"></span>Up next <span class="lg lg-fast"></span>Fast-track <span class="lg lg-done"></span>Done</div>
+    </div>
+
+    ${allDone ? `<div class="up-next complete">
+        <p class="eyebrow">Roadmap complete 🎉</p>
+        <h4>You've finished every step. Now apply.</h4>
+        <p class="small">Search for these titles: ${role.titles.map(esc).join(", ")}. Put your projects at the top of your resume and keep shipping small things while you interview.</p>
+      </div>` : nextStep ? `<div class="up-next">
+        <p class="eyebrow">Up next · Step ${nextStep.step} of ${steps.length}</p>
+        <h4>${esc(nextStep.title)}</h4>
+        <p class="small">${esc(nextStep.what)}</p>
+        <p class="small"><strong>Start with:</strong> ${esc(nextStep.sources.split(",")[0])}</p>
+        <p class="tiny muted">${stepWhen(nextStep, start)}</p>
+        <div class="up-next-actions">
+          <button type="button" class="button btn-primary" data-done="${nextStep.step}">Mark step ${nextStep.step} done</button>
+          <button type="button" class="button btn-secondary" data-goto="${nextStep.step}">View details</button>
+        </div>
+      </div>` : ""}
+
+    <div class="rm-toolbar">
+      <span class="small"><strong>${doneCount}</strong> of ${steps.length} done</span>
+      ${meter((doneCount / steps.length) * 100, "progress")}
+      <button type="button" class="link-btn small" data-expand="1">Expand all</button>
+      <button type="button" class="link-btn small" data-expand="0">Collapse all</button>
+    </div>
+    <ol class="roadmap">
+      ${steps.map(s => stepItem(s, prog.done.has(s.step), open.has(s.step), nextStep && s.step === nextStep.step, start)).join("")}
+    </ol>
+    <div class="rm-actions">
+      <button type="button" class="button btn-secondary" data-act="ics">Add to my calendar (.ics)</button>
+      <span class="muted small">Tick each step when you finish it. Progress is saved in this browser. <span class="badge-fast">Fast-track</span> steps cover skills you already have, so a quick revision is enough.</span>
+    </div>`;
+
+  const rerender = () => {
+    const opened = new Set([...sec.querySelectorAll(".roadmap details[open]")].map(d => Number(d.closest(".step").dataset.step)));
+    renderRoadmap(r, p, opened);
+  };
+  const toggleDone = (step, on) => {
+    const pr = getProgress(r.id);
+    on ? pr.done.add(step) : pr.done.delete(step);
+    if (!pr.start) pr.start = isoDate(today());
+    setProgress(r.id, pr);
+  };
+  sec.querySelectorAll(".step input[type=checkbox]").forEach(cb => cb.onchange = () => {
+    toggleDone(Number(cb.closest(".step").dataset.step), cb.checked);
+    rerender();
+  });
+  sec.querySelectorAll("[data-done]").forEach(b => b.onclick = () => {
+    toggleDone(Number(b.dataset.done), true);
+    renderRoadmap(r, p);
+  });
+  sec.querySelectorAll("[data-goto]").forEach(b => b.onclick = () => {
+    const li = sec.querySelector(`.step[data-step="${b.dataset.goto}"]`);
+    li.querySelector("details").open = true;
+    li.scrollIntoView({ behavior: "smooth", block: "center" });
+    li.classList.add("flash");
+    setTimeout(() => li.classList.remove("flash"), 1200);
+  });
+  sec.querySelectorAll("[data-expand]").forEach(b => b.onclick = () => {
+    sec.querySelectorAll(".roadmap details").forEach(d => d.open = b.dataset.expand === "1");
+  });
+  sec.querySelectorAll("[data-pace]").forEach(b => b.onclick = () => {
+    state.answers.hours = b.dataset.pace;
+    save();
+    renderResult($("#app"));
+    $("#sec-roadmap").scrollIntoView({ block: "start" });
+  });
+  sec.querySelector('[data-act="ics"]').onclick = () => downloadIcs(role, steps, start);
+}
+
+function stepWhen(s, start) {
+  if (s.endWeek <= s.startWeek) return `From ${fmtDate(addWeeks(start, s.startWeek), true)}, ongoing`;
+  const a = Math.floor(s.startWeek) + 1, b = Math.max(a, Math.ceil(s.endWeek));
+  return `Week${a === b ? ` ${a}` : `s ${a}–${b}`} · ${fmtDate(addWeeks(start, s.startWeek))} – ${fmtDate(addWeeks(start, s.endWeek))} · ~${s.studyHours} study hours`;
+}
+
+function stepItem(s, isDone, open, isNext, start) {
   const list = (cls, title, items) => items && items.length ? `<div class="${cls}"><span class="step-label">${title}</span><ul>${items.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : "";
-  const time = s.studyWeeks === null ? s.time : s.fast ? `~${Math.max(1, Math.round(s.studyWeeks * 10))} h revision` : s.time;
-  return `<li class="step${isDone ? " done" : ""}${s.fast ? " fast" : ""}" data-step="${s.step}">
-    <label class="step-check" title="Mark step ${s.step} as done"><input type="checkbox" ${isDone ? "checked" : ""} aria-label="Mark step ${s.step} done"><span class="step-num">${s.step}</span></label>
+  const time = s.studyWeeks === null ? s.time : s.fast ? `~${Math.max(1, s.studyHours)} h revision` : s.time;
+  return `<li class="step${isDone ? " done" : ""}${s.fast ? " fast" : ""}${isNext ? " next" : ""}" data-step="${s.step}">
+    <label class="step-check" title="Mark step ${s.step} as done"><input type="checkbox" ${isDone ? "checked" : ""} aria-label="Mark step ${s.step}, ${esc(s.title)}, as done"><span class="step-num">${s.step}</span></label>
     <details ${open ? "open" : ""}>
-      <summary><span class="step-title">${esc(s.title)}</span><span class="step-badges">${s.fast ? `<span class="badge-fast">Fast-track</span>` : ""}<span class="badge-time">${esc(time)}</span></span></summary>
+      <summary><span class="step-title">${esc(s.title)}</span><span class="step-badges">${isNext ? `<span class="badge-next">Up next</span>` : ""}${s.fast ? `<span class="badge-fast">Fast-track</span>` : ""}<span class="badge-time">${esc(time)}</span></span></summary>
       <div class="step-body">
+        <p class="step-when">${stepWhen(s, start)}</p>
         <p>${esc(s.what)}</p>
         ${s.why ? `<p class="step-why"><strong>Why it matters:</strong> ${esc(s.why)}</p>` : ""}
         <p class="small"><strong>Learn from:</strong> ${esc(s.sources)}</p>
@@ -415,22 +547,27 @@ function stepItem(s, isDone, open) {
   </li>`;
 }
 
-function bindRoadmap(app, roleId) {
-  app.querySelectorAll(".roadmap .step input[type=checkbox]").forEach(cb => {
-    cb.onchange = () => {
-      const li = cb.closest(".step");
-      const step = Number(li.dataset.step);
-      const all = progressStore();
-      const set = new Set(all[roleId] || []);
-      cb.checked ? set.add(step) : set.delete(step);
-      all[roleId] = [...set];
-      storage.set(PROGRESS_KEY, all);
-      li.classList.toggle("done", cb.checked);
-      const total = app.querySelectorAll(".roadmap .step").length;
-      app.querySelector(".meter.progress span").style.width = Math.max(3, (set.size / total) * 100) + "%";
-      $("#stepCounter").textContent = `${set.size} / ${total}`;
-    };
+// Calendar export: one all-day event per study step, plus a reminder to start applying.
+function downloadIcs(role, steps, start) {
+  const fmt = d => isoDate(d).replace(/-/g, "");
+  const text = s => String(s).replace(/\\/g, "\\\\").replace(/[,;]/g, m => "\\" + m).replace(/\n/g, "\\n");
+  const fold = line => line.length <= 74 ? line : line.match(/.{1,73}/g).join("\r\n ");
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+  const events = steps.map(s => {
+    const from = addWeeks(start, s.startWeek);
+    const to = s.endWeek > s.startWeek ? addWeeks(start, s.endWeek) : new Date(from.getTime() + DAY);
+    return ["BEGIN:VEVENT", `UID:aipf-${role.slug}-${s.step}@ai-path-finder`, `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${fmt(from)}`, `DTEND;VALUE=DATE:${fmt(to > from ? to : new Date(from.getTime() + DAY))}`,
+      `SUMMARY:${text(`AI roadmap · Step ${s.step}: ${s.title}`)}`,
+      `DESCRIPTION:${text(`${s.what}\n\nLearn from: ${s.sources}`)}`, "TRANSP:TRANSPARENT", "END:VEVENT"].map(fold).join("\r\n");
   });
+  const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//AI Path Finder//Roadmap//EN", "CALSCALE:GREGORIAN", ...events, "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = `${role.slug}-roadmap.ics`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
 }
 
 function copyPlan(btn, r, p) {

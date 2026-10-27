@@ -225,7 +225,18 @@
     const studyHours = weeks * BASE_HOURS_PER_WEEK;
     const calendarWeeks = Math.ceil(studyHours / Math.max(1, p.hours));
     const months = Math.round((calendarWeeks / 4.33) * 10) / 10;
-    return { steps, studyHours: Math.round(studyHours), calendarWeeks, months };
+    // Calendar schedule at the learner's pace (sequential, so it errs on the safe side).
+    // Ongoing steps (applying, networking) start when the study steps end.
+    const pace = BASE_HOURS_PER_WEEK / Math.max(1, p.hours);
+    let cursor = 0;
+    steps.forEach(s => {
+      const len = s.studyWeeks === null ? 0 : s.studyWeeks * pace;
+      s.startWeek = cursor;
+      s.endWeek = cursor + len;
+      s.studyHours = s.studyWeeks === null ? 0 : Math.round(s.studyWeeks * BASE_HOURS_PER_WEEK);
+      cursor += len;
+    });
+    return { steps, studyHours: Math.round(studyHours), calendarWeeks, months, totalWeeks: cursor };
   }
 
   // ---------- Ranking ----------

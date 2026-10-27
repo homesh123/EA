@@ -25,10 +25,13 @@ Live: https://homesh123.github.io/ai-career-advisor/
    - **Why it fits** and **watch-outs**.
    - **Transferable strengths** from their current job.
    - **Skill gaps** with advice.
-4. **Personalised roadmap.** Steps the person already knows are marked *fast-track*
-   and shortened. The timeline is converted to calendar months using their weekly
-   hours and checked against their target date. Progress ticks are saved in the
-   browser.
+4. **Personalised roadmap planner.** Steps the person already knows are marked
+   *fast-track* and shortened. Each step gets a week range and real dates at the
+   person's pace. The pace can be changed on the results page, and the plan is
+   checked against their target date. The roadmap also has:
+   - a timeline bar and an "Up next" card;
+   - progress tracking saved in the browser;
+   - export to a calendar (.ics) file.
 
 ## Roles covered
 
@@ -45,15 +48,39 @@ AI Forward Deployed Engineer · AI Product Manager
 | `roles.js` | Role catalogue: requirements, market info, roadmaps |
 | `scoring.js` | Profile validation, role ranking, readiness, gaps, timeline (no DOM; also runs in Node) |
 | `app.js` | UI: intro, questions, review, results |
-| `tests/` | Persona-based tests for the recommendation logic |
+| `scripts/build.js` | Generates the static, crawlable pages from `roles.js` (see below) |
+| `roles/*.html` | Generated landing page per AI role (do not edit by hand) |
+| `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
+| `tests/` | Persona tests for the recommendation logic, plus SEO / site checks |
 
 ## Development
 
 No build step. Open `index.html` in a browser, or serve the folder with any static server.
 
 ```bash
-npm test   # runs the persona tests with Node's built-in test runner (Node 18+)
+npm run build   # regenerate role pages, the homepage comparison table, sitemap.xml and llms.txt
+npm test        # recommendation tests + site checks (Node 18+, no dependencies)
 ```
+
+After editing `roles.js`, or the FAQ in `index.html`, run `npm run build`. The tests fail if the
+generated files are out of date. Bump `UPDATED` in `scripts/build.js` when content changes,
+so `lastmod` and the "Updated" dates stay accurate.
+
+## SEO, AEO and GEO
+
+- **Crawlable content without JavaScript:** one landing page per role
+  (`roles/<slug>.html`) with the roadmap, key facts, salary and FAQ. The homepage
+  also has a static comparison table and a "Which AI role should I choose?" quick answer.
+- **Structured data (JSON-LD):** Organization, WebSite and WebApplication;
+  ItemList of roles; and an FAQPage generated from the visible FAQ. Each role page
+  also has WebPage, BreadcrumbList, Occupation (with US and India salary ranges),
+  HowTo and FAQPage.
+- **Answer-engine friendly:** each role page starts with a direct "Quick answer" and a
+  key-facts table, then gives question-style headings.
+- **AI crawlers:** `llms.txt` gives LLMs a plain-text summary. `robots.txt` explicitly
+  allows GPTBot, ClaudeBot, PerplexityBot and Google-Extended.
+- **Sharing and housekeeping:** sitemap with `lastmod`, canonical URLs, Open Graph and
+  Twitter cards with `og-image.png`, a favicon, and a custom `404.html`.
 
 When you change weights in `scoring.js` or add a role, add or adjust a persona in
 `tests/personas.js` that describes who the change is for. The tests also run 20,000
