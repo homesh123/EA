@@ -181,9 +181,9 @@ body{
 
 .nav{
   display:flex;
-  justify-content:space-between;
-  margin-top:32px;
+  justify-content:center;
   gap:12px;
+  margin-top:32px;
 }
 
 .button{

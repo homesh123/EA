@@ -274,6 +274,7 @@ function renderForm() {
   back.className = "button btn-secondary";
   back.textContent = "Back";
   back.disabled = state.step === 0;
+  back.style.display = state.step === 0 ? "none" : "";
   back.addEventListener("click", () => { state.step--; renderForm(); });
   const next = document.createElement("button");
   next.className = "button btn-primary";
