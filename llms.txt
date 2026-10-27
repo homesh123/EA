@@ -1,0 +1,32 @@
+# AI Path Finder
+
+> Free AI career consultation. A questionnaire matches software engineers, testers, DevOps and data engineers, freshers, MCA/BCA graduates and career changers from non-IT fields to the best-fit AI role. It explains why the role fits and gives a personalised, dated learning roadmap.
+
+Last updated: 2026-10-27
+
+## How the recommendation works
+- About 20 questions in 5 sections: background and experience, skill levels (Python, SQL, cloud, AI/ML, maths), a 4-question reasoning check, working style and interests, goals and weekly study hours.
+- Self-ratings are checked against the reasoning questions, and contradictory answers are corrected.
+- Each of the 9 roles is scored with weighted, explainable signals. Users see a fit %, readiness %, skill gaps, transferable strengths and a roadmap that skips what they already know.
+- Everything runs in the browser. Answers are not sent to a server.
+
+## AI career paths
+- [AI Foundations Path](https://homesh123.github.io/ai-career-advisor/roles/ai-foundations-beginner.html): Build the base, then land a junior AI / ML role. Best for: students, graduates and people new to coding. Time to job-ready: 4.8 months at 10 h/week. Coding: basic Python; maths: basic statistics.
+- [ML Engineer](https://homesh123.github.io/ai-career-advisor/roles/ml-engineer.html): Build, train and ship ML models into real products. Best for: backend and data developers who enjoy data and maths. Time to job-ready: 3.9–5.3 months at 10 h/week. Coding: comfortable Python; maths: basic statistics.
+- [Data Engineer (AI focus)](https://homesh123.github.io/ai-career-advisor/roles/ai-data-engineer.html): Build the data pipelines every AI system depends on. Best for: data engineers, BI analysts and SQL-heavy developers. Time to job-ready: 3–3.5 months at 10 h/week. Coding: comfortable Python; maths: very little.
+- [AI Product Engineer](https://homesh123.github.io/ai-career-advisor/roles/ai-product-engineer.html): Ship AI features users love — chat, search, copilots. Best for: frontend, full-stack and mobile developers. Time to job-ready: 3–3.2 months at 10 h/week. Coding: basic Python; maths: very little.
+- [MLOps / AI Platform Engineer](https://homesh123.github.io/ai-career-advisor/roles/mlops-engineer.html): Run AI reliably and cheaply at scale. Best for: DevOps, cloud, SRE and infrastructure engineers. Time to job-ready: 2.5–3.5 months at 10 h/week. Coding: comfortable Python; maths: very little.
+- [LLM / Agent Engineer](https://homesh123.github.io/ai-career-advisor/roles/llm-agent-engineer.html): Build AI agents that plan, use tools and get work done. Best for: backend developers and automation / QA engineers. Time to job-ready: 2.5–3.2 months at 10 h/week. Coding: comfortable Python; maths: very little.
+- [AI Research Engineer](https://homesh123.github.io/ai-career-advisor/roles/ai-research-engineer.html): Train, fine-tune and push the limits of models. Best for: people with strong maths who love deep technical work. Time to job-ready: 3.2–5.3 months at 10 h/week. Coding: advanced Python; maths: strong (linear algebra, calculus, probability).
+- [AI Forward Deployed Engineer](https://homesh123.github.io/ai-career-advisor/roles/ai-forward-deployed-engineer.html): Deploy AI inside real businesses, hands-on with customers. Best for: senior engineers who enjoy clients and know an industry. Time to job-ready: 2.3–3.5 months at 10 h/week. Coding: comfortable Python; maths: very little.
+- [AI Product Manager](https://homesh123.github.io/ai-career-advisor/roles/ai-product-manager.html): Decide what AI should build — and make it succeed. Best for: PMs, BAs, team leads and non-IT domain experts. Time to job-ready: 3–3.2 months at 10 h/week. Coding: not required (low-code is fine); maths: basic statistics.
+
+## Quick answers
+- Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
+- Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.
+- Can freshers or MCA graduates get into AI? Yes. Start with the AI Foundations path (Python, statistics, SQL, ML basics, two portfolio projects), or go straight to ML Engineer if you already have strong ML projects.
+- How long does it take? Usually 3 to 9 months at around 10 hours a week, depending on starting skills and the target role.
+
+## Links
+- [Take the questionnaire](https://homesh123.github.io/ai-career-advisor/)
+- [Sitemap](https://homesh123.github.io/ai-career-advisor/sitemap.xml)
