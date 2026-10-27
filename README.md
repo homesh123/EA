@@ -41,3 +41,9 @@ Open `index.html` directly in a browser, or deploy via GitHub Pages:
 
 MIT
 Build refresh: Tue Oct 27 03:19:03 AM UTC 2026
+
+## UX Improvements (latest)
+- Role tabs to switch between primary and alternative recommendations
+- Clickable roadmap steps with progress tracker
+- Week timeline visualization
+- Collapsible step details with toggle
