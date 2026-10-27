@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://homesh123.github.io/ai-career-advisor/sitemap.xml
