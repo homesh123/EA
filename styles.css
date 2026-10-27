@@ -100,9 +100,9 @@ body{
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
-  padding:32px;
+  padding:28px 32px 8px;
   box-shadow:var(--shadow);
-  margin-bottom:24px;
+  margin-bottom:16px;
 }
 
 .question{
@@ -182,8 +182,14 @@ body{
 .nav{
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:12px;
-  margin-top:32px;
+  margin-top:16px;
+  margin-bottom:8px;
+}
+
+.nav .btn-secondary.hidden{
+  display:none;
 }
 
 .button{

@@ -272,9 +272,9 @@ function renderForm() {
   nav.className = "nav";
   const back = document.createElement("button");
   back.className = "button btn-secondary";
+  if (state.step === 0) back.classList.add("hidden");
   back.textContent = "Back";
   back.disabled = state.step === 0;
-  back.style.display = state.step === 0 ? "none" : "";
   back.addEventListener("click", () => { state.step--; renderForm(); });
   const next = document.createElement("button");
   next.className = "button btn-primary";
