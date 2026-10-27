@@ -219,7 +219,10 @@
       </p>
       <div id="progressWrap" class="progress-wrap" hidden>
         <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
-        <p id="progressLabel" class="step-counter" aria-live="polite"></p>
+        <div class="progress-meta">
+          <p id="progressLabel" class="step-counter" aria-live="polite"></p>
+          <button type="button" id="restartBtn" class="link-btn restart-link">↺ Start over</button>
+        </div>
       </div>
     </header>
 
@@ -351,6 +354,17 @@
       <p><a href="llms.txt">llms.txt</a> · <a href="sitemap.xml">Sitemap</a> · <a href="https://github.com/homesh123/ai-career-advisor">Source on GitHub</a></p>
     </footer>
   </main>
+  <dialog id="resetDialog" class="dialog" aria-labelledby="resetTitle">
+    <form method="dialog">
+      <h2 id="resetTitle">Start the questionnaire again?</h2>
+      <p>Your current answers will be cleared and you'll go back to question 1.</p>
+      <label id="resetProgressRow" class="dialog-check"><input type="checkbox" id="resetProgress" /> Also clear my roadmap progress (ticked steps)</label>
+      <div class="dialog-actions">
+        <button type="submit" value="cancel" class="button btn-secondary">Cancel</button>
+        <button type="submit" value="reset" class="button btn-primary">Yes, start over</button>
+      </div>
+    </form>
+  </dialog>
   <script src="questions.js" defer></script>
   <script src="roles.js" defer></script>
   <script src="scoring.js" defer></script>

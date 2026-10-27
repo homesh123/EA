@@ -69,6 +69,24 @@ body:not([data-view="intro"]) .hero h1{font-size:1.75rem;margin-bottom:0}
 .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#2b9bff);transition:width .35s ease}
 .step-counter{color:var(--muted);font-size:13px;font-weight:500;margin:10px 0 0}
 
+.progress-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}
+.progress-meta .step-counter{margin:0}
+.restart-link{font-size:13px;color:var(--muted);white-space:nowrap}
+.restart-link:hover{color:var(--accent)}
+
+/* confirmation dialog */
+.dialog{
+  border:none;border-radius:var(--radius-lg);padding:0;max-width:420px;width:calc(100% - 32px);
+  box-shadow:0 20px 60px rgba(0,0,0,.25);color:var(--text);
+}
+.dialog::backdrop{background:rgba(0,0,0,.35)}
+.dialog form{padding:24px}
+.dialog h2{font-size:1.2rem;margin:0 0 8px}
+.dialog p{color:var(--muted);margin:0 0 14px;font-size:.95rem}
+.dialog-check{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;margin-bottom:18px;cursor:pointer}
+.dialog-check input{margin-top:3px;width:16px;height:16px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
 /* ---------- card & buttons ---------- */
 .card{
   background:var(--card);border:1px solid var(--border-light);border-radius:var(--radius-lg);
@@ -296,6 +314,13 @@ body:not([data-view="intro"]) .hero h1{font-size:1.75rem;margin-bottom:0}
   padding:6px 12px;border-radius:999px;
 }
 .result-nav a:hover{background:var(--surface);color:var(--text)}
+.nav-restart{
+  margin-left:auto;white-space:nowrap;border:1px solid var(--border-light);background:#fff;cursor:pointer;
+  font:inherit;font-size:.82rem;font-weight:600;color:var(--muted);padding:5px 12px;border-radius:999px;
+}
+.nav-restart:hover{color:var(--accent);border-color:#9cc3f0}
+/* keep "Start over" pinned and visible while the section links scroll underneath on small screens */
+.nav-restart{position:sticky;right:0;flex-shrink:0;box-shadow:-14px 0 12px -4px rgba(255,255,255,.95)}
 .view-result > section{scroll-margin-top:52px}
 .hero-cta{display:inline-block;margin-top:18px;text-decoration:none}
 .hero-cta:hover{color:#fff}

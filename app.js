@@ -107,9 +107,25 @@ function renderIntro(app) {
   if (r) r.onclick = restart;
 }
 
+// Ask before wiping answers. Uses the <dialog> in index.html, with confirm() as a fallback.
 function restart() {
-  if (!confirm("Clear your answers and start over?")) return;
+  const dlg = $("#resetDialog");
+  if (!dlg || typeof dlg.showModal !== "function") {
+    if (confirm("Clear your answers and start the questionnaire again?")) doRestart(false);
+    return;
+  }
+  const clearBox = $("#resetProgress");
+  clearBox.checked = false;
+  $("#resetProgressRow").hidden = !Object.keys(storage.get(PROGRESS_KEY) || {}).length;
+  dlg.onclose = () => { if (dlg.returnValue === "reset") doRestart(clearBox.checked); };
+  dlg.returnValue = "";
+  dlg.showModal();
+}
+
+function doRestart(clearProgress) {
+  if (clearProgress) storage.set(PROGRESS_KEY, {});
   state = freshState();
+  window.scrollTo({ top: 0 });
   go("question", { qid: QUESTIONS[0].id });
 }
 
@@ -214,7 +230,11 @@ function renderReview(app) {
       ${qs.map(q => `<li><div><span class="review-q">${esc(q.q)}</span><span class="review-a">${q.quiz ? (hasAnswer(q) ? "Answered" : "<em class='muted'>Not answered</em>") : label(q)}</span></div>
         <button type="button" class="link-btn" data-q="${q.id}">Change</button></li>`).join("")}
     </ol>
-    <div class="nav"><button type="button" class="button btn-primary" data-act="done">See my updated results</button></div>`;
+    <div class="nav">
+      <button type="button" class="button btn-secondary" data-act="restart">Start over</button>
+      <button type="button" class="button btn-primary" data-act="done">See my updated results</button>
+    </div>`;
+  app.querySelector('[data-act="restart"]').onclick = restart;
   app.querySelectorAll("[data-q]").forEach(b => b.onclick = () => go("question", { qid: b.dataset.q, returnToReview: true }));
   app.querySelector('[data-act="done"]').onclick = () => {
     const missing = qs.find(q => !hasAnswer(q));
@@ -257,6 +277,7 @@ function renderResult(app) {
   app.innerHTML = `
     <nav class="result-nav" aria-label="Result sections">
       <a href="#sec-overview">Overview</a><a href="#sec-role">Role</a><a href="#sec-roadmap">Roadmap</a><a href="#sec-profile">Your profile</a><a href="#sec-resources">Resources</a>
+      <button type="button" class="nav-restart" data-act="restart-nav" title="Clear answers and start the questionnaire again">↺ Start over</button>
     </nav>
     <section class="result-hero" id="sec-overview">
       <p class="eyebrow">Your best-fit AI path</p>
@@ -314,7 +335,7 @@ function renderResult(app) {
     $(a.getAttribute("href")).scrollIntoView({ behavior: "smooth", block: "start" });
   });
   app.querySelector('[data-act="edit"]').onclick = () => go("review");
-  app.querySelector('[data-act="restart"]').onclick = restart;
+  app.querySelectorAll('[data-act="restart"], [data-act="restart-nav"]').forEach(b => b.onclick = restart);
   app.querySelector('[data-act="print"]').onclick = () => window.print();
   app.querySelector('[data-act="copy"]').onclick = e => copyPlan(e.currentTarget, sel, p);
 }
@@ -599,4 +620,5 @@ function fallbackCopy(text, done) {
 // Open every roadmap step when printing so the PDF contains the full plan.
 window.addEventListener("beforeprint", () => document.querySelectorAll(".roadmap details").forEach(d => d.open = true));
 
+$("#restartBtn").onclick = restart;
 render();
