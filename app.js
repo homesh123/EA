@@ -64,6 +64,12 @@ const QUESTIONS = [
       { value: "freelance", label: "Freelance / side projects", desc: "Build AI products on the side" },
       { value: "start", label: "Start from scratch", desc: "Enter the field for the first time" }
     ]},
+  { id: "aiRoleComfort", q: "Are you already in an AI role? If yes, how comfortable are you?", clarify: "If youre already in AI but unhappy, we can find a better-fit role.",
+    options: [
+      { value: "none", label: "Not in AI yet", desc: "Im new to AI or not working in AI" },
+      { value: "comfortable", label: "Comfortable", desc: "Im happy in my current AI role" },
+      { value: "uncomfortable", label: "Not comfortable", desc: "Im in AI but want to switch to a different AI role" }
+    ]},
   { id: "pythonLevel", q: "What is your Python comfort level?", clarify: "Python is the #1 language for AI. Be honest — this shapes your starting point.",
     options: [
       { value: "none", label: "None", desc: "I don't know Python yet" },
@@ -163,6 +169,13 @@ function scoreRole(answers) {
   if (state.answers.bizDomain === "finance" || state.answers.bizDomain === "healthcare" || state.answers.bizDomain === "retail" || state.answers.bizDomain === "logistics") { add("ai-forward-deployed-engineer", 2); add("ai-product-engineer", 1); }
 
   if (state.answers.learnStyle === "structured") { /* lighter self-paced load */ }
+
+  // AI role comfort scoring
+  if (state.answers.aiRoleComfort === "uncomfortable") {
+    add("ai-product-engineer", 2);
+    add("ai-forward-deployed-engineer", 2);
+    add("mlops-engineer", 1);
+  }
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   return sorted.slice(0, 2).map(s => s[0]);
@@ -313,6 +326,7 @@ function showResult() {
   if (state.answers.lang === "js" && state.answers.domain === "frontend") gaps.push("<strong>Leverage your frontend:</strong> AI Product Engineer is a strong fit — embed LLM features into web apps using JavaScript/TypeScript.");
   if (state.answers.domain === "backend" || state.answers.domain === "devops") gaps.push("<strong>Leverage your backend:</strong> AI Platform/MLOps Engineer fits well — focus on model serving, Kubernetes, and observability.");
   if (state.answers.experience === "5-10" || state.answers.experience === "10+") gaps.push("<strong>Consider AI Forward Deployed Engineer:</strong> With your experience, client-facing AI roles (OpenAI, Anthropic hire these) value domain knowledge + communication.");
+  if (state.answers.aiRoleComfort === "uncomfortable") gaps.push("<strong>Already in AI but unhappy?</strong> Consider switching to AI Product Engineer (build AI features), AI Forward Deployed Engineer (client-facing solutions), or MLOps Engineer (infrastructure). Your AI experience is valuable—just need to pivot to a better-fit role.");
   
   gapDiv.innerHTML = "<strong style='color:var(--accent2)'>⚡ Gap analysis &amp; next steps:</strong><ul>" + gaps.map(g => "<li>" + g + "</li>").join("") + "</ul>";
   form.appendChild(gapDiv);
