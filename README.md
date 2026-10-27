@@ -50,6 +50,9 @@ AI Forward Deployed Engineer · AI Product Manager
 | `app.js` | UI: intro, questions, review, results |
 | `scripts/build.js` | Generates the static, crawlable pages from `roles.js` (see below) |
 | `roles/*.html` | Generated landing page per AI role (do not edit by hand) |
+| `for/*.html` | Generated "best AI roles for <background>" pages, ranked by the real scoring engine |
+| `guide/*.html` | Generated guide ("How to choose the right AI role") and methodology page |
+| `content/` | Hand-written copy for the background pages and the guide |
 | `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
 | `tests/` | Persona tests for the recommendation logic, plus SEO / site checks |
 
@@ -68,10 +71,18 @@ so `lastmod` and the "Updated" dates stay accurate.
 
 ## SEO, AEO and GEO
 
+- **Search intent:** the homepage targets "AI career consultation", "AI role consultation" and
+  "AI career counselling" (title, `<h1>`, description and FAQ), with a "How it works" section.
+- **Long-tail pages:** "best AI roles for <background>" pages (QA testers, Java/.NET developers,
+  DevOps, data, freshers/MCA, non-IT, PMs/BAs, senior engineers). Their recommendations come
+  from `scoring.js`, so they always match the questionnaire.
+- **Guide and methodology:** a 5-step "how to choose an AI role" framework with data tables, and
+  a public methodology page listing every scoring signal. Answer engines can cite both.
 - **Crawlable content without JavaScript:** one landing page per role
   (`roles/<slug>.html`) with the roadmap, key facts, salary and FAQ. The homepage
   also has a static comparison table and a "Which AI role should I choose?" quick answer.
-- **Structured data (JSON-LD):** Organization, WebSite and WebApplication;
+- **Structured data (JSON-LD):** Organization, WebSite, WebApplication, Service (AI career
+  consultation) and HowTo;
   ItemList of roles; and an FAQPage generated from the visible FAQ. Each role page
   also has WebPage, BreadcrumbList, Occupation (with US and India salary ranges),
   HowTo and FAQPage.
