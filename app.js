@@ -112,13 +112,25 @@ function scoreRole(answers) {
   const scores = {};
   const add = (role, points) => { scores[role] = (scores[role] || 0) + points; };
 
-  if (answers.background === "fresher" || answers.background === "mca" || answers.lang === "none" || answers.goal === "start") {
+  // Freshers / students / absolute beginners with no language → AI Beginner path
+  if (answers.background === "fresher" || answers.background === "mca" || answers.goal === "start") {
     return ["ai-fresher"];
   }
+  // Career changers with no programming language → still route to AI Forward Deployed if domain expertise exists
   if (answers.background === "careerchange" || answers.background === "other") {
     if (answers.ml === "none" || answers.ml === "use") {
+      const bizScores = ["finance","healthcare","retail","logistics","other"];
+      const hasDomain = bizScores.includes(answers.bizDomain) && answers.bizDomain !== "none";
+      const interests = Array.isArray(answers.interest) ? answers.interest : (answers.interest ? [answers.interest] : []);
+      if (hasDomain && (interests.includes("solutions") || interests.includes("build") || interests.includes("data"))) {
+        return ["ai-forward-deployed-engineer", "ai-fresher"];
+      }
       return ["ai-fresher", "ai-product-engineer"];
     }
+  }
+  // If no language at all and not a career changer → beginner
+  if (answers.lang === "none") {
+    return ["ai-fresher", "ai-product-engineer"];
   }
 
   const ml = answers.ml, interest = answers.interest, domain = answers.domain, lang = answers.lang, math = answers.math, goal = answers.goal;
@@ -127,10 +139,10 @@ function scoreRole(answers) {
   if (ml === "none") { add("ml-engineer", 2); add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
   if (ml === "use") { add("ai-product-engineer", 3); add("llm-agent-engineer", 3); add("ml-engineer", 2); }
   if (ml === "basic") { add("ml-engineer", 3); add("ai-research-engineer", 2); add("mlops-engineer", 1); }
-  if (ml === "adv") { add("ai-research-engineer", 3); add("mlops-engineer", 3); add("ml-engineer", 2); }
+  if (ml === "adv") { add("ai-research-engineer", 4); add("mlops-engineer", 3); add("ml-engineer", 2); }
 
   if (interests.includes("build")) { add("ai-product-engineer", 3); add("llm-agent-engineer", 2); }
-  if (interests.includes("model")) { add("ai-research-engineer", 3); add("ml-engineer", 2); }
+  if (interests.includes("model")) { add("ai-research-engineer", 4); add("ml-engineer", 2); add("mlops-engineer", 1); }
   if (interests.includes("data")) { add("data-engineer-ai", 3); add("ml-engineer", 1); }
   if (interests.includes("agents")) { add("llm-agent-engineer", 3); add("ai-product-engineer", 1); }
   if (interests.includes("infra")) { add("mlops-engineer", 3); add("data-engineer-ai", 1); }
@@ -155,23 +167,35 @@ function scoreRole(answers) {
   if (goal === "freelance") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
 
   // New question scoring
-  if (state.answers.pythonLevel === "python" || state.answers.pythonLevel === "comfortable" || state.answers.pythonLevel === "advanced") add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1);
-  if (state.answers.pythonLevel === "basic") add("ai-product-engineer", 1); add("llm-agent-engineer", 1);
-  if (state.answers.pythonLevel === "none") { add("ai-product-engineer", 1); add("ai-fresher", 1); }
+  const py = answers.pythonLevel;
+  if (py === "comfortable" || py === "advanced") { add("ml-engineer", 1); add("data-engineer-ai", 1); add("ai-research-engineer", 1); add("llm-agent-engineer", 1); }
+  if (py === "basic") { add("ai-product-engineer", 1); add("llm-agent-engineer", 1); }
+  if (py === "none") { add("ai-product-engineer", 1); add("ai-fresher", 1); }
 
-  if (state.answers.cloud === "advanced") { add("mlops-engineer", 2); add("ai-research-engineer", 1); }
-  if (state.answers.cloud === "comfortable") add("mlops-engineer", 1);
-  if (state.answers.cloud === "basic") add("mlops-engineer", 1);
+  const cloud = answers.cloud;
+  if (cloud === "advanced") { add("mlops-engineer", 2); add("ai-research-engineer", 1); }
+  if (cloud === "comfortable" || cloud === "basic") add("mlops-engineer", 1);
 
-  if (state.answers.db === "advanced") { add("data-engineer-ai", 2); add("ml-engineer", 1); }
-  if (state.answers.db === "comfortable") add("data-engineer-ai", 1);
+  const db = answers.db;
+  if (db === "advanced") { add("data-engineer-ai", 2); add("ml-engineer", 1); }
+  if (db === "comfortable") add("data-engineer-ai", 1);
+  if (db === "basic") add("data-engineer-ai", 0.5);
 
-  if (state.answers.bizDomain === "finance" || state.answers.bizDomain === "healthcare" || state.answers.bizDomain === "retail" || state.answers.bizDomain === "logistics") { add("ai-forward-deployed-engineer", 2); add("ai-product-engineer", 1); }
+  const biz = answers.bizDomain;
+  if (biz === "finance" || biz === "healthcare" || biz === "retail" || biz === "logistics" || biz === "other") {
+    add("ai-forward-deployed-engineer", 2);
+    add("ai-product-engineer", 1);
+  }
 
-  if (state.answers.learnStyle === "structured") { /* lighter self-paced load */ }
+  // Data engineering domain always gets a strong data-engineer boost
+  if (domain === "dataeng") { add("data-engineer-ai", 4); add("ml-engineer", 1); }
+  if (lang === "python" && db !== "none" && db !== "basic") add("data-engineer-ai", 1);
+
+  if (answers.learnStyle === "structured") { /* lighter self-paced load */ }
 
   // AI role comfort scoring
-  if (state.answers.aiRoleComfort === "uncomfortable") {
+  const comfort = answers.aiRoleComfort;
+  if (comfort === "uncomfortable") {
     add("ai-product-engineer", 2);
     add("ai-forward-deployed-engineer", 2);
     add("mlops-engineer", 1);
@@ -279,40 +303,100 @@ function showResult() {
   intro.textContent = "Based on your experience, abilities, and interests, here is your exact AI career path:";
   form.appendChild(intro);
 
-  roles.forEach(roleId => {
+  // Role tabs (if 2 roles returned)
+  if (roles.length > 1) {
+    const tabs = document.createElement("div");
+    tabs.className = "role-tabs";
+    roles.forEach((rid, i) => {
+      const r = ROLES[rid];
+      const tab = document.createElement("div");
+      tab.className = "role-tab" + (i === 0 ? " active" : "");
+      tab.textContent = (i === 0 ? "🎯 " : "📊 ") + r.title;
+      tab.onclick = () => {
+        document.querySelectorAll(".role-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        document.querySelectorAll(".role-card.result").forEach((c, idx) => {
+          c.style.display = idx === i ? "block" : "none";
+        });
+      };
+      tabs.appendChild(tab);
+    });
+    form.appendChild(tabs);
+  }
+
+  roles.forEach((roleId, idx) => {
     const role = ROLES[roleId];
     const [lo, hi] = totalWeeks(role.roadmap);
     const totalLabel = fmtDuration([lo, hi]);
-    const steps = role.roadmap.map(r => `
-      <li>
-        <strong>Step ${r.step} — ${r.title}</strong>
-        <span class="step-time">⏱ ${r.time}</span>
-        <div class="step-what">${r.what}</div>
-        <div class="step-why"><em>Why this matters:</em> This is a core skill for the role. Mastering it gives you the ability employers look for.</div>
-        <div class="step-sources"><strong>Learn from:</strong> ${r.sources}</div>
-        <div class="step-seq"><strong>Do it when:</strong> ${r.sequence}</div>
-        <div class="step-subtopics" style="margin-top:8px;"><strong>What you will learn:</strong><ul style="margin:4px 0 0 18px;">${r.subTopics ? r.subTopics.map(st => `<li>${st}</li>`).join("") : ""}</ul></div>
-        <div class="step-mindnotes" style="margin-top:8px;"><strong>Mind notes:</strong><ul style="margin:4px 0 0 18px;">${r.mindNotes ? r.mindNotes.map(mn => `<li>${mn}</li>`).join("") : ""}</ul></div>
-        <div class="step-highlights" style="margin-top:8px;"><strong>Must learn:</strong><ul style="margin:4px 0 0 18px;">${r.keyHighlights ? r.keyHighlights.map(kh => `<li>${kh}</li>`).join("") : ""}</ul></div>
-        <div class="step-projects" style="margin-top:8px;"><strong>Starter projects (GitHub):</strong><ul style="margin:4px 0 0 18px;">${r.starterProjects ? r.starterProjects.map(sp => `<li><strong>${sp.name}</strong> — ${sp.description}<br><small>Files: ${sp.files.join(", ")}</small><a href="${sp.url}" target="_blank" rel="noopener">View on GitHub →</a></li>`).join("") : ""}</ul></div>
-      </li>`).join("");
+    const maxWeek = hi;
+    const steps = role.roadmap.map(r => {
+      const [a, b] = parseWeeks(r.time);
+      const endWeek = b || a;
+      const pct = maxWeek > 0 ? Math.round(endWeek / maxWeek * 100) : 0;
+      return `
+      <li data-step="${r.step}">
+        <div class="step-header">
+          <strong>Step ${r.step} — ${r.title}</strong>
+          <span class="step-toggle" onclick="this.parentElement.parentElement.querySelector('.step-body').classList.toggle('collapsed');this.classList.toggle('open')">+</span>
+        </div>
+        <div class="step-body">
+          <span class="step-time">⏱ ${r.time}</span>
+          <div class="step-what">${r.what}</div>
+          <div class="step-why"><em>Why this matters:</em> This is a core skill for the role. Mastering it gives you the ability employers look for.</div>
+          <div class="step-sources"><strong>Learn from:</strong> ${r.sources}</div>
+          <div class="step-seq"><strong>Do it when:</strong> ${r.sequence}</div>
+          <div class="step-subtopics"><span class="step-section-label">What you will learn</span><ul>${r.subTopics ? r.subTopics.map(st => `<li>${st}</li>`).join("") : ""}</ul></div>
+          <div class="step-mindnotes"><span class="step-section-label">Mind notes</span><ul>${r.mindNotes ? r.mindNotes.map(mn => `<li>${mn}</li>`).join("") : ""}</ul></div>
+          <div class="step-highlights"><span class="step-section-label">Must learn</span><ul>${r.keyHighlights ? r.keyHighlights.map(kh => `<li>${kh}</li>`).join("") : ""}</ul></div>
+          <div class="step-projects"><span class="step-section-label">Starter projects (GitHub)</span><ul>${r.starterProjects ? r.starterProjects.map(sp => `<li><strong>${sp.name}</strong> — ${sp.description}<br><small>Files: ${sp.files.join(", ")}</small> <a href="${sp.url}" target="_blank" rel="noopener">View on GitHub →</a></li>`).join("") : ""}</ul></div>
+        </div>
+      </li>`;
+    }).join("");
+
     const card = document.createElement("div");
-    card.className = "role-card result";
+    card.className = "role-card result" + (idx > 0 ? " collapsed-card" : "");
+    card.style.display = idx === 0 ? "block" : "none";
     card.innerHTML = `
       <h2>${role.title}</h2>
       <p class="total-time">Total estimated learning time: <strong>${totalLabel}</strong> (approx. ${lo}–${hi} weeks)</p>
       <p class="why">${role.why}</p>
-      <div class="skill-list">${role.skills.map(s => `<span class="skill">${s}</span>`).join("")}</div>
+      <div class="week-timeline">
+        <span>📅 Timeline</span>
+        <div class="bar"><div class="fill" style="width:${Math.min(100, Math.round(hi/12*100))}%"></div></div>
+        <span>${lo}–${hi}w</span>
+      </div>
+      <div class="roadmap-progress">
+        <span>Progress</span>
+        <div class="roadmap-progress-bar"><div class="roadmap-progress-fill" style="width:0%"></div></div>
+        <span id="stepCounter">0 / ${role.roadmap.length}</span>
+      </div>
+      <div class="skills-highlight">
+        ${role.skills.map((s, i) => `<span class="skill-highlight${i < 3 ? ' top' : ''}">${s}</span>`).join("")}
+      </div>
       <div class="roadmap"><strong>Step-by-step roadmap (follow in this exact order):</strong><ol>${steps}</ol></div>
     `;
     form.appendChild(card);
+
+    // Add progress click handlers
+    card.querySelectorAll(".roadmap li").forEach(li => {
+      li.addEventListener("click", function(e) {
+        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        this.classList.toggle("completed");
+        const total = card.querySelectorAll(".roadmap li").length;
+        const done = card.querySelectorAll(".roadmap li.completed").length;
+        const fill = card.querySelector(".roadmap-progress-fill");
+        const counter = card.querySelector("#stepCounter");
+        if (fill) fill.style.width = (done / total * 100) + "%";
+        if (counter) counter.textContent = done + " / " + total;
+      });
+    });
   });
 
   const note = document.createElement("p");
-  note.style.color = "var(--muted)";
+  note.style.color = "#86868b";
   note.style.fontSize = "13px";
   note.style.marginTop = "16px";
-  note.textContent = "Tip: Follow the roadmap in order — each step builds the ability needed for the next. Build at least one portfolio project before applying.";
+  note.textContent = "Tip: Click any step to mark it complete. Follow the roadmap in order — each step builds the ability needed for the next. Build at least one portfolio project before applying.";
   form.appendChild(note);
 
   // Gap analysis based on answers
