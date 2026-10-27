@@ -335,3 +335,57 @@ function showResult() {
 }
 
 renderForm();
+
+  // Market insights section
+  const marketDiv = document.createElement("div");
+  marketDiv.style.marginTop = "24px";
+  marketDiv.style.padding = "20px";
+  marketDiv.style.background = "linear-gradient(180deg,#fdfbf7,#f9f5ea)";
+  marketDiv.style.border = "1px solid #e5d8c9";
+  marketDiv.style.borderRadius = "12px";
+  marketDiv.style.boxShadow = "var(--shadow)";
+
+  const marketHTML =
+    '<h3 style="font-size:1rem;font-weight:700;margin:0 0 12px;color:#1d1d1f;text-transform:uppercase;letter-spacing:0.5px;">Market Insights — AI Roles & Salaries (2026)</h3>' +
+    '<p style="color:#86868b;font-size:0.875rem;margin-bottom:12px;">Based on data from Levels.fyi, Glassdoor, and job postings at Google, Meta, Amazon, Apple, NVIDIA, Microsoft, OpenAI, Anthropic:</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:16px;">' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">ML Engineer</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $280k–$400k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $180k–$300k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Python, PyTorch, MLOps, system design</p>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Product Engineer</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $250k–$350k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $160k–$260k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> LLM APIs, RAG, JavaScript, prompt engineering</p>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">MLOps / AI Platform</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $260k–$380k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $170k–$280k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Kubernetes, CI/CD, model serving, observability</p>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">LLM / Agent Engineer</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $300k–$450k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $200k–$350k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> LangChain/LangGraph, vector DBs, agent frameworks</p>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Forward Deployed</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $250k–$400k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $170k–$280k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> Client solutions, LLM integration, data engineering</p>' +
+    '</div>' +
+    '<div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;">' +
+    '<h4 style="margin:0 0 8px;font-size:0.9rem;color:#1d1d1f;">AI Research Engineer</h4>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Big Tech:</strong> $350k–$600k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;margin-bottom:8px;"><strong>Startups:</strong> $220k–$380k TC</p>' +
+    '<p style="font-size:0.85rem;color:#86868b;"><strong>Key skills:</strong> PyTorch, deep learning, research papers, fine-tuning</p>' +
+    '</div>' +
+    '</div>' +
+    '<p style="font-size:0.8rem;color:#aeaeb2;margin-top:12px;">Sources: Levels.fyi, Glassdoor, company H-1B filings, job postings. Salaries are total compensation (base + equity + bonus) for US roles.</p>' +
+    '</div>';
+  form.appendChild(marketDiv);
