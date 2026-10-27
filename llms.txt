@@ -1,6 +1,6 @@
 # AI Path Finder
 
-> Free AI career consultation. A questionnaire matches software engineers, testers, DevOps and data engineers, freshers, MCA/BCA graduates and career changers from non-IT fields to the best-fit AI role. It explains why the role fits and gives a personalised, dated learning roadmap.
+> Free AI career consultation (AI role consultation / AI career counselling). A questionnaire matches software engineers, testers, DevOps and data engineers, freshers, MCA/BCA graduates and career changers from non-IT fields to the best-fit AI role. It explains why the role fits and gives a personalised, dated learning roadmap.
 
 Last updated: 2026-10-27
 
@@ -20,6 +20,21 @@ Last updated: 2026-10-27
 - [AI Research Engineer](https://homesh123.github.io/ai-career-advisor/roles/ai-research-engineer.html): Train, fine-tune and push the limits of models. Best for: people with strong maths who love deep technical work. Time to job-ready: 3.2–5.3 months at 10 h/week. Coding: advanced Python; maths: strong (linear algebra, calculus, probability).
 - [AI Forward Deployed Engineer](https://homesh123.github.io/ai-career-advisor/roles/ai-forward-deployed-engineer.html): Deploy AI inside real businesses, hands-on with customers. Best for: senior engineers who enjoy clients and know an industry. Time to job-ready: 2.3–3.5 months at 10 h/week. Coding: comfortable Python; maths: very little.
 - [AI Product Manager](https://homesh123.github.io/ai-career-advisor/roles/ai-product-manager.html): Decide what AI should build — and make it succeed. Best for: PMs, BAs, team leads and non-IT domain experts. Time to job-ready: 3–3.2 months at 10 h/week. Coding: not required (low-code is fine); maths: basic statistics.
+
+## AI career guidance by background
+- [Software testers and QA engineers](https://homesh123.github.io/ai-career-advisor/for/software-testers-qa.html): usually fits LLM / Agent Engineer, then AI Product Engineer or ML Engineer.
+- [Java, .NET and backend developers](https://homesh123.github.io/ai-career-advisor/for/java-dotnet-backend-developers.html): usually fits LLM / Agent Engineer, then AI Product Engineer or ML Engineer.
+- [Frontend and full-stack developers](https://homesh123.github.io/ai-career-advisor/for/frontend-full-stack-developers.html): usually fits AI Product Engineer, then AI Forward Deployed Engineer or AI Product Manager.
+- [DevOps, cloud and SRE engineers](https://homesh123.github.io/ai-career-advisor/for/devops-cloud-engineers.html): usually fits MLOps / AI Platform Engineer, then AI Forward Deployed Engineer or ML Engineer.
+- [Data engineers and BI analysts](https://homesh123.github.io/ai-career-advisor/for/data-engineers-analysts.html): usually fits Data Engineer (AI focus), then ML Engineer or AI Forward Deployed Engineer.
+- [Freshers, students and MCA / BCA graduates](https://homesh123.github.io/ai-career-advisor/for/freshers-mca-bca-graduates.html): usually fits AI Foundations Path, then ML Engineer or AI Research Engineer.
+- [Non-IT professionals (finance, healthcare, teaching, operations)](https://homesh123.github.io/ai-career-advisor/for/non-it-professionals.html): usually fits AI Product Manager, then AI Forward Deployed Engineer or AI Foundations Path.
+- [Product managers, project managers and business analysts](https://homesh123.github.io/ai-career-advisor/for/product-managers-business-analysts.html): usually fits AI Product Manager, then AI Forward Deployed Engineer or AI Foundations Path.
+- [Senior engineers, architects and tech leads (10+ years)](https://homesh123.github.io/ai-career-advisor/for/senior-engineers-tech-leads.html): usually fits AI Forward Deployed Engineer, then AI Product Manager or AI Product Engineer.
+
+## Guides
+- [How to choose the right AI role: a 5-step framework](https://homesh123.github.io/ai-career-advisor/guide/how-to-choose-an-ai-role.html): Pick the AI role that reuses most of what you already do, matches the kind of work you enjoy every day, and fits your honest comfort with coding and maths and the hours you can study. Then test it with one small project before you commit months to it. For most working professionals that means an adjacent move rather than starting over: backend to LLM / Agent Engineer, frontend to AI Product Engineer, DevOps to MLOps, data to AI Data Engineer, and PMs or domain experts to AI Product Manager.
+- [How the AI career consultation works](https://homesh123.github.io/ai-career-advisor/guide/how-it-works.html): the questions, validation rules, scoring signals per role, and limitations.
 
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.

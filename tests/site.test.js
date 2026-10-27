@@ -8,7 +8,7 @@ const { ROLES } = require("../roles.js");
 
 const ROOT = path.join(__dirname, "..");
 const read = rel => fs.readFileSync(path.join(ROOT, rel), "utf8");
-const pages = ["index.html", ...Object.values(ROLES).map(r => `roles/${r.slug}.html`)];
+const pages = Object.keys(outputs()).filter(f => f.endsWith(".html"));
 
 test("generated files are up to date (run `npm run build`)", () => {
   for (const [rel, content] of Object.entries(outputs())) assert.equal(read(rel), content, rel);
@@ -39,6 +39,20 @@ for (const rel of pages) {
   });
 }
 
+test("every page is linked from the homepage (no orphan pages)", () => {
+  const home = read("index.html");
+  pages.filter(p => p !== "index.html").forEach(p => assert.ok(home.includes(`href="${p}"`), `homepage doesn't link ${p}`));
+});
+
+test("audience pages recommend roles that match the scoring engine", () => {
+  const { AUDIENCES } = require("../content/audiences.js");
+  const { rankRoles } = require("../scoring.js");
+  AUDIENCES.forEach(a => {
+    const top = ROLES[rankRoles(a.profile).results[0].id];
+    assert.match(read(`for/${a.slug}.html`), new RegExp(`the best AI role is ${top.title.replace(/[/()]/g, "\\$&")}`), a.slug);
+  });
+});
+
 test("titles and descriptions are unique across pages", () => {
   const titles = pages.map(p => read(p).match(/<title>([^<]*)/)[1]);
   const descs = pages.map(p => read(p).match(/<meta name="description" content="([^"]*)/)[1]);
@@ -53,11 +67,12 @@ test("FAQ structured data matches the visible FAQ on the home page", () => {
   assert.equal(ld.mainEntity.length, visible + 1); // + the "Which AI role should I choose?" quick answer
 });
 
-test("sitemap and llms.txt list every role page", () => {
+test("sitemap lists every page and llms.txt links every content page", () => {
   const sitemap = read("sitemap.xml"), llms = read("llms.txt");
-  Object.values(ROLES).forEach(r => {
-    assert.ok(sitemap.includes(`roles/${r.slug}.html`), r.slug);
-    assert.ok(llms.includes(`roles/${r.slug}.html`), r.slug);
+  pages.forEach(p => {
+    const loc = p === "index.html" ? "https://homesh123.github.io/ai-career-advisor/</loc>" : p;
+    assert.ok(sitemap.includes(loc), `sitemap missing ${p}`);
+    if (p !== "index.html") assert.ok(llms.includes(p), `llms.txt missing ${p}`);
   });
   assert.match(read("robots.txt"), /Sitemap: https:\/\/homesh123\.github\.io\/ai-career-advisor\/sitemap\.xml/);
 });
