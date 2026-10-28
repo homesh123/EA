@@ -121,10 +121,10 @@
     <a class="brand" href="../">AI Path Finder</a>
     <nav class="site-nav" aria-label="Main">
       <a href="../#paths">AI roles</a>
-      <a href="../#backgrounds">By background</a>
-      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
-      <a href="../guide/how-it-works.html">How it works</a>
       <a href="../learn.html">Learn</a>
+      <a href="../interview.html">Interview prep</a>
+      <a href="../resumes/">Resumes</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
   </header>
@@ -138,6 +138,7 @@
       </header>
       <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>If you&#39;ve used Excel, you already know the idea: rows, columns, filters and totals. Pandas is Excel inside Python. The difference is that it handles millions of rows, never crashes on big files, and repeats your steps exactly every time.</p></section>
       <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Pandas is the standard Python library for tabular data. A DataFrame is a table, and each column is a Series. With a few lines you can load a CSV, look at the first rows, filter, sort, fill in missing values, and group data to calculate totals or averages. Before any ML model can learn, data is almost always cleaned and shaped in Pandas. NumPy, which Pandas is built on, handles fast maths on arrays of numbers.</p></section>
+      
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div><dt>DataFrame</dt><dd>A table with rows and named columns.</dd></div><div><dt>Missing value (NaN)</dt><dd>An empty cell. Must be handled before modelling.</dd></div><div><dt>groupby</dt><dd>Split rows into groups and summarise each, e.g. sales per city.</dd></div></dl>
       </section>
@@ -153,8 +154,8 @@ print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q">You want total sales for each city. Which Pandas tool fits?</p>
-        <ol type="A"><li>head()</li><li>groupby()</li><li>read_csv()</li></ol>
-        <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. groupby()</strong>: groupby splits rows by city, then sum() adds up the sales in each group.</p></details>
+        <ol type="A"><li>groupby()</li><li>read_csv()</li><li>head()</li></ol>
+        <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. groupby()</strong>: groupby splits rows by city, then sum() adds up the sales in each group.</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 Remember</h2><p>DataFrame = table. Most AI projects start with load → clean → groupby.</p></section>
 
@@ -175,7 +176,7 @@ print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

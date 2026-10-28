@@ -126,10 +126,10 @@
     <a class="brand" href="../">AI Path Finder</a>
     <nav class="site-nav" aria-label="Main">
       <a href="../#paths">AI roles</a>
-      <a href="../#backgrounds">By background</a>
-      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
-      <a href="../guide/how-it-works.html">How it works</a>
       <a href="../learn.html">Learn</a>
+      <a href="../interview.html">Interview prep</a>
+      <a href="../resumes/">Resumes</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
   </header>
@@ -143,6 +143,7 @@
       </header>
       <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Airport security has two kinds of mistakes: stopping an innocent traveller (a false alarm) or missing a real threat. A scanner that never beeps is &#39;99.99% accurate&#39;, because almost nobody is a threat, but it&#39;s useless! Precision asks: when it beeps, how often is it right? Recall asks: of all the real threats, how many did it catch?</p></section>
       <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Accuracy, the share of predictions that are correct, is misleading when one class is rare, like fraud or disease. Always compare against a baseline, such as &#39;always predict the most common class&#39;. Precision = correct positives ÷ everything you flagged. High precision means few false alarms. Recall = correct positives ÷ all actual positives. High recall means few misses. F1 combines both. Which matters more depends on the cost of each mistake: for cancer screening, recall is critical. For spam filters, precision matters so real emails aren&#39;t hidden. For regression, use errors like MAE (average absolute error).</p></section>
+      <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 250" role="img" aria-label="Confusion matrix with 8 caught, 12 false alarms, 2 missed and 978 correctly ignored; highlights the precision row, then the recall column" focusable="false"><defs><marker id="ah-cm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="330" y="22" text-anchor="middle" class="ts tm">Actually fraud</text><text x="470" y="22" text-anchor="middle" class="ts tm">Actually genuine</text><text x="185" y="78" text-anchor="end" class="ts tm">Model: fraud</text><text x="185" y="158" text-anchor="end" class="ts tm">Model: genuine</text><g><rect x="260" y="34" width="140" height="70" rx="10" class="bo"/><text x="330" y="66" text-anchor="middle" class="big">8</text><text x="330" y="88" text-anchor="middle" class="ts">caught ✓</text></g><g><rect x="400" y="34" width="140" height="70" rx="10" class="bw"/><text x="470" y="66" text-anchor="middle" class="big">12</text><text x="470" y="88" text-anchor="middle" class="ts">false alarms</text></g><g><rect x="260" y="114" width="140" height="70" rx="10" class="bw"/><text x="330" y="146" text-anchor="middle" class="big">2</text><text x="330" y="168" text-anchor="middle" class="ts">missed</text></g><g><rect x="400" y="114" width="140" height="70" rx="10" class="b"/><text x="470" y="146" text-anchor="middle" class="big">978</text><text x="470" y="168" text-anchor="middle" class="ts">correctly ignored</text></g><g class="alt1"><rect x="254" y="28" width="292" height="82" rx="14" class="hl-box"/><text x="320" y="222" text-anchor="middle" class="tb">Precision = 8 / (8 + 12) = 40%  · few false alarms?</text></g><g class="alt2"><rect x="254" y="28" width="152" height="162" rx="14" class="hl-box"/><text x="320" y="222" text-anchor="middle" class="tb">Recall = 8 / (8 + 2) = 80%  · few misses?</text></g></svg></div><p class="viz-caption">Out of 1,000 payments, 10 are fraud. The model flags 20 and 8 of those are real. Precision looks across the &#39;flagged&#39; row, recall down the &#39;actually fraud&#39; column.</p></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div><dt>Precision</dt><dd>Of everything flagged, how much was truly positive.</dd></div><div><dt>Recall</dt><dd>Of all true positives, how many were caught.</dd></div><div><dt>Confusion matrix</dt><dd>A 2×2 table of correct and wrong yes/no predictions.</dd></div></dl>
       </section>
@@ -158,8 +159,8 @@ Baseline &#39;never fraud&#39; accuracy = 99%  ← beats the model on accuracy!<
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q">For a cancer screening model, which mistake is usually worse?</p>
-        <ol type="A"><li>Low recall: missing real cases</li><li>Low precision: some false alarms</li><li>Both are equally fine</li></ol>
-        <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. Low recall: missing real cases</strong>: A missed cancer case can be life-threatening, while a false alarm leads to another test. So recall matters most.</p></details>
+        <ol type="A"><li>Both are equally fine</li><li>Low recall: missing real cases</li><li>Low precision: some false alarms</li></ol>
+        <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. Low recall: missing real cases</strong>: A missed cancer case can be life-threatening, while a false alarm leads to another test. So recall matters most.</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 Remember</h2><p>Beat the baseline, and choose precision vs recall by the cost of each mistake.</p></section>
 
@@ -180,7 +181,7 @@ Baseline &#39;never fraud&#39; accuracy = 99%  ← beats the model on accuracy!<
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

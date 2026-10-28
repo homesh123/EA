@@ -116,10 +116,10 @@
     <a class="brand" href="../../">AI Path Finder</a>
     <nav class="site-nav" aria-label="Main">
       <a href="../../#paths">AI roles</a>
-      <a href="../../#backgrounds">By background</a>
-      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
-      <a href="../../guide/how-it-works.html">How it works</a>
       <a href="../../learn.html">Learn</a>
+      <a href="../../interview.html">Interview prep</a>
+      <a href="../../resumes/">Resumes</a>
+      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
   </header>
@@ -133,6 +133,7 @@
       </header>
       <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>School mein ek register mein students ke naam aur roll number hote the, aur doosre mein roll number ke hisaab se marks. &#39;Naam + marks&#39; print karne ke liye aap dono registers ko roll number se match karte ho. JOIN database tables ke liye yahi matching karta hai.</p></section>
       <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Repetition se bachne ke liye databases data ko alag tables mein baant dete hain, jaise customers aur orders, jo customer_id jaisi key se jude hote hain. JOIN unhe wapas jodta hai. INNER JOIN sirf woh rows rakhta hai jo dono tables mein match karti hain. LEFT JOIN left table ki har row rakhta hai, aur jahan match na ho wahan khaali chhod deta hai, jo &#39;kin customers ne kabhi order nahi kiya&#39; jaise sawaalon ke liye perfect hai. Galat key pe join karna, ya duplicate matches aana, galat numbers ki sabse common wajah hai.</p></section>
+      <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Venn diagram of customers and orders, highlighting the overlap for INNER JOIN and the whole customers circle for LEFT JOIN" focusable="false"><defs><marker id="ah-sj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><defs><clipPath id="sj-clip"><circle cx="250" cy="125" r="90"/></clipPath></defs><g class="alt1"><circle cx="390" cy="125" r="90" class="hl" clip-path="url(#sj-clip)"/><text x="320" y="26" text-anchor="middle" class="tb">INNER JOIN · only matching rows</text></g><g class="alt2"><circle cx="250" cy="125" r="90" class="hl"/><text x="320" y="26" text-anchor="middle" class="tb">LEFT JOIN · every customer + matches</text></g><circle cx="250" cy="125" r="90" class="ring"/><circle cx="390" cy="125" r="90" class="ring"/><text x="200" y="130" text-anchor="middle" class="">customers</text><text x="445" y="130" text-anchor="middle" class="">orders</text><text x="320" y="130" text-anchor="middle" class="ts">match</text></svg></div><p class="viz-caption">INNER JOIN sirf un customers ko rakhta hai jinke orders hain (overlap). LEFT JOIN har customer ko rakhta hai, orders hon ya na hon.</p></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div><dt>Primary / foreign key</dt><dd>Row ko unique pehchaanne wali ID, aur doosri table ka column jo us ID ko point karta hai.</dd></div><div><dt>INNER JOIN</dt><dd>Sirf woh rows jo dono tables mein match karein.</dd></div><div><dt>LEFT JOIN</dt><dd>Left table ki saari rows, aur right se match ho to woh bhi.</dd></div></dl>
       </section>
@@ -146,8 +147,8 @@ WHERE o.id IS NULL;</code></pre></div>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q">Aapko har product chahiye, woh bhi jo kabhi nahi bike. Kaunsa join?</p>
-        <ol type="A"><li>Products ka sales ke saath INNER JOIN</li><li>Products se sales tak LEFT JOIN</li><li>Join ki zaroorat nahi</li></ol>
-        <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Products se sales tak LEFT JOIN</strong>: LEFT JOIN saare products rakhta hai, chahe sales ki koi row match na kare. INNER JOIN unhe hata deta.</p></details>
+        <ol type="A"><li>Products se sales tak LEFT JOIN</li><li>Products ka sales ke saath INNER JOIN</li><li>Join ki zaroorat nahi</li></ol>
+        <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Products se sales tak LEFT JOIN</strong>: LEFT JOIN saare products rakhta hai, chahe sales ki koi row match na kare. INNER JOIN unhe hata deta.</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>INNER = sirf matches. LEFT = left ki saari rows rakho.</p></section>
 
@@ -168,7 +169,7 @@ WHERE o.id IS NULL;</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

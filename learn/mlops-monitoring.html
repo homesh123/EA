@@ -116,10 +116,10 @@
     <a class="brand" href="../">AI Path Finder</a>
     <nav class="site-nav" aria-label="Main">
       <a href="../#paths">AI roles</a>
-      <a href="../#backgrounds">By background</a>
-      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
-      <a href="../guide/how-it-works.html">How it works</a>
       <a href="../learn.html">Learn</a>
+      <a href="../interview.html">Interview prep</a>
+      <a href="../resumes/">Resumes</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
   </header>
@@ -133,6 +133,7 @@
       </header>
       <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>A demand-forecasting model trained before Diwali suddenly sees completely different shopping patterns during the festival season. Nothing &#39;crashed&#39;, but its predictions are now wrong. Like a car slowly going out of alignment, models drift as the world changes, and you only notice if you keep checking.</p></section>
       <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Software errors are loud. Model errors are often silent. Data drift means the inputs change: new user types, new products, a changed upstream field. Concept drift means the relationship changes: what used to signal fraud no longer does. Monitor input distributions, prediction distributions, data quality and, when labels arrive, real accuracy. For LLM apps, trace every request (prompt, retrieved docs, output, cost, latency) and track user feedback. Set alerts and a retraining or rollback plan before you need them.</p></section>
+      <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 226" role="img" aria-label="Line chart of average transaction amount, flat for weeks and then rising past an alert threshold" focusable="false"><defs><marker id="ah-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><path d="M50 190 H610 M50 190 V20" class="ln"/><text x="56" y="30" text-anchor="start" class="tm ts">avg transaction ₹</text><text x="610" y="212" text-anchor="end" class="tm ts">weeks →</text><path d="M50 80 H610" class="mk-warn"/><text x="58" y="72" text-anchor="start" class="warn ts">alert threshold</text><path d="M50 150 L120 146 L190 152 L260 144 L330 148 L400 140 L450 118 L500 84 L550 60 L610 48" class="series draw"/><g class="s5"><text x="470" y="56" text-anchor="middle" class="pulse big">🚨</text><text x="604" y="178" text-anchor="end" class="warn ts tb">drift detected → retrain</text></g></svg></div><p class="viz-caption">Nothing crashed, but the inputs drifted during the festival season. Monitoring catches the line crossing the alert threshold before accuracy quietly falls apart.</p></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div><dt>Data drift</dt><dd>Input data looks different from the training data.</dd></div><div><dt>Concept drift</dt><dd>The real-world relationship the model learned has changed.</dd></div><div><dt>Tracing</dt><dd>Recording each request&#39;s steps, inputs and outputs for debugging.</dd></div></dl>
       </section>
@@ -145,8 +146,8 @@
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q">Model accuracy slowly drops over months with no code changes. Most likely cause?</p>
-        <ol type="A"><li>A syntax error</li><li>Drift: the real-world data or relationships changed</li><li>Too many tests</li></ol>
-        <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. Drift: the real-world data or relationships changed</strong>: When the world changes, a frozen model gets stale. That&#39;s drift.</p></details>
+        <ol type="A"><li>Too many tests</li><li>A syntax error</li><li>Drift: the real-world data or relationships changed</li></ol>
+        <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Drift: the real-world data or relationships changed</strong>: When the world changes, a frozen model gets stale. That&#39;s drift.</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 Remember</h2><p>Models decay silently. Monitor inputs, outputs and outcomes, with alerts.</p></section>
 
@@ -167,7 +168,7 @@
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

@@ -6,6 +6,8 @@
 //   - guide/*.html        how to choose an AI role, and how the consultation works (methodology)
 //   - learn/<id>.html, learn/hi/<id>.html  static lesson pages in English and Hinglish
 //   - learn.html          generated regions: lesson catalog and Course structured data
+//   - interview/<slug>.html  interview questions and answers per role; interview.html catalog
+//   - resumes/<slug>.html, resumes/index.html  editable, ATS-friendly sample resumes
 //   - index.html          generated regions: paths table, backgrounds, nav/footer links, JSON-LD
 //   - sitemap.xml, llms.txt
 // Usage: `npm run build` to write files, `node scripts/build.js --check` to verify they are current.
@@ -17,6 +19,11 @@ const { QUESTIONS, SECTIONS } = require("../questions.js");
 const { AUDIENCES } = require("../content/audiences.js");
 const { GUIDE } = require("../content/guide.js");
 const { LESSON_TOPICS, LEARN_TRACKS, LEARN_I18N } = require("../content/lessons.js");
+const { LESSON_VISUALS } = require("../content/visuals.js");
+const { ROLE_TASKS } = require("../content/tasks.js");
+const { INTERVIEW } = require("../content/interview.js");
+const { RESUMES } = require("../content/resumes.js");
+const { optionOrder } = require("../content/shuffle.js");
 
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://homesh123.github.io/ai-career-advisor/";
@@ -90,26 +97,31 @@ function faqFor(role, t) {
 }
 
 // ---------- shared layout ----------
-// `p` is the relative prefix back to the site root ("" on the homepage, "../" one level down).
-function siteNav(p) {
+// `p` is the relative prefix back to the site root ("" for root-level pages, "../" one level down).
+// Links to homepage sections (#paths, #app…) need the homepage in front of them, except on the
+// homepage itself.
+const homeAnchor = (p, home) => (home ? "" : p || "./");
+function siteNav(p, home = false) {
+  const h = homeAnchor(p, home);
   return `<header class="site-header">
     <a class="brand" href="${p || "./"}">${SITE_NAME}</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="${p}#paths">AI roles</a>
-      <a href="${p}#backgrounds">By background</a>
-      <a href="${p}${GUIDE_PATH}">How to choose</a>
-      <a href="${p}${METHOD_PATH}">How it works</a>
+      <a href="${h}#paths">AI roles</a>
       <a href="${p}learn.html">Learn</a>
+      <a href="${p}interview.html">Interview prep</a>
+      <a href="${p}resumes/">Resumes</a>
+      <a href="${p}${GUIDE_PATH}">How to choose</a>
     </nav>
-    <a class="button btn-primary btn-small" href="${p}#app">Free consultation</a>
+    <a class="button btn-primary btn-small" href="${h}#app">Free consultation</a>
   </header>`;
 }
 
-function footerLinks(p) {
+function footerLinks(p, home = false) {
+  const h = homeAnchor(p, home);
   return `<nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul>${ids.map(id => `<li><a href="${p}roles/${ROLES[id].slug}.html">${esc(ROLES[id].title)}</a></li>`).join("")}</ul></div>
       <div><h2>AI careers by background</h2><ul>${AUDIENCES.map(a => `<li><a href="${p}for/${a.slug}.html">${esc(a.short)}</a></li>`).join("")}</ul></div>
-      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${p}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
     </nav>`;
 }
 
@@ -635,6 +647,7 @@ ${jsonLd(graph)}`;
       </header>
       <section class="ls ls-analogy"><h2>🏠 ${esc(ui("realLife"))}</h2><p>${esc(pick(x.analogy))}</p></section>
       <section class="ls ls-explain"><h2>💡 ${esc(ui("simpleWords"))}</h2><p>${esc(pick(x.explain))}</p></section>
+      ${LESSON_VISUALS[id] ? `<section class="ls ls-visual"><h2>🎬 ${esc(ui("howItWorks"))}</h2><div class="viz">${LESSON_VISUALS[id].svg}</div><p class="viz-caption">${esc(pick(LESSON_VISUALS[id].caption))}</p></section>` : ""}
       <section class="ls ls-terms"><h2>🔑 ${esc(ui("keyTerms"))}</h2>
         <dl class="terms">${x.terms.map(([term, en, hin]) => `<div><dt>${esc(term)}</dt><dd>${esc(hi ? hin : en)}</dd></div>`).join("")}</dl>
       </section>
@@ -644,8 +657,8 @@ ${jsonLd(graph)}`;
       </section>
       <section class="ls ls-quiz"><h2>✅ ${esc(ui("quickCheck"))}</h2>
         <p class="quiz-q">${esc(pick(x.quiz.q))}</p>
-        <ol type="A">${x.quiz.options.map(o => `<li>${esc(pick(o))}</li>`).join("")}</ol>
-        <details class="answer-reveal"><summary>${hi ? "Jawaab dekho" : "Show answer"}</summary><p><strong>${"ABC"[x.quiz.answer]}. ${esc(pick(x.quiz.options[x.quiz.answer]))}</strong>: ${esc(pick(x.quiz.why))}</p></details>
+        <ol type="A">${optionOrder(id, x.quiz.options.length).map(i => `<li>${esc(pick(x.quiz.options[i]))}</li>`).join("")}</ol>
+        <details class="answer-reveal"><summary>${hi ? "Jawaab dekho" : "Show answer"}</summary><p><strong>${"ABC"[optionOrder(id, x.quiz.options.length).indexOf(x.quiz.answer)]}. ${esc(pick(x.quiz.options[x.quiz.answer]))}</strong>: ${esc(pick(x.quiz.why))}</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
 
@@ -701,6 +714,251 @@ function learnLd() {
       };
     })
   }).replace(/\n/g, "\n  ");
+}
+
+// ---------- sample resumes (resumes/<slug>.html, resumes/index.html) ----------
+const resumeUrl = id => `${SITE}resumes/${ROLES[id].slug}.html`;
+const ATS_TIPS = [
+  "Keep one column, standard headings (Summary, Skills, Experience, Projects, Education) and no tables, text boxes, icons or photos.",
+  "Mirror the exact keywords from each job description you apply to, but only for skills you really have.",
+  "Write bullets as action + result + number. Replace every sample number with your own, real results.",
+  "Save as .docx or a text-based PDF (not a scanned image), with a simple file name like firstname-lastname-resume.",
+  "Keep it to 1 page for under 5 years of experience, and 2 pages maximum after that.",
+  "Put AI projects with links near the top if you're switching careers. They prove the new skills."
+];
+
+function resumeSheet(id) {
+  const r = RESUMES[id];
+  const entries = (list, head) => list.map(e => `
+        <div class="rs-entry">
+          <p class="rs-entry-head">${head(e)}</p>
+          <ul>${e.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+        </div>`).join("");
+  const projects = `<section><h3>Projects</h3>${entries(r.projects, p => `<span><strong>${esc(p.name)}</strong></span> <span class="rs-dates">${esc(p.link)}</span>`)}</section>`;
+  const experience = `<section><h3>Professional Experience</h3>${entries(r.experience, e => `<span><strong>${esc(e.title)}</strong>, ${esc(e.company)} — ${esc(e.location)}</span> <span class="rs-dates">${esc(e.dates)}</span>`)}</section>`;
+  return `<header class="rs-head">
+        <h2 class="rs-name">Your Name</h2>
+        <p class="rs-title">${esc(r.target)}</p>
+        <p class="rs-contact">${esc(r.contact)}</p>
+      </header>
+      <section><h3>Professional Summary</h3><p>${esc(r.summary)}</p></section>
+      <section><h3>Skills</h3><ul class="rs-skills">${r.skills.map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join("")}</ul></section>
+      ${r.projectsFirst ? projects + experience : experience + projects}
+      <section><h3>Education</h3>${r.education.map(([d, s]) => `<p><strong>${esc(d)}</strong> — ${esc(s)}</p>`).join("")}</section>
+      <section><h3>Certifications</h3><ul>${r.certifications.map(c => `<li>${esc(c)}</li>`).join("")}</ul></section>`;
+}
+
+function resumePage(id) {
+  const role = ROLES[id], r = RESUMES[id];
+  const url = resumeUrl(id);
+  const title = `${role.title} Resume Sample (ATS-Friendly) ${YEAR}: Edit and Download Free`;
+  const description = `Free ATS-friendly ${role.title} resume sample for ${YEAR}: ${lcFirst(r.persona)}. Edit it in your browser, check ${r.keywords.length} ATS keywords live, and download as Word, PDF or text.`;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description, { about: { "@type": "Occupation", name: role.title } }),
+      breadcrumb(url, [[SITE_NAME, SITE], ["Resume samples", `${SITE}resumes/`], [`${role.title} resume`, url]])
+    ]
+  };
+  const others = ids.filter(x => x !== id);
+  const body = `  <main class="container resume-container">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["Resume samples", "./"], [`${role.title} resume`]])}
+    <header class="resume-intro">
+      <p class="eyebrow">Resume sample · ATS-friendly · Updated <time datetime="${UPDATED}">${prettyDate(UPDATED)}</time></p>
+      <h1>${esc(role.title)} resume sample</h1>
+      <p class="lead">Target role: ${esc(r.target)}. Sample profile: ${esc(lcFirst(r.persona))}. Edit it right here, watch the ATS keyword checklist update, then download it.</p>
+      <p class="callout callout-warn small"><strong>This is a sample.</strong> Replace every name, company, date and number with your own, real details. Never claim results you didn't achieve: interviewers will ask you about each bullet.</p>
+    </header>
+    <div class="resume-layout">
+      <div>
+        <div class="resume-toolbar" role="toolbar" aria-label="Resume actions">
+          <button type="button" class="button btn-primary btn-small" data-act="edit" aria-pressed="false">✏️ Edit resume</button>
+          <button type="button" class="button btn-secondary btn-small" data-act="word">⬇️ Word (.doc)</button>
+          <button type="button" class="button btn-secondary btn-small" data-act="pdf">🖨️ PDF</button>
+          <button type="button" class="button btn-secondary btn-small" data-act="text">📋 Copy text</button>
+          <button type="button" class="button btn-ghost btn-small" data-act="reset">↺ Reset</button>
+          <span id="resumeStatus" class="small muted" role="status"></span>
+        </div>
+        <article id="resume" class="resume-sheet" data-role="${id}" aria-label="Resume">
+      ${resumeSheet(id)}
+        </article>
+      </div>
+      <aside class="resume-side">
+        <section class="side-card">
+          <h2>ATS keyword checklist <span id="kwCount" class="kw-count">${r.keywords.length} / ${r.keywords.length}</span></h2>
+          <p class="small muted">Applicant tracking systems scan for these terms in ${esc(role.title)} job descriptions. The list updates as you edit.</p>
+          <ul class="kw-list">${r.keywords.map(k => `<li data-kw="${esc(k)}" class="found"><span class="kw-mark">✓</span> ${esc(k)}</li>`).join("")}</ul>
+        </section>
+        <section class="side-card">
+          <h2>ATS tips</h2>
+          <ul class="small">${ATS_TIPS.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+        </section>
+        <section class="side-card">
+          <h2>Get ready for ${esc(role.title)} roles</h2>
+          <ul class="small">
+            <li><a href="../learn.html?course=${id}">📖 Free ${esc(role.title)} course</a></li>
+            <li><a href="../interview.html?role=${id}">🎤 Interview practice with scoring</a></li>
+            <li><a href="../interview/${role.slug}.html">📝 ${esc(role.title)} interview questions &amp; answers</a></li>
+            <li><a href="../roles/${role.slug}.html">🧭 ${esc(role.title)} roadmap and salary</a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+    <section class="resume-others">
+      <h2>Resume samples for other AI roles</h2>
+      <ul class="related">${others.map(x => `<li><a href="${ROLES[x].slug}.html">${esc(ROLES[x].title)} resume</a></li>`).join("")}</ul>
+    </section>
+  </main>
+  <script src="../resume.js" defer></script>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page resume-page">');
+}
+
+function resumesIndex() {
+  const url = `${SITE}resumes/`;
+  const title = `AI Resume Samples ${YEAR}: 9 ATS-Friendly Templates for AI Roles (Edit and Download Free)`;
+  const description = "Free ATS-friendly resume samples for ML engineer, data engineer, AI product engineer, MLOps, LLM/agent engineer, research engineer, forward deployed engineer, AI product manager and junior AI roles. Edit online and download as Word, PDF or text.";
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description),
+      breadcrumb(url, [[SITE_NAME, SITE], ["Resume samples", url]]),
+      { "@type": "ItemList", itemListElement: ids.map((id, i) => ({ "@type": "ListItem", position: i + 1, name: `${ROLES[id].title} resume sample`, url: resumeUrl(id) })) }
+    ]
+  };
+  const body = `  <main class="container article">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["Resume samples"]])}
+    <article>
+      <header>
+        <p class="eyebrow">Resume samples · Updated <time datetime="${UPDATED}">${prettyDate(UPDATED)}</time></p>
+        <h1>ATS-friendly resume samples for AI roles</h1>
+        <p class="lead">One sample per AI role, each written as a realistic career-switch profile. Open one, edit it in your browser, check the ATS keywords, and download it as Word, PDF or text.</p>
+      </header>
+      <ul class="resume-grid">
+${ids.map(id => `        <li><a class="resume-card" href="${ROLES[id].slug}.html"><strong>${esc(ROLES[id].title)}</strong><span class="small muted">${esc(RESUMES[id].persona)}</span><span class="tiny">${RESUMES[id].keywords.slice(0, 6).map(esc).join(" · ")} …</span></a></li>`).join("\n")}
+      </ul>
+      <section>
+        <h2>What makes a resume ATS-friendly?</h2>
+        <ul>${ATS_TIPS.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </section>
+${ctaBox("../", "Not sure which AI role to target?")}
+    </article>
+  </main>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" });
+}
+
+// ---------- interview Q&A pages (interview/<slug>.html) ----------
+const interviewPageUrl = id => `${SITE}interview/${ROLES[id].slug}.html`;
+const roleQuestions = id => INTERVIEW.questions.filter(q => q.roles.includes(id));
+
+function interviewPage(id) {
+  const role = ROLES[id];
+  const url = interviewPageUrl(id);
+  const qs = roleQuestions(id);
+  const title = `${role.title} Interview Questions and Answers (${YEAR}): ${qs.length} Questions With Explanations`;
+  const description = `${qs.length} ${role.title} interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free.`;
+  const answerText = q => q.type === "mcq" ? `${q.options[q.answer]}. ${q.why}` : q.model;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description),
+      breadcrumb(url, [[SITE_NAME, SITE], ["Interview practice", `${SITE}interview.html`], [`${role.title} interview questions`, url]]),
+      faqPage(url, qs.map(q => [q.q, answerText(q)]))
+    ]
+  };
+  const areas = [...new Set(qs.map(q => q.area))];
+  const lessonLink = tp => `<a href="../learn/${tp}.html">${esc(LESSON_TOPICS[tp].title[0])}</a>`;
+  const qHtml = q => q.type === "mcq" ? `<li class="iv-static">
+          <p class="quiz-q">${esc(q.q)}</p>
+          <ol type="A">${optionOrder(q.id, q.options.length).map(i => `<li>${esc(q.options[i])}</li>`).join("")}</ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>${esc(q.options[q.answer])}</strong>. ${esc(q.why)}</p><p class="small">Learn: ${q.topics.map(lessonLink).join(" · ")}</p></details>
+        </li>` : `<li class="iv-static">
+          <p class="quiz-q">${esc(q.q)} <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small">${q.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>${esc(q.model)}</p><p class="small">Learn: ${q.topics.map(lessonLink).join(" · ")}</p></details>
+        </li>`;
+  const body = `  <main class="container article">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["Interview practice", "../interview.html"], [`${role.title} interview questions`]])}
+    <article>
+      <header>
+        <p class="eyebrow">Interview preparation · Updated <time datetime="${UPDATED}">${prettyDate(UPDATED)}</time></p>
+        <h1>${esc(role.title)} interview questions and answers</h1>
+        <p class="lead">${qs.length} questions that come up in ${esc(role.title)} interviews, grouped by skill area, with answers, explanations and the lesson to study for each. For a scored session with your gaps explained, use <a href="../interview.html?role=${id}">interview practice</a>.</p>
+      </header>
+      <nav class="toc" aria-label="Skill areas"><strong>Skill areas</strong><ol>${areas.map((a, i) => `<li><a href="#area-${i + 1}">${esc(a)}</a> (${qs.filter(q => q.area === a).length})</li>`).join("")}</ol></nav>
+${areas.map((a, i) => `      <section id="area-${i + 1}">
+        <h2>${esc(a)}</h2>
+        <ol class="iv-list">
+        ${qs.filter(q => q.area === a).map(qHtml).join("\n        ")}
+        </ol>
+      </section>`).join("\n")}
+      <section>
+        <h2>More questions to prepare</h2>
+        <ul>${(INTERVIEW.extra[id] || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </section>
+      <section class="cta-box">
+        <h2>Practise with a score and gap analysis</h2>
+        <p>Answer these as a timed practice session. Multiple-choice answers are scored automatically, open answers are self-checked against key points, and your report links the exact lessons for every gap.</p>
+        <a class="button btn-primary" href="../interview.html?role=${id}">Start ${esc(role.title)} interview practice</a>
+      </section>
+      <section>
+        <h2>Also for ${esc(role.title)}</h2>
+        <ul class="related"><li><a href="../resumes/${role.slug}.html">ATS-friendly ${esc(role.title)} resume sample</a></li><li><a href="../learn.html?course=${id}">Free ${esc(role.title)} course</a></li><li><a href="../roles/${role.slug}.html">${esc(role.title)} roadmap and salary</a></li></ul>
+      </section>
+    </article>
+  </main>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" });
+}
+
+function interviewCatalog() {
+  return `    <section class="catalog" aria-labelledby="ivCatalogTitle">
+      <h2 id="ivCatalogTitle">Interview questions and answers by role</h2>
+      <p class="muted small">Read every question with its answer and explanation, then come back here for a scored practice session.</p>
+      <ul class="related">
+${ids.map(id => `        <li><a href="interview/${ROLES[id].slug}.html">${esc(ROLES[id].title)} interview questions</a> <span class="muted small">(${roleQuestions(id).length})</span></li>`).join("\n")}
+      </ul>
+    </section>`;
+}
+
+// ---------- homepage: learn hub (pick a role → brief → learn) ----------
+function learnHub() {
+  return `    <section class="learnhub" id="learn-hub" aria-labelledby="hubTitle">
+      <h2 id="hubTitle">Learn for your target AI role</h2>
+      <p class="muted">Pick a role to see what it involves and who it suits. Then learn it step by step, in English or Hinglish, with practice tasks, interview practice and a sample resume.</p>
+      <div class="hub-tabs" role="tablist" aria-label="AI roles">
+${ids.map((id, i) => `        <button type="button" role="tab" id="hubtab-${id}" aria-controls="hub-${id}" aria-selected="${i === 0}" data-hub="${id}">${esc(ROLES[id].title)}</button>`).join("\n")}
+      </div>
+${ids.map(id => {
+    const r = ROLES[id], lessons = courseOrder(id);
+    const mins = lessons.reduce((s, x) => s + LESSON_TOPICS[x].mins, 0);
+    const movers = audiencesFor(id);
+    return `      <div class="hub-panel" id="hub-${id}" role="tabpanel" aria-labelledby="hubtab-${id}" data-hub-panel="${id}">
+        <h3>${esc(r.title)} <span class="muted">· ${esc(r.tagline)}</span></h3>
+        <div class="hub-cols">
+          <div>
+            <h4>What you'll do</h4>
+            <p>${esc(r.why)}</p>
+            <h4>Who it suits</h4>
+            <p>${esc(r.bestFor)}.${movers.length ? ` Often a good move for: ${movers.map(a => `<a href="for/${a.slug}.html">${esc(a.short)}</a>`).join(", ")}.` : ""}</p>
+          </div>
+          <div>
+            <h4>What's included</h4>
+            <ul class="hub-includes">
+              <li>📖 ${lessons.length} lessons · ~${mins} min, with diagrams and real-life examples</li>
+              <li>🛠️ ${ROLE_TASKS[id].length} hands-on practice tasks</li>
+              <li>🎤 ${roleQuestions(id).length} interview questions, scored, with gap analysis</li>
+              <li>📄 ATS-friendly sample resume you can edit</li>
+            </ul>
+            <div class="hub-actions">
+              <a class="button btn-primary btn-small" href="learn.html?course=${id}">Start learning</a>
+              <a class="button btn-secondary btn-small" href="interview.html?role=${id}">Interview practice</a>
+              <a class="small" href="resumes/${r.slug}.html">Sample resume →</a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join("\n")}
+    </section>`;
 }
 
 // ---------- index.html generated regions ----------
@@ -767,6 +1025,10 @@ function sitemap() {
     ...AUDIENCES.map(a => ({ loc: audUrl(a), pri: "0.8" })),
     ...ids.map(id => ({ loc: roleUrl(ROLES[id]), pri: "0.8" })),
     { loc: `${SITE}learn.html`, pri: "0.9" },
+    { loc: `${SITE}interview.html`, pri: "0.8" },
+    { loc: `${SITE}resumes/`, pri: "0.8" },
+    ...ids.map(id => ({ loc: interviewPageUrl(id), pri: "0.7" })),
+    ...ids.map(id => ({ loc: resumeUrl(id), pri: "0.7" })),
     ...LESSON_IDS.flatMap(id => [{ loc: lessonUrl(id, "en"), pri: "0.6" }, { loc: lessonUrl(id, "hi"), pri: "0.5" }])
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -808,6 +1070,14 @@ ${AUDIENCES.map(a => `- [${a.name}](${audUrl(a)}): usually fits ${ROLES[RANKED[a
 - [Learn hub](${SITE}learn.html): ${ids.length} courses, one per AI role, following each roadmap step by step. ${LESSON_IDS.length} lessons, each with a real-life analogy, a plain-language explanation, key terms, a worked example and a quick check. Every lesson is available in English and Hinglish (Hindi in Roman script with English technical terms).
 ${LESSON_IDS.map(id => `- [${LESSON_TOPICS[id].title[0]}](${lessonUrl(id, "en")}) · [Hinglish](${lessonUrl(id, "hi")}): ${LESSON_TOPICS[id].remember[0]}`).join("\n")}
 
+## Interview practice
+- [Interview practice with scoring](${SITE}interview.html): role-specific questions (multiple-choice scored automatically, open questions self-checked against model answers). The report gives a score per skill area, explains each mistake and links the lessons for every gap.
+${ids.map(id => `- [${ROLES[id].title} interview questions and answers](${interviewPageUrl(id)}) (${roleQuestions(id).length} questions)`).join("\n")}
+
+## ATS-friendly resume samples
+- [All resume samples](${SITE}resumes/): editable in the browser, downloadable as Word, PDF or text, with a live ATS keyword checklist.
+${ids.map(id => `- [${ROLES[id].title} resume sample](${resumeUrl(id)}): keywords ${RESUMES[id].keywords.join(", ")}`).join("\n")}
+
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
 - Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.
@@ -831,6 +1101,26 @@ function outputs() {
     files[`learn/${id}.html`] = lessonPage(id, "en");
     files[`learn/hi/${id}.html`] = lessonPage(id, "hi");
   });
+  ids.forEach(id => {
+    files[`resumes/${ROLES[id].slug}.html`] = resumePage(id);
+    files[`interview/${ROLES[id].slug}.html`] = interviewPage(id);
+  });
+  files["resumes/index.html"] = resumesIndex();
+  let ivHtml = fs.readFileSync(path.join(ROOT, "interview.html"), "utf8");
+  ivHtml = replaceRegion(ivHtml, "sitenav", "  " + siteNav(""));
+  ivHtml = replaceRegion(ivHtml, "footerlinks", "    " + footerLinks(""));
+  ivHtml = replaceRegion(ivHtml, "ivcatalog", interviewCatalog());
+  ivHtml = replaceRegion(ivHtml, "ivld", "  " + jsonLd({
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebApplication", name: "AI interview practice", url: `${SITE}interview.html`, applicationCategory: "EducationalApplication",
+        operatingSystem: "Any (web browser)", isAccessibleForFree: true, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Scored interview practice for 9 AI roles, with a score per skill area, every mistake explained and the lessons to fix each gap.",
+        publisher: { "@id": `${SITE}#org` } },
+      { "@type": "ItemList", name: "AI interview questions by role", itemListElement: ids.map((id, i) => ({ "@type": "ListItem", position: i + 1, name: `${ROLES[id].title} interview questions`, url: interviewPageUrl(id) })) }
+    ]
+  }).replace(/\n/g, "\n  "));
+  files["interview.html"] = ivHtml;
   let learnHtml = fs.readFileSync(path.join(ROOT, "learn.html"), "utf8");
   learnHtml = replaceRegion(learnHtml, "sitenav", "  " + siteNav(""));
   learnHtml = replaceRegion(learnHtml, "footerlinks", "    " + footerLinks(""));
@@ -840,8 +1130,9 @@ function outputs() {
   let index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   index = replaceRegion(index, "paths", pathsSection());
   index = replaceRegion(index, "backgrounds", backgroundsSection());
-  index = replaceRegion(index, "sitenav", "  " + siteNav(""));
-  index = replaceRegion(index, "footerlinks", "      " + footerLinks(""));
+  index = replaceRegion(index, "learnhub", learnHub());
+  index = replaceRegion(index, "sitenav", "  " + siteNav("", true));
+  index = replaceRegion(index, "footerlinks", "      " + footerLinks("", true));
   index = index.replace(/(<time class="updated" datetime=")[^"]*(">)[^<]*(<\/time>)/, `$1${UPDATED}$2${prettyDate(UPDATED)}$3`);
   index = replaceRegion(index, "itemlist", itemListLd());
   index = replaceRegion(index, "faq", faqLd(index));
