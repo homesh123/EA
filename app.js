@@ -276,7 +276,7 @@ function renderResult(app) {
 
   app.innerHTML = `
     <nav class="result-nav" aria-label="Result sections">
-      <a href="#sec-overview">Overview</a><a href="#sec-role">Role</a><a href="#sec-roadmap">Roadmap</a><a href="#sec-profile">Your profile</a><a href="#sec-resources">Resources</a>
+      <a href="#sec-overview">Overview</a><a href="#sec-role">Role</a><a href="#sec-roadmap">Roadmap</a><a href="#sec-profile">Your profile</a><a href="#sec-resources">Resources</a><a href="learn.html?course=${sel.id}" class="nav-learn">📖 Learn</a>
       <button type="button" class="nav-restart" data-act="restart-nav" title="Clear answers and start the questionnaire again">↺ Start over</button>
     </nav>
     <section class="result-hero" id="sec-overview">
@@ -330,7 +330,7 @@ function renderResult(app) {
     renderResult(app);
     $("#sec-role").scrollIntoView({ behavior: "smooth", block: "start" });
   });
-  app.querySelectorAll(".result-nav a, .hero-cta").forEach(a => a.onclick = e => {
+  app.querySelectorAll('.result-nav a[href^="#"], .hero-cta').forEach(a => a.onclick = e => {
     e.preventDefault();
     $(a.getAttribute("href")).scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -406,7 +406,7 @@ function roleDetail(r, p, isTop) {
         <div class="gap-head"><strong>${esc(g.label)}</strong>${g.need !== undefined ? `<span class="gap-meter">${meter((g.have / g.max) * 100, "have")}<span class="tiny muted">you: ${levelName(g.key, g.have)} → needed: ${levelName(g.key, g.need)}</span></span>` : ""}</div>
         <p class="small">${esc(g.advice)}</p></li>`).join("")}</ul>`
       : `<p class="small ok-text">No major gaps. You already meet the core skill levels, so focus on portfolio projects and applying.</p>`}
-    <p class="small guide-link"><a href="roles/${role.slug}.html">Read the full ${esc(role.title)} guide →</a></p>`;
+    <p class="small guide-link"><a href="learn.html?course=${r.id}">📖 Start the free ${esc(role.title)} course (English or Hinglish)</a> · <a href="roles/${role.slug}.html">Read the full guide →</a></p>`;
 }
 
 const LEVEL_NAMES = {
@@ -480,6 +480,7 @@ function renderRoadmap(r, p, keepOpen) {
         <p class="tiny muted">${stepWhen(nextStep, start)}</p>
         <div class="up-next-actions">
           <button type="button" class="button btn-primary" data-done="${nextStep.step}">Mark step ${nextStep.step} done</button>
+          ${lessonCount(r.id, nextStep.step) ? `<a class="button btn-secondary" href="learn.html?course=${r.id}&amp;step=${nextStep.step}">📖 Learn it (${lessonCount(r.id, nextStep.step)} lessons)</a>` : ""}
           <button type="button" class="button btn-secondary" data-goto="${nextStep.step}">View details</button>
         </div>
       </div>` : ""}
@@ -491,7 +492,7 @@ function renderRoadmap(r, p, keepOpen) {
       <button type="button" class="link-btn small" data-expand="0">Collapse all</button>
     </div>
     <ol class="roadmap">
-      ${steps.map(s => stepItem(s, prog.done.has(s.step), open.has(s.step), nextStep && s.step === nextStep.step, start)).join("")}
+      ${steps.map(s => stepItem(s, prog.done.has(s.step), open.has(s.step), nextStep && s.step === nextStep.step, start, r.id)).join("")}
     </ol>
     <div class="rm-actions">
       <button type="button" class="button btn-secondary" data-act="ics">Add to my calendar (.ics)</button>
@@ -541,7 +542,14 @@ function stepWhen(s, start) {
   return `Week${a === b ? ` ${a}` : `s ${a}–${b}`} · ${fmtDate(addWeeks(start, s.startWeek))} – ${fmtDate(addWeeks(start, s.endWeek))} · ~${s.studyHours} study hours`;
 }
 
-function stepItem(s, isDone, open, isNext, start) {
+// Lessons available in the Learn section for a roadmap step (0 when Learn isn't loaded).
+const lessonCount = (roleId, step) => {
+  if (typeof LEARN_TRACKS === "undefined" || !LEARN_TRACKS[roleId]) return 0;
+  const entry = LEARN_TRACKS[roleId].find(([n]) => n === step);
+  return entry ? entry[1].length : 0;
+};
+
+function stepItem(s, isDone, open, isNext, start, roleId) {
   const list = (cls, title, items) => items && items.length ? `<div class="${cls}"><span class="step-label">${title}</span><ul>${items.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : "";
   const time = s.studyWeeks === null ? s.time : s.fast ? `~${Math.max(1, s.studyHours)} h revision` : s.time;
   return `<li class="step${isDone ? " done" : ""}${s.fast ? " fast" : ""}${isNext ? " next" : ""}" data-step="${s.step}">
@@ -552,6 +560,7 @@ function stepItem(s, isDone, open, isNext, start) {
         <p class="step-when">${stepWhen(s, start)}</p>
         <p>${esc(s.what)}</p>
         ${s.why ? `<p class="step-why"><strong>Why it matters:</strong> ${esc(s.why)}</p>` : ""}
+        ${lessonCount(roleId, s.step) ? `<p class="step-learn"><a href="learn.html?course=${roleId}&amp;step=${s.step}">📖 Learn this step: ${lessonCount(roleId, s.step)} lessons with everyday examples (English or Hinglish) →</a></p>` : ""}
         <p class="small"><strong>Learn from:</strong> ${esc(s.sources)}</p>
         <p class="small muted"><strong>When:</strong> ${esc(s.sequence)}</p>
         <div class="step-lists">

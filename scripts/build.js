@@ -4,6 +4,8 @@
 //   - roles/<slug>.html   one landing page per role (roadmap, FAQ, salary, structured data)
 //   - for/<slug>.html     "AI career for <background>" pages, ranked by the real scoring engine
 //   - guide/*.html        how to choose an AI role, and how the consultation works (methodology)
+//   - learn/<id>.html, learn/hi/<id>.html  static lesson pages in English and Hinglish
+//   - learn.html          generated regions: lesson catalog and Course structured data
 //   - index.html          generated regions: paths table, backgrounds, nav/footer links, JSON-LD
 //   - sitemap.xml, llms.txt
 // Usage: `npm run build` to write files, `node scripts/build.js --check` to verify they are current.
@@ -14,11 +16,12 @@ const { plan, rankRoles, strengths, SIGNALS } = require("../scoring.js");
 const { QUESTIONS, SECTIONS } = require("../questions.js");
 const { AUDIENCES } = require("../content/audiences.js");
 const { GUIDE } = require("../content/guide.js");
+const { LESSON_TOPICS, LEARN_TRACKS, LEARN_I18N } = require("../content/lessons.js");
 
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://homesh123.github.io/ai-career-advisor/";
 const SITE_NAME = "AI Path Finder";
-const UPDATED = "2026-10-27"; // bump when content changes
+const UPDATED = "2026-10-28"; // bump when content changes
 const YEAR = UPDATED.slice(0, 4);
 const STUDY_HOURS = 10;
 
@@ -96,6 +99,7 @@ function siteNav(p) {
       <a href="${p}#backgrounds">By background</a>
       <a href="${p}${GUIDE_PATH}">How to choose</a>
       <a href="${p}${METHOD_PATH}">How it works</a>
+      <a href="${p}learn.html">Learn</a>
     </nav>
     <a class="button btn-primary btn-small" href="${p}#app">Free consultation</a>
   </header>`;
@@ -105,7 +109,7 @@ function footerLinks(p) {
   return `<nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul>${ids.map(id => `<li><a href="${p}roles/${ROLES[id].slug}.html">${esc(ROLES[id].title)}</a></li>`).join("")}</ul></div>
       <div><h2>AI careers by background</h2><ul>${AUDIENCES.map(a => `<li><a href="${p}for/${a.slug}.html">${esc(a.short)}</a></li>`).join("")}</ul></div>
-      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${p}#app">Free AI career consultation</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${p}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
     </nav>`;
 }
 
@@ -573,6 +577,132 @@ ${AUDIENCES.map(a => { const r = RANKED[a.slug][0]; return `        <li><a href=
     </section>`;
 }
 
+// ---------- Learn: static lesson pages (English + Hinglish) ----------
+const courseIdsFor = id => Object.keys(LEARN_TRACKS).filter(r => LEARN_TRACKS[r].some(([, ts]) => ts.includes(id)));
+const courseOrder = r => LEARN_TRACKS[r].flatMap(([, ts]) => ts);
+const lessonUrl = (id, lang) => `${SITE}learn/${lang === "hi" ? "hi/" : ""}${id}.html`;
+const LESSON_IDS = (() => {
+  const seen = [];
+  ids.forEach(r => courseOrder(r).forEach(id => { if (!seen.includes(id)) seen.push(id); }));
+  return seen;
+})();
+
+function lessonPage(id, lang) {
+  const x = LESSON_TOPICS[id];
+  const hi = lang === "hi";
+  const pick = pair => pair[hi ? 1 : 0];
+  const ui = k => LEARN_I18N[lang][k];
+  const p = hi ? "../../" : "../";
+  const url = lessonUrl(id, lang);
+  const home = courseIdsFor(id)[0];
+  const order = courseOrder(home);
+  const i = order.indexOf(id);
+  const prevId = order[i - 1], nextId = order[i + 1];
+  const title = hi ? `${x.title[1]}: Hinglish mein aasaan explanation` : `${x.title[0]}: Explained Simply With Real-Life Examples`;
+  // Meta description: whole sentences until it's long enough to be useful, capped for search results.
+  const firstSentences = s => {
+    let out = "";
+    for (const sentence of s.split(/(?<=\.)\s/)) { out = out ? `${out} ${sentence}` : sentence; if (out.length >= 110) break; }
+    return out.length > 158 ? out.slice(0, 155).replace(/\s\S*$/, "") + "…" : out;
+  };
+  const description = firstSentences(pick(x.explain));
+  const appLink = c => `${p}learn.html?course=${c}&amp;lesson=${id}${hi ? "&amp;lang=hi" : ""}`;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LearningResource", "@id": `${url}#lesson`, url, name: pick(x.title), description,
+        inLanguage: hi ? "hi-Latn" : "en", learningResourceType: "Lesson", educationalLevel: "Beginner",
+        timeRequired: `PT${x.mins}M`, isAccessibleForFree: true, teaches: x.terms.map(([term]) => term),
+        datePublished: UPDATED, dateModified: UPDATED, provider: { "@id": `${SITE}#org` }, publisher: { "@id": `${SITE}#org` },
+        isPartOf: courseIdsFor(id).map(c => ({ "@type": "Course", name: `${ROLES[c].title} course`, url: `${SITE}learn.html?course=${c}` }))
+      },
+      breadcrumb(url, [[SITE_NAME, SITE], ["Learn", `${SITE}learn.html`], [pick(x.title), url]]),
+      faqPage(url, [[pick(x.quiz.q), `${pick(x.quiz.options[x.quiz.answer])}. ${pick(x.quiz.why)}`]])
+    ]
+  };
+  const head = `  <link rel="alternate" hreflang="en" href="${lessonUrl(id, "en")}" />
+  <link rel="alternate" hreflang="hi" href="${lessonUrl(id, "hi")}" />
+  <link rel="alternate" hreflang="x-default" href="${lessonUrl(id, "en")}" />
+${jsonLd(graph)}`;
+  const body = `  <main class="container article lesson-page">
+    ${crumbsHtml(p, [[SITE_NAME, p], ["Learn", `${p}learn.html`], [pick(x.title)]])}
+    <article lang="${hi ? "hi-Latn" : "en"}">
+      <header>
+        <p class="eyebrow">${hi ? "Lesson · Hinglish" : "Lesson"} · ⏱ ${x.mins} ${esc(ui("readTime"))}</p>
+        <h1>${x.icon} ${esc(pick(x.title))}</h1>
+        <p class="lang-switch">${hi ? `<a href="../${id}.html" hreflang="en" lang="en">English</a><span>Hinglish</span>` : `<span>English</span><a href="hi/${id}.html" hreflang="hi" lang="hi-Latn">Hinglish</a>`}</p>
+      </header>
+      <section class="ls ls-analogy"><h2>🏠 ${esc(ui("realLife"))}</h2><p>${esc(pick(x.analogy))}</p></section>
+      <section class="ls ls-explain"><h2>💡 ${esc(ui("simpleWords"))}</h2><p>${esc(pick(x.explain))}</p></section>
+      <section class="ls ls-terms"><h2>🔑 ${esc(ui("keyTerms"))}</h2>
+        <dl class="terms">${x.terms.map(([term, en, hin]) => `<div><dt>${esc(term)}</dt><dd>${esc(hi ? hin : en)}</dd></div>`).join("")}</dl>
+      </section>
+      <section class="ls ls-example"><h2>👀 ${esc(ui("seeItInAction"))}</h2>
+        <div class="code-wrap"><span class="code-lang">${esc(x.example.lang)}</span><pre><code>${esc(x.example.code)}</code></pre></div>
+        <p class="small muted">${esc(pick(x.example.note))}</p>
+      </section>
+      <section class="ls ls-quiz"><h2>✅ ${esc(ui("quickCheck"))}</h2>
+        <p class="quiz-q">${esc(pick(x.quiz.q))}</p>
+        <ol type="A">${x.quiz.options.map(o => `<li>${esc(pick(o))}</li>`).join("")}</ol>
+        <details class="answer-reveal"><summary>${hi ? "Jawaab dekho" : "Show answer"}</summary><p><strong>${"ABC"[x.quiz.answer]}. ${esc(pick(x.quiz.options[x.quiz.answer]))}</strong>: ${esc(pick(x.quiz.why))}</p></details>
+      </section>
+      <section class="ls ls-remember"><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
+
+      <nav class="lesson-pager" aria-label="${hi ? "Lessons" : "Lessons"}">
+        ${prevId ? `<a href="${prevId}.html">← ${esc(pick(LESSON_TOPICS[prevId].title))}</a>` : "<span></span>"}
+        ${nextId ? `<a href="${nextId}.html">${esc(pick(LESSON_TOPICS[nextId].title))} →</a>` : ""}
+      </nav>
+
+      <section class="cta-box">
+        <h2>${hi ? "Poora course, aapke roadmap ke hisaab se" : "Learn this as part of a full course"}</h2>
+        <p>${hi
+          ? "Progress tracking, quick checks aur step-by-step order ke saath. Yeh lesson in courses ka hissa hai:"
+          : "Track your progress, take the quick checks and follow the lessons in the right order. This lesson is part of:"}</p>
+        <p>${courseIdsFor(id).map(c => `<a href="${appLink(c)}">${esc(ROLES[c].title)}</a>`).join(" · ")}</p>
+        <a class="button btn-primary" href="${appLink(home)}">${hi ? "Course mein seekho" : "Continue in the course"}</a>
+      </section>
+    </article>
+  </main>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head, body, p });
+}
+
+function learnCatalog() {
+  return `    <section class="catalog" aria-labelledby="catalogTitle">
+      <h2 id="catalogTitle">Browse every lesson</h2>
+      <p class="muted small">${LESSON_IDS.length} lessons across ${ids.length} courses, each with a real-life example, key terms, a worked example and a quick check. Every lesson is also available in <a href="learn/hi/what-is-ai.html" hreflang="hi">Hinglish</a>.</p>
+      <div class="catalog-grid">
+${ids.map(r => `        <div>
+          <h3><a href="learn.html?course=${r}">${esc(ROLES[r].title)}</a></h3>
+          <ol>${courseOrder(r).map(id => `<li><a href="learn/${id}.html">${esc(LESSON_TOPICS[id].title[0])}</a></li>`).join("")}</ol>
+        </div>`).join("\n")}
+      </div>
+    </section>`;
+}
+
+function learnLd() {
+  return "  " + jsonLd({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Free AI courses by career path",
+    itemListElement: ids.map((r, i) => {
+      const lessons = courseOrder(r);
+      const mins = lessons.reduce((sum, id) => sum + LESSON_TOPICS[id].mins, 0);
+      return {
+        "@type": "ListItem", position: i + 1,
+        item: {
+          "@type": "Course", "@id": `${SITE}learn.html?course=${r}`, url: `${SITE}learn.html?course=${r}`,
+          name: `${ROLES[r].title}: free AI course`, description: `${ROLES[r].tagline}. ${lessons.length} lessons following the ${ROLES[r].title} roadmap, explained with everyday examples, in English or Hinglish.`,
+          provider: { "@type": "Organization", name: SITE_NAME, url: SITE }, inLanguage: ["en", "hi"], isAccessibleForFree: true,
+          offers: { "@type": "Offer", category: "Free", price: "0", priceCurrency: "USD" },
+          hasCourseInstance: { "@type": "CourseInstance", courseMode: "Online", courseWorkload: `PT${Math.floor(mins / 60)}H${mins % 60}M` },
+          teaches: lessons.map(id => LESSON_TOPICS[id].title[0])
+        }
+      };
+    })
+  }).replace(/\n/g, "\n  ");
+}
+
 // ---------- index.html generated regions ----------
 function pathsSection() {
   const rows = ids.map(id => {
@@ -635,7 +765,9 @@ function sitemap() {
     { loc: `${SITE}${GUIDE_PATH}`, pri: "0.9" },
     { loc: `${SITE}${METHOD_PATH}`, pri: "0.6" },
     ...AUDIENCES.map(a => ({ loc: audUrl(a), pri: "0.8" })),
-    ...ids.map(id => ({ loc: roleUrl(ROLES[id]), pri: "0.8" }))
+    ...ids.map(id => ({ loc: roleUrl(ROLES[id]), pri: "0.8" })),
+    { loc: `${SITE}learn.html`, pri: "0.9" },
+    ...LESSON_IDS.flatMap(id => [{ loc: lessonUrl(id, "en"), pri: "0.6" }, { loc: lessonUrl(id, "hi"), pri: "0.5" }])
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -672,6 +804,10 @@ ${AUDIENCES.map(a => `- [${a.name}](${audUrl(a)}): usually fits ${ROLES[RANKED[a
 - [How to choose the right AI role: a 5-step framework](${SITE}${GUIDE_PATH}): ${GUIDE.quickAnswer}
 - [How the AI career consultation works](${SITE}${METHOD_PATH}): the questions, validation rules, scoring signals per role, and limitations.
 
+## Learn: free AI courses (English and Hinglish)
+- [Learn hub](${SITE}learn.html): ${ids.length} courses, one per AI role, following each roadmap step by step. ${LESSON_IDS.length} lessons, each with a real-life analogy, a plain-language explanation, key terms, a worked example and a quick check. Every lesson is available in English and Hinglish (Hindi in Roman script with English technical terms).
+${LESSON_IDS.map(id => `- [${LESSON_TOPICS[id].title[0]}](${lessonUrl(id, "en")}) · [Hinglish](${lessonUrl(id, "hi")}): ${LESSON_TOPICS[id].remember[0]}`).join("\n")}
+
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
 - Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.
@@ -691,6 +827,16 @@ function outputs() {
   AUDIENCES.forEach(a => { files[`for/${a.slug}.html`] = audiencePage(a); });
   files[GUIDE_PATH] = guidePage();
   files[METHOD_PATH] = methodPage();
+  LESSON_IDS.forEach(id => {
+    files[`learn/${id}.html`] = lessonPage(id, "en");
+    files[`learn/hi/${id}.html`] = lessonPage(id, "hi");
+  });
+  let learnHtml = fs.readFileSync(path.join(ROOT, "learn.html"), "utf8");
+  learnHtml = replaceRegion(learnHtml, "sitenav", "  " + siteNav(""));
+  learnHtml = replaceRegion(learnHtml, "footerlinks", "    " + footerLinks(""));
+  learnHtml = replaceRegion(learnHtml, "catalog", learnCatalog());
+  learnHtml = replaceRegion(learnHtml, "learnld", learnLd());
+  files["learn.html"] = learnHtml;
   let index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   index = replaceRegion(index, "paths", pathsSection());
   index = replaceRegion(index, "backgrounds", backgroundsSection());
