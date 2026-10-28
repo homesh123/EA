@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "git commit. commit saves a snapshot locally. push then uploads your commits to GitHub."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between Git and GitHub?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Git is the tool on your computer that tracks versions. GitHub is a website that hosts Git repositories so you can share and collaborate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do recruiters really look at GitHub?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For AI roles, often yes, especially for career switchers. Two or three clean projects with good READMEs prove skills better than certificates."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Writing an important document, people save &#39;report_final&#39;, &#39;report_final_v2&#39;, &#39;report_FINAL_really&#39;. Git does this properly. Each &#39;commit&#39; is a labelled save point you can go back to. GitHub is like Google Drive for code: it keeps your project online and shows recruiters what you&#39;ve built.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Git is a version-control tool. It tracks every change to your files so you can see history, undo mistakes and work with others without overwriting each other&#39;s work. The basic cycle is: edit files → &#39;git add&#39; (choose changes) → &#39;git commit&#39; (save with a message) → &#39;git push&#39; (upload to GitHub). Branches let you try something new without breaking the main version. Your public GitHub profile is often the first thing an AI hiring manager looks at.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 210" role="img" aria-label="Git commit graph: commits on main, a branch with two commits merged back, then pushed to GitHub" focusable="false"><defs><marker id="ah-git" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><path d="M40 120 H600" class="ln"/><text x="40" y="104" text-anchor="start" class="tm ts">main</text><path d="M210 120 C250 120 250 60 290 60 H420 C460 60 460 120 500 120" class="ln la"/><text x="300" y="44" text-anchor="start" class="tm ts">branch: try-new-model</text><circle cx="90" cy="120" r="10" class="c-main s1"/><circle cx="160" cy="120" r="10" class="c-main s2"/><circle cx="210" cy="120" r="10" class="c-main s3"/><circle cx="320" cy="60" r="10" class="c-br s4"/><circle cx="390" cy="60" r="10" class="c-br s5"/><circle cx="500" cy="120" r="12" class="c-ok s6"/><g class="s6"><text x="500" y="152" text-anchor="middle" class="ts">merge ✓</text></g><g class="s7"><path d="M560 112 L600 70" class="ln " marker-end="url(#ah-git)"/><g class=""><rect x="560" y="18" width="74" height="38" rx="10" class="ba"/><text x="597" y="42" text-anchor="middle" class="">GitHub</text></g><text x="540" y="90" text-anchor="middle" class="tm ts">push</text></g><text x="90" y="152" text-anchor="middle" class="tm ts">commit</text><text x="160" y="152" text-anchor="middle" class="tm ts">commit</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Each dot is a commit (a save point). A branch lets you try something safely, then merge it back and push to GitHub.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Start tracking a project: git init in the folder (or clone an existing repo with git clone &lt;url&gt;).</li><li data-read>Save a checkpoint: git add file.py (choose what to save), then git commit -m &quot;Add EMI calculator&quot; (save with a message).</li><li data-read>Work safely on a branch: git switch -c new-feature. Your main code stays untouched until you merge.</li><li data-read>Share it: create a repo on GitHub and git push. Others (and recruiters) can now see your code.</li><li data-read>Write a README: what the project does, how to run it, a screenshot and results. This is what people read first.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Commit</dt><dd>A saved snapshot of your project with a short message.</dd></div><div data-read><dt>Repository (repo)</dt><dd>A project folder tracked by Git.</dd></div><div data-read><dt>Branch</dt><dd>A separate line of work, so you can experiment safely.</dd></div></dl>
       </section>
@@ -146,11 +163,13 @@ git commit -m &quot;Add sales analysis&quot;
 git push origin main             # upload to GitHub</code></pre></div>
         <p class="small muted" data-read>Four commands you&#39;ll use every single day.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Committing secrets like API keys or passwords. Put them in a .env file and add .env to .gitignore.</li><li data-read>One giant commit at the end. Commit small steps with clear messages; it tells the story of your work.</li><li data-read>Uploading huge data files. Keep data out of git; share a download link or a small sample instead.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Which command creates a save point with a message?</p>
         <ol type="A"><li data-read data-read-text="Option A: git init">git init</li><li data-read data-read-text="Option B: git commit">git commit</li><li data-read data-read-text="Option C: git push">git push</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. git commit</strong>: commit saves a snapshot locally. push then uploads your commits to GitHub.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>What&#39;s the difference between Git and GitHub?</summary><p data-read>Git is the tool on your computer that tracks versions. GitHub is a website that hosts Git repositories so you can share and collaborate.</p></details><details class="deep-faq"><summary data-read>Do recruiters really look at GitHub?</summary><p data-read>For AI roles, often yes, especially for career switchers. Two or three clean projects with good READMEs prove skills better than certificates.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>add → commit → push. Commit small and often, with clear messages.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -172,7 +191,7 @@ git push origin main             # upload to GitHub</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

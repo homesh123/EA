@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Run the full eval set and compare scores. A few examples can hide regressions elsewhere. The eval set shows the real effect."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How many examples do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with 50 good ones; that already catches most regressions. Grow towards hundreds per important category over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are online evals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Signals from real usage after launch: thumbs up or down, edits to AI output, escalations to humans, task completion."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A restaurant doesn&#39;t judge a new dish by the chef&#39;s opinion alone. They run tasting sessions with a fixed checklist (taste, temperature, presentation) across many plates. Evals are tasting sessions for AI: a fixed set of real questions with clear scoring, run every time you change the prompt or model.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>LLM outputs vary, so &#39;it looked good in a demo&#39; isn&#39;t evidence. Build an eval set: 30 to a few hundred real inputs with expected answers or grading rules. Score them automatically where you can (exact match, contains the right citation, valid JSON), use an LLM-as-judge with a clear rubric for open-ended quality, and spot-check by hand. Track the score on every change, like unit tests for AI. For agents, measure task success rate, steps and cost. Evals are what separate production AI engineers from demo builders.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Write down what good means for your feature, with examples of good and bad outputs.</li><li data-read>Collect 50 to 200 real inputs: common cases, edge cases and past failures.</li><li data-read>Choose how to score each: code checks where possible (valid JSON, right category), a rubric for open answers.</li><li data-read>Use an LLM judge for the rubric only after checking it agrees with human ratings on a sample.</li><li data-read>Run the eval on every prompt or model change, track the score over time, and add every new production failure to the set.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Eval set</dt><dd>A fixed collection of test inputs with expected results.</dd></div><div data-read><dt>LLM-as-judge</dt><dd>Using an LLM with a rubric to grade another model&#39;s answers.</dd></div><div data-read><dt>Regression</dt><dd>Here: a change that makes previously good answers worse.</dd></div></dl>
       </section>
@@ -162,11 +179,13 @@ Check 3: says &#39;not found&#39; when it should   → 5/6
 Prompt v2 → v3: 42 → 46 correct. Ship v3 🚀</code></pre></div>
         <p class="small muted" data-read>Numbers, not vibes, decide whether a change ships.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Testing by trying a few prompts by hand (&#39;vibe checks&#39;). It misses regressions you didn&#39;t think to try.</li><li data-read>An eval set made only of easy examples. Include the tricky and adversarial ones.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">You changed the prompt and a few answers you tried look better. What next?</p>
         <ol type="A"><li data-read data-read-text="Option A: Ship it immediately">Ship it immediately</li><li data-read data-read-text="Option B: Ask the model whether it improved">Ask the model whether it improved</li><li data-read data-read-text="Option C: Run the full eval set and compare scores">Run the full eval set and compare scores</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Run the full eval set and compare scores</strong>: A few examples can hide regressions elsewhere. The eval set shows the real effect.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>How many examples do I need?</summary><p data-read>Start with 50 good ones; that already catches most regressions. Grow towards hundreds per important category over time.</p></details><details class="deep-faq"><summary data-read>What are online evals?</summary><p data-read>Signals from real usage after launch: thumbs up or down, edits to AI output, escalations to humans, task completion.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>No evals, no confidence. Measure every change.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -188,7 +207,7 @@ Prompt v2 → v3: 42 → 46 correct. Ship v3 🚀</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

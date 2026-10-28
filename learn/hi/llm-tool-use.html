@@ -109,6 +109,22 @@
             "@type": "Answer",
             "text": "Aapka application code. Model sirf call request karta hai. Code aapka chalata hai, isliye permissions aur safety aapke control mein hain."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya model mera code chalata hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nahi. Woh sirf batata hai kaunsa tool kin arguments ke saath call karna hai. Aapki application use chalati hai aur tay karti hai allow karna hai ya nahi."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya ek saath kai tools call kar sakta hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kai models parallel tool calls support karte hain, jaise teen warehouses mein ek saath stock check karna. Aapka code unhe chalata hai aur saare results lautata hai."
+          }
         }
       ]
     }
@@ -123,7 +139,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -146,6 +162,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Smart receptionist khud doctor ka calendar nahi dekh sakti, lekin calendar system ko call kar sakti hai: &#39;Kya Dr. Mehta 4 baje free hain?&#39; Phir jawaab ke hisaab se aapko reply karti hai. Tool use LLM ko yahi power deta hai. Woh khud live data nahi la sakta, lekin aapke code se function chalwa sakta hai aur result use kar sakta hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein. Jab sawaal ke liye tool chahiye, model text ki jagah tool call reply karta hai (&#39;get_order_status&#39;, order_id=&#39;A123&#39;). Aapka code asli function chalata hai aur result wapas bhejta hai, aur model usse final jawaab likhta hai. Chatbots aise hi orders check karte hain, tickets book karte hain ya databases query karte hain. Control aapke code ke paas rehta hai: inputs validate karo, permissions check karo, aur refund jaise risky actions ke liye insaan ki approval rakho.</p></section>
       <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 240" role="img" aria-label="Sequence diagram: user asks the LLM, the LLM requests a tool call, your code calls the orders API, and the answer flows back to the user" focusable="false"><defs><marker id="ah-tu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><text x="70" y="22" text-anchor="middle" class="tb ts">User</text><path d="M70 32 V232" class="lane"/><text x="240" y="22" text-anchor="middle" class="tb ts">LLM</text><path d="M240 32 V232" class="lane"/><text x="410" y="22" text-anchor="middle" class="tb ts">Your code</text><path d="M410 32 V232" class="lane"/><text x="570" y="22" text-anchor="middle" class="tb ts">Orders API</text><path d="M570 32 V232" class="lane"/><g class="s1"><path d="M70 58 L234 58" class="ln la " marker-end="url(#ah-tu)"/><text x="155" y="52" text-anchor="middle" class="ts">Where is order A123?</text></g><g class="s2"><path d="M240 90 L404 90" class="ln la " marker-end="url(#ah-tu)"/><text x="325" y="84" text-anchor="middle" class="ts">tool_call get_order_status(A123)</text></g><g class="s3"><path d="M410 122 L564 122" class="ln la " marker-end="url(#ah-tu)"/><text x="490" y="116" text-anchor="middle" class="ts">GET /orders/A123</text></g><g class="s4"><path d="M570 154 L416 154" class="ln la " marker-end="url(#ah-tu)"/><text x="490" y="148" text-anchor="middle" class="ts">out for delivery · 7:40 pm</text></g><g class="s5"><path d="M410 186 L246 186" class="ln la " marker-end="url(#ah-tu)"/><text x="325" y="180" text-anchor="middle" class="ts">tool result</text></g><g class="s6"><path d="M240 218 L76 218" class="ln la " marker-end="url(#ah-tu)"/><text x="155" y="212" text-anchor="middle" class="ts">Arriving by 7:40 pm 🛵</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Model khud API call nahi karta. Woh aapke code se kehta hai, aapka code chalata hai, aur model result se jawaab likhta hai.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Ek normal function likho, jaise get_order_status(order_id).</li><li data-read>Model ko iske baare mein batao: naam, kya karta hai, aur parameters ka JSON schema.</li><li data-read>Jab user poochhe &quot;order 4512 kahan hai?&quot;, model tool call se jawaab deta hai: get_order_status, order_id 4512.</li><li data-read>Aapka code arguments validate karta hai, permissions check karta hai, function chalata hai aur result wapas bhejta hai.</li><li data-read>Model result se user ko jawaab deta hai, ya zaroorat ho to doosra tool call karta hai.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Tool / function</dt><dd>Action jo aapka code model ko deta hai, jaise search ya calculator.</dd></div><div data-read><dt>JSON schema</dt><dd>Tool ke inputs aur unke types ka description.</dd></div><div data-read><dt>Human-in-the-loop</dt><dd>Important actions hone se pehle insaan approve karta hai.</dd></div></dl>
       </section>
@@ -156,11 +173,13 @@ Your code runs it → {&quot;status&quot;: &quot;out for delivery&quot;, &quot;e
 Model:  &quot;Your order is out for delivery and should arrive by 7:40 pm 🛵&quot;</code></pre></div>
         <p class="small muted" data-read>Tool kab use karna hai, yeh model decide karta hai. Asli kaam aapka code karta hai.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Arguments pe aankh band karke bharosa. Model order ID ya galat amount bana sakta hai; sab validate karo.</li><li data-read>Bina limits ke powerful tools dena, jaise delete ya refund bina confirmation step ke.</li><li data-read>Vague descriptions wale bahut saare milte julte tools. Model galat chunta hai; tools kam aur saaf described rakho.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Tool call asal mein kaun execute karta hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Aapka application code">Aapka application code</li><li data-read data-read-text="Option B: User">User</li><li data-read data-read-text="Option C: LLM khud, model ke andar">LLM khud, model ke andar</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Aapka application code</strong>: Model sirf call request karta hai. Code aapka chalata hai, isliye permissions aur safety aapke control mein hain.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kya model mera code chalata hai?</summary><p data-read>Nahi. Woh sirf batata hai kaunsa tool kin arguments ke saath call karna hai. Aapki application use chalati hai aur tay karti hai allow karna hai ya nahi.</p></details><details class="deep-faq"><summary data-read>Kya ek saath kai tools call kar sakta hai?</summary><p data-read>Kai models parallel tool calls support karte hain, jaise teen warehouses mein ek saath stock check karna. Aapka code unhe chalata hai aur saare results lautata hai.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Model poochta hai, aapka code karta hai. Sab kuch validate karo.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -182,7 +201,7 @@ Model:  &quot;Your order is out for delivery and should arrive by 7:40 pm 🛵&q
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

@@ -940,3 +940,103 @@ body:not([data-view="intro"]) .hero h1{font-size:1.75rem;margin-bottom:0}
   .match,.step details,.stat{break-inside:avoid}
   a{color:inherit}
 }
+
+/* ---------- Interview prep guide ---------- */
+.prep-bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin:14px 0 6px}
+.prep-stage{margin-top:22px}
+.prep-stage h3{margin:0 0 4px}
+.prep-list{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.prep-q{border:1px solid var(--border-light);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+.prep-q.prepared{border-color:#b7e1c3;background:var(--ok-soft)}
+.prep-q summary{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:12px 14px;font-weight:600;list-style:none}
+.prep-q summary::-webkit-details-marker{display:none}
+.prep-q summary::after{content:"+";margin-left:auto;color:var(--muted);font-weight:400;font-size:1.2rem;line-height:1}
+.prep-q details[open] summary::after{content:"–"}
+.prep-n{flex:none;display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.8rem}
+.prep-body{padding:0 16px 14px 50px}
+.prep-body p{margin:0 0 8px}
+.prep-body ul{margin:0 0 10px;padding-left:20px}
+.prep-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:6px !important}
+.prep-check{background:var(--warn-soft);border-radius:8px;padding:8px 10px;font-size:.9rem}
+.rounds-box{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:16px 0}
+.rounds-box h2{margin-top:0;font-size:1.1rem}
+.sources ul{padding-left:18px}
+
+/* ---------- Resume builder ---------- */
+.rb-steps{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:12px 0 16px}
+.rb-step{font:inherit;font-size:.86rem;display:flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:6px 12px;cursor:pointer}
+.rb-step.current{background:var(--accent);color:#fff;border-color:var(--accent)}
+.rb-step:disabled{opacity:.45;cursor:not-allowed}
+.rb-num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.08);font-size:.75rem;font-weight:700}
+.rb-step.current .rb-num{background:rgba(255,255,255,.25)}
+.rb-private{background:var(--ok-soft);border-radius:8px;padding:8px 12px}
+.rb-start{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}
+.rb-card{border:1px solid var(--border-light);border-radius:var(--radius);background:var(--card);padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;box-shadow:var(--shadow)}
+.rb-card h3{margin:0;font-size:1rem}
+.rb-card p{margin:0}
+.rb-icon{font-size:1.6rem}
+.rb-upload{border-style:dashed;border-width:2px;border-color:var(--accent)}
+.rb-upload.over{background:var(--accent-soft)}
+.rb-file{cursor:pointer}
+.rb-select,.rb-input{font:inherit;font-size:.92rem;padding:7px 10px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);max-width:100%}
+.rb-card .rb-select{display:block;margin-top:4px;width:100%}
+.rb-paste{margin:6px 0 12px}
+.rb-paste summary{cursor:pointer;font-weight:600}
+.rb-role{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.rb-match{display:flex;gap:14px;align-items:center;margin:8px 0}
+.rb-miss{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0 10px}
+.rb-inline{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
+.rb-inline .rb-input{flex:1;min-width:180px}
+.rb-idea{margin:12px 0;background:var(--surface);border-radius:8px;padding:8px 12px}
+.rb-idea summary{cursor:pointer;font-weight:600}
+.rb-templates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}
+.rb-tpl{font:inherit;text-align:left;display:flex;flex-direction:column;gap:4px;border:2px solid var(--border-light);border-radius:var(--radius);background:var(--card);color:var(--text);padding:10px;cursor:pointer}
+.rb-tpl.current{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.rb-thumb{display:block;height:230px;overflow:hidden;border-radius:6px;border:1px solid var(--border-light);background:#fff;position:relative}
+.rb-thumb .rb-sheet{position:absolute;top:0;left:0;width:820px;transform:scale(.32);transform-origin:top left;box-shadow:none;border:none;pointer-events:none}
+.rb-edit{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start}
+.rb-form h3{margin-top:0}
+.rb-field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;font-size:.88rem;font-weight:600}
+.rb-field .rb-input,.rb-field textarea{font-weight:400;width:100%;box-sizing:border-box}
+.rb-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.45}
+.rb-sec-head{display:flex;gap:8px;align-items:center}
+.rb-sec-title{flex:1;font-weight:700 !important}
+.rb-tone{background:var(--surface);border-radius:8px;padding:10px 14px;margin-top:10px}
+.rb-tone h4{margin:0 0 2px}
+.rb-tone ul{padding-left:18px;margin:6px 0 0}
+.rb-preview{position:sticky;top:8px}
+.rb-preview .resume-toolbar{position:static;padding:0}
+.rb-preview .rb-sheet{padding:30px 34px;font-size:12.5px;max-height:78vh;overflow:auto}
+.rb-quiz{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 14px;margin-top:12px;background:var(--card)}
+.rb-quiz p{margin:0;flex:1;min-width:200px}
+/* Templates: all single column with standard headings, so ATS parsers read them correctly. */
+.tpl-classic{font-family:Georgia,"Times New Roman",serif}
+.tpl-classic .rs-head{text-align:center}
+.tpl-classic h3{letter-spacing:1.2px}
+.tpl-modern .rs-head{border-bottom:3px solid #0b4a8b}
+.tpl-modern .rs-name,.tpl-modern .rs-title{color:#0b4a8b}
+.tpl-modern h3{color:#0b4a8b;border-bottom:2px solid #0b4a8b}
+.tpl-compact{font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:1.28}
+.tpl-compact .rs-name{font-size:21px}
+.tpl-compact h3{margin:9px 0 4px;font-size:12px}
+.tpl-compact .rs-entry-head{margin:4px 0 1px !important}
+@media (max-width:860px){
+  .rb-start,.rb-templates{grid-template-columns:1fr}
+  .rb-edit{grid-template-columns:minmax(0,1fr)}
+  .rb-preview{position:static}
+  .rb-thumb{height:200px}
+  .rb-preview .rb-sheet{padding:18px 16px;max-height:none}
+  .prep-body{padding:0 14px 14px 14px}
+}
+
+/* ---------- Deeper lesson sections ---------- */
+.ls-steps .deep-steps{counter-reset:st;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.ls-steps .deep-steps li{counter-increment:st;position:relative;padding:8px 10px 8px 42px;background:var(--card);border:1px solid var(--border-light);border-radius:8px}
+.ls-steps .deep-steps li::before{content:counter(st);position:absolute;left:10px;top:8px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;display:grid;place-items:center}
+.ls-mistakes{background:var(--warn-soft)}
+.ls-mistakes ul{margin:0;padding-left:20px}
+.ls-mistakes li{margin-bottom:6px}
+.deep-faq{border-top:1px solid var(--border-light);padding:8px 0}
+.deep-faq:first-of-type{border-top:none}
+.deep-faq summary{cursor:pointer;font-weight:600}
+.deep-faq p{margin:6px 0 0}

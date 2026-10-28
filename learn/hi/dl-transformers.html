@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Har word samajhne ke liye doosre words ka context use karna. Attention relevant words ki information milaata hai, taaki har word ka matlab context pe depend kare."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Multi head attention kya hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kai attention mechanisms ek saath, har ek alag rishton pe dhyaan de sakta hai, jaise ek head grammar pe aur doosra matlab pe."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya transformers sirf text ke liye hain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nahi. Image, audio, video aur multimodal models bhi inhi se chalte hain, un inputs ko bhi tokens mein badal kar."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Padho: &#39;Trophy suitcase mein fit nahi hui kyunki woh bahut badi thi.&#39; &#39;Woh&#39; kise bol rahe hain? Aap apne aap &#39;trophy&#39; ki taraf wapas dekhte ho. Attention model ko yahi karne deta hai: har word ke liye woh decide karta hai ki baaki kin words pe focus karna hai. Transformer is attention ki bahut saari layers se bana hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Text pehle tokens (words ke tukde) mein toota jaata hai, aur har token ek vector (embedding) ban jaata hai. Har transformer layer mein self-attention har token ko baaki saare tokens se information lene deta hai, relevance ke hisaab se weighted, taaki matlab context pe depend kare (nadi ka &#39;bank&#39; vs bank account). Darjanon layers stack karne se gehri samajh banti hai. Large language models (GPT, Claude, Llama) agla token predict karne ke liye train kiye gaye vishaal transformers hain. Modern image, speech aur code models bhi transformers pe chalte hain.</p></section>
       <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 220" role="img" aria-label="Sentence with arcs from the word it to other words; the thickest arc goes to trophy" focusable="false"><defs><marker id="ah-tf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><path d="M438 150 Q240 110 42 150" class="att a1"/><path d="M438 150 Q318 90 198 150" class="att a1"/><path d="M438 150 Q350 100 262 150" class="att a1"/><path d="M438 150 Q490 110 542 150" class="att a1"/><path d="M438 150 Q454 130 470 150" class="att a1"/><path d="M438 150 Q378 80 318 150" class="att a2"/><path d="M438 150 Q264 20 90 150" class="att a3 pulse-stroke"/><text x="42" y="172" text-anchor="middle" class="">The</text><text x="90" y="172" text-anchor="middle" class="tb ok">trophy</text><text x="150" y="172" text-anchor="middle" class="">didn't</text><text x="198" y="172" text-anchor="middle" class="">fit</text><text x="230" y="172" text-anchor="middle" class="">in</text><text x="262" y="172" text-anchor="middle" class="">the</text><text x="318" y="172" text-anchor="middle" class="">suitcase</text><text x="390" y="172" text-anchor="middle" class="">because</text><text x="438" y="172" text-anchor="middle" class="tb hl-t">it</text><text x="470" y="172" text-anchor="middle" class="">was</text><text x="506" y="172" text-anchor="middle" class="">too</text><text x="542" y="172" text-anchor="middle" class="">big</text><text x="320" y="206" text-anchor="middle" class="tm ts">attention from 'it' → strongest to 'trophy'</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Jab model &#39;it&#39; padhta hai, attention use baaki har word se jodta hai. Sabse strong link &#39;trophy&#39; se hai, isliye model samajhta hai ki &#39;it&#39; ka matlab trophy hai.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Text ko tokens mein todo aur har token ko vector (embedding) banao, saath mein uski position ki jaankari.</li><li data-read>Self attention: har token khud ko baaki har token se compare karta hai (query vs keys) yeh tay karne ke liye ki uske matlab ke liye kaunse zaroori hain.</li><li data-read>Phir zaroori tokens ki information (values) mila leta hai. &#39;River&#39; ke paas wala &#39;bank&#39; &#39;loan&#39; ke paas wale &#39;bank&#39; se alag ban jaata hai.</li><li data-read>Aisi bahut saari layers stack karo, har ek mein attention aur chhota feed forward network, residuals aur normalisation se jude.</li><li data-read>LLM ke liye aakhri layer agla token predict karti hai. Text generate karna yahi ek ek token karke repeat karta hai.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Token</dt><dd>Text ka tukda, English mein average ek word ka lagbhag ¾.</dd></div><div data-read><dt>Self-attention</dt><dd>Har token tay karta hai ki baaki har token kitna relevant hai.</dd></div><div data-read><dt>Context</dt><dd>Aas-paas ka text jo word ka matlab tay karta hai.</dd></div></dl>
       </section>
@@ -150,11 +167,13 @@ Attention for &#39;bank&#39; → strongest links: &#39;deposited&#39; (0.41), &#
 → model understands: bank = financial institution, not a river bank</code></pre></div>
         <p class="small muted" data-read>Attention weights (example numbers) dikhaate hain ki kin words ne matlab tay kiya.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Yeh sochna ki attention ka kharch chhota hai. Yeh text ki lambai ke square ke saath badhta hai, isliye lambe contexts mehenge hain.</li><li data-read>Training (weights seekhna) aur prompting (trained model use karna) ko mix karna. Zyaadatar product kaam doosra wala hai.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Attention transformer ki kya madad karta hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Disk pe files store karna">Disk pe files store karna</li><li data-read data-read-text="Option B: Har word samajhne ke liye doosre words ka context use karna">Har word samajhne ke liye doosre words ka context use karna</li><li data-read data-read-text="Option C: Training data chhota karna">Training data chhota karna</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Har word samajhne ke liye doosre words ka context use karna</strong>: Attention relevant words ki information milaata hai, taaki har word ka matlab context pe depend kare.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Multi head attention kya hai?</summary><p data-read>Kai attention mechanisms ek saath, har ek alag rishton pe dhyaan de sakta hai, jaise ek head grammar pe aur doosra matlab pe.</p></details><details class="deep-faq"><summary data-read>Kya transformers sirf text ke liye hain?</summary><p data-read>Nahi. Image, audio, video aur multimodal models bhi inhi se chalte hain, un inputs ko bhi tokens mein badal kar.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Tokens → vectors → bahut saari attention layers → agle token ki prediction.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -176,7 +195,7 @@ Attention for &#39;bank&#39; → strongest links: &#39;deposited&#39; (0.41), &#
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

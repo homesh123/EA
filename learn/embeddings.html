@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Their embeddings are close because their meanings are similar. Embeddings capture meaning, so similar ideas sit close together even with different words."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a special vector database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not always. For small projects, pgvector in PostgreSQL or even an in memory library works. Dedicated databases help at large scale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do embeddings work for Hindi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multilingual embedding models do, and can even match a Hindi question to an English document. Test with your own examples."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>In a library, books on similar topics sit near each other. Cricket books are next to sports biographies, far from cookbooks. Embeddings give every piece of text a &#39;location&#39; (a vector) so that similar meanings land close together. Then &#39;How do I return a damaged item?&#39; sits right next to &#39;Refund policy for broken products&#39;, even with no shared words.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>An embedding model turns text, or images, into a vector of hundreds of numbers that captures meaning. Similar meanings give vectors close together, measured with cosine similarity. A vector database (pgvector, Pinecone, Qdrant and others) stores millions of these vectors and quickly finds the nearest ones to a query. This is semantic search: searching by meaning, not exact keywords. It powers RAG, recommendations and duplicate detection. Combining it with keyword search (hybrid search) often works best for names and codes.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 236" role="img" aria-label="Scatter of text embeddings in clusters for payments, delivery and refunds; a question point lands next to the refund policy" focusable="false"><defs><marker id="ah-em" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="16" y="12" width="608" height="212" rx="14" class="bm"/><circle cx="120" cy="60" r="7" class="c-main"/><text x="132" y="64" text-anchor="start" class="ts">UPI payment failed</text><circle cx="160" cy="92" r="7" class="c-main"/><text x="172" y="96" text-anchor="start" class="ts">Card declined</text><circle cx="60" cy="178" r="7" class="c-main"/><text x="72" y="182" text-anchor="start" class="ts">Track my delivery</text><circle cx="110" cy="204" r="7" class="c-main"/><text x="122" y="208" text-anchor="start" class="ts">Delivery is late</text><circle cx="400" cy="70" r="7" class="c-ok"/><text x="412" y="74" text-anchor="start" class="ts">Refund policy for broken products</text><circle cx="420" cy="108" r="7" class="c-ok"/><text x="432" y="112" text-anchor="start" class="ts">Raise a replacement request</text><g class="s3"><path d="M330 128 L394 76" class="ln la fl"/><circle cx="330" cy="128" r="9" class="c-warn pulse"/><text x="330" y="154" text-anchor="middle" class="ts tb">Q: “How do I return a damaged item?”</text></g><g class="s4"><text x="520" y="40" text-anchor="middle" class="ok ts">nearest = most similar ✓</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Each text becomes a point. Similar meanings land close together, so the question finds the refund article even though they share no keywords.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Send text to an embedding model; you get back a vector of hundreds of numbers.</li><li data-read>Do this for every document chunk and store the vectors, with the text and metadata, in a vector database.</li><li data-read>At search time, embed the user&#39;s query the same way.</li><li data-read>Find the nearest vectors with cosine similarity; the vector database does this quickly even for millions.</li><li data-read>Return the matching chunks, optionally filtered by metadata (department, date, permissions).</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Embedding</dt><dd>A vector of numbers representing the meaning of text.</dd></div><div data-read><dt>Cosine similarity</dt><dd>How close two vectors point. Near 1 means very similar.</dd></div><div data-read><dt>Vector database</dt><dd>A database built to find the nearest vectors fast.</dd></div></dl>
       </section>
@@ -162,11 +179,13 @@ Similarity to stored help articles:
   0.21  Track your delivery partner live</code></pre></div>
         <p class="small muted" data-read>No keyword overlap with the top match, but the meaning matches. That&#39;s semantic search.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Mixing embedding models. Vectors from different models aren&#39;t comparable; re-embed everything when you switch.</li><li data-read>Relying only on vector search for exact codes, names or IDs. Add keyword search (hybrid).</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Why can semantic search find &#39;refund for broken product&#39; for the query &#39;return damaged item&#39;?</p>
         <ol type="A"><li data-read data-read-text="Option A: Random luck">Random luck</li><li data-read data-read-text="Option B: They share keywords">They share keywords</li><li data-read data-read-text="Option C: Their embeddings are close because their meanings are similar">Their embeddings are close because their meanings are similar</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Their embeddings are close because their meanings are similar</strong>: Embeddings capture meaning, so similar ideas sit close together even with different words.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Do I need a special vector database?</summary><p data-read>Not always. For small projects, pgvector in PostgreSQL or even an in memory library works. Dedicated databases help at large scale.</p></details><details class="deep-faq"><summary data-read>Do embeddings work for Hindi?</summary><p data-read>Multilingual embedding models do, and can even match a Hindi question to an English document. Test with your own examples.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Embeddings = meaning as numbers. A vector DB finds the nearest meanings fast.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -188,7 +207,7 @@ Similarity to stored help articles:
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

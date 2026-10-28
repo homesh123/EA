@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "In an environment variable or secret manager. Keys in code end up on GitHub and get stolen. Use environment variables or a secrets manager."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Which model should I start with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with a strong general model to prove the feature works, then test smaller, cheaper models on your eval set and switch where quality holds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data used for training?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Policies differ by provider and plan. Business API plans usually don't train on your data by default, but always check the current terms."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Ordering on Zomato: you send a request (what you want and where), the restaurant processes it, and you get a response (the food). You pay per order, and your account login proves who you are. An LLM API works the same way: your code sends a request with messages, the model replies, you&#39;re billed per token, and the API key is your login.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Providers like Anthropic and OpenAI let you use their models over the internet through an API. You send a list of messages (system and user) plus settings like model name, max tokens and temperature, and get back the generated text. Keep API keys secret: put them in environment variables, never in code or GitHub. Plan for errors and rate limits with retries and timeouts. Streaming sends the answer word by word so users aren&#39;t kept waiting. Track cost: input tokens plus output tokens multiplied by the price per token.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Create an API key in the provider&#39;s console and store it in an environment variable, never in code.</li><li data-read>Send a request with the model name, a system message (instructions) and user messages; read the text from the response.</li><li data-read>Log input and output token counts. Cost = tokens × price per token, so you can estimate cost per user.</li><li data-read>Handle failures: set a timeout, retry rate limit (429) and server errors with exponential backoff, and show a friendly message if all retries fail.</li><li data-read>Stream long answers so users see text immediately, and set a max token limit to control cost.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>API key</dt><dd>A secret password that identifies your account to the API.</dd></div><div data-read><dt>Rate limit</dt><dd>The maximum number of requests allowed per minute.</dd></div><div data-read><dt>Streaming</dt><dd>Receiving the reply piece by piece as it&#39;s generated.</dd></div></dl>
       </section>
@@ -168,11 +185,13 @@ print(msg.content[0].text)
 print(msg.usage)   # input/output tokens → cost</code></pre></div>
         <p class="small muted" data-read>The key comes from an environment variable, never pasted into code.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Committing API keys to GitHub. Bots find them within minutes; rotate the key immediately if it happens.</li><li data-read>Calling the API from browser code, which exposes your key. Call it from your server.</li><li data-read>No usage limits. A bug or abuse can create a huge bill; set budgets and per user limits.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Where should your API key live?</p>
         <ol type="A"><li data-read data-read-text="Option A: In an environment variable or secret manager">In an environment variable or secret manager</li><li data-read data-read-text="Option B: In the README">In the README</li><li data-read data-read-text="Option C: Hard-coded in app.py">Hard-coded in app.py</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. In an environment variable or secret manager</strong>: Keys in code end up on GitHub and get stolen. Use environment variables or a secrets manager.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Which model should I start with?</summary><p data-read>Start with a strong general model to prove the feature works, then test smaller, cheaper models on your eval set and switch where quality holds.</p></details><details class="deep-faq"><summary data-read>Is my data used for training?</summary><p data-read>Policies differ by provider and plan. Business API plans usually don&#39;t train on your data by default, but always check the current terms.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Request in → response out, billed per token. Guard the key, and handle errors.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -194,7 +213,7 @@ print(msg.usage)   # input/output tokens → cost</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

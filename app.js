@@ -92,7 +92,8 @@ function renderIntro(app) {
         <li><strong>Checks your answers</strong>: 4 quick reasoning questions to double-check your self-ratings</li>
         <li><strong>A realistic timeline</strong>: steps you already know are shortened, and the plan fits the hours you have</li>
       </ul>
-      <p class="fine">About 4 minutes · No sign-up · Your answers stay in your browser</p>
+      ${prefillNote(answered)}
+      <p class="fine">About 4 minutes · No sign-up · Your answers stay in your browser${resume ? "" : ` · <a href="resume-builder.html">Have a resume? Fill answers from it</a>`}</p>
       <div class="nav nav-start">
         ${resume ? `<button class="button btn-secondary" data-act="restart">Start over</button>` : ""}
         <button class="button btn-primary" data-act="start">${resume ? `Continue (${answered}/${qs.length} answered)` : "Start the questionnaire"}</button>
@@ -105,6 +106,13 @@ function renderIntro(app) {
   };
   const r = app.querySelector('[data-act="restart"]');
   if (r) r.onclick = restart;
+}
+
+// Answers pre-filled by the resume builder (resume-builder.js) are flagged so people check them.
+function prefillNote(answered) {
+  const pf = storage.get("aipf:prefill");
+  if (!pf || !pf.count || !answered) return "";
+  return `<p class="callout callout-ok small">📄 We filled ${pf.count} answers from your resume. Continue to answer the rest, then check everything on the review screen before you see your results.</p>`;
 }
 
 // Ask before wiping answers. Uses the <dialog> in index.html, with confirm() as a fallback.
@@ -124,6 +132,7 @@ function restart() {
 
 function doRestart(clearProgress) {
   if (clearProgress) storage.set(PROGRESS_KEY, {});
+  try { localStorage.removeItem("aipf:prefill"); } catch (e) { /* ignore */ }
   state = freshState();
   window.scrollTo({ top: 0 });
   go("question", { qid: QUESTIONS[0].id });

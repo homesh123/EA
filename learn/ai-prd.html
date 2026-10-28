@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "An eval plan and quality bar for AI outputs. AI outputs vary, so you must define in advance how quality is measured and what's good enough."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How is an AI PRD different from a normal PRD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It adds an eval plan and quality thresholds, explicit failure handling, data needs, cost per use and model change management."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who writes the eval set?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually the PM with domain experts and engineers together. Domain experts define what a correct answer is."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>When you hire a contractor to renovate a kitchen, a good brief says what you want, the budget, the must-haves, what&#39;s off-limits and how you&#39;ll inspect the work. An AI PRD is that brief for an AI feature, with one extra part normal software doesn&#39;t need: how you&#39;ll judge answers that can be &#39;mostly right&#39;.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>A good AI PRD covers the user and problem, the success metric, scope and non-goals, and the user experience, including what happens when the AI is unsure or wrong. Add the AI-specific sections too: the data and context the model needs, the approach (prompting, RAG, fine-tuning), the eval plan (an eval set, quality bar, how it&#39;s measured), risks (hallucination, privacy, bias, prompt injection) and mitigations, cost and latency budgets, human oversight, and launch criteria. Writing the eval plan before building forces everyone to agree on what &#39;good&#39; means.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Problem and users: who has the pain, how big it is, and today&#39;s baseline.</li><li data-read>Solution and scope: what the AI does, what it doesn&#39;t, and where humans stay in the loop.</li><li data-read>Quality bar: the eval set, how it&#39;s scored, and the launch thresholds (including zero tolerance cases).</li><li data-read>Risks and mitigations: wrong answers, privacy, abuse, cost; and the fallback for each.</li><li data-read>Metrics and rollout: layered success metrics, guardrails, a phased launch plan and a review date.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Non-goals</dt><dd>Things the feature deliberately won&#39;t do.</dd></div><div data-read><dt>Quality bar</dt><dd>The minimum eval score needed to launch.</dd></div><div data-read><dt>Launch criteria</dt><dd>Conditions that must be met before going live.</dd></div></dl>
       </section>
@@ -149,11 +166,13 @@ Risks:     wrong answer → always cite + &#39;confirm with manager&#39; for loa
 Launch:    ≥ 90% on evals, &lt; 3 s p95 latency, legal sign-off</code></pre></div>
         <p class="small muted" data-read>The eval set and quality bar are decided before any code is written.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Writing &quot;the AI should be accurate&quot; with no measurable definition.</li><li data-read>Leaving out what happens when the AI fails. That&#39;s often the most important part of the spec.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">What&#39;s the key section an AI PRD needs that a normal PRD often lacks?</p>
         <ol type="A"><li data-read data-read-text="Option A: A list of competitors">A list of competitors</li><li data-read data-read-text="Option B: An eval plan and quality bar for AI outputs">An eval plan and quality bar for AI outputs</li><li data-read data-read-text="Option C: A colour palette">A colour palette</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. An eval plan and quality bar for AI outputs</strong>: AI outputs vary, so you must define in advance how quality is measured and what&#39;s good enough.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>How is an AI PRD different from a normal PRD?</summary><p data-read>It adds an eval plan and quality thresholds, explicit failure handling, data needs, cost per use and model change management.</p></details><details class="deep-faq"><summary data-read>Who writes the eval set?</summary><p data-read>Usually the PM with domain experts and engineers together. Domain experts define what a correct answer is.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Problem, metric, scope, UX for failure, eval plan, risks, launch bar.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -175,7 +194,7 @@ Launch:    ≥ 90% on evals, &lt; 3 s p95 latency, legal sign-off</code></pre></
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "Abstract, figures aur conclusion. Pehla jaldi wala pass batata hai ki paper gehraai se padhne laayak hai ya nahi."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Acche papers kahan milenge?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Preprints ke liye arXiv, conference proceedings (NeurIPS, ICML, ACL), aur curated lists ya newsletters jo important kaam summarise karte hain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Maths bahut mushkil hai. Kya karun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pehle pass mein chhod do, idea figures aur code se samjho, phir notebook ke saath ek ek equation pe wapas aao."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Food blogger kehta hai 10 minute mein biryani ban jaati hai. Aap tab tak nahi maanoge jab tak unke exact steps se khud na banao. Paper reproduce karna bhi aisa hi hai: method follow karo, code chalao, aur dekho ki unke results aate hain ya nahi. Aapne sach mein samjha hai, iska yahi sabse accha saboot hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Pehli baar mein paper shuru se aakhir tak mat padho. Abstract padho, figures dekho, aur conclusion padho. Poocho: yeh kaunsi problem solve karta hai, aur key idea kya hai? Doosri baar method dhyaan se padho, aur datasets, metrics aur baselines note karo. Reproduce karne ke liye sabse chhote experiment se shuru karo, unki settings match karo, aur har run log karo. Agar aapke numbers alag aayein to wajah dhoondho: asli seekhna wahin hota hai. Apna reproduction code ke saath GitHub pe likho; research roles mein yeh ek mini-publication jaisa count hota hai.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Pehla pass (10 minute): title, abstract, figures aur conclusion padho. Kya problem, kya idea, kya result?</li><li data-read>Doosra pass: method dhyaan se padho aur core idea apne teen sentences mein likho.</li><li data-read>Experiments check karo: kaunse datasets, kaunse baselines, gain kitna bada hai, aur ablations hain ya nahi?</li><li data-read>Sabse chhota experiment reproduce karo, official code ho to use karke, aur apne numbers compare karo.</li><li data-read>Chhota blog post ya notes likho: kya chala, kya nahi, aage kya try karoge.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Abstract</dt><dd>Paper ki chhoti summary: problem, idea aur result.</dd></div><div data-read><dt>Baseline</dt><dd>Pichhla best method jisse paper compare karta hai.</dd></div><div data-read><dt>Ablation</dt><dd>Ek hissa hata kar dekhna ki woh kitna zaroori tha.</dd></div></dl>
       </section>
@@ -146,11 +163,13 @@ Reproduce:        smallest experiment → match settings → log runs
 Share:            repo + README: &#39;their result vs mine, and why&#39;</code></pre></div>
         <p class="small muted" data-read>Ek repeatable routine jo kisi bhi ML paper ke liye kaam karta hai.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Har paper shuru se aakhir tak padhna. Bahut saare skim karo, kuch gehraai se padho.</li><li data-read>Ek run ke result pe bharosa. Chhote gains maanne se pehle alag random seeds pe variance dekho.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Naya paper kholte hi sabse pehle kya padhna chahiye?</p>
         <ol type="A"><li data-read data-read-text="Option A: Har equation order mein">Har equation order mein</li><li data-read data-read-text="Option B: Abstract, figures aur conclusion">Abstract, figures aur conclusion</li><li data-read data-read-text="Option C: Appendix">Appendix</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Abstract, figures aur conclusion</strong>: Pehla jaldi wala pass batata hai ki paper gehraai se padhne laayak hai ya nahi.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Acche papers kahan milenge?</summary><p data-read>Preprints ke liye arXiv, conference proceedings (NeurIPS, ICML, ACL), aur curated lists ya newsletters jo important kaam summarise karte hain.</p></details><details class="deep-faq"><summary data-read>Maths bahut mushkil hai. Kya karun?</summary><p data-read>Pehle pass mein chhod do, idea figures aur code se samjho, phir notebook ke saath ek ek equation pe wapas aao.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Pehle skim, phir gehraai mein, phir reproduce. Reproduction hi saboot hai.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -172,7 +191,7 @@ Share:            repo + README: &#39;their result vs mine, and why&#39;</code><
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

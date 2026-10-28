@@ -109,6 +109,22 @@
             "@type": "Answer",
             "text": "groupby(). groupby rows ko city ke hisaab se baantta hai, phir sum() har group ki sales jodta hai."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Pandas ya SQL: kaunsa use karun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dono. Database ke andar data nikalne aur aggregate karne ke liye SQL, phir Python mein exploration, cleaning aur ML prep ke liye pandas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Meri file pandas ke liye bahut badi hai. Ab kya?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sirf zaroori columns padho (usecols), chunks mein padho (chunksize), ya bade data ke tools jaise Polars, DuckDB ya Spark use karo."
+          }
         }
       ]
     }
@@ -123,7 +139,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -146,6 +162,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Agar aapne Excel use kiya hai, to idea aapko pehle se pata hai: rows, columns, filters aur totals. Pandas Python ke andar Excel hai. Fark yeh hai ki yeh lakhon rows handle kar leta hai, badi files pe crash nahi hota, aur har baar aapke steps bilkul same tarah repeat karta hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai. Kuch hi lines mein aap CSV load kar sakte ho, pehli rows dekh sakte ho, filter aur sort kar sakte ho, missing values bhar sakte ho, aur data group karke totals ya averages nikaal sakte ho. Koi bhi ML model seekhne se pehle data lagbhag hamesha Pandas mein hi clean aur shape kiya jaata hai. NumPy, jis pe Pandas bana hai, numbers ke arrays pe fast maths karta hai.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Data load karo: df = pd.read_csv(&quot;sales.csv&quot;). DataFrame ek table hai: rows aur naam wale columns.</li><li data-read>Analyse karne se pehle dekho: df.head(), df.shape, df.info() (types aur missing values), df.describe() (summary numbers).</li><li data-read>Select aur filter: df[&quot;city&quot;], df[df[&quot;amount&quot;] &gt; 1000], df[[&quot;city&quot;, &quot;amount&quot;]].</li><li data-read>Saaf karo: df.dropna(), df.fillna(0), df.drop_duplicates(), pd.to_datetime(df[&quot;date&quot;]).</li><li data-read>Summarise: df.groupby(&quot;city&quot;)[&quot;amount&quot;].sum().sort_values(ascending=False). Yeh ek line kai business sawaalon ka jawaab deti hai.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>DataFrame</dt><dd>Rows aur naam wale columns wali table.</dd></div><div data-read><dt>Missing value (NaN)</dt><dd>Khaali cell. Modelling se pehle isse handle karna zaroori hai.</dd></div><div data-read><dt>groupby</dt><dd>Rows ko groups mein baanto aur har group ka summary nikaalo, jaise har city ki sales.</dd></div></dl>
       </section>
@@ -159,11 +176,13 @@ by_city = df.groupby(&quot;city&quot;)[&quot;amount&quot;].sum().sort_values(asc
 print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
         <p class="small muted" data-read>Load → clean → summarise. Data kaam ka roz ka loop.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Data types check na karna: text mein save numbers (&quot;1,200&quot;) jud nahi paayenge. pd.to_numeric se saaf karke convert karo.</li><li data-read>for se row by row loop chalana. Pandas mein poore column pe operations bahut tez hote hain.</li><li data-read>Bina soche missing values drop karna. Aap zyaadatar data mita sakte ho ya bias daal sakte ho; pehle dekho kitne hain aur kyun.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Aapko har city ki total sales chahiye. Kaunsa Pandas tool sahi hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: groupby()">groupby()</li><li data-read data-read-text="Option B: read_csv()">read_csv()</li><li data-read data-read-text="Option C: head()">head()</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. groupby()</strong>: groupby rows ko city ke hisaab se baantta hai, phir sum() har group ki sales jodta hai.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Pandas ya SQL: kaunsa use karun?</summary><p data-read>Dono. Database ke andar data nikalne aur aggregate karne ke liye SQL, phir Python mein exploration, cleaning aur ML prep ke liye pandas.</p></details><details class="deep-faq"><summary data-read>Meri file pandas ke liye bahut badi hai. Ab kya?</summary><p data-read>Sirf zaroori columns padho (usecols), chunks mein padho (chunksize), ya bade data ke tools jaise Polars, DuckDB ya Spark use karo.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>DataFrame = table. Zyaadatar AI projects load → clean → groupby se shuru hote hain.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -185,7 +204,7 @@ print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

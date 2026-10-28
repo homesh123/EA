@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Similar / pointing the same way. A large positive dot product means the vectors point in a similar direction, i.e. they're similar."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How much linear algebra do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most engineering roles: vectors, dot products, matrix multiplication and shapes. Research roles need much more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is NumPy's role?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NumPy stores vectors and matrices efficiently and does fast maths on them. Pandas and most ML libraries are built on top of it."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Describe a phone with numbers: [price, battery, camera MP, weight] = [20000, 5000, 50, 190]. That list is a vector, and two phones with similar vectors are similar phones. A spreadsheet of 100 phones, each row a vector, is a matrix. AI models are mostly huge amounts of fast vector and matrix maths.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>A vector is an ordered list of numbers that represents something: a data row, an image or the meaning of a word. A matrix is a grid of numbers, i.e. many vectors stacked together. Key operations: the dot product measures how aligned two vectors are (the basis of similarity search), and matrix multiplication transforms vectors (what every neural-network layer does). Eigenvectors describe the main directions of variation in data. You don&#39;t need to compute these by hand; NumPy and PyTorch do it. But knowing what they mean makes papers and models readable.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>A vector is a list of numbers: a house as [3 bedrooms, 1200 sq ft, 8 km from centre].</li><li data-read>A matrix is a table of numbers: many houses, one row each.</li><li data-read>The dot product multiplies matching numbers and adds them. A model&#39;s prediction is often a dot product of features and weights.</li><li data-read>Matrix multiplication does many dot products at once. GPUs are fast at exactly this, which is why they power AI.</li><li data-read>Cosine similarity compares the direction of two vectors. Similar meanings have similar directions, which powers semantic search.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Vector</dt><dd>An ordered list of numbers describing one thing.</dd></div><div data-read><dt>Dot product</dt><dd>Multiply matching numbers and add them up. Higher means more aligned.</dd></div><div data-read><dt>Matrix multiplication</dt><dd>Transforming many vectors at once. The core work of a neural layer.</dd></div></dl>
       </section>
@@ -153,11 +170,13 @@ print(you @ riya)    # 40 → very similar tastes
 print(you @ vikas)   # 9  → quite different</code></pre></div>
         <p class="small muted" data-read>The dot product as a simple &#39;taste similarity&#39; score. Recommenders use this idea.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Mixing up shapes. A (3×2) matrix can only multiply something with 2 rows. Print shapes when debugging.</li><li data-read>Comparing vectors with very different scales (rupees vs counts) without scaling. One feature dominates distances.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Two vectors have a large positive dot product. They are probably…</p>
         <ol type="A"><li data-read data-read-text="Option A: Similar / pointing the same way">Similar / pointing the same way</li><li data-read data-read-text="Option B: Empty">Empty</li><li data-read data-read-text="Option C: Very different">Very different</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. Similar / pointing the same way</strong>: A large positive dot product means the vectors point in a similar direction, i.e. they&#39;re similar.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>How much linear algebra do I need?</summary><p data-read>For most engineering roles: vectors, dot products, matrix multiplication and shapes. Research roles need much more.</p></details><details class="deep-faq"><summary data-read>What is NumPy&#39;s role?</summary><p data-read>NumPy stores vectors and matrices efficiently and does fast maths on them. Pandas and most ML libraries are built on top of it.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Everything in AI becomes vectors, and similarity is just vector maths.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -179,7 +198,7 @@ print(you @ vikas)   # 9  → quite different</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

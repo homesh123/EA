@@ -178,7 +178,16 @@ const LEARN_I18N = {
     pausedReading: "Paused",
     ttsUnsupported: "Your browser can't read aloud",
     diagram: "Diagram",
-    option: "Option"
+    option: "Option",
+    stepByStep: "Step by step", commonMistakes: "Common mistakes to avoid", peopleAsk: "Questions learners ask",
+    prepGuide: "Interview prep guide", prepBlurb: "{n} questions interviewers ask for this role, in interview order, with easy answers to study.",
+    prepIntro: "These are the questions people are being asked for this role right now, in the order a real interview usually goes. Read the question, try answering out loud, then open the easy answer. Interviews are in English, so the answers are in English; every linked lesson is also in Hinglish.",
+    roundsTitle: "How the interview usually goes", roundsNote: "Based on recent candidate reports. Companies vary, so use it as a map.",
+    preparedCount: "{done} of {total} prepared", easyAnswer: "Easy answer", strongCovers: "A strong answer covers", theyCheck: "What they're really checking", learnIt: "Learn it",
+    markPrepared: "I can answer this ✓", unmarkPrepared: "Mark as not ready", expandAll: "Open all answers", collapseAll: "Close all", onlyLeft: "Only show questions I haven't prepared", sayAloud: "Tip: answer out loud before you open it. Saying it is the real practice.",
+    resumeBuilder: "Resume builder", resumeBuilderBlurb: "Upload your resume or start from the sample, add this role's skills, pick a template and download PDF or Word.",
+    extraLesson: "Extra lesson (from another course)", backTo: "Back", scoredPractice: "Scored interview practice", allDoneTitle: "You've covered everything for this role",
+    allDoneText: "Lessons, practice tasks, interview prep, scored practice and your resume. Keep revising the questions you marked as not ready, and apply with confidence."
   },
   hi: {
     langName: "Hinglish",
@@ -269,7 +278,16 @@ const LEARN_I18N = {
     pausedReading: "Ruka hua",
     ttsUnsupported: "Aapka browser padh kar nahi suna sakta",
     diagram: "Diagram",
-    option: "Option"
+    option: "Option",
+    stepByStep: "Step by step", commonMistakes: "Aam galtiyaan jinse bachna hai", peopleAsk: "Seekhne wale yeh poochhte hain",
+    prepGuide: "Interview prep guide", prepBlurb: "Is role ke {n} sawaal jo interviewers poochhte hain, interview ke order mein, aasaan jawaabon ke saath.",
+    prepIntro: "Yeh woh sawaal hain jo aajkal is role ke interviews mein poochhe ja rahe hain, usi order mein jaise asli interview chalta hai. Sawaal padho, bolkar jawaab do, phir aasaan jawaab kholo. Interview English mein hote hain, isliye jawaab English mein hain; har linked lesson Hinglish mein bhi hai.",
+    roundsTitle: "Interview aam taur par kaise hota hai", roundsNote: "Haal ke candidates ki reports par based. Har company alag hai, isse ek map ki tarah use karo.",
+    preparedCount: "{total} mein se {done} taiyaar", easyAnswer: "Aasaan jawaab", strongCovers: "Accha jawaab yeh cover karta hai", theyCheck: "Asal mein kya check kar rahe hain", learnIt: "Seekho",
+    markPrepared: "Yeh mujhe aata hai ✓", unmarkPrepared: "Abhi taiyaar nahi", expandAll: "Saare jawaab kholo", collapseAll: "Sab band karo", onlyLeft: "Sirf woh sawaal dikhao jo abhi taiyaar nahi", sayAloud: "Tip: kholne se pehle bolkar jawaab do. Bolna hi asli practice hai.",
+    resumeBuilder: "Resume builder", resumeBuilderBlurb: "Apna resume upload karo ya sample se shuru karo, is role ke skills add karo, template chuno aur PDF ya Word download karo.",
+    extraLesson: "Extra lesson (doosre course se)", backTo: "Peeche", scoredPractice: "Scored interview practice", allDoneTitle: "Is role ke liye aapne sab cover kar liya",
+    allDoneText: "Lessons, practice tasks, interview prep, scored practice aur aapka resume. Jo sawaal abhi taiyaar nahi, unhe revise karte raho, aur confidence se apply karo."
   }
 };
 

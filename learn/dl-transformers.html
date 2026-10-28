@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Use the context of other words to understand each word. Attention mixes in information from relevant words, so each word's meaning depends on context."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What is multi head attention?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Several attention mechanisms in parallel, each free to focus on different relationships, like grammar in one head and meaning in another."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are transformers only for text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. They power image, audio, video and multimodal models too, by turning those inputs into tokens as well."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Read: &#39;The trophy didn&#39;t fit in the suitcase because it was too big.&#39; What does &#39;it&#39; mean? You automatically look back at &#39;trophy&#39;. Attention lets a model do the same: for every word, it decides which other words to focus on. A transformer is built from many layers of this attention.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Text is first split into tokens (word pieces) and each token becomes a vector (an embedding). In each transformer layer, self-attention lets every token gather information from every other token, weighted by relevance, so meaning depends on context (&#39;bank&#39; of a river vs a bank account). Stacking dozens of layers builds a deep understanding. Large language models (GPT, Claude, Llama) are giant transformers trained to predict the next token. Transformers also power modern image, speech and code models.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 220" role="img" aria-label="Sentence with arcs from the word it to other words; the thickest arc goes to trophy" focusable="false"><defs><marker id="ah-tf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><path d="M438 150 Q240 110 42 150" class="att a1"/><path d="M438 150 Q318 90 198 150" class="att a1"/><path d="M438 150 Q350 100 262 150" class="att a1"/><path d="M438 150 Q490 110 542 150" class="att a1"/><path d="M438 150 Q454 130 470 150" class="att a1"/><path d="M438 150 Q378 80 318 150" class="att a2"/><path d="M438 150 Q264 20 90 150" class="att a3 pulse-stroke"/><text x="42" y="172" text-anchor="middle" class="">The</text><text x="90" y="172" text-anchor="middle" class="tb ok">trophy</text><text x="150" y="172" text-anchor="middle" class="">didn't</text><text x="198" y="172" text-anchor="middle" class="">fit</text><text x="230" y="172" text-anchor="middle" class="">in</text><text x="262" y="172" text-anchor="middle" class="">the</text><text x="318" y="172" text-anchor="middle" class="">suitcase</text><text x="390" y="172" text-anchor="middle" class="">because</text><text x="438" y="172" text-anchor="middle" class="tb hl-t">it</text><text x="470" y="172" text-anchor="middle" class="">was</text><text x="506" y="172" text-anchor="middle" class="">too</text><text x="542" y="172" text-anchor="middle" class="">big</text><text x="320" y="206" text-anchor="middle" class="tm ts">attention from 'it' → strongest to 'trophy'</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">When the model reads &#39;it&#39;, attention links it to every other word. The strongest link is to &#39;trophy&#39;, so the model understands &#39;it&#39; means the trophy.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Split text into tokens and turn each token into a vector (embedding), plus information about its position.</li><li data-read>Self attention: each token compares itself with every other token (query vs keys) to decide which ones matter for its meaning.</li><li data-read>It then mixes in information from the important tokens (values). &#39;Bank&#39; near &#39;river&#39; becomes different from &#39;bank&#39; near &#39;loan&#39;.</li><li data-read>Stack many such layers, each with attention and a small feed forward network, connected by residuals and normalisation.</li><li data-read>For an LLM, the final layer predicts the next token. Generating text repeats this one token at a time.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Token</dt><dd>A piece of text, roughly ¾ of an English word on average.</dd></div><div data-read><dt>Self-attention</dt><dd>Each token weighing how relevant every other token is.</dd></div><div data-read><dt>Context</dt><dd>The surrounding text that shapes a word&#39;s meaning.</dd></div></dl>
       </section>
@@ -150,11 +167,13 @@ Attention for &#39;bank&#39; → strongest links: &#39;deposited&#39; (0.41), &#
 → model understands: bank = financial institution, not a river bank</code></pre></div>
         <p class="small muted" data-read>Attention weights (illustrative numbers) show which words shaped the meaning.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Thinking attention cost is small. It grows with the square of the text length, which is why long contexts are expensive.</li><li data-read>Confusing training (learning weights) with prompting (using a trained model). Most product work is the second.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">What does attention help a transformer do?</p>
         <ol type="A"><li data-read data-read-text="Option A: Store files on disk">Store files on disk</li><li data-read data-read-text="Option B: Use the context of other words to understand each word">Use the context of other words to understand each word</li><li data-read data-read-text="Option C: Make training data smaller">Make training data smaller</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. Use the context of other words to understand each word</strong>: Attention mixes in information from relevant words, so each word&#39;s meaning depends on context.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>What is multi head attention?</summary><p data-read>Several attention mechanisms in parallel, each free to focus on different relationships, like grammar in one head and meaning in another.</p></details><details class="deep-faq"><summary data-read>Are transformers only for text?</summary><p data-read>No. They power image, audio, video and multimodal models too, by turning those inputs into tokens as well.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Tokens → vectors → many attention layers → next-token prediction.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -176,7 +195,7 @@ Attention for &#39;bank&#39; → strongest links: &#39;deposited&#39; (0.41), &#
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

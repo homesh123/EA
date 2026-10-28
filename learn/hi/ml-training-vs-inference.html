@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Batch inference. Yeh prediction (inference) hai jo schedule pe bahut saare items pe hota hai, yaani batch."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya zyaada mehenga hai, training ya inference?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zyaadatar companies ke liye inference, kyunki yeh har user ke liye lagaataar chalta hai. LLMs mein jab tak apna model train na karo, inference ka bill hi main hota hai."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya model use hote hue seekhta rehta hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aam taur pe nahi. Retrain karne tak woh fixed rehta hai. Online learning hoti hai par kam aur zyaada risky."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Chef test kitchen mein mahino tak recipe perfect karta hai. Yeh training hai: slow, mehenga, kabhi-kabhi hota hai. Phir restaurant woh dish roz sainkdon customers ko jaldi aur same taste ke saath serve karta hai. Yeh inference hai. Production mein AI chalaana zyaadatar restaurant ke baare mein hai, test kitchen ke nahi.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Training mein bahut saara data aur compute lagta hai, aksar GPUs, aur isse ek model artifact banta hai: seekhe hue parameters ki saved file. Inference us artifact ko load karke naye inputs pe predictions karta hai, ya to real time mein (API jo milliseconds mein jawaab de) ya batches mein (raat bhar mein 10 lakh customers ko score karna). Inference ki priorities training se alag hain: latency, throughput, har request ki cost aur reliability. Models ko code ki tarah version kiya jaata hai, taaki pata rahe kis model ne kaunsa jawaab diya. Inference wala hissa aam taur pe infrastructure engineers sambhaalte hain.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Training kabhi kabhi hoti hai (daily, weekly) bahut saare purane data pe, aksar powerful machines pe.</li><li data-read>Nateeja ek saved model file aur uske preprocessing steps, version ke saath stored.</li><li data-read>Inference us model se naye inputs pe predict karta hai, ya to batch mein (raat ko saare customers score) ya real time mein (har request pe).</li><li data-read>Real time inference tez aur reliable hona chahiye, isliye yeh monitoring ke saath API ke peeche chalta hai.</li><li data-read>Waqt ke saath data badalta hai, isliye results monitor karo aur fresh data se retrain karo.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Model artifact</dt><dd>Saved, trained model ki file jo deploy hoti hai.</dd></div><div data-read><dt>Inference</dt><dd>Trained model se predictions karwana.</dd></div><div data-read><dt>Batch vs real-time</dt><dd>Schedule pe bahut saare items score karna vs har request ka turant jawaab.</dd></div></dl>
       </section>
@@ -150,11 +167,13 @@ Inference (24×7):    UPI payment → API loads v12 → P(fraud)=0.03 → approv
                      latency budget: &lt; 50 ms per payment</code></pre></div>
         <p class="small muted" data-read>Model ek hi, lekin engineering ki do bilkul alag problems.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Model ko uske preprocessing ke bina save karna. Production mein predictions toot jaati hain ya chupke se galat ho jaati hain.</li><li data-read>Jab raat ka batch kaafi ho tab real time serving banana. Batch simple aur sasta hai.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Har raat 20 lakh customers ka churn risk score karna kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Batch inference">Batch inference</li><li data-read data-read-text="Option B: Real-time inference">Real-time inference</li><li data-read data-read-text="Option C: Training">Training</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Batch inference</strong>: Yeh prediction (inference) hai jo schedule pe bahut saare items pe hota hai, yaani batch.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kya zyaada mehenga hai, training ya inference?</summary><p data-read>Zyaadatar companies ke liye inference, kyunki yeh har user ke liye lagaataar chalta hai. LLMs mein jab tak apna model train na karo, inference ka bill hi main hota hai.</p></details><details class="deep-faq"><summary data-read>Kya model use hote hue seekhta rehta hai?</summary><p data-read>Aam taur pe nahi. Retrain karne tak woh fixed rehta hai. Online learning hoti hai par kam aur zyaada risky.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Training model banata hai. Inference use serve karta hai: fast, sasta aur reliable.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -176,7 +195,7 @@ Inference (24×7):    UPI payment → API loads v12 → P(fraud)=0.03 → approv
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

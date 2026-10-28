@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "Guardrails like a max-steps limit and loop detection. Agents need explicit stopping rules. Don't rely on the model alone."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between an agent and a chatbot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A chatbot mostly answers. An agent takes actions with tools over several steps to complete a task."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a framework like LangGraph?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not to start. A simple loop in your own code teaches you the most. Frameworks help later with state, retries and multi step flows."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Planning a Goa trip, you check flight prices, then hotels near the beach, notice the hotel is far from the airport, re-check flights to a different airport, and then book. You plan, act, look at the result and adjust. An AI agent works in the same loop, using tools at each step until the task is done.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>An agent is an LLM in a loop: it decides the next action, calls a tool, reads the result, and repeats until it can give a final answer or hits a limit. Agents need memory (what has happened so far), clear tools, and stopping rules such as maximum steps and a budget. Frameworks like LangGraph or agent SDKs manage the loop and state. Agents fail in new ways: they loop forever, pick the wrong tool, or act on bad data. Start with a fixed workflow and add autonomy only where it clearly helps, and keep a human approving high-impact steps.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 240" role="img" aria-label="A loop of think, act and observe, with a step log on the right ending in a final answer" focusable="false"><defs><marker id="ah-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><circle cx="150" cy="122" r="80" class="ring"/><g class=""><rect x="95" y="18" width="110" height="40" rx="10" class="ba"/><text x="150" y="43" text-anchor="middle" class="">🧠 Think</text></g><g class=""><rect x="200" y="162" width="110" height="40" rx="10" class="bo"/><text x="255" y="187" text-anchor="middle" class="">🛠️ Act (tool)</text></g><g class=""><rect x="0" y="162" width="110" height="40" rx="10" class="bw"/><text x="55" y="187" text-anchor="middle" class="">👀 Observe</text></g><circle r="6" class="dot"><animateMotion dur="4s" repeatCount="indefinite" path="M150 42 A80 80 0 1 1 149.9 42"/></circle><text x="150" y="128" text-anchor="middle" class="tm ts">loop</text><g><rect x="330" y="18" width="296" height="204" rx="10" class="b"/><text x="346" y="42" text-anchor="start" class="tb ts">Goal: 3 cafés open after 10 pm</text></g><g class="s1"><text x="346" y="72" text-anchor="start" class="ts">1 · search_places('cafés')</text></g><g class="s2"><text x="346" y="98" text-anchor="start" class="ts">2 · 12 results</text></g><g class="s3"><text x="346" y="124" text-anchor="start" class="ts">3 · get_hours() for each</text></g><g class="s4"><text x="346" y="150" text-anchor="start" class="ts">4 · filter rating ≥ 4.2 → 3</text></g><g class="s5"><text x="346" y="176" text-anchor="start" class="ts ok tb">5 · ✓ final answer</text></g><text x="346" y="210" text-anchor="start" class="tm ts">guardrail: max_steps = 8</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">An agent loops: think about the next step, act with a tool, observe the result, and repeat, until the goal is met or a step limit stops it.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Give the agent a clear goal and a small set of tools.</li><li data-read>Loop: the model plans the next step, calls a tool, reads the result, and decides again.</li><li data-read>Set limits: maximum steps, maximum cost and a timeout, so it can&#39;t loop forever.</li><li data-read>Require human approval before risky actions like payments, emails to customers or deleting data.</li><li data-read>Log every step (a trace) so you can see why it did what it did, and evaluate on realistic tasks.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Agent loop</dt><dd>Think → act (tool) → observe → repeat.</dd></div><div data-read><dt>State / memory</dt><dd>What the agent has done and learned so far in the task.</dd></div><div data-read><dt>Guardrails</dt><dd>Limits on steps, cost and actions that keep the agent safe.</dd></div></dl>
       </section>
@@ -148,11 +165,13 @@ Step 4 observe → 3 match
 Step 5 → final answer with names, ratings, closing times ✅  (max_steps = 8)</code></pre></div>
         <p class="small muted" data-read>Each step uses the previous result. A step limit stops endless loops.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Using an agent where a fixed workflow works. Fixed steps are cheaper, faster and easier to test.</li><li data-read>No stopping rules, leading to runaway loops and big bills.</li><li data-read>Letting web pages or documents give the agent instructions (prompt injection). Treat them as data.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">An agent keeps calling the same search tool 50 times. What should have prevented it?</p>
         <ol type="A"><li data-read data-read-text="Option A: Higher temperature">Higher temperature</li><li data-read data-read-text="Option B: A bigger model">A bigger model</li><li data-read data-read-text="Option C: Guardrails like a max-steps limit and loop detection">Guardrails like a max-steps limit and loop detection</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Guardrails like a max-steps limit and loop detection</strong>: Agents need explicit stopping rules. Don&#39;t rely on the model alone.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>What&#39;s the difference between an agent and a chatbot?</summary><p data-read>A chatbot mostly answers. An agent takes actions with tools over several steps to complete a task.</p></details><details class="deep-faq"><summary data-read>Do I need a framework like LangGraph?</summary><p data-read>Not to start. A simple loop in your own code teaches you the most. Frameworks help later with state, retries and multi step flows.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Agent = LLM + tools + loop + memory + guardrails.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -174,7 +193,7 @@ Step 5 → final answer with names, ratings, closing times ✅  (max_steps = 8)<
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

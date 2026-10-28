@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "LEFT JOIN from products to sales. A LEFT JOIN keeps all products even when no sales row matches. An INNER JOIN would drop them."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "When do I use RIGHT or FULL OUTER JOIN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RIGHT JOIN is just a LEFT JOIN with tables swapped, so most people use LEFT. FULL OUTER keeps unmatched rows from both sides, useful for reconciling two systems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are joins slow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not with indexes on the join keys and sensible filters. In warehouses, joining huge tables can be costly, so filter early."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Your school kept one register for student names and roll numbers, and another for marks by roll number. To print &#39;name + marks&#39;, you match the two registers on roll number. A JOIN does that matching for database tables.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Databases split data into separate tables to avoid repetition, such as customers and orders, linked by a key like customer_id. A JOIN brings them back together. An INNER JOIN keeps only rows that match in both tables. A LEFT JOIN keeps every row from the left table, with blanks where there&#39;s no match, which is perfect for questions like &#39;customers who never ordered&#39;. Joining on the wrong key, or getting duplicate matches, is the most common source of wrong numbers.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Venn diagram of customers and orders, highlighting the overlap for INNER JOIN and the whole customers circle for LEFT JOIN" focusable="false"><defs><marker id="ah-sj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><defs><clipPath id="sj-clip"><circle cx="250" cy="125" r="90"/></clipPath></defs><g class="alt1"><circle cx="390" cy="125" r="90" class="hl" clip-path="url(#sj-clip)"/><text x="320" y="26" text-anchor="middle" class="tb">INNER JOIN · only matching rows</text></g><g class="alt2"><circle cx="250" cy="125" r="90" class="hl"/><text x="320" y="26" text-anchor="middle" class="tb">LEFT JOIN · every customer + matches</text></g><circle cx="250" cy="125" r="90" class="ring"/><circle cx="390" cy="125" r="90" class="ring"/><text x="200" y="130" text-anchor="middle" class="">customers</text><text x="445" y="130" text-anchor="middle" class="">orders</text><text x="320" y="130" text-anchor="middle" class="ts">match</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">INNER JOIN keeps only customers who have orders (the overlap). LEFT JOIN keeps every customer, with or without orders.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Find the shared key: orders.customer_id matches customers.id.</li><li data-read>INNER JOIN keeps only matches: customers who have orders.</li><li data-read>LEFT JOIN keeps every row from the left table; missing matches become NULL. Customers with no orders show NULL order columns.</li><li data-read>Find what&#39;s missing: LEFT JOIN ... WHERE orders.id IS NULL lists customers who never ordered.</li><li data-read>Check row counts before and after a join. If they jump unexpectedly, your key isn&#39;t unique and rows are being duplicated.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Primary / foreign key</dt><dd>An ID that uniquely identifies a row, and the column in another table that points to it.</dd></div><div data-read><dt>INNER JOIN</dt><dd>Only rows that match in both tables.</dd></div><div data-read><dt>LEFT JOIN</dt><dd>All rows from the left table, plus matches from the right if there are any.</dd></div></dl>
       </section>
@@ -152,11 +169,13 @@ LEFT JOIN orders o ON o.customer_id = c.id
 WHERE o.id IS NULL;</code></pre></div>
         <p class="small muted" data-read>A LEFT JOIN plus &#39;IS NULL&#39; finds the rows with no match.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Joining on a non unique key and double counting revenue. Aggregate first, or join on a truly unique key.</li><li data-read>Putting a filter on the right table in WHERE after a LEFT JOIN, which silently turns it into an INNER JOIN. Put that condition in the ON clause.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">You need every product, including ones that never sold. Which join?</p>
         <ol type="A"><li data-read data-read-text="Option A: LEFT JOIN from products to sales">LEFT JOIN from products to sales</li><li data-read data-read-text="Option B: INNER JOIN products with sales">INNER JOIN products with sales</li><li data-read data-read-text="Option C: No join is needed">No join is needed</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. LEFT JOIN from products to sales</strong>: A LEFT JOIN keeps all products even when no sales row matches. An INNER JOIN would drop them.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>When do I use RIGHT or FULL OUTER JOIN?</summary><p data-read>RIGHT JOIN is just a LEFT JOIN with tables swapped, so most people use LEFT. FULL OUTER keeps unmatched rows from both sides, useful for reconciling two systems.</p></details><details class="deep-faq"><summary data-read>Are joins slow?</summary><p data-read>Not with indexes on the join keys and sensible filters. In warehouses, joining huge tables can be costly, so filter early.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>INNER = only matches. LEFT = keep everything on the left.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -178,7 +197,7 @@ WHERE o.id IS NULL;</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

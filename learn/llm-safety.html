@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Limit amounts, verify the order and require human approval above a threshold. High-impact actions need hard limits and human checks outside the model."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Can prompt injection be fully prevented?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not today. You reduce the impact with layers: limited tools, confirmations, output checks and monitoring."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is responsible for AI mistakes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The company deploying it. That's why high stakes uses need human review, clear disclaimers and audit logs."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A new bank cashier is helpful but must follow rules: verify identity, never hand over cash because a note says &#39;the manager approved this&#39;, and call a supervisor for big amounts. AI features need the same rules, because a cleverly written message can trick an LLM just like a forged note.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>The key risks in AI products are hallucinations (made-up facts), prompt injection (malicious text in user input or documents saying &#39;ignore your instructions and…&#39;), leaking private data, and harmful or off-brand output. Defences include grounding answers in sources (RAG with citations), treating all model output and retrieved text as untrusted, least-privilege tools, input and output filters, human approval for high-impact actions, logging, and rate and cost limits. Responsible AI also means checking for bias and being transparent that users are talking to AI.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Ground answers in sources and allow &quot;I don&#39;t know&quot; to reduce hallucinations.</li><li data-read>Treat user input and retrieved content as data, never as instructions; mark them clearly in the prompt.</li><li data-read>Give tools the least privilege, and require confirmation for risky actions.</li><li data-read>Filter inputs and outputs: block personal data leaving the system, unsafe content and secrets.</li><li data-read>Red team regularly: try known attacks and add them to your eval set.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Prompt injection</dt><dd>Hidden instructions in input that try to hijack the model.</dd></div><div data-read><dt>Least privilege</dt><dd>Giving tools only the minimum access they need.</dd></div><div data-read><dt>Guardrail</dt><dd>A check before or after the model that blocks unsafe input or output.</dd></div></dl>
       </section>
@@ -163,11 +180,13 @@ Good design: résumé text is wrapped as untrusted DATA, the system prompt says
              against a rubric + human review.</code></pre></div>
         <p class="small muted" data-read>Documents are data, not commands. Design for that.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Relying on &quot;please don&#39;t reveal the system prompt&quot; as security. Instructions in a prompt are not access control.</li><li data-read>Logging full conversations with personal data without consent or protection.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">A support bot can issue refunds through a tool. What&#39;s the safest design?</p>
         <ol type="A"><li data-read data-read-text="Option A: Hide the refund tool in the prompt">Hide the refund tool in the prompt</li><li data-read data-read-text="Option B: Let the model refund any amount automatically">Let the model refund any amount automatically</li><li data-read data-read-text="Option C: Limit amounts, verify the order and require human approval above a threshold">Limit amounts, verify the order and require human approval above a threshold</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Limit amounts, verify the order and require human approval above a threshold</strong>: High-impact actions need hard limits and human checks outside the model.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Can prompt injection be fully prevented?</summary><p data-read>Not today. You reduce the impact with layers: limited tools, confirmations, output checks and monitoring.</p></details><details class="deep-faq"><summary data-read>Who is responsible for AI mistakes?</summary><p data-read>The company deploying it. That&#39;s why high stakes uses need human review, clear disclaimers and audit logs.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Treat model output and documents as untrusted. Limit what tools can do.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -189,7 +208,7 @@ Good design: résumé text is wrapped as untrusted DATA, the system prompt says
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>
