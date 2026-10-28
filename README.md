@@ -133,6 +133,16 @@ both languages), category filters, an A to Z bar, "open all", read aloud per ter
 `glossary/#term-rag`. Content is in `content/glossary-*.js`, rendering in `glossary.js` (also used by
 the build). The page carries DefinedTermSet structured data, and every term is listed in `llms.txt`.
 
+- **Think of it like.** `content/glossary-simple.js` adds an everyday comparison in English and Hinglish
+  (RAG is like an open book exam, an API is like a waiter) for every term whose meaning is technical.
+  It is shown above the detailed explanation and read aloud with it.
+- **One page per term** (`glossary/rag.html`, `glossary/overfitting.html`, ...): "What is RAG?" with the
+  one line answer first, the everyday comparison, the full explanation, a real example, lessons, related
+  terms and a short FAQ. Each page has DefinedTerm, FAQPage and BreadcrumbList structured data, a unique
+  title and description, and is in the sitemap and `llms.txt`. That gives search engines (SEO), answer
+  boxes and voice assistants (AEO) and AI assistants (GEO) a clean, quotable answer for each word.
+- Every lesson page ends with "Words from this lesson", linking to those term pages.
+
 ## AI for kids (ages 5+)
 
 `kids/` has a playful section for children: a hub with Robo's adventure map and six levels
