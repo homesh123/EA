@@ -2,6 +2,10 @@
 // Multiple-choice questions are scored automatically, with instant feedback. Open questions are
 // self-checked: write an answer, compare it with a model answer and tick the key points covered.
 // The report scores each skill area, explains every mistake and links the lessons that close the gaps.
+// InterviewApp.mount(el, { role, embedded, lessonLink }) renders it anywhere: interview.html mounts it
+// on #interviewApp; the Learn section mounts it inside a course (embedded: no role switching, lesson
+// links open inside the course).
+var InterviewApp = (function () {
 const LS_SESSION = "aipf:interview-session";
 const LS_RESULTS = "aipf:interview";
 const LS_LANG = "aipf:lang";
@@ -12,11 +16,10 @@ const store = {
   del(key) { try { localStorage.removeItem(key); } catch (e) { /* ignore */ } }
 };
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const $ = sel => document.querySelector(sel);
-const lang = store.get(LS_LANG) === "hi" ? "hi" : "en";
+let lang = "en";
 
 // Interface text. Questions stay in English, because that's the language of these interviews.
-const UI = {
+const UI_ALL = {
   en: {
     pick: "Choose a role to practise", pickIntro: "Each set mixes multiple-choice questions (scored automatically) with open questions you self-check against a model answer. At the end you get a score, every mistake explained, and the exact lessons to revise.",
     questions: "questions", mcqs: "multiple-choice", opens: "open-ended", minutes: "min", start: "Start practice", resume: "Resume where you left off", best: "Best score", last: "Last score",
@@ -26,7 +29,7 @@ const UI = {
     tickPoints: "Tick each key point your answer covered:", covered: "covered",
     report: "Your interview report", overall: "Overall score", byArea: "Score by skill area", focus: "Where to focus", focusNone: "No weak areas. Great work! Keep practising the open questions out loud.",
     missedIn: "You missed", studyThese: "Study these lessons", mistakes: "Your mistakes, explained", you: "You answered", right: "Correct answer", missedPoints: "Points you missed",
-    strengths: "Your strengths", more: "More questions to prepare", retake: "Retake all questions", retryWrong: "Retry only what I missed", toCourse: "Go to the course", toResume: "Sample resume",
+    strengths: "Your strengths", more: "More questions to prepare", retake: "Retake all questions", retryWrong: "Retry only what I missed", toCourse: "Go to the course", toResume: "Build your resume",
     verdictReady: "Interview-ready ✓", verdictAlmost: "Almost there", verdictPractise: "Keep practising",
     verdictReadyText: "You answered most questions well. Practise saying the open answers out loud, with your own project numbers.",
     verdictAlmostText: "Good base. Close the gaps below and you'll be ready.",
@@ -42,31 +45,36 @@ const UI = {
     tickPoints: "Jo key points aapke jawaab mein the, unhe tick karo:", covered: "cover kiye",
     report: "Aapki interview report", overall: "Overall score", byArea: "Skill area ke hisaab se score", focus: "Kahan focus karna hai", focusNone: "Koi weak area nahi. Bahut badhiya! Open sawaalon ko bolkar practice karte raho.",
     missedIn: "Aapse chhoote", studyThese: "Yeh lessons padho", mistakes: "Aapki galtiyaan, samjhaayi hui", you: "Aapka jawaab", right: "Sahi jawaab", missedPoints: "Chhoote hue points",
-    strengths: "Aapki strengths", more: "Taiyaari ke liye aur sawaal", retake: "Saare sawaal dobara", retryWrong: "Sirf galat wale dobara", toCourse: "Course pe jao", toResume: "Sample resume",
+    strengths: "Aapki strengths", more: "Taiyaari ke liye aur sawaal", retake: "Saare sawaal dobara", retryWrong: "Sirf galat wale dobara", toCourse: "Course pe jao", toResume: "Apna resume banao",
     verdictReady: "Interview-ready ✓", verdictAlmost: "Bas thoda aur", verdictPractise: "Practice jaari rakho",
     verdictReadyText: "Aapne zyaadatar sawaal acche se kiye. Open answers ko apne project numbers ke saath bolkar practice karo.",
     verdictAlmostText: "Acchi shuruaat. Neeche ke gaps band karo aur aap ready ho.",
     verdictPractiseText: "Neeche weak areas ke lessons padho, phir dobara do. Doosri baar mein zyaadatar log kaafi behtar karte hain.",
     switchRole: "Role badlo", honest: "Self-check wale jawaab hisse mein count hote hain: 5 mein se 3 points = 0.6 sawaal."
   }
-}[lang];
+};
+let UI = UI_ALL.en;
 
-const params = new URLSearchParams(location.search);
 const ROLE_IDS = Object.keys(ROLES);
-let role = ROLE_IDS.includes(params.get("role")) ? params.get("role") : null;
+let role = null;
+let root = null; // element the app renders into
+let embedded = false;
+let customLessonLink = null; // (topic) => attributes string for an <a>, when embedded
 const roleQuestions = r => INTERVIEW.questions.filter(q => q.roles.includes(r));
 const results = () => store.get(LS_RESULTS) || {};
-const lessonHref = (r, topic) => LEARN_TRACKS[r].some(([, ids]) => ids.includes(topic))
+const defaultLessonHref = (r, topic) => LEARN_TRACKS[r].some(([, ids]) => ids.includes(topic))
   ? `learn.html?course=${r}&lesson=${topic}${lang === "hi" ? "&lang=hi" : ""}`
   : `learn/${lang === "hi" ? "hi/" : ""}${topic}.html`;
+const lessonAttrs = topic => customLessonLink ? customLessonLink(topic) : `href="${defaultLessonHref(role, topic)}"`;
 const lessonName = topic => LESSON_TOPICS[topic].title[lang === "hi" ? 1 : 0];
 const minutesFor = qs => Math.round(qs.reduce((m, q) => m + (q.type === "mcq" ? 1 : 4), 0));
 
 // A session: question order, answers and position. Kept in localStorage so a refresh resumes it.
-let session = (() => {
+let session = null;
+const loadSession = () => {
   const s = store.get(LS_SESSION);
-  return s && s.role === role ? s : null;
-})();
+  session = s && s.role === role ? s : null;
+};
 
 function newSession(onlyIds) {
   const prev = results()[role];
@@ -106,12 +114,12 @@ function buildReport() {
 
 // ---------- views ----------
 function render() {
-  const app = $("#interviewApp");
+  const app = root;
   if (!role) app.innerHTML = pickView();
   else if (!session || session.phase === "intro") app.innerHTML = introView();
   else if (session.phase === "report") app.innerHTML = reportView();
   else app.innerHTML = questionView();
-  document.title = `${role ? `${ROLES[role].title} interview practice` : "AI interview practice"} | AI Path Finder`;
+  if (!embedded) document.title = `${role ? `${ROLES[role].title} interview practice` : "AI interview practice"} | AI Path Finder`;
   bind(app);
 }
 
@@ -136,8 +144,8 @@ function introView() {
   const canResume = inProgress && inProgress.role === role && inProgress.phase === "question" && inProgress.idx > 0;
   return `<div class="learn-bar"><div><p class="eyebrow">🎤 Interview practice</p><h2>${esc(ROLES[role].title)}</h2>
       <p class="muted">${qs.length} ${esc(UI.questions)} (${qs.filter(q => q.type === "mcq").length} ${esc(UI.mcqs)} · ${qs.filter(q => q.type === "open").length} ${esc(UI.opens)}) · ~${minutesFor(qs)} ${esc(UI.minutes)}</p></div>
-      <a class="link-btn small" href="interview.html">${esc(UI.switchRole)}</a></div>
-    <div class="lesson">
+      ${switchLink()}</div>
+    <div class="${box()}">
       ${res ? `<div class="score-strip"><span>${esc(UI.best)}: <strong>${res.best}%</strong></span><span>${esc(UI.last)}: <strong>${res.last}%</strong></span></div>` : ""}
       <h3>${esc(UI.how)}</h3>
       <ol class="path-list"><li>${esc(UI.how1)}</li><li>${esc(UI.how2)}</li><li>${esc(UI.how3)}</li></ol>
@@ -158,7 +166,7 @@ function questionView() {
   const q = qById(session.order[session.idx]);
   const a = session.answers[q.id] || {};
   const last = session.idx === session.order.length - 1;
-  const learnLinks = q.topics.map(tp => `<a href="${lessonHref(role, tp)}" target="_blank" rel="noopener">${LESSON_TOPICS[tp].icon} ${esc(lessonName(tp))}</a>`).join(" · ");
+  const learnLinks = q.topics.map(tp => `<a ${lessonAttrs(tp)}${embedded ? "" : ' target="_blank" rel="noopener"'}>${LESSON_TOPICS[tp].icon} ${esc(lessonName(tp))}</a>`).join(" · ");
   let body;
   if (q.type === "mcq") {
     const order = optionOrder(`${q.id}:${session.attempt}`, q.options.length);
@@ -182,7 +190,7 @@ function questionView() {
   }
   const answered = q.type === "mcq" ? a.choice !== undefined : a.revealed;
   return `<div class="learn-bar"><div><p class="eyebrow">🎤 ${esc(ROLES[role].title)}</p>${progressBar()}</div></div>
-    <article class="lesson iv-q">
+    <article class="${box()} iv-q">
       <p class="lesson-meta">${esc(UI.area)}: ${esc(q.area)} · ${q.type === "mcq" ? esc(UI.mcqs) : esc(UI.opens)}</p>
       <h2 class="lesson-title">${esc(q.q)}</h2>
       ${body}
@@ -202,8 +210,8 @@ function reportView() {
   const missedIds = wrongMcq.concat(weakOpen).map(q => q.id);
   const topicsOf = list => [...new Set(list.flatMap(q => q.topics))];
   return `<div class="learn-bar"><div><p class="eyebrow">🎤 ${esc(ROLES[role].title)}</p><h2>${esc(UI.report)}</h2></div>
-      <a class="link-btn small" href="interview.html">${esc(UI.switchRole)}</a></div>
-    <article class="lesson">
+      ${switchLink()}</div>
+    <article class="${box()}">
       <div class="iv-score ${verdict[0]}">
         <div class="iv-ring" style="--p:${pct}"><span>${pct}%</span></div>
         <div><p class="eyebrow">${esc(UI.overall)}</p><h3>${esc(verdict[1])}</h3><p>${esc(verdict[2])}</p><p class="tiny muted">${esc(UI.honest)}</p></div>
@@ -216,7 +224,7 @@ function reportView() {
       ${gaps.length ? gaps.map(g => `<div class="gap-card-iv">
           <p><strong>${esc(g.name)}</strong> · ${g.pct}%</p>
           <p class="small">${esc(UI.missedIn)}: ${g.a.missed.map(q => `“${esc(q.q)}”`).join("; ")}</p>
-          <p class="small"><strong>📖 ${esc(UI.studyThese)}:</strong> ${topicsOf(g.a.missed).map(tp => `<a href="${lessonHref(role, tp)}">${LESSON_TOPICS[tp].icon} ${esc(lessonName(tp))}</a>`).join(" · ")}</p>
+          <p class="small"><strong>📖 ${esc(UI.studyThese)}:</strong> ${topicsOf(g.a.missed).map(tp => `<a ${lessonAttrs(tp)}>${LESSON_TOPICS[tp].icon} ${esc(lessonName(tp))}</a>`).join(" · ")}</p>
         </div>`).join("") : `<p class="ok-text">${esc(UI.focusNone)}</p>`}
 
       ${strong.length ? `<h3>💪 ${esc(UI.strengths)}</h3><p>${strong.map(r => `<span class="chip chip-key">${esc(r.name)} · ${r.pct}%</span>`).join(" ")}</p>` : ""}
@@ -229,7 +237,7 @@ function reportView() {
             <p class="small"><span class="tag-wrong">${esc(UI.you)}</span> ${esc(q.options[a.choice])}</p>
             <p class="small"><span class="tag-right">${esc(UI.right)}</span> ${esc(q.options[q.answer])}</p>
             <p class="small muted"><strong>${esc(UI.why)}:</strong> ${esc(q.why)}</p>
-            <p class="small">📖 ${q.topics.map(tp => `<a href="${lessonHref(role, tp)}">${esc(lessonName(tp))}</a>`).join(" · ")}</p>
+            <p class="small">📖 ${q.topics.map(tp => `<a ${lessonAttrs(tp)}>${esc(lessonName(tp))}</a>`).join(" · ")}</p>
           </div>`;
         }).join("")}
         ${weakOpen.map(q => {
@@ -249,17 +257,25 @@ function reportView() {
         ${missedIds.length ? `<button type="button" class="button btn-secondary" data-act="retry-wrong" data-ids="${missedIds.join(",")}">${esc(UI.retryWrong)} (${missedIds.length})</button>` : "<span></span>"}
         <button type="button" class="button btn-primary" data-act="retake">${esc(UI.retake)}</button>
       </div>
-      <p class="small" style="text-align:center"><a href="learn.html?course=${role}">${esc(UI.toCourse)}</a> · <a href="resumes/${ROLES[role].slug}.html">${esc(UI.toResume)}</a></p>
+      ${embedded ? "" : `<p class="small" style="text-align:center"><a href="learn.html?course=${role}">${esc(UI.toCourse)}</a> · <a href="resume-builder.html?role=${role}">${esc(UI.toResume)}</a></p>`}
     </article>`;
+}
+
+const box = () => embedded ? "iv-box" : "lesson";
+const switchLink = () => embedded ? "" : `<a class="link-btn small" href="interview.html">${esc(UI.switchRole)}</a>`;
+function toTop() {
+  if (!embedded) { window.scrollTo({ top: 0 }); return; }
+  const r = root.getBoundingClientRect();
+  if (r.top < 0) root.scrollIntoView({ block: "start" });
 }
 
 // ---------- events ----------
 function bind(app) {
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(el => el.addEventListener("click", fn));
-  on('[data-act="start"]', () => { newSession(); render(); window.scrollTo({ top: 0 }); });
+  on('[data-act="start"]', () => { newSession(); render(); toTop(); });
   on('[data-act="resume"]', () => { session = store.get(LS_SESSION); render(); });
-  on('[data-act="retake"]', () => { newSession(); render(); window.scrollTo({ top: 0 }); });
-  on('[data-act="retry-wrong"]', e => { newSession(e.currentTarget.dataset.ids.split(",")); render(); window.scrollTo({ top: 0 }); });
+  on('[data-act="retake"]', () => { newSession(); render(); toTop(); });
+  on('[data-act="retry-wrong"]', e => { newSession(e.currentTarget.dataset.ids.split(",")); render(); toTop(); });
   on("[data-choice]", e => {
     const q = qById(session.order[session.idx]);
     session.answers[q.id] = { choice: Number(e.currentTarget.dataset.choice) };
@@ -293,7 +309,7 @@ function bind(app) {
     render();
   }));
   on('[data-act="next"]', () => {
-    if (session.idx < session.order.length - 1) { session.idx++; saveSession(); render(); window.scrollTo({ top: 0 }); return; }
+    if (session.idx < session.order.length - 1) { session.idx++; saveSession(); render(); toTop(); return; }
     session.phase = "report";
     saveSession();
     if (!session.partial) {
@@ -304,8 +320,25 @@ function bind(app) {
       store.set(LS_RESULTS, all);
     }
     render();
-    window.scrollTo({ top: 0 });
+    toTop();
   });
 }
 
-render();
+function mount(el, opts = {}) {
+  root = el;
+  embedded = !!opts.embedded;
+  customLessonLink = opts.lessonLink || null;
+  lang = opts.lang || (store.get(LS_LANG) === "hi" ? "hi" : "en");
+  UI = UI_ALL[lang];
+  role = ROLE_IDS.includes(opts.role) ? opts.role : null;
+  loadSession();
+  render();
+}
+
+return { mount };
+})();
+
+if (typeof document !== "undefined" && document.getElementById("interviewApp")) {
+  const r = new URLSearchParams(location.search).get("role");
+  InterviewApp.mount(document.getElementById("interviewApp"), { role: r });
+}

@@ -119,6 +119,22 @@
             "@type": "Answer",
             "text": "It generates likely-sounding text and doesn't check facts by itself. LLMs predict plausible text. Without retrieval or tools they have no fact-checking step."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How many tokens is a page of text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roughly 500 to 700 tokens for a page of English. Hindi and other scripts often use more tokens for the same meaning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the same prompt give different answers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a token is sampled from probabilities. Lower the temperature (towards 0) for more consistent output."
+          }
         }
       ]
     }
@@ -133,7 +149,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -156,6 +172,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Your phone keyboard suggests the next word as you type. An LLM (large language model) is that idea scaled up enormously: trained on a huge share of the internet&#39;s text, it predicts the next word so well that whole essays, code and answers come out. The &#39;context window&#39; is how much of the conversation it can keep in mind at once, like the size of a whiteboard.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>LLMs read and write in tokens, chunks of text roughly ¾ of an English word. Hindi and other languages often use more tokens per word. You pay for, and are limited by, tokens. The context window is the maximum number of tokens (your prompt plus documents plus the answer) the model can handle at once. Temperature controls randomness: low (0–0.3) gives focused, repeatable answers, and higher values are more creative. LLMs don&#39;t &#39;look things up&#39; unless you give them tools or documents. They generate likely text, which is why they can confidently be wrong (hallucinate).</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Bars show next-word probabilities: ginger 41 percent, biscuits 32, friends 12, rain 8; ginger is appended to the sentence" focusable="false"><defs><marker id="ah-lm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><g><rect x="20" y="18" width="600" height="44" rx="10" class="b"/><text x="40" y="46" text-anchor="start" class="">Chai is best with</text><g class="s5"><text x="186" y="46" text-anchor="start" class="tb ok">ginger</text></g><rect x="240" y="30" width="2" height="22" class="cursor"/></g><text x="40" y="92" text-anchor="start" class="tm ts">next-token probabilities</text><text x="120" y="122" text-anchor="end" class="ts">ginger</text><rect x="130" y="108" width="369" height="18" rx="5" class="bo grow"/><text x="509" y="122" text-anchor="start" class="ts tm">41%</text><text x="120" y="150" text-anchor="end" class="ts">biscuits</text><rect x="130" y="136" width="288" height="18" rx="5" class="f2 grow"/><text x="428" y="150" text-anchor="start" class="ts tm">32%</text><text x="120" y="178" text-anchor="end" class="ts">friends</text><rect x="130" y="164" width="108" height="18" rx="5" class="f2 grow"/><text x="248" y="178" text-anchor="start" class="ts tm">12%</text><text x="120" y="206" text-anchor="end" class="ts">rain</text><rect x="130" y="192" width="72" height="18" rx="5" class="f2 grow"/><text x="212" y="206" text-anchor="start" class="ts tm">8%</text><g class="s5"><text x="604" y="46" text-anchor="end" class="ok tb ts">picked ✓</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">An LLM scores every possible next token, picks one (here &#39;ginger&#39;), adds it to the text, and repeats, one token at a time.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Your text is split into tokens (pieces of words). &quot;Unbelievable&quot; might become &quot;un&quot;, &quot;believ&quot;, &quot;able&quot;.</li><li data-read>Everything the model sees at once, your instructions, documents, chat history and its own answer, must fit in the context window.</li><li data-read>The model predicts a probability for every possible next token, picks one, appends it, and repeats.</li><li data-read>Temperature controls how adventurous that pick is: low for facts and formats, higher for brainstorming.</li><li data-read>It has no memory between API calls. Chat apps resend the conversation each time, which is why long chats cost more.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Token</dt><dd>The unit LLMs read and bill by, a word-piece.</dd></div><div data-read><dt>Context window</dt><dd>The maximum text the model can consider in one go.</dd></div><div data-read><dt>Hallucination</dt><dd>A confident-sounding answer that is made up or wrong.</dd></div></dl>
       </section>
@@ -167,11 +184,13 @@ temperature 1.0 → &quot;Kettle &amp; Kulhad&quot;, &quot;Brew Bandhu&quot;, &q
 Tokens: &quot;Suggest a name for my chai startup&quot; ≈ 8 tokens</code></pre></div>
         <p class="small muted" data-read>Low temperature for facts and code, higher for brainstorming.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Treating answers as facts. LLMs produce plausible text; verify anything important or ground it with sources.</li><li data-read>Ignoring the knowledge cutoff. A model doesn&#39;t know events after its training data unless you give it that information.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Why can an LLM state a wrong fact confidently?</p>
         <ol type="A"><li data-read data-read-text="Option A: It is lying on purpose">It is lying on purpose</li><li data-read data-read-text="Option B: It generates likely-sounding text and doesn&#39;t check facts by itself">It generates likely-sounding text and doesn&#39;t check facts by itself</li><li data-read data-read-text="Option C: Its internet is slow">Its internet is slow</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. It generates likely-sounding text and doesn&#39;t check facts by itself</strong>: LLMs predict plausible text. Without retrieval or tools they have no fact-checking step.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>How many tokens is a page of text?</summary><p data-read>Roughly 500 to 700 tokens for a page of English. Hindi and other scripts often use more tokens for the same meaning.</p></details><details class="deep-faq"><summary data-read>Why does the same prompt give different answers?</summary><p data-read>Because a token is sampled from probabilities. Lower the temperature (towards 0) for more consistent output.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>LLM = super-powered next-word predictor. Mind tokens, context and temperature.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -193,7 +212,7 @@ Tokens: &quot;Suggest a name for my chai startup&quot; ≈ 8 tokens</code></pre>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

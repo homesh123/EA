@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "A product dimension table. Category describes the product, so it lives in the product dimension, which the fact table links to."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Normalised tables or a star schema?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apps use normalised tables to avoid duplicate data while writing. Analytics uses star schemas because they make reading and reporting simple and fast."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does data modelling matter for AI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clean, well defined tables make features and training data trustworthy. Many 'model problems' are really data definition problems."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A supermarket bill lists what happened: items, quantities, amounts. That&#39;s a &#39;fact&#39;. Separately, the store keeps details about products (brand, category) and stores (city, size). Those are &#39;dimensions&#39;. Keeping the bills slim and the details in their own tables makes every report faster and cleaner.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Analytics databases (data warehouses like BigQuery or Snowflake) are designed differently from app databases. The classic design is a star schema: a central fact table of events (sales, clicks, trips) with numeric measures, surrounded by dimension tables that describe the who, what, where and when. Window functions such as running totals, ranks and &#39;previous value&#39; let you analyse sequences without messy self-joins. A good model makes common questions easy and wrong answers hard.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Decide the grain: what does one row mean? One order, one order line, or one customer per day?</li><li data-read>Create a fact table for events and numbers (order_id, date_id, product_id, quantity, amount).</li><li data-read>Create dimension tables for descriptions (product name and category, customer city, calendar dates).</li><li data-read>Connect them with keys in a star shape: facts in the middle, dimensions around.</li><li data-read>Document each table and column, and add tests (unique keys, no NULLs where not allowed).</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Fact table</dt><dd>Events with numbers, e.g. each sale and its amount.</dd></div><div data-read><dt>Dimension table</dt><dd>Descriptive details, e.g. product name or store city.</dd></div><div data-read><dt>Window function</dt><dd>A calculation across related rows, such as a rank or running total.</dd></div></dl>
       </section>
@@ -145,11 +162,13 @@
 FROM fact_sales;</code></pre></div>
         <p class="small muted" data-read>A running total per store, with no self-join needed.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Mixing grains in one table, like daily totals and individual orders together. Sums become wrong.</li><li data-read>Overwriting history: if a customer moves city and you overwrite it, old sales get the new city. Keep history where it matters.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">In a star schema, where does the &#39;product category&#39; column belong?</p>
         <ol type="A"><li data-read data-read-text="Option A: Repeated in every table">Repeated in every table</li><li data-read data-read-text="Option B: The fact table">The fact table</li><li data-read data-read-text="Option C: A product dimension table">A product dimension table</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. A product dimension table</strong>: Category describes the product, so it lives in the product dimension, which the fact table links to.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Normalised tables or a star schema?</summary><p data-read>Apps use normalised tables to avoid duplicate data while writing. Analytics uses star schemas because they make reading and reporting simple and fast.</p></details><details class="deep-faq"><summary data-read>Why does data modelling matter for AI?</summary><p data-read>Clean, well defined tables make features and training data trustworthy. Many &#39;model problems&#39; are really data definition problems.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Facts = what happened (numbers). Dimensions = descriptions.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -171,7 +190,7 @@ FROM fact_sales;</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

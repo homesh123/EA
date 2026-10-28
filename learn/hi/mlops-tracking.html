@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Model registry mein pichhle version pe roll back karna. Registry tested versions rakhti hai, isliye rollback ek step ka kaam hai."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya MLflow hi ek option hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nahi. Weights & Biases, cloud tools (SageMaker, Vertex AI) aur doosre bhi aisa hi karte hain. Tool se zyaada aadat zaroori hai."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Data ka version kaise rakhun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dated snapshots, warehouse ya lakehouse mein table versions, ya DVC jaise tools use karo, aur har run ke saath version record karo."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Achha cook naye biryani recipes try karte waqt har koshish likhta hai: chawal ka brand, masaalon ki quantity, pakane ka time aur taste kaisa tha. Notes ke bina woh sabse acchi wali kabhi dobara nahi bana paayega. Experiment tracking ML ke liye wahi notebook hai, aur model registry approved, label wali recipes ki shelf hai jo restaurant asal mein serve karta hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>MLOps machine learning ke liye DevOps hai: model training ko reproducible aur deployment ko reliable banaana. Experiment tracking tools (MLflow, Weights &amp; Biases) har run ka code version, data version, parameters, metrics aur output model automatically log karte hain, taaki aap runs compare kar sako aur best wala dobara bana sako. Model registry approved model versions ko &#39;staging&#39; aur &#39;production&#39; jaise stages ke saath store karti hai, taaki deployment hamesha jaana-pehchaana, tested version uthaaye aur aap turant roll back kar sako. ML ke liye CI/CD model promote hone se pehle automated tests aur evals jodta hai.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Har training run log karo: parameters, metrics, code commit aur data version (MLflow ya waisa tool).</li><li data-read>Trained model aur uska preprocessing ek artifact ke roop mein save karo.</li><li data-read>Acche models ko model registry mein version aur stage (staging, production) ke saath register karo.</li><li data-read>Model tabhi promote karo jab woh fixed evaluation set pe current wale ko hara de.</li><li data-read>Version se deploy karo, taaki rollback bas pichhle version ki taraf ishaara karna ho.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Experiment run</dt><dd>Ek training koshish, uski settings aur results ke log ke saath.</dd></div><div data-read><dt>Model registry</dt><dd>Approved models aur unke stages ka versioned store.</dd></div><div data-read><dt>Reproducibility</dt><dd>Bilkul same model dobara bana paana.</dd></div></dl>
       </section>
@@ -153,11 +170,13 @@ with mlflow.start_run(run_name=&quot;xgb-depth4&quot;):
     mlflow.sklearn.log_model(model, &quot;model&quot;, registered_model_name=&quot;fraud&quot;)</code></pre></div>
         <p class="small muted" data-read>Har run record hota hai, aur best wala registry mein jaata hai.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Results notebooks aur spreadsheets mein rakhna. Baad mein koi reproduce ya compare nahi kar paata.</li><li data-read>Runs ke beech evaluation data badalna, jisse scores compare nahi ho paate.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Naya model version production mein kharab perform kar raha hai. Sabse jaldi recover kaise hoga?</p>
         <ol type="A"><li data-read data-read-text="Option A: Yaad se dobara train karna">Yaad se dobara train karna</li><li data-read data-read-text="Option B: Logs delete karna">Logs delete karna</li><li data-read data-read-text="Option C: Model registry mein pichhle version pe roll back karna">Model registry mein pichhle version pe roll back karna</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Model registry mein pichhle version pe roll back karna</strong>: Registry tested versions rakhti hai, isliye rollback ek step ka kaam hai.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kya MLflow hi ek option hai?</summary><p data-read>Nahi. Weights &amp; Biases, cloud tools (SageMaker, Vertex AI) aur doosre bhi aisa hi karte hain. Tool se zyaada aadat zaroori hai.</p></details><details class="deep-faq"><summary data-read>Data ka version kaise rakhun?</summary><p data-read>Dated snapshots, warehouse ya lakehouse mein table versions, ya DVC jaise tools use karo, aur har run ke saath version record karo.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Har run log karo, har ship hua model register karo, aur hamesha roll back kar sako.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -179,7 +198,7 @@ with mlflow.start_run(run_name=&quot;xgb-depth4&quot;):
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

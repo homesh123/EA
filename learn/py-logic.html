@@ -119,6 +119,22 @@
             "@type": "Answer",
             "text": "A function inside a loop. Write the rule once as a function, then loop over the orders and call it for each one."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I use for vs while?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use for when you know what to go through (a list, a range). Use while when you repeat until a condition changes and don't know how many times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How big should a function be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Small enough to describe in one sentence. If you need 'and' twice to describe it, split it into two functions."
+          }
         }
       ]
     }
@@ -133,7 +149,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -156,6 +172,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A traffic signal makes decisions: if red, stop; else if green, go. That&#39;s if/else. A washing machine repeats the same rinse cycle several times. That&#39;s a loop. And your mom&#39;s chai recipe is written once and reused every morning. That&#39;s a function: steps you package once and call whenever you need them.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Programs need to make decisions, repeat work and stay organised. &#39;if / elif / else&#39; runs different code depending on a condition. A &#39;for&#39; loop repeats code for each item in a collection, and a &#39;while&#39; loop repeats until a condition becomes false. A function (made with &#39;def&#39;) bundles steps under a name, takes inputs (parameters) and gives back an output with &#39;return&#39;. Good functions do one clear job, which makes code easier to test and reuse.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Decisions with if / elif / else: if marks &gt;= 90: grade = &quot;A&quot; elif marks &gt;= 75: grade = &quot;B&quot; else: grade = &quot;C&quot;. Indentation (4 spaces) shows what&#39;s inside each block.</li><li data-read>Repeat with for: for city in [&quot;Pune&quot;, &quot;Delhi&quot;]: print(city). Use range(5) to repeat 5 times.</li><li data-read>Repeat until something changes with while: while balance &lt; target: balance += saving. Make sure the loop can end.</li><li data-read>Package logic in a function: def emi(principal, rate, months): ... return value. Call it with different inputs instead of copying code.</li><li data-read>Test functions with small known cases: if emi(100000, 0, 10) should be 10000, check it with assert.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Condition</dt><dd>A question with a True/False answer, e.g. price &gt; 100.</dd></div><div data-read><dt>Loop</dt><dd>Code that repeats for each item or until a condition changes.</dd></div><div data-read><dt>Function</dt><dd>A named, reusable block of code with inputs and an output.</dd></div></dl>
       </section>
@@ -171,11 +188,13 @@ for o in orders:
 # 120 → 120, 650 → 585.0, 300 → 300</code></pre></div>
         <p class="small muted" data-read>A kirana-store discount rule written once and used for every order.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Wrong indentation: mixing tabs and spaces or forgetting to indent after a colon causes errors or wrong logic.</li><li data-read>Infinite while loops: the condition never becomes false. Always update the variable you check.</li><li data-read>Printing inside a function instead of returning. print shows a value; return gives it back so other code can use it.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">You need to apply the same discount rule to 1,000 orders. What do you use?</p>
         <ol type="A"><li data-read data-read-text="Option A: Copy-paste the code 1,000 times">Copy-paste the code 1,000 times</li><li data-read data-read-text="Option B: A single if statement">A single if statement</li><li data-read data-read-text="Option C: A function inside a loop">A function inside a loop</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. A function inside a loop</strong>: Write the rule once as a function, then loop over the orders and call it for each one.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>When should I use for vs while?</summary><p data-read>Use for when you know what to go through (a list, a range). Use while when you repeat until a condition changes and don&#39;t know how many times.</p></details><details class="deep-faq"><summary data-read>How big should a function be?</summary><p data-read>Small enough to describe in one sentence. If you need &#39;and&#39; twice to describe it, split it into two functions.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>if = decide, loop = repeat, function = reuse.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -197,7 +216,7 @@ for o in orders:
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

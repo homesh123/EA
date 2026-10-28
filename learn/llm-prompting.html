@@ -119,6 +119,22 @@
             "@type": "Answer",
             "text": "A specific JSON format. A fixed JSON shape can be parsed reliably. Free text can't."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Do long prompts work better?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clear beats long. Include what's needed, remove what isn't. Long irrelevant context can confuse the model and costs more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is chain of thought?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Asking the model to reason step by step before answering. It helps on maths and multi step problems; many modern models do it internally."
+          }
         }
       ]
     }
@@ -133,7 +149,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -156,6 +172,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Tell a new intern &#39;make a report&#39; and you&#39;ll get something random. Tell them &#39;make a one-page sales report for March, compare it with February, use a table, and highlight the top 3 cities&#39; and you get exactly what you need. LLMs are brilliant interns: the clearer the brief, the better the work.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>A good prompt gives the role and context, the exact task, constraints such as length, tone, language and format, and examples of good output. The system prompt sets lasting rules (&#39;You are a helpful bank assistant. Never share account numbers.&#39;). Few-shot prompting means showing 2–3 examples of input → desired output. Asking the model to think step by step before answering improves reasoning. Asking for structured output (JSON) makes answers usable by code. Treat prompts like code: test them on real examples and iterate.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>State the role and the goal: &quot;You are a support assistant for a bank. Answer customer questions about cards.&quot;</li><li data-read>Give the context the model needs: the policy text, the customer&#39;s plan, today&#39;s date.</li><li data-read>Spell out rules and limits: answer only from the policy, say &quot;I don&#39;t know&quot; otherwise, keep it under 100 words.</li><li data-read>Show one or two examples of a good answer, and define the output format (bullets, JSON with named fields).</li><li data-read>Test on 20 or more real inputs, look at failures, adjust one thing at a time, and keep versions of your prompt.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>System prompt</dt><dd>Standing instructions that shape every response.</dd></div><div data-read><dt>Few-shot</dt><dd>Including a few worked examples in the prompt.</dd></div><div data-read><dt>Structured output</dt><dd>Asking for a fixed format like JSON so code can read it.</dd></div></dl>
       </section>
@@ -166,11 +183,13 @@ User:   Classify: &quot;Order came cold and 40 mins late 😡&quot;
 Model:  {&quot;category&quot;: &quot;delivery&quot;, &quot;sentiment&quot;: &quot;neg&quot;, &quot;urgent&quot;: true}</code></pre></div>
         <p class="small muted" data-read>Role + task + exact format = reliable, machine-readable answers.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Vague prompts like &quot;make it better&quot;. Say what better means: shorter, friendlier, with a call to action.</li><li data-read>Judging a prompt on one or two tries. Prompts that look great on one example often fail on others.</li><li data-read>Putting secrets or private data in prompts sent to tools that aren&#39;t approved by your company.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Your app needs to read the LLM&#39;s answer in code. What should the prompt ask for?</p>
         <ol type="A"><li data-read data-read-text="Option A: A friendly paragraph">A friendly paragraph</li><li data-read data-read-text="Option B: As much detail as possible">As much detail as possible</li><li data-read data-read-text="Option C: A specific JSON format">A specific JSON format</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. A specific JSON format</strong>: A fixed JSON shape can be parsed reliably. Free text can&#39;t.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Do long prompts work better?</summary><p data-read>Clear beats long. Include what&#39;s needed, remove what isn&#39;t. Long irrelevant context can confuse the model and costs more.</p></details><details class="deep-faq"><summary data-read>What is chain of thought?</summary><p data-read>Asking the model to reason step by step before answering. It helps on maths and multi step problems; many modern models do it internally.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Role + context + task + format + examples. Then test and iterate.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -192,7 +211,7 @@ Model:  {&quot;category&quot;: &quot;delivery&quot;, &quot;sentiment&quot;: &quo
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

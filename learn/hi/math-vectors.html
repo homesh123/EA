@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Similar hain / same direction mein hain. Bada positive dot product matlab vectors milti-julti direction mein point karte hain, yaani similar hain."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kitni linear algebra chahiye?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zyaadatar engineering roles ke liye: vectors, dot products, matrix multiplication aur shapes. Research roles ko bahut zyaada chahiye."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "NumPy ka kya role hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NumPy vectors aur matrices ko efficiently store karta hai aur unpe tez maths karta hai. Pandas aur zyaadatar ML libraries iske upar bani hain."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Ek phone ko numbers se describe karo: [price, battery, camera MP, weight] = [20000, 5000, 50, 190]. Yeh list ek vector hai, aur milte-julte vectors wale do phones milte-julte phones hain. 100 phones ki spreadsheet, jismein har row ek vector hai, ek matrix hai. AI models zyaadatar bahut saari fast vector aur matrix maths hi hain.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Vector numbers ki ordered list hai jo kisi cheez ko represent karti hai: data ki row, image, ya kisi word ka matlab. Matrix numbers ka grid hai, yaani bahut saare vectors ek ke upar ek. Key operations: dot product batata hai ki do vectors kitne ek hi direction mein hain (similarity search ka base), aur matrix multiplication vectors ko transform karta hai (har neural-network layer yahi karti hai). Eigenvectors data mein variation ki main directions batate hain. Inhe haath se calculate nahi karna padta; NumPy aur PyTorch kar dete hain. Lekin inka matlab samajhne se papers aur models padhne laayak ho jaate hain.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Vector numbers ki list hai: ek ghar jaise [3 bedrooms, 1200 sq ft, centre se 8 km].</li><li data-read>Matrix numbers ki table hai: bahut saare ghar, har ek ki ek row.</li><li data-read>Dot product matching numbers ko multiply karke jodta hai. Model ka prediction aksar features aur weights ka dot product hota hai.</li><li data-read>Matrix multiplication ek saath bahut saare dot products karta hai. GPUs isi mein tez hain, isliye AI unpe chalta hai.</li><li data-read>Cosine similarity do vectors ki direction compare karti hai. Milte julte matlab ki direction milti julti hoti hai, isi se semantic search chalta hai.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Vector</dt><dd>Numbers ki ordered list jo ek cheez ko describe kare.</dd></div><div data-read><dt>Dot product</dt><dd>Matching numbers multiply karke jodo. Zyaada value matlab zyaada aligned.</dd></div><div data-read><dt>Matrix multiplication</dt><dd>Ek saath bahut saare vectors transform karna. Neural layer ka core kaam.</dd></div></dl>
       </section>
@@ -153,11 +170,13 @@ print(you @ riya)    # 40 → very similar tastes
 print(you @ vikas)   # 9  → quite different</code></pre></div>
         <p class="small muted" data-read>Dot product ek simple &#39;pasand ki similarity&#39; score ki tarah. Recommenders yahi idea use karte hain.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Shapes mein gadbad. (3×2) matrix sirf 2 rows wali cheez se multiply ho sakti hai. Debug karte waqt shapes print karo.</li><li data-read>Bahut alag scale wale vectors (rupees vs counts) bina scaling compare karna. Ek feature distance pe haavi ho jaata hai.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Do vectors ka dot product bada positive hai. Woh shayad…</p>
         <ol type="A"><li data-read data-read-text="Option A: Similar hain / same direction mein hain">Similar hain / same direction mein hain</li><li data-read data-read-text="Option B: Khaali hain">Khaali hain</li><li data-read data-read-text="Option C: Bilkul alag hain">Bilkul alag hain</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Similar hain / same direction mein hain</strong>: Bada positive dot product matlab vectors milti-julti direction mein point karte hain, yaani similar hain.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kitni linear algebra chahiye?</summary><p data-read>Zyaadatar engineering roles ke liye: vectors, dot products, matrix multiplication aur shapes. Research roles ko bahut zyaada chahiye.</p></details><details class="deep-faq"><summary data-read>NumPy ka kya role hai?</summary><p data-read>NumPy vectors aur matrices ko efficiently store karta hai aur unpe tez maths karta hai. Pandas aur zyaadatar ML libraries iske upar bani hain.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>AI mein sab kuch vectors ban jaata hai, aur similarity bas vector maths hai.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -179,7 +198,7 @@ print(you @ vikas)   # 9  → quite different</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

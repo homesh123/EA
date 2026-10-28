@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Retrieval: chunking, embeddings or hybrid search. If the right text never reaches the prompt, no LLM can answer correctly. Fix retrieval first."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "RAG or a bigger context window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Even with huge context windows, RAG is usually cheaper, faster and more accurate, because the model sees only what's relevant. For one small document, just put it in the prompt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I keep the index up to date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Run a sync job that re-embeds changed documents and deletes removed ones, triggered by changes or on a schedule."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>An open-book exam: you don&#39;t memorise the whole textbook. When a question comes, you find the right pages, read them, and write your answer from them, citing the chapter. RAG (Retrieval-Augmented Generation) makes an LLM take an open-book exam with your company&#39;s documents.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>There are two phases. Indexing: split documents into chunks (a few paragraphs each), create an embedding for each chunk, and store them in a vector database. Answering: embed the user&#39;s question, retrieve the most relevant chunks, put them into the prompt (&#39;Answer only from these sources…&#39;), and let the LLM write the answer with citations. RAG keeps answers current and grounded in your data without retraining the model. Most RAG quality problems are retrieval problems, such as bad chunking or missing documents, so measure retrieval separately from the final answer.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 236" role="img" aria-label="RAG pipeline: question, embed, search the vector database, add chunks to the prompt, answer with a source" focusable="false"><defs><marker id="ah-rg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><g><rect x="16" y="12" width="608" height="44" rx="10" class="bm"/><text x="320" y="40" text-anchor="middle" class="ts">Indexing (once): 📄 documents → ✂️ chunks → 🔢 embeddings → 🗄️ vector DB</text></g><g class="s1"><rect x="16" y="96" width="112" height="56" rx="10" class="b"/><text x="72" y="129" text-anchor="middle" class="ts">❓ Question</text></g><g class="s2"><rect x="140" y="96" width="112" height="56" rx="10" class="b"/><text x="196" y="129" text-anchor="middle" class="ts">🔢 Embed</text></g><g class="s3"><rect x="264" y="96" width="112" height="56" rx="10" class="ba"/><text x="320" y="129" text-anchor="middle" class="ts">🔎 Search</text></g><g class="s4"><rect x="388" y="96" width="112" height="56" rx="10" class="b"/><text x="444" y="129" text-anchor="middle" class="ts">🧩 Prompt</text></g><g class="s5"><rect x="512" y="96" width="112" height="56" rx="10" class="bo"/><text x="568" y="129" text-anchor="middle" class="ts">✅ Answer</text></g><path d="M128 124 H138" class="ln " marker-end="url(#ah-rg)"/><path d="M252 124 H262" class="ln " marker-end="url(#ah-rg)"/><path d="M376 124 H386" class="ln " marker-end="url(#ah-rg)"/><path d="M500 124 H510" class="ln " marker-end="url(#ah-rg)"/><path d="M320 56 V94" class="ln la fl"/><circle r="6" class="dot"><animateMotion dur="4s" repeatCount="indefinite" path="M72 124 H568"/></circle><text x="320" y="196" text-anchor="middle" class="ts ok">“New joiners get 8 casual leaves [HR-Policy §4.2]”</text><text x="320" y="222" text-anchor="middle" class="tm ts">if nothing relevant is found → say so (don't guess)</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Indexing happens once: documents → chunks → embeddings → vector DB. For each question, retrieve the best chunks, add them to the prompt, and answer with the source.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Collect and clean the documents: remove duplicates, old versions and junk text.</li><li data-read>Chunk them along headings and paragraphs, a few hundred tokens each, and keep title, section and date as metadata.</li><li data-read>Embed the chunks and store them; for each question, retrieve the top matches (ideally hybrid search plus a reranker).</li><li data-read>Prompt: &quot;Answer only from the sources below and cite them. If they don&#39;t contain the answer, say so.&quot;</li><li data-read>Build an eval set of real questions; measure retrieval (was the right chunk found?) and answers (correct and faithful?) separately.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Chunking</dt><dd>Splitting documents into small, searchable pieces.</dd></div><div data-read><dt>Retrieval</dt><dd>Finding the most relevant chunks for a question.</dd></div><div data-read><dt>Grounding / citations</dt><dd>Answering only from the retrieved sources and showing which ones.</dd></div></dl>
       </section>
@@ -162,11 +179,13 @@ prompt = f&quot;Answer ONLY from the sources below. Cite them. If not found, say
 answer = llm(prompt)   # → &quot;New joiners get 8 casual leaves per year [HR-Policy-2026 §4.2]&quot;</code></pre></div>
         <p class="small muted" data-read>Retrieve → augment the prompt → generate. Plus an honest &#39;not found&#39; rule.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Fixed size chunks that cut tables and lists in half. Respect document structure.</li><li data-read>Stuffing 30 chunks into the prompt. More isn&#39;t better; a few relevant chunks usually beat many.</li><li data-read>Ignoring permissions, so users see documents they shouldn&#39;t. Filter at retrieval time.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Your RAG bot gives wrong answers. The right document exists, but it&#39;s never retrieved. What should you fix first?</p>
         <ol type="A"><li data-read data-read-text="Option A: Increase temperature">Increase temperature</li><li data-read data-read-text="Option B: Switch to a bigger LLM">Switch to a bigger LLM</li><li data-read data-read-text="Option C: Retrieval: chunking, embeddings or hybrid search">Retrieval: chunking, embeddings or hybrid search</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Retrieval: chunking, embeddings or hybrid search</strong>: If the right text never reaches the prompt, no LLM can answer correctly. Fix retrieval first.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>RAG or a bigger context window?</summary><p data-read>Even with huge context windows, RAG is usually cheaper, faster and more accurate, because the model sees only what&#39;s relevant. For one small document, just put it in the prompt.</p></details><details class="deep-faq"><summary data-read>How do I keep the index up to date?</summary><p data-read>Run a sync job that re-embeds changed documents and deletes removed ones, triggered by changes or on a schedule.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>RAG = search your docs, then answer from them with citations.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -188,7 +207,7 @@ answer = llm(prompt)   # → &quot;New joiners get 8 casual leaves per year [HR-
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

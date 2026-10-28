@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "An inference server with continuous batching. Batching packs more requests onto the same GPU, raising utilisation and throughput."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What is batching and why does it help?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Processing many requests together keeps the GPU busy. Continuous batching adds new requests into a running batch instead of waiting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should we self host an LLM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When data can't leave your environment, when volume is high enough that it's cheaper, or when you need a fine tuned open model."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>An auto-rickshaw carrying one passenger at a time is slow and expensive per person. A bus that waits a few seconds to fill up moves far more people for the same fuel. LLM servers &#39;batch&#39; many user requests together on one GPU for the same reason: much better throughput and lower cost per request.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Self-hosting open models (Llama, Qwen, Mistral) needs GPUs, and GPUs are expensive. Inference servers like vLLM or TGI maximise GPU use with continuous batching (adding new requests mid-flight) and efficient memory for the conversation cache. Key metrics: time to first token (how fast the reply starts), tokens per second, p95 latency and cost per 1,000 requests. Quantisation shrinks models to fit cheaper GPUs, caching repeated prompts saves money, and an LLM gateway in front routes traffic, enforces budgets and falls back between providers.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Pick the smallest model that meets your quality bar on your eval set.</li><li data-read>Consider quantisation (8 bit or 4 bit) to fit on cheaper GPUs with little quality loss; measure it.</li><li data-read>Serve with an LLM inference engine (vLLM, TGI) for continuous batching and efficient KV cache memory.</li><li data-read>Measure time to first token, tokens per second and cost per 1,000 requests under realistic load.</li><li data-read>Autoscale on queue length, cache repeated prompts, and route easy requests to smaller models.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Batching</dt><dd>Processing many requests together to use the GPU fully.</dd></div><div data-read><dt>Time to first token</dt><dd>How quickly the first words of a reply appear.</dd></div><div data-read><dt>p95 latency</dt><dd>95% of requests are faster than this. It captures the slow tail.</dd></div></dl>
       </section>
@@ -147,11 +164,13 @@ vllm serve Qwen/Qwen2.5-7B-Instruct --max-model-len 8192
 # Track: time-to-first-token, tokens/sec, p95 latency, GPU utilisation, ₹ per 1k requests</code></pre></div>
         <p class="small muted" data-read>One command gives you a batched, production-style LLM server.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Comparing GPUs only by price per hour. Compare cost per request at your real traffic.</li><li data-read>Self hosting by default. At low volume, an API is often cheaper and far simpler.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Your GPU sits at 20% utilisation while users wait. What helps most?</p>
         <ol type="A"><li data-read data-read-text="Option A: A bigger model">A bigger model</li><li data-read data-read-text="Option B: An inference server with continuous batching">An inference server with continuous batching</li><li data-read data-read-text="Option C: Buy more GPUs">Buy more GPUs</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. An inference server with continuous batching</strong>: Batching packs more requests onto the same GPU, raising utilisation and throughput.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>What is batching and why does it help?</summary><p data-read>Processing many requests together keeps the GPU busy. Continuous batching adds new requests into a running batch instead of waiting.</p></details><details class="deep-faq"><summary data-read>When should we self host an LLM?</summary><p data-read>When data can&#39;t leave your environment, when volume is high enough that it&#39;s cheaper, or when you need a fine tuned open model.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Batch requests, measure latency and cost, and quantise and cache where you can.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -173,7 +192,7 @@ vllm serve Qwen/Qwen2.5-7B-Instruct --max-model-len 8192
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

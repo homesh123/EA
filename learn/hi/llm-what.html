@@ -119,6 +119,22 @@
             "@type": "Answer",
             "text": "Woh likely-sounding text banata hai aur khud facts check nahi karta. LLMs plausible text predict karte hain. Retrieval ya tools ke bina unke paas fact-check ka koi step nahi hota."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Ek page text mein kitne tokens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "English ke ek page mein lagbhag 500 se 700 tokens. Hindi aur doosri scripts aksar same matlab ke liye zyaada tokens leti hain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Same prompt alag jawaab kyun deta hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kyunki token probabilities se sample hota hai. Zyaada consistent output ke liye temperature kam karo (0 ki taraf)."
+          }
         }
       ]
     }
@@ -133,7 +149,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -156,6 +172,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Typing karte waqt phone ka keyboard agla word suggest karta hai. LLM (large language model) wahi idea hai, lekin bahut bada: internet ke bahut bade hisse ke text pe train hokar woh agla word itni acchi tarah predict karta hai ki poore essays, code aur jawaab ban jaate hain. &#39;Context window&#39; yeh hai ki woh ek baar mein conversation ka kitna hissa yaad rakh sakta hai, jaise whiteboard ka size.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte hain. Aap tokens ke hisaab se pay karte ho, aur limit bhi tokens ki hi hoti hai. Context window maximum tokens hain (aapka prompt, documents aur jawaab milakar) jo model ek baar mein handle kar sakta hai. Temperature randomness control karta hai: low (0–0.3) focused, repeatable jawaab deta hai, aur zyaada value zyaada creative hoti hai. Jab tak aap tools ya documents na do, LLMs kuch &#39;look up&#39; nahi karte. Woh likely text generate karte hain, isliye confidently galat bhi ho sakte hain (hallucinate).</p></section>
       <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Bars show next-word probabilities: ginger 41 percent, biscuits 32, friends 12, rain 8; ginger is appended to the sentence" focusable="false"><defs><marker id="ah-lm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><g><rect x="20" y="18" width="600" height="44" rx="10" class="b"/><text x="40" y="46" text-anchor="start" class="">Chai is best with</text><g class="s5"><text x="186" y="46" text-anchor="start" class="tb ok">ginger</text></g><rect x="240" y="30" width="2" height="22" class="cursor"/></g><text x="40" y="92" text-anchor="start" class="tm ts">next-token probabilities</text><text x="120" y="122" text-anchor="end" class="ts">ginger</text><rect x="130" y="108" width="369" height="18" rx="5" class="bo grow"/><text x="509" y="122" text-anchor="start" class="ts tm">41%</text><text x="120" y="150" text-anchor="end" class="ts">biscuits</text><rect x="130" y="136" width="288" height="18" rx="5" class="f2 grow"/><text x="428" y="150" text-anchor="start" class="ts tm">32%</text><text x="120" y="178" text-anchor="end" class="ts">friends</text><rect x="130" y="164" width="108" height="18" rx="5" class="f2 grow"/><text x="248" y="178" text-anchor="start" class="ts tm">12%</text><text x="120" y="206" text-anchor="end" class="ts">rain</text><rect x="130" y="192" width="72" height="18" rx="5" class="f2 grow"/><text x="212" y="206" text-anchor="start" class="ts tm">8%</text><g class="s5"><text x="604" y="46" text-anchor="end" class="ok tb ts">picked ✓</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">LLM har possible agle token ko score karta hai, ek chunta hai (yahan &#39;ginger&#39;), use text mein jodta hai, aur repeat karta hai, ek-ek token karke.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Aapka text tokens (shabdon ke tukde) mein toota jaata hai. &quot;Unbelievable&quot; ban sakta hai &quot;un&quot;, &quot;believ&quot;, &quot;able&quot;.</li><li data-read>Model ek saath jo kuch dekhta hai, aapke instructions, documents, chat history aur uska khud ka jawaab, sab context window mein fit hona chahiye.</li><li data-read>Model har mumkin agle token ki probability nikaalta hai, ek chunta hai, jodta hai, aur repeat karta hai.</li><li data-read>Temperature tay karta hai woh chunaav kitna adventurous ho: facts aur formats ke liye kam, brainstorming ke liye zyaada.</li><li data-read>API calls ke beech isko kuch yaad nahi rehta. Chat apps har baar poori baatcheet dobara bhejti hain, isliye lambi chats mehengi padti hain.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Token</dt><dd>Woh unit jisse LLM padhta hai aur billing hoti hai, word ka tukda.</dd></div><div data-read><dt>Context window</dt><dd>Maximum text jo model ek baar mein dhyaan mein rakh sakta hai.</dd></div><div data-read><dt>Hallucination</dt><dd>Bharose se bola gaya jawaab jo banaaya hua ya galat hai.</dd></div></dl>
       </section>
@@ -167,11 +184,13 @@ temperature 1.0 → &quot;Kettle &amp; Kulhad&quot;, &quot;Brew Bandhu&quot;, &q
 Tokens: &quot;Suggest a name for my chai startup&quot; ≈ 8 tokens</code></pre></div>
         <p class="small muted" data-read>Facts aur code ke liye low temperature, brainstorming ke liye zyaada.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Jawaabon ko facts maan lena. LLMs sahi lagne wala text banate hain; zaroori cheezein verify karo ya sources se ground karo.</li><li data-read>Knowledge cutoff ignore karna. Model training data ke baad ki baatein nahi jaanta jab tak aap woh jaankari na do.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">LLM galat fact bhi bharose se kyun bol sakta hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Woh jaan-boojhkar jhooth bol raha hai">Woh jaan-boojhkar jhooth bol raha hai</li><li data-read data-read-text="Option B: Woh likely-sounding text banata hai aur khud facts check nahi karta">Woh likely-sounding text banata hai aur khud facts check nahi karta</li><li data-read data-read-text="Option C: Uska internet slow hai">Uska internet slow hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Woh likely-sounding text banata hai aur khud facts check nahi karta</strong>: LLMs plausible text predict karte hain. Retrieval ya tools ke bina unke paas fact-check ka koi step nahi hota.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Ek page text mein kitne tokens?</summary><p data-read>English ke ek page mein lagbhag 500 se 700 tokens. Hindi aur doosri scripts aksar same matlab ke liye zyaada tokens leti hain.</p></details><details class="deep-faq"><summary data-read>Same prompt alag jawaab kyun deta hai?</summary><p data-read>Kyunki token probabilities se sample hota hai. Zyaada consistent output ke liye temperature kam karo (0 ki taraf).</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>LLM = super-powered next-word predictor. Tokens, context aur temperature ka dhyaan rakho.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -193,7 +212,7 @@ Tokens: &quot;Suggest a name for my chai startup&quot; ≈ 8 tokens</code></pre>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Define 'leaving', measure the baseline and check what data exists. Without a clear definition, baseline and data, any model is a guess."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I spot a good AI use case?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Frequent, costly, mostly text or pattern based work, where a draft or suggestion helps and mistakes can be caught."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the data doesn't exist yet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start collecting it, or begin with an LLM that needs fewer examples, and log real usage to build a dataset over time."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A patient walks into a clinic and says &#39;give me antibiotics&#39;. A good doctor first asks what the symptoms are, since when, and what has been tried. Often the real need is different from the request. When a client says &#39;we need an AI chatbot&#39;, a good AI professional diagnoses before prescribing.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Start from the problem, not the technology. Ask who has the problem, how often, and what it costs today. Define success as a measurable metric (&#39;cut average ticket handling time from 9 to 5 minutes&#39;). Check whether the data and workflow exist to support a solution. Then pick the simplest approach that works, which might be a rule, a dashboard, a classic ML model, an LLM feature or an agent. AI is a good fit when the task is frequent, pattern-based, tolerant of occasional errors and backed by data. It&#39;s a poor fit when every mistake is costly and rules already work.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Write the problem in business terms: &quot;Agents spend 6 minutes per ticket finding the right policy.&quot;</li><li data-read>Measure today&#39;s baseline: how long, how many, how much it costs, how often it goes wrong.</li><li data-read>List solutions from simplest to most complex: a better process, a rule, search, classic ML, an LLM, an agent.</li><li data-read>Check feasibility: is the data available, can it be measured, and what happens when the AI is wrong?</li><li data-read>Agree one success metric and a small pilot with a deadline.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Success metric</dt><dd>A number that shows whether the solution worked.</dd></div><div data-read><dt>Baseline</dt><dd>How things perform today, without the new solution.</dd></div><div data-read><dt>Simplest viable approach</dt><dd>The least complex solution that meets the goal.</dd></div></dl>
       </section>
@@ -152,11 +169,13 @@ Better fix: auto-reply with live order status (API) + LLM drafts for the rest
 Metric:    handling time 9 → 5 min, CSAT ≥ 4.3</code></pre></div>
         <p class="small muted" data-read>Diagnosis changed the solution, and made it cheaper and more effective.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Starting from the technology (&quot;let&#39;s use agents&quot;) instead of the problem.</li><li data-read>No baseline, so nobody can prove the AI made things better.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">A client asks for &#39;AI to stop customers leaving&#39;. What&#39;s the best first step?</p>
         <ol type="A"><li data-read data-read-text="Option A: Build a chatbot">Build a chatbot</li><li data-read data-read-text="Option B: Train a deep learning model right away">Train a deep learning model right away</li><li data-read data-read-text="Option C: Define &#39;leaving&#39;, measure the baseline and check what data exists">Define &#39;leaving&#39;, measure the baseline and check what data exists</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Define &#39;leaving&#39;, measure the baseline and check what data exists</strong>: Without a clear definition, baseline and data, any model is a guess.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>How do I spot a good AI use case?</summary><p data-read>Frequent, costly, mostly text or pattern based work, where a draft or suggestion helps and mistakes can be caught.</p></details><details class="deep-faq"><summary data-read>What if the data doesn&#39;t exist yet?</summary><p data-read>Start collecting it, or begin with an LLM that needs fewer examples, and log real usage to build a dataset over time.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Problem → metric → data → simplest solution. Diagnose before you prescribe.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -178,7 +197,7 @@ Metric:    handling time 9 → 5 min, CSAT ≥ 4.3</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

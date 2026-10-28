@@ -119,6 +119,22 @@
             "@type": "Answer",
             "text": "float. Numbers with a decimal point are floats. Whole numbers are ints."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Python version should I learn?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Python 3, the latest stable version. Python 2 is retired. Small differences between 3.x versions won't matter while learning."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a powerful laptop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Any laptop runs Python. For heavier AI work later, free cloud notebooks like Google Colab give you GPUs."
+          }
         }
       ]
     }
@@ -133,7 +149,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -156,6 +172,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Your kitchen has labelled containers: &#39;sugar&#39;, &#39;salt&#39;, &#39;rice&#39;. You put something inside and later find it by its label. A variable in Python is exactly that: a labelled container that holds a value. And just as you don&#39;t keep milk in a salt jar, each value has a type: a number, some text, or true/false.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Python is the most-used language in AI because it reads almost like English and has ready-made libraries for data and ML. You store information in variables using &#39;=&#39;. The common data types are int (whole numbers), float (decimals), str (text in quotes) and bool (True or False). print() shows a value, and type() tells you what type it is. Most beginner bugs come from mixing types, such as adding a number to text.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Install Python 3 (or open Google Colab in your browser, nothing to install) and run print(&quot;Hello&quot;).</li><li data-read>Create variables: name = &quot;Asha&quot;, age = 28, salary = 55000.5, is_active = True. Python works out the type from the value.</li><li data-read>Check a type with type(age). Convert with int(&quot;42&quot;), float(&quot;3.5&quot;) or str(100). Input from users and files usually arrives as text.</li><li data-read>Combine values with f-strings: f&quot;{name} earns {salary}&quot;. Do maths with + - * / and // (whole division) and % (remainder).</li><li data-read>Practise by writing tiny programs: a tip calculator, an EMI calculator, a temperature converter.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Variable</dt><dd>A name that points to a stored value, e.g. price = 20.</dd></div><div data-read><dt>String (str)</dt><dd>Text inside quotes, e.g. &#39;Masala chai&#39;.</dd></div><div data-read><dt>Boolean (bool)</dt><dd>A value that is either True or False.</dd></div></dl>
       </section>
@@ -170,11 +187,13 @@ print(type(rating))      # &lt;class &#39;float&#39;&gt;
 total = price * 3        # 3 cups → 60</code></pre></div>
         <p class="small muted" data-read>A tiny chai-stall menu stored in variables.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Adding text and numbers: &quot;Age: &quot; + 28 gives an error. Use f&quot;Age: {28}&quot; or str(28).</li><li data-read>Forgetting that input() returns text: input() + 5 fails. Convert first with int(input()).</li><li data-read>Using = (assign) when you mean == (compare). x = 5 sets x; x == 5 asks whether x is 5.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">What is the type of the value 4.5?</p>
         <ol type="A"><li data-read data-read-text="Option A: float">float</li><li data-read data-read-text="Option B: int">int</li><li data-read data-read-text="Option C: str">str</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. float</strong>: Numbers with a decimal point are floats. Whole numbers are ints.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>Which Python version should I learn?</summary><p data-read>Python 3, the latest stable version. Python 2 is retired. Small differences between 3.x versions won&#39;t matter while learning.</p></details><details class="deep-faq"><summary data-read>Do I need a powerful laptop?</summary><p data-read>No. Any laptop runs Python. For heavier AI work later, free cloud notebooks like Google Colab give you GPUs.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>A variable is a labelled box, and every value inside it has a type.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -196,7 +215,7 @@ total = price * 3        # 3 cups → 60</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

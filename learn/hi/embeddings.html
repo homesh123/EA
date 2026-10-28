@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Matlab milta-julta hai isliye unki embeddings paas-paas hain. Embeddings matlab pakadti hain, isliye alag words hone pe bhi milte-julte ideas paas-paas hote hain."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya special vector database chahiye?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hamesha nahi. Chhote projects ke liye PostgreSQL mein pgvector ya in memory library bhi chal jaati hai. Bade scale pe dedicated databases kaam aate hain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya embeddings Hindi ke liye kaam karti hain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multilingual embedding models karte hain, aur Hindi sawaal ko English document se match bhi kar sakte hain. Apne examples se test karo."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Library mein milte-julte topics ki books paas-paas rakhi hoti hain. Cricket ki books sports biographies ke paas hoti hain, cookbooks se door. Embeddings har text ke tukde ko ek &#39;location&#39; (vector) dete hain, taaki milte-julte matlab paas-paas aayein. Phir &#39;Damaged item kaise return karun?&#39; &#39;Toote products ki refund policy&#39; ke bilkul paas hota hai, chahe ek bhi word common na ho.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Embedding model text, ya images, ko sainkdon numbers ke vector mein badalta hai jo matlab pakadta hai. Milte-julte matlab ke vectors paas-paas hote hain, jise cosine similarity se naapte hain. Vector database (pgvector, Pinecone, Qdrant waghera) aise lakhon vectors store karta hai aur query ke sabse paas wale vectors jaldi dhoondhta hai. Yeh semantic search hai: exact keywords se nahi, matlab se search. Yeh RAG, recommendations aur duplicate detection ko power karta hai. Isse keyword search ke saath milaana (hybrid search) naam aur codes ke liye aksar best kaam karta hai.</p></section>
       <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 236" role="img" aria-label="Scatter of text embeddings in clusters for payments, delivery and refunds; a question point lands next to the refund policy" focusable="false"><defs><marker id="ah-em" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><rect x="16" y="12" width="608" height="212" rx="14" class="bm"/><circle cx="120" cy="60" r="7" class="c-main"/><text x="132" y="64" text-anchor="start" class="ts">UPI payment failed</text><circle cx="160" cy="92" r="7" class="c-main"/><text x="172" y="96" text-anchor="start" class="ts">Card declined</text><circle cx="60" cy="178" r="7" class="c-main"/><text x="72" y="182" text-anchor="start" class="ts">Track my delivery</text><circle cx="110" cy="204" r="7" class="c-main"/><text x="122" y="208" text-anchor="start" class="ts">Delivery is late</text><circle cx="400" cy="70" r="7" class="c-ok"/><text x="412" y="74" text-anchor="start" class="ts">Refund policy for broken products</text><circle cx="420" cy="108" r="7" class="c-ok"/><text x="432" y="112" text-anchor="start" class="ts">Raise a replacement request</text><g class="s3"><path d="M330 128 L394 76" class="ln la fl"/><circle cx="330" cy="128" r="9" class="c-warn pulse"/><text x="330" y="154" text-anchor="middle" class="ts tb">Q: “How do I return a damaged item?”</text></g><g class="s4"><text x="520" y="40" text-anchor="middle" class="ok ts">nearest = most similar ✓</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Har text ek point ban jaata hai. Milte-julte matlab paas-paas aate hain, isliye sawaal ko refund wala article mil jaata hai, chahe ek bhi keyword common na ho.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Text embedding model ko bhejo; badle mein sainkdon numbers ka vector milta hai.</li><li data-read>Har document chunk ke liye yeh karo aur vectors ko text aur metadata ke saath vector database mein store karo.</li><li data-read>Search ke time user ki query ko bhi same tarah embed karo.</li><li data-read>Cosine similarity se sabse paas ke vectors dhoondo; vector database laakhon mein bhi yeh jaldi karta hai.</li><li data-read>Match hue chunks lautao, chaaho to metadata se filter karke (department, date, permissions).</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Embedding</dt><dd>Numbers ka vector jo text ka matlab represent karta hai.</dd></div><div data-read><dt>Cosine similarity</dt><dd>Do vectors kitne paas point karte hain. 1 ke paas matlab bahut similar.</dd></div><div data-read><dt>Vector database</dt><dd>Database jo sabse paas wale vectors jaldi dhoondhne ke liye bana hai.</dd></div></dl>
       </section>
@@ -162,11 +179,13 @@ Similarity to stored help articles:
   0.21  Track your delivery partner live</code></pre></div>
         <p class="small muted" data-read>Top match se koi keyword common nahi, lekin matlab match karta hai. Yahi semantic search hai.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Embedding models mix karna. Alag models ke vectors compare nahi ho sakte; switch karo to sab dobara embed karo.</li><li data-read>Exact codes, naam ya IDs ke liye sirf vector search pe nirbhar rehna. Keyword search bhi jodo (hybrid).</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Query &#39;return damaged item&#39; pe semantic search &#39;refund for broken product&#39; kaise dhoondh leta hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Kismat se">Kismat se</li><li data-read data-read-text="Option B: Unke keywords common hain">Unke keywords common hain</li><li data-read data-read-text="Option C: Matlab milta-julta hai isliye unki embeddings paas-paas hain">Matlab milta-julta hai isliye unki embeddings paas-paas hain</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Matlab milta-julta hai isliye unki embeddings paas-paas hain</strong>: Embeddings matlab pakadti hain, isliye alag words hone pe bhi milte-julte ideas paas-paas hote hain.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kya special vector database chahiye?</summary><p data-read>Hamesha nahi. Chhote projects ke liye PostgreSQL mein pgvector ya in memory library bhi chal jaati hai. Bade scale pe dedicated databases kaam aate hain.</p></details><details class="deep-faq"><summary data-read>Kya embeddings Hindi ke liye kaam karti hain?</summary><p data-read>Multilingual embedding models karte hain, aur Hindi sawaal ko English document se match bhi kar sakte hain. Apne examples se test karo.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Embeddings = numbers ke roop mein matlab. Vector DB sabse paas wale matlab jaldi dhoondhta hai.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -188,7 +207,7 @@ Similarity to stored help articles:
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

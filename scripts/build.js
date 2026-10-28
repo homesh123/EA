@@ -18,11 +18,12 @@ const { plan, rankRoles, strengths, SIGNALS } = require("../scoring.js");
 const { QUESTIONS, SECTIONS } = require("../questions.js");
 const { AUDIENCES } = require("../content/audiences.js");
 const { GUIDE } = require("../content/guide.js");
-const { LESSON_TOPICS, LEARN_TRACKS, LEARN_I18N } = require("../content/lessons.js");
+const { LESSON_TOPICS, LESSON_DEEP, LEARN_TRACKS, LEARN_I18N } = require("../content/lessons.js");
 const { LESSON_VISUALS } = require("../content/visuals.js");
 const { ROLE_TASKS } = require("../content/tasks.js");
 const { INTERVIEW } = require("../content/interview.js");
 const { RESUMES } = require("../content/resumes.js");
+const { INTERVIEW_PREP } = require("../content/interview-prep.js");
 const { optionOrder } = require("../content/shuffle.js");
 const { LessonReader } = require("../tts.js");
 
@@ -110,7 +111,7 @@ function siteNav(p, home = false) {
       <a href="${h}#paths">AI roles</a>
       <a href="${p}learn.html">Learn</a>
       <a href="${p}interview.html">Interview prep</a>
-      <a href="${p}resumes/">Resumes</a>
+      <a href="${p}resume-builder.html">Resume builder</a>
       <a href="${p}${GUIDE_PATH}">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="${h}#app">Free consultation</a>
@@ -122,7 +123,7 @@ function footerLinks(p, home = false) {
   return `<nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul>${ids.map(id => `<li><a href="${p}roles/${ROLES[id].slug}.html">${esc(ROLES[id].title)}</a></li>`).join("")}</ul></div>
       <div><h2>AI careers by background</h2><ul>${AUDIENCES.map(a => `<li><a href="${p}for/${a.slug}.html">${esc(a.short)}</a></li>`).join("")}</ul></div>
-      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
     </nav>`;
 }
 
@@ -602,6 +603,7 @@ const LESSON_IDS = (() => {
 
 function lessonPage(id, lang) {
   const x = LESSON_TOPICS[id];
+  const deep = LESSON_DEEP[id];
   const hi = lang === "hi";
   const pick = pair => pair[hi ? 1 : 0];
   const ui = k => LEARN_I18N[lang][k];
@@ -631,7 +633,7 @@ function lessonPage(id, lang) {
         isPartOf: courseIdsFor(id).map(c => ({ "@type": "Course", name: `${ROLES[c].title} course`, url: `${SITE}learn.html?course=${c}` }))
       },
       breadcrumb(url, [[SITE_NAME, SITE], ["Learn", `${SITE}learn.html`], [pick(x.title), url]]),
-      faqPage(url, [[pick(x.quiz.q), `${pick(x.quiz.options[x.quiz.answer])}. ${pick(x.quiz.why)}`]])
+      faqPage(url, [[pick(x.quiz.q), `${pick(x.quiz.options[x.quiz.answer])}. ${pick(x.quiz.why)}`], ...deep.faq.map(([q, ans]) => [pick(q), pick(ans)])])
     ]
   };
   const head = `  <link rel="alternate" hreflang="en" href="${lessonUrl(id, "en")}" />
@@ -650,6 +652,7 @@ ${jsonLd(graph)}`;
       <section class="ls ls-analogy" data-read><h2>🏠 ${esc(ui("realLife"))}</h2><p>${esc(pick(x.analogy))}</p></section>
       <section class="ls ls-explain" data-read><h2>💡 ${esc(ui("simpleWords"))}</h2><p>${esc(pick(x.explain))}</p></section>
       ${LESSON_VISUALS[id] ? `<section class="ls ls-visual"><h2>🎬 ${esc(ui("howItWorks"))}</h2><div class="viz">${LESSON_VISUALS[id].svg}</div><p class="viz-caption" data-read data-read-prefix="${esc(ui("diagram"))}">${esc(pick(LESSON_VISUALS[id].caption))}</p></section>` : ""}
+      <section class="ls ls-steps"><h2>🪜 ${esc(ui("stepByStep"))}</h2><ol class="deep-steps">${deep.steps.map(t => `<li data-read>${esc(pick(t))}</li>`).join("")}</ol></section>
       <section class="ls ls-terms"><h2>🔑 ${esc(ui("keyTerms"))}</h2>
         <dl class="terms">${x.terms.map(([term, en, hin]) => `<div data-read><dt>${esc(term)}</dt><dd>${esc(hi ? hin : en)}</dd></div>`).join("")}</dl>
       </section>
@@ -657,11 +660,13 @@ ${jsonLd(graph)}`;
         <div class="code-wrap"><span class="code-lang">${esc(x.example.lang)}</span><pre><code>${esc(x.example.code)}</code></pre></div>
         <p class="small muted" data-read>${esc(pick(x.example.note))}</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ ${esc(ui("commonMistakes"))}</h2><ul class="deep-mistakes">${deep.mistakes.map(t => `<li data-read>${esc(pick(t))}</li>`).join("")}</ul></section>
       <section class="ls ls-quiz"><h2>✅ ${esc(ui("quickCheck"))}</h2>
         <p class="quiz-q" data-read data-read-prefix="${esc(ui("quickCheck"))}">${esc(pick(x.quiz.q))}</p>
         <ol type="A">${optionOrder(id, x.quiz.options.length).map((i, pos) => `<li data-read data-read-text="${esc(`${ui("option")} ${"ABC"[pos]}: ${pick(x.quiz.options[i])}`)}">${esc(pick(x.quiz.options[i]))}</li>`).join("")}</ol>
         <details class="answer-reveal"><summary>${hi ? "Jawaab dekho" : "Show answer"}</summary><p><strong>${"ABC"[optionOrder(id, x.quiz.options.length).indexOf(x.quiz.answer)]}. ${esc(pick(x.quiz.options[x.quiz.answer]))}</strong>: ${esc(pick(x.quiz.why))}</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 ${esc(ui("peopleAsk"))}</h2>${deep.faq.map(([q, ans]) => `<details class="deep-faq"><summary data-read>${esc(pick(q))}</summary><p data-read>${esc(pick(ans))}</p></details>`).join("")}</section>
       <section class="ls ls-remember" data-read><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
 
       <nav class="lesson-pager" aria-label="${hi ? "Lessons" : "Lessons"}">
@@ -727,7 +732,7 @@ const ATS_TIPS = [
   "Keep one column, standard headings (Summary, Skills, Experience, Projects, Education) and no tables, text boxes, icons or photos.",
   "Mirror the exact keywords from each job description you apply to, but only for skills you really have.",
   "Write bullets as action + result + number. Replace every sample number with your own, real results.",
-  "Save as .docx or a text-based PDF (not a scanned image), with a simple file name like firstname-lastname-resume.",
+  "Save as .docx or a text-based PDF (not a scanned image), with a simple file name like PriyaSharmaResume.pdf.",
   "Keep it to 1 page for under 5 years of experience, and 2 pages maximum after that.",
   "Put AI projects with links near the top if you're switching careers. They prove the new skills."
 ];
@@ -740,7 +745,7 @@ function resumeSheet(id) {
           <ul>${e.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
         </div>`).join("");
   const projects = `<section><h3>Projects</h3>${entries(r.projects, p => `<span><strong>${esc(p.name)}</strong></span> <span class="rs-dates">${esc(p.link)}</span>`)}</section>`;
-  const experience = `<section><h3>Professional Experience</h3>${entries(r.experience, e => `<span><strong>${esc(e.title)}</strong>, ${esc(e.company)} — ${esc(e.location)}</span> <span class="rs-dates">${esc(e.dates)}</span>`)}</section>`;
+  const experience = `<section><h3>Professional Experience</h3>${entries(r.experience, e => `<span><strong>${esc(e.title)}</strong>, ${esc(e.company)}, ${esc(e.location)}</span> <span class="rs-dates">${esc(e.dates)}</span>`)}</section>`;
   return `<header class="rs-head">
         <h2 class="rs-name">Your Name</h2>
         <p class="rs-title">${esc(r.target)}</p>
@@ -749,7 +754,7 @@ function resumeSheet(id) {
       <section><h3>Professional Summary</h3><p>${esc(r.summary)}</p></section>
       <section><h3>Skills</h3><ul class="rs-skills">${r.skills.map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join("")}</ul></section>
       ${r.projectsFirst ? projects + experience : experience + projects}
-      <section><h3>Education</h3>${r.education.map(([d, s]) => `<p><strong>${esc(d)}</strong> — ${esc(s)}</p>`).join("")}</section>
+      <section><h3>Education</h3>${r.education.map(([d, s]) => `<p><strong>${esc(d)}</strong>, ${esc(s)}</p>`).join("")}</section>
       <section><h3>Certifications</h3><ul>${r.certifications.map(c => `<li>${esc(c)}</li>`).join("")}</ul></section>`;
 }
 
@@ -801,6 +806,7 @@ function resumePage(id) {
         <section class="side-card">
           <h2>Get ready for ${esc(role.title)} roles</h2>
           <ul class="small">
+            <li><a href="../resume-builder.html?role=${id}"><strong>🧰 Build your own resume</strong></a>: upload yours or start from this sample, pick a template, download PDF or Word</li>
             <li><a href="../learn.html?course=${id}">📖 Free ${esc(role.title)} course</a></li>
             <li><a href="../interview.html?role=${id}">🎤 Interview practice with scoring</a></li>
             <li><a href="../interview/${role.slug}.html">📝 ${esc(role.title)} interview questions &amp; answers</a></li>
@@ -859,19 +865,34 @@ function interviewPage(id) {
   const role = ROLES[id];
   const url = interviewPageUrl(id);
   const qs = roleQuestions(id);
-  const title = `${role.title} Interview Questions and Answers (${YEAR}): ${qs.length} Questions With Explanations`;
-  const description = `${qs.length} ${role.title} interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free.`;
+  const prep = INTERVIEW_PREP.forRole(id);
+  const stages = INTERVIEW_PREP.stages.filter(st => prep.some(q => q.stage === st.id));
+  const total = prep.length + qs.length;
+  const title = `${role.title} Interview Questions and Answers (${YEAR}): ${total} Questions With Easy Answers`;
+  const description = `${total} ${role.title} interview questions with easy model answers, in the order interviews usually go: introduction, fundamentals, role skills, design, behaviour and salary. Based on ${YEAR} interview reports. Free, with scored practice.`;
   const answerText = q => q.type === "mcq" ? `${q.options[q.answer]}. ${q.why}` : q.model;
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
       webPage(url, title, description),
       breadcrumb(url, [[SITE_NAME, SITE], ["Interview practice", `${SITE}interview.html`], [`${role.title} interview questions`, url]]),
-      faqPage(url, qs.map(q => [q.q, answerText(q)]))
+      faqPage(url, prep.map(q => [q.q, q.answer]).concat(qs.map(q => [q.q, answerText(q)])))
     ]
   };
   const areas = [...new Set(qs.map(q => q.area))];
   const lessonLink = tp => `<a href="../learn/${tp}.html">${esc(LESSON_TOPICS[tp].title[0])}</a>`;
+  const prepHtml = (q, n) => `<li class="prep-q" id="q-${q.id}">
+          <details${n < 2 ? " open" : ""}><summary><span class="prep-n">${n + 1}</span>${esc(q.q)}</summary>
+            <div class="prep-body">
+              <p class="prep-label">💬 Easy answer</p>
+              <p>${esc(q.answer)}</p>
+              <p class="prep-label">✅ A strong answer covers</p>
+              <ul>${q.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+              <p class="prep-check"><strong>What they're really checking:</strong> ${esc(q.check)}</p>
+              ${q.topics.length ? `<p class="small">📖 Learn it: ${q.topics.map(lessonLink).join(" · ")}</p>` : ""}
+            </div>
+          </details>
+        </li>`;
   const qHtml = q => q.type === "mcq" ? `<li class="iv-static">
           <p class="quiz-q">${esc(q.q)}</p>
           <ol type="A">${optionOrder(q.id, q.options.length).map(i => `<li>${esc(q.options[i])}</li>`).join("")}</ol>
@@ -882,21 +903,36 @@ function interviewPage(id) {
           <ul class="small">${q.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
           <details class="answer-reveal"><summary>Show model answer</summary><p>${esc(q.model)}</p><p class="small">Learn: ${q.topics.map(lessonLink).join(" · ")}</p></details>
         </li>`;
+  let n = 0;
   const body = `  <main class="container article">
     ${crumbsHtml("../", [[SITE_NAME, "../"], ["Interview practice", "../interview.html"], [`${role.title} interview questions`]])}
     <article>
       <header>
         <p class="eyebrow">Interview preparation · Updated <time datetime="${UPDATED}">${prettyDate(UPDATED)}</time></p>
         <h1>${esc(role.title)} interview questions and answers</h1>
-        <p class="lead">${qs.length} questions that come up in ${esc(role.title)} interviews, grouped by skill area, with answers, explanations and the lesson to study for each. For a scored session with your gaps explained, use <a href="../interview.html?role=${id}">interview practice</a>.</p>
+        <p class="lead">${prep.length} questions ${esc(role.title)} candidates are asked in ${YEAR}, in the order a real interview usually goes, each with an easy answer you can study and say out loud. Then ${qs.length} quick quiz questions to test yourself. For a scored session with your gaps explained, use <a href="../interview.html?role=${id}">interview practice</a>.</p>
       </header>
-      <nav class="toc" aria-label="Skill areas"><strong>Skill areas</strong><ol>${areas.map((a, i) => `<li><a href="#area-${i + 1}">${esc(a)}</a> (${qs.filter(q => q.area === a).length})</li>`).join("")}</ol></nav>
-${areas.map((a, i) => `      <section id="area-${i + 1}">
-        <h2>${esc(a)}</h2>
-        <ol class="iv-list">
-        ${qs.filter(q => q.area === a).map(qHtml).join("\n        ")}
+      <section class="rounds-box">
+        <h2>How ${/^[AEIOU]/.test(role.title) ? "an" : "a"} ${esc(role.title)} interview usually goes</h2>
+        <ol>${INTERVIEW_PREP.rounds[id].map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+        <p class="small muted">Based on ${YEAR} candidate reports. Companies vary, so use this as a map.</p>
+      </section>
+      <nav class="toc" aria-label="Contents"><strong>Contents</strong><ol>${stages.map(st => `<li><a href="#stage-${st.id}">${st.icon} ${esc(st.title)}</a> (${prep.filter(q => q.stage === st.id).length})</li>`).join("")}<li><a href="#quiz">🧪 Quick quiz: test yourself</a> (${qs.length})</li></ol></nav>
+${stages.map(st => `      <section id="stage-${st.id}">
+        <h2>${st.icon} ${esc(st.title)}</h2>
+        <p class="muted">${esc(st.blurb)}</p>
+        <ol class="prep-list">
+        ${prep.filter(q => q.stage === st.id).map(q => prepHtml(q, n++)).join("\n        ")}
         </ol>
       </section>`).join("\n")}
+      <section id="quiz">
+        <h2>🧪 Quick quiz: test yourself</h2>
+        <p class="muted">Short questions by skill area. Try each one before you open the answer.</p>
+${areas.map((a, i) => `        <h3 id="area-${i + 1}">${esc(a)}</h3>
+        <ol class="iv-list">
+        ${qs.filter(q => q.area === a).map(qHtml).join("\n        ")}
+        </ol>`).join("\n")}
+      </section>
       <section>
         <h2>More questions to prepare</h2>
         <ul>${(INTERVIEW.extra[id] || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
@@ -908,7 +944,12 @@ ${areas.map((a, i) => `      <section id="area-${i + 1}">
       </section>
       <section>
         <h2>Also for ${esc(role.title)}</h2>
-        <ul class="related"><li><a href="../resumes/${role.slug}.html">ATS-friendly ${esc(role.title)} resume sample</a></li><li><a href="../learn.html?course=${id}">Free ${esc(role.title)} course</a></li><li><a href="../roles/${role.slug}.html">${esc(role.title)} roadmap and salary</a></li></ul>
+        <ul class="related"><li><a href="../resume-builder.html?role=${id}">Build your ${esc(role.title)} resume (upload yours or start from a sample)</a></li><li><a href="../resumes/${role.slug}.html">ATS-friendly ${esc(role.title)} resume sample</a></li><li><a href="../learn.html?course=${id}">Free ${esc(role.title)} course</a></li><li><a href="../roles/${role.slug}.html">${esc(role.title)} roadmap and salary</a></li></ul>
+      </section>
+      <section class="sources">
+        <h2>Sources</h2>
+        <p class="small muted">Questions were compiled from ${YEAR} interview guides and candidate reports, then rewritten with simple answers and checked against our lessons.</p>
+        <ul class="small">${INTERVIEW_PREP.SOURCES.map(([name, href]) => `<li><a href="${href}" rel="nofollow noopener">${esc(name)}</a></li>`).join("")}</ul>
       </section>
     </article>
   </main>`;
@@ -920,7 +961,7 @@ function interviewCatalog() {
       <h2 id="ivCatalogTitle">Interview questions and answers by role</h2>
       <p class="muted small">Read every question with its answer and explanation, then come back here for a scored practice session.</p>
       <ul class="related">
-${ids.map(id => `        <li><a href="interview/${ROLES[id].slug}.html">${esc(ROLES[id].title)} interview questions</a> <span class="muted small">(${roleQuestions(id).length})</span></li>`).join("\n")}
+${ids.map(id => `        <li><a href="interview/${ROLES[id].slug}.html">${esc(ROLES[id].title)} interview questions</a> <span class="muted small">(${roleQuestions(id).length + INTERVIEW_PREP.forRole(id).length})</span></li>`).join("\n")}
       </ul>
     </section>`;
 }
@@ -952,12 +993,13 @@ ${ids.map(id => {
               <li>📖 ${lessons.length} lessons · ~${mins} min, with diagrams and real-life examples</li>
               <li>🛠️ ${ROLE_TASKS[id].length} hands-on practice tasks</li>
               <li>🎤 ${roleQuestions(id).length} interview questions, scored, with gap analysis</li>
-              <li>📄 ATS-friendly sample resume you can edit</li>
+              <li>📝 ${INTERVIEW_PREP.forRole(id).length} interview questions with easy answers to study</li>
+              <li>📄 Resume builder: upload yours or start from a sample</li>
             </ul>
             <div class="hub-actions">
               <a class="button btn-primary btn-small" href="learn.html?course=${id}">Start learning</a>
               <a class="button btn-secondary btn-small" href="interview.html?role=${id}">Interview practice</a>
-              <a class="small" href="resumes/${r.slug}.html">Sample resume →</a>
+              <a class="small" href="resume-builder.html?role=${id}">Build your resume →</a>
             </div>
           </div>
         </div>
@@ -1032,6 +1074,7 @@ function sitemap() {
     { loc: `${SITE}learn.html`, pri: "0.9" },
     { loc: `${SITE}interview.html`, pri: "0.8" },
     { loc: `${SITE}resumes/`, pri: "0.8" },
+    { loc: `${SITE}resume-builder.html`, pri: "0.8" },
     ...ids.map(id => ({ loc: interviewPageUrl(id), pri: "0.7" })),
     ...ids.map(id => ({ loc: resumeUrl(id), pri: "0.7" })),
     ...LESSON_IDS.flatMap(id => [{ loc: lessonUrl(id, "en"), pri: "0.6" }, { loc: lessonUrl(id, "hi"), pri: "0.5" }])
@@ -1077,9 +1120,10 @@ ${LESSON_IDS.map(id => `- [${LESSON_TOPICS[id].title[0]}](${lessonUrl(id, "en")}
 
 ## Interview practice
 - [Interview practice with scoring](${SITE}interview.html): role-specific questions (multiple-choice scored automatically, open questions self-checked against model answers). The report gives a score per skill area, explains each mistake and links the lessons for every gap.
-${ids.map(id => `- [${ROLES[id].title} interview questions and answers](${interviewPageUrl(id)}) (${roleQuestions(id).length} questions)`).join("\n")}
+${ids.map(id => `- [${ROLES[id].title} interview questions and answers](${interviewPageUrl(id)}): ${INTERVIEW_PREP.forRole(id).length} commonly asked questions in interview order (introduction, fundamentals, role skills, design, behaviour, salary) with easy model answers, plus ${roleQuestions(id).length} quiz questions. Typical rounds: ${INTERVIEW_PREP.rounds[id].map(r => r.split(":")[0]).join("; ")}.`).join("\n")}
 
-## ATS-friendly resume samples
+## Resume builder and ATS-friendly samples
+- [Resume builder](${SITE}resume-builder.html): upload a resume (PDF, Word .docx or text) or start from a role sample, pick the target AI role and add missing ATS keywords, choose one of three single-column templates, edit with a live preview and a "human tone" check, and download as PDF or Word. The file is read in the browser and never uploaded. It can also pre-fill the career questionnaire.
 - [All resume samples](${SITE}resumes/): editable in the browser, downloadable as Word, PDF or text, with a live ATS keyword checklist.
 ${ids.map(id => `- [${ROLES[id].title} resume sample](${resumeUrl(id)}): keywords ${RESUMES[id].keywords.join(", ")}`).join("\n")}
 
@@ -1132,6 +1176,10 @@ function outputs() {
   learnHtml = replaceRegion(learnHtml, "catalog", learnCatalog());
   learnHtml = replaceRegion(learnHtml, "learnld", learnLd());
   files["learn.html"] = learnHtml;
+  let rbHtml = fs.readFileSync(path.join(ROOT, "resume-builder.html"), "utf8");
+  rbHtml = replaceRegion(rbHtml, "sitenav", "  " + siteNav(""));
+  rbHtml = replaceRegion(rbHtml, "footerlinks", "    " + footerLinks(""));
+  files["resume-builder.html"] = rbHtml;
   let index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
   index = replaceRegion(index, "paths", pathsSection());
   index = replaceRegion(index, "backgrounds", backgroundsSection());

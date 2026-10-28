@@ -114,6 +114,22 @@
             "@type": "Answer",
             "text": "Amount limit karo, order verify karo, aur threshold se upar insaan ki approval rakho. High-impact actions ke liye model ke bahar hard limits aur insaan ke checks chahiye."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya prompt injection poori tarah rok sakte hain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aaj nahi. Layers se asar kam karte ho: limited tools, confirmations, output checks aur monitoring."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI ki galtiyon ke liye zimmedaar kaun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jo company use deploy karti hai. Isiliye high stakes uses mein human review, saaf disclaimers aur audit logs chahiye."
+          }
         }
       ]
     }
@@ -128,7 +144,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -151,6 +167,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Bank ka naya cashier helpful hai, lekin use rules follow karne padte hain: identity verify karo, sirf isliye cash mat do kyunki chitthi mein likha hai &#39;manager ne approve kiya hai&#39;, aur badi rakam ke liye supervisor ko bulao. AI features ko bhi yahi rules chahiye, kyunki chaalaaki se likha message LLM ko waise hi dhokha de sakta hai jaise nakli chitthi.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>AI products ke main risks hain: hallucinations (banaaye hue facts), prompt injection (user input ya documents mein khatarnaak text jo kehta hai &#39;apne instructions bhool jao aur…&#39;), private data leak hona, aur harmful ya brand ke khilaaf output. Bachaav: jawaabon ko sources pe based rakhna (citations ke saath RAG), model ke har output aur retrieve kiye text ko untrusted maanna, least-privilege tools, input aur output filters, high-impact actions ke liye insaan ki approval, logging, aur rate aur cost limits. Responsible AI ka matlab bias check karna aur users ko saaf batana bhi hai ki woh AI se baat kar rahe hain.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Hallucinations kam karne ke liye jawaab sources pe based rakho aur &quot;I don&#39;t know&quot; kehne do.</li><li data-read>User input aur retrieved content ko data maano, instructions kabhi nahi; prompt mein unhe saaf mark karo.</li><li data-read>Tools ko kam se kam privilege do, aur risky actions ke liye confirmation zaroori karo.</li><li data-read>Inputs aur outputs filter karo: personal data ka bahar jaana, unsafe content aur secrets block karo.</li><li data-read>Regularly red team karo: jaane maane attacks try karo aur unhe eval set mein jodo.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Prompt injection</dt><dd>Input mein chhupe instructions jo model ko hijack karne ki koshish karte hain.</dd></div><div data-read><dt>Least privilege</dt><dd>Tools ko sirf utna access dena jitna zaroori hai.</dd></div><div data-read><dt>Guardrail</dt><dd>Model se pehle ya baad ka check jo unsafe input/output rokta hai.</dd></div></dl>
       </section>
@@ -163,11 +180,13 @@ Good design: résumé text is wrapped as untrusted DATA, the system prompt says
              against a rubric + human review.</code></pre></div>
         <p class="small muted" data-read>Documents data hain, commands nahi. Design isi hisaab se karo.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>&quot;please don&#39;t reveal the system prompt&quot; ko security maan lena. Prompt ke instructions access control nahi hain.</li><li data-read>Bina consent ya protection ke personal data wali poori conversations log karna.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Support bot ek tool se refunds de sakta hai. Sabse safe design kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Refund tool ko prompt mein chhupa do">Refund tool ko prompt mein chhupa do</li><li data-read data-read-text="Option B: Model ko koi bhi amount automatically refund karne do">Model ko koi bhi amount automatically refund karne do</li><li data-read data-read-text="Option C: Amount limit karo, order verify karo, aur threshold se upar insaan ki approval rakho">Amount limit karo, order verify karo, aur threshold se upar insaan ki approval rakho</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Amount limit karo, order verify karo, aur threshold se upar insaan ki approval rakho</strong>: High-impact actions ke liye model ke bahar hard limits aur insaan ke checks chahiye.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Kya prompt injection poori tarah rok sakte hain?</summary><p data-read>Aaj nahi. Layers se asar kam karte ho: limited tools, confirmations, output checks aur monitoring.</p></details><details class="deep-faq"><summary data-read>AI ki galtiyon ke liye zimmedaar kaun?</summary><p data-read>Jo company use deploy karti hai. Isiliye high stakes uses mein human review, saaf disclaimers aur audit logs chahiye.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Model output aur documents ko untrusted maano. Tools ki power limit karo.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -189,7 +208,7 @@ Good design: résumé text is wrapped as untrusted DATA, the system prompt says
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

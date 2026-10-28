@@ -99,6 +99,22 @@
             "@type": "Answer",
             "text": "Policy documents pe RAG ke saath model API. API + RAG sasta, fast hai aur jawaab current rakhta hai. Zero se training bahut zyaada hai."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Mahine ka LLM cost kaise estimate karun?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mahine ki requests × (input tokens × input price + output tokens × output price). Retries aur growth ke liye margin jodo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kya open source models kaafi acche hain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kai tasks ke liye haan, khaaskar fine tuning ke baad. Decide karne se pehle apne eval set pe API model ke against test karo."
+          }
         }
       ]
     }
@@ -113,7 +129,7 @@
       <a href="../../#paths">AI roles</a>
       <a href="../../learn.html">Learn</a>
       <a href="../../interview.html">Interview prep</a>
-      <a href="../../resumes/">Resumes</a>
+      <a href="../../resume-builder.html">Resume builder</a>
       <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
@@ -136,6 +152,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Dukaan ki billing ke liye aap developers rakh kar software banwa sakte ho, ya ₹500 mahine mein ready app subscribe kar sakte ho. Agar billing aapki dukaan ko khaas nahi banaati, to aap kharidte ho. AI mein bhi yahi choice aati hai: existing AI product ya API use karo, use customise karo, ya apna model banao.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Zyaadatar companies ko apne foundation models train nahi karne chahiye. Normal seedhi yeh hai: off-the-shelf AI tool kharido → acche prompts ke saath model API use karo → apne data pe RAG jodo → fine-tune karo → custom models banao. Upar tabhi chadho jab neeche wala step fail ho. Costs mein API tokens, engineering time, evals, monitoring aur galtiyon ke liye zaroori human review shaamil hai. Limits jaano: models hallucinate karte hain, inconsistent ho sakte hain, tools ke bina exact calculation mein mushkil hoti hai, aur data privacy rules tay kar sakte hain ki kaunse providers use kar sakte ho. Acche AI decisions value, cost, risk aur launch ke time ko tolte hain.</p></section>
       
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Zaroorat saaf define karo: task, volume, quality bar, latency aur data sensitivity.</li><li data-read>Dekho kya maujood hai: SaaS product, model API, open model jo host kar sakte ho.</li><li data-read>Top do options ko apne eval set pe test karo, vendor demos pe nahi.</li><li data-read>Saal bhar ka total cost compare karo: usage, infrastructure, banane aur maintain karne wale engineers, aur switch karne ka cost.</li><li data-read>Decide karo, aur nikalne ka raasta rakho: vendors ko apne interface ke peeche rakho taaki switch kar sako.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Foundation model</dt><dd>Bada general-purpose model (GPT, Claude, Llama) jis pe doosre cheezein banaate hain.</dd></div><div data-read><dt>Total cost of ownership</dt><dd>Time ke saath saare costs: API, log, monitoring aur galtiyaan.</dd></div><div data-read><dt>Vendor lock-in</dt><dd>Ek provider pe aisi dependency jo badalna mushkil ho.</dd></div></dl>
       </section>
@@ -146,11 +163,13 @@ Build: transcription + LLM API ≈ ₹60k/month + 2 engineers × 3 months
 Decision: buy now, revisit build if volume ×5 or custom insights are needed</code></pre></div>
         <p class="small muted" data-read>Saaf, numbers-based decision, aur dobara sochne ka trigger bhi.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Aisi problems ke liye custom models banana jo ek acchi API pehle se acche se solve karti hai.</li><li data-read>Sirf per token price compare karna aur engineering aur maintenance time ignore karna.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">Company ko apni policies pe internal Q&amp;A bot chahiye. Aam taur pe sahi pehla approach kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Research lab hire karo">Research lab hire karo</li><li data-read data-read-text="Option B: Zero se foundation model train karo">Zero se foundation model train karo</li><li data-read data-read-text="Option C: Policy documents pe RAG ke saath model API">Policy documents pe RAG ke saath model API</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Policy documents pe RAG ke saath model API</strong>: API + RAG sasta, fast hai aur jawaab current rakhta hai. Zero se training bahut zyaada hai.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Seekhne wale yeh poochhte hain</h2><details class="deep-faq"><summary data-read>Mahine ka LLM cost kaise estimate karun?</summary><p data-read>Mahine ki requests × (input tokens × input price + output tokens × output price). Retries aur growth ke liye margin jodo.</p></details><details class="deep-faq"><summary data-read>Kya open source models kaafi acche hain?</summary><p data-read>Kai tasks ke liye haan, khaaskar fine tuning ke baad. Decide karne se pehle apne eval set pe API model ke against test karo.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Buy → API → RAG → fine-tune → build. Zaroorat ho tabhi upar chadho.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -172,7 +191,7 @@ Decision: buy now, revisit build if volume ×5 or custom insights are needed</co
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

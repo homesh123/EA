@@ -104,6 +104,22 @@
             "@type": "Answer",
             "text": "Median. A few villas pull the mean up. The median stays at the middle house."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between variance and standard deviation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard deviation is the square root of variance. It's in the same units as your data (rupees, seconds), so it's easier to interpret."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do tech teams talk about p99 latency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because averages hide the slow cases users actually notice. p99 means 99% of requests are faster than this; the slowest 1% often matter most to unhappy users."
+          }
         }
       ]
     }
@@ -118,7 +134,7 @@
       <a href="../#paths">AI roles</a>
       <a href="../learn.html">Learn</a>
       <a href="../interview.html">Interview prep</a>
-      <a href="../resumes/">Resumes</a>
+      <a href="../resume-builder.html">Resume builder</a>
       <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
@@ -141,6 +157,7 @@
       <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Nine friends earn ₹30,000 a month and one earns ₹10 lakh. The &#39;average&#39; (mean) salary comes out above ₹1.2 lakh, which describes nobody! The median, the middle person&#39;s salary, is ₹30,000 and tells the real story. And &#39;spread&#39; asks whether everyone earns about the same or the numbers are all over the place.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Before modelling, you describe your data. The mean is the sum divided by the count, and it&#39;s pulled around by extreme values (outliers). The median is the middle value after sorting, and it&#39;s robust to outliers. The mode is the most common value. Spread measures how scattered the numbers are: variance is the average squared distance from the mean, and standard deviation is its square root, in the same units as the data. Always check both the centre and the spread.</p></section>
       <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 220" role="img" aria-label="Number line: nine dots at 30 thousand, one outlier at 1000 thousand; the mean marker moves right, the median stays" focusable="false"><defs><marker id="ah-st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><path d="M40 170 H600" class="ln"/><path d="M40 166 V174" class="ln"/><text x="40" y="192" text-anchor="middle" class="tm ts">₹0k</text><path d="M152 166 V174" class="ln"/><text x="152" y="192" text-anchor="middle" class="tm ts">₹200k</text><path d="M264 166 V174" class="ln"/><text x="264" y="192" text-anchor="middle" class="tm ts">₹400k</text><path d="M376.00000000000006 166 V174" class="ln"/><text x="376.00000000000006" y="192" text-anchor="middle" class="tm ts">₹600k</text><path d="M488.00000000000006 166 V174" class="ln"/><text x="488.00000000000006" y="192" text-anchor="middle" class="tm ts">₹800k</text><path d="M600 166 V174" class="ln"/><text x="600" y="192" text-anchor="middle" class="tm ts">₹1000k</text><circle cx="57" cy="156" r="6" class="c-main"/><circle cx="57" cy="143" r="6" class="c-main"/><circle cx="57" cy="130" r="6" class="c-main"/><circle cx="57" cy="117" r="6" class="c-main"/><circle cx="57" cy="104" r="6" class="c-main"/><circle cx="57" cy="91" r="6" class="c-main"/><circle cx="57" cy="78" r="6" class="c-main"/><circle cx="57" cy="65" r="6" class="c-main"/><circle cx="57" cy="52" r="6" class="c-main"/><g class="drop"><circle cx="600" cy="156" r="7" class="c-warn"/><text x="600" y="136" text-anchor="middle" class="ts">₹1000k</text></g><path d="M57 40 V172" class="mk-ok"/><text x="66" y="34" text-anchor="start" class="ok">Median ₹30k</text><g class="mean"><path d="M111 60 V172" class="mk-warn"/><text x="120" y="74" text-anchor="start" class="warn">Mean ₹127k</text></g></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">Nine salaries sit at ₹30k. When one ₹10 lakh salary arrives, the mean jumps to ₹127k but the median stays at ₹30k.</p></section>
+      <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Mean: add all values and divide by how many. Good for symmetric data like heights.</li><li data-read>Median: sort the values and take the middle one. Use it when there are extreme values, like salaries or house prices.</li><li data-read>Spread: range (max minus min) is quick but sensitive. Standard deviation tells how far values typically are from the mean.</li><li data-read>Percentiles: the 90th percentile is the value 90% of data is below. Used for things like delivery time or API latency (p90, p99).</li><li data-read>Always plot a histogram: two datasets can have the same mean but very different shapes.</li></ol></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div data-read><dt>Mean</dt><dd>The usual average: sum ÷ count.</dd></div><div data-read><dt>Median</dt><dd>The middle value when sorted. Not fooled by outliers.</dd></div><div data-read><dt>Standard deviation</dt><dd>The typical distance of values from the mean.</dd></div></dl>
       </section>
@@ -152,11 +169,13 @@ print(st.median(salaries))  # 30.0   ← the real picture
 print(round(st.stdev(salaries), 1))  # 306.7 ← huge spread</code></pre></div>
         <p class="small muted" data-read>One outlier changes the mean a lot but barely moves the median.</p>
       </section>
+      <section class="ls ls-mistakes"><h2>⚠️ Common mistakes to avoid</h2><ul class="deep-mistakes"><li data-read>Reporting only the average. &#39;Average delivery time is 2 days&#39; hides that 10% of orders take a week.</li><li data-read>Using the mean for skewed data like income. A few very high values pull it up; the median is more honest.</li></ul></section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q" data-read data-read-prefix="Quick check">House prices in a city include a few very expensive villas. Which describes a typical house better?</p>
         <ol type="A"><li data-read data-read-text="Option A: Mean">Mean</li><li data-read data-read-text="Option B: Median">Median</li><li data-read data-read-text="Option C: Maximum">Maximum</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. Median</strong>: A few villas pull the mean up. The median stays at the middle house.</p></details>
       </section>
+      <section class="ls ls-faq"><h2>🙋 Questions learners ask</h2><details class="deep-faq"><summary data-read>What&#39;s the difference between variance and standard deviation?</summary><p data-read>Standard deviation is the square root of variance. It&#39;s in the same units as your data (rupees, seconds), so it&#39;s easier to interpret.</p></details><details class="deep-faq"><summary data-read>Why do tech teams talk about p99 latency?</summary><p data-read>Because averages hide the slow cases users actually notice. p99 means 99% of requests are faster than this; the slowest 1% often matter most to unhappy users.</p></details></section>
       <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Use the median when there are outliers, and always look at the spread too.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
@@ -178,7 +197,7 @@ print(round(st.stdev(salaries), 1))  # 306.7 ← huge spread</code></pre></div>
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

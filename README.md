@@ -35,7 +35,10 @@ Live: https://homesh123.github.io/ai-career-advisor/
 
 ## Learn → practise → interview → resume
 
-Each role has a complete path: **Overview → Lessons → Practice tasks → Interview practice → Sample resume**.
+Each role has a complete path: **Overview → Lessons → Practice tasks → Interview prep guide →
+Scored interview practice → Resume builder**. All of it runs inside the course on `learn.html`, so a
+learner never has to leave the page: lessons from other courses open there as "extra lessons", the
+scored practice (`InterviewApp`) and the resume builder (`ResumeBuilder`) are mounted inside it.
 The homepage section "Learn for your target AI role" lets people pick a role, read what it involves
 and who it suits, then start.
 
@@ -45,13 +48,35 @@ and who it suits, then start.
   when the device asks for reduced motion.
 - **Practice tasks** (`content/tasks.js`): 3 per role (starter, core, portfolio), each with steps,
   a deliverable and "done when" criteria, in English and Hinglish.
+- **Interview prep guide** (`content/interview-prep.js`): 108 questions compiled from 2026 interview
+  guides and candidate reports (sources listed in the file and on each page), 33 to 50 per role.
+  - In the order a real interview goes: opening, fundamentals, role skills, design and cases,
+    projects and behaviour, closing questions and salary.
+  - Each has an easy model answer to study, the points a strong answer covers, what the interviewer
+    is really checking, and links to the lessons that teach it.
+  - The typical interview rounds for each role, and "I can answer this" tracking.
+  - The static `interview/<slug>.html` pages include the full guide (with FAQ structured data).
 - **Interview practice** (`interview.html`, `content/interview.js`): role-specific question sets.
   - Multiple-choice questions are scored automatically, with options shuffled per attempt.
   - Open questions are self-checked against key points and a model answer.
   - The report shows a score per skill area, explains every mistake, links the lessons for each gap,
     and offers "retry only what I missed".
   - Static Q&A pages per role (`interview/<slug>.html`) help with search.
-- **Sample resumes** (`resumes/`, `content/resumes.js`): one ATS-friendly sample per role.
+- **Resume builder** (`resume-builder.html`, `resume-builder.js`):
+  1. Start: upload a resume (PDF via pdf.js loaded on demand, Word .docx read with a tiny built in
+     ZIP reader, or .txt), paste text, start from the role's sample, or start blank. Files are read in
+     the browser and never uploaded.
+  2. Target role and skills: ATS keyword match for the chosen role, tick missing skills to add them,
+     use the role's headline and a summary idea.
+  3. Template: Classic, Modern or Compact, all single column with standard headings.
+  4. Edit and download: form editor with live preview, a "human tone" check (dashes, hyphenated
+     words, buzzwords, bullets without numbers, with one click fixes), PDF (print of the resume only)
+     or Word download.
+  - "Use my resume for the career questionnaire" pre-fills the answers the resume clearly shows
+    (experience, background, main work area, languages, Python, SQL, cloud, ML level, industry);
+    the questionnaire then flags them for review.
+- **Sample resumes** (`resumes/`, `content/resumes.js`): one ATS-friendly sample per role, written
+  to sound human (no dashes or hyphenated phrasing, checked by a test).
   - Editable in the browser, with a live keyword checklist.
   - Downloads as Word (.doc), PDF (print) or plain text.
   - Tests check every ATS keyword appears in the resume and every experience bullet has a number.
@@ -66,7 +91,10 @@ roadmap step by step, starting with a "Start here" lesson.
   - a plain-language explanation;
   - key terms;
   - a worked example (code or scenario) with a copy button;
+  - step by step: how it works or how to do it;
+  - common mistakes to avoid;
   - a quick check with instant feedback;
+  - questions learners usually ask, with answers;
   - a one-line takeaway.
 - **Two languages:** every lesson and the course screens can be read in English or Hinglish
   (Hindi in Roman script, with technical terms kept in English).
@@ -83,7 +111,8 @@ roadmap step by step, starting with a "Start here" lesson.
   (`learn/<id>.html`, `learn/hi/<id>.html`) with `hreflang` links between them, so search
   engines and AI assistants can find and cite them.
 
-Lesson content lives in `content/lessons-*.js` (`[English, Hinglish]` pairs). Which lessons
+Lesson content lives in `content/lessons-*.js` (`[English, Hinglish]` pairs); the step by step,
+mistakes and learner questions are in `content/deep-*.js`. Which lessons
 belong to each course and step is set in `content/learn-tracks.js`. The tests check that both
 languages are complete, quiz answers are valid, every roadmap step has lessons, and prerequisites
 come first.
@@ -111,7 +140,8 @@ AI Forward Deployed Engineer · AI Product Manager
 | `learn.html`, `learn.js` | The Learn section (interactive courses) |
 | `tts.js` | "Listen" read-aloud player for lessons (Web Speech API) |
 | `learn/*.html`, `learn/hi/*.html` | Generated static lesson pages in English and Hinglish |
-| `interview.html`, `interview.js` | Scored interview practice; `interview/*.html` are generated Q&A pages |
+| `interview.html`, `interview.js` | Scored interview practice (`InterviewApp`, also mounted in Learn); `interview/*.html` are generated prep guides and Q&A pages |
+| `resume-builder.html`, `resume-builder.js` | Resume builder (`ResumeBuilder`, also mounted in Learn) |
 | `resumes/*.html`, `resume.js` | Generated, editable ATS resume samples |
 | `home.js` | Homepage role picker ("Learn for your target AI role") |
 | `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
