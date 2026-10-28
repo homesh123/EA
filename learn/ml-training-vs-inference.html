@@ -128,27 +128,34 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 6 min read</p>
-        <h1>🏭 Training vs inference: how ML runs in production</h1>
+        <h1 data-read>🏭 Training vs inference: how ML runs in production</h1>
         <p class="lang-switch"><span>English</span><a href="hi/ml-training-vs-inference.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>A chef spends months perfecting a recipe in a test kitchen. That&#39;s training: slow, expensive, done occasionally. Then the restaurant serves that dish to hundreds of customers a day, quickly and consistently. That&#39;s inference. Running AI in production is mostly about the restaurant, not the test kitchen.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Training uses lots of data and compute, often GPUs, to produce a model artifact: a saved file of learned parameters. Inference loads that artifact and makes predictions on new inputs, either in real time (an API answering in milliseconds) or in batches (scoring a million customers overnight). Inference has different priorities from training: latency, throughput, cost per request and reliability. Models are versioned like code, so you know exactly which model gave which answer. Infrastructure engineers usually own the inference side.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A chef spends months perfecting a recipe in a test kitchen. That&#39;s training: slow, expensive, done occasionally. Then the restaurant serves that dish to hundreds of customers a day, quickly and consistently. That&#39;s inference. Running AI in production is mostly about the restaurant, not the test kitchen.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Training uses lots of data and compute, often GPUs, to produce a model artifact: a saved file of learned parameters. Inference loads that artifact and makes predictions on new inputs, either in real time (an API answering in milliseconds) or in batches (scoring a million customers overnight). Inference has different priorities from training: latency, throughput, cost per request and reliability. Models are versioned like code, so you know exactly which model gave which answer. Infrastructure engineers usually own the inference side.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Model artifact</dt><dd>The saved, trained model file that gets deployed.</dd></div><div><dt>Inference</dt><dd>Using a trained model to make predictions.</dd></div><div><dt>Batch vs real-time</dt><dd>Scoring many items on a schedule vs answering each request instantly.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Model artifact</dt><dd>The saved, trained model file that gets deployed.</dd></div><div data-read><dt>Inference</dt><dd>Using a trained model to make predictions.</dd></div><div data-read><dt>Batch vs real-time</dt><dd>Scoring many items on a schedule vs answering each request instantly.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Training (weekly):   data → train.py on GPU → fraud_model_v12.pkl → registry
 Inference (24×7):    UPI payment → API loads v12 → P(fraud)=0.03 → approve
                      latency budget: &lt; 50 ms per payment</code></pre></div>
-        <p class="small muted">Same model, two very different engineering problems.</p>
+        <p class="small muted" data-read>Same model, two very different engineering problems.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Scoring all 2 million customers for churn risk every night is…</p>
-        <ol type="A"><li>Batch inference</li><li>Real-time inference</li><li>Training</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Scoring all 2 million customers for churn risk every night is…</p>
+        <ol type="A"><li data-read data-read-text="Option A: Batch inference">Batch inference</li><li data-read data-read-text="Option B: Real-time inference">Real-time inference</li><li data-read data-read-text="Option C: Training">Training</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. Batch inference</strong>: It&#39;s prediction (inference) done on a schedule over many items, which is batch.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Training creates the model. Inference serves it, fast, cheaply and reliably.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Training creates the model. Inference serves it, fast, cheaply and reliably.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="dl-transformers.html">← Transformers and attention: how LLMs read</a>
@@ -163,6 +170,8 @@ Inference (24×7):    UPI payment → API loads v12 → P(fraud)=0.03 → approv
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

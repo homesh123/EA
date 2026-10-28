@@ -66,3 +66,24 @@ test("interface text exists in both languages", () => {
   assert.deepEqual(Object.keys(LEARN_I18N.hi).sort(), Object.keys(LEARN_I18N.en).sort());
   Object.entries(LEARN_I18N.hi).forEach(([k, v]) => assert.ok(nonEmpty(v), k));
 });
+
+test("read aloud: sentence splitting and emoji cleanup", () => {
+  const { LessonReader } = require("../tts.js");
+  assert.equal(LessonReader.clean("🏠 Real-life example\nHello  world"), "Real-life example. Hello world");
+  const long = Array.from({ length: 12 }, (_, i) => `Sentence number ${i} is here.`).join(" ");
+  const parts = LessonReader.sentences(long);
+  assert.ok(parts.length > 1 && parts.every(p => p.length < 200), "long text is split into short chunks");
+  assert.equal(parts.join(" "), long, "no text lost");
+});
+
+test("read aloud: every static lesson page has the Listen bar and readable sections", () => {
+  const fs = require("node:fs");
+  const path = require("node:path");
+  for (const id of Object.keys(LESSON_TOPICS)) {
+    for (const dir of ["learn", "learn/hi"]) {
+      const html = fs.readFileSync(path.join(__dirname, "..", dir, `${id}.html`), "utf8");
+      assert.ok(html.includes("data-reader") && html.includes("tts.js"), `${dir}/${id} has the Listen bar`);
+      assert.ok((html.match(/data-read[ >]/g) || []).length >= 5, `${dir}/${id} marks its sections for reading`);
+    }
+  }
+});

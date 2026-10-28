@@ -123,6 +123,11 @@ function render() {
     : `${L(LESSON_TOPICS[lessonId].title)} · ${ROLES[course].title}`;
   document.title = `${title} | AI Path Finder`;
   bind(app);
+  if (typeof LessonReader !== "undefined") {
+    const bar = app.querySelector("[data-reader]");
+    if (bar) LessonReader.attach(bar, app.querySelector(".lesson"), lang);
+    else LessonReader.stop();
+  }
   // People who ask their device to reduce motion get still diagrams (SMIL dots included).
   if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) {
     app.querySelectorAll(".viz svg").forEach(s => s.pauseAnimations && s.pauseAnimations());
@@ -254,31 +259,32 @@ function lessonView(list, fast) {
   const isLast = idx === list.length - 1;
   return `
     <p class="lesson-meta">${esc(stepTitle(course, step))} · ${esc(t("lessonOf", { i: idx + 1, n: list.length }))} · ⏱ ${x.mins} ${esc(t("readTime"))}${fast.has(step) ? ` <span class="badge-fast">${esc(t("youMayKnow"))}</span>` : ""}</p>
-    <h2 class="lesson-title"><span class="lesson-icon" aria-hidden="true">${x.icon}</span>${esc(L(x.title))}</h2>
+    <h2 class="lesson-title" data-read><span class="lesson-icon" aria-hidden="true">${x.icon}</span>${esc(L(x.title))}</h2>
+    ${readerBar()}
 
-    <section class="ls ls-analogy"><h3>🏠 ${esc(t("realLife"))}</h3><p>${esc(L(x.analogy))}</p></section>
-    <section class="ls ls-explain"><h3>💡 ${esc(t("simpleWords"))}</h3><p>${esc(L(x.explain))}</p></section>
-    ${visual ? `<section class="ls ls-visual"><h3>🎬 ${esc(t("howItWorks"))}</h3><div class="viz">${visual.svg}</div><p class="viz-caption">${esc(L(visual.caption))}</p></section>` : ""}
+    <section class="ls ls-analogy" data-read><h3>🏠 ${esc(t("realLife"))}</h3><p>${esc(L(x.analogy))}</p></section>
+    <section class="ls ls-explain" data-read><h3>💡 ${esc(t("simpleWords"))}</h3><p>${esc(L(x.explain))}</p></section>
+    ${visual ? `<section class="ls ls-visual"><h3>🎬 ${esc(t("howItWorks"))}</h3><div class="viz">${visual.svg}</div><p class="viz-caption" data-read data-read-prefix="${esc(t("diagram"))}">${esc(L(visual.caption))}</p></section>` : ""}
     <section class="ls ls-terms"><h3>🔑 ${esc(t("keyTerms"))}</h3>
-      <dl class="terms">${x.terms.map(([term, en, hi]) => `<div><dt>${esc(term)}</dt><dd>${esc(lang === "hi" ? hi : en)}</dd></div>`).join("")}</dl>
+      <dl class="terms">${x.terms.map(([term, en, hi]) => `<div data-read><dt>${esc(term)}</dt><dd>${esc(lang === "hi" ? hi : en)}</dd></div>`).join("")}</dl>
     </section>
     <section class="ls ls-example"><h3>👀 ${esc(t("seeItInAction"))}</h3>
       <div class="code-wrap"><span class="code-lang">${esc(x.example.lang)}</span><button type="button" class="copy-btn" data-act="copy">${esc(t("copy"))}</button><pre><code>${esc(x.example.code)}</code></pre></div>
-      <p class="small muted">${esc(L(x.example.note))}</p>
+      <p class="small muted" data-read>${esc(L(x.example.note))}</p>
     </section>
     <section class="ls ls-quiz"><h3>✅ ${esc(t("quickCheck"))}</h3>
-      <p class="quiz-q">${esc(L(x.quiz.q))}</p>
+      <p class="quiz-q" data-read data-read-prefix="${esc(t("quickCheck"))}">${esc(L(x.quiz.q))}</p>
       <div class="quiz-opts" role="group" aria-label="${esc(t("quickCheck"))}">
         ${order.map((i, pos) => {
           const o = x.quiz.options[i];
           const cls = !answered ? "" : i === x.quiz.answer ? " right" : i === chosen ? " wrong" : " dim";
-          return `<button type="button" class="quiz-opt${cls}" data-opt="${i}" ${answered ? "disabled" : ""}><span class="quiz-letter">${"ABCD"[pos]}</span>${esc(L(o))}</button>`;
+          return `<button type="button" class="quiz-opt${cls}" data-opt="${i}" ${answered ? "disabled" : ""} data-read data-read-text="${esc(`${t("option")} ${"ABCD"[pos]}: ${L(o)}`)}"><span class="quiz-letter">${"ABCD"[pos]}</span>${esc(L(o))}</button>`;
         }).join("")}
       </div>
       ${answered ? `<div class="quiz-feedback ${right ? "ok" : "miss"}" role="status"><strong>${esc(right ? t("correct") : t("notQuite"))}</strong> ${esc(L(x.quiz.why))}
         ${right ? "" : `<button type="button" class="link-btn small" data-act="retry">${esc(t("tryAgain"))}</button>`}</div>` : ""}
     </section>
-    <section class="ls ls-remember"><h3>📌 ${esc(t("remember"))}</h3><p>${esc(L(x.remember))}</p></section>
+    <section class="ls ls-remember" data-read><h3>📌 ${esc(t("remember"))}</h3><p>${esc(L(x.remember))}</p></section>
 
     ${stepDone && me ? `<div class="callout callout-ok step-callout"><strong>${esc(t("stepComplete", { n: step }))}</strong>
       ${roadmapDone ? `<span>${esc(t("stepMarked", { n: step }))}</span>` : `<button type="button" class="button btn-secondary btn-small" data-act="mark-step" data-step="${step}">${esc(t("markStepOnRoadmap", { n: step }))}</button>`}</div>` : ""}
@@ -289,6 +295,12 @@ function lessonView(list, fast) {
     </div>
     <p class="kbd-hint">${esc(t("shortcut"))}</p>`;
 }
+
+// "Listen" player bar (tts.js) with labels in the current language.
+const readerBar = () => typeof LessonReader === "undefined" ? "" : LessonReader.barHtml({
+  listen: t("listen"), pause: t("pause"), resume: t("resumeReading"), stop: t("stop"), speed: t("speed"),
+  reading: t("readingAloud"), paused: t("pausedReading"), unsupported: t("ttsUnsupported")
+});
 
 function tasksView() {
   const tasks = ROLE_TASKS[course];

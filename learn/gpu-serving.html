@@ -123,14 +123,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 7 min read</p>
-        <h1>⚡ Serving LLMs efficiently: GPUs, batching and cost</h1>
+        <h1 data-read>⚡ Serving LLMs efficiently: GPUs, batching and cost</h1>
         <p class="lang-switch"><span>English</span><a href="hi/gpu-serving.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>An auto-rickshaw carrying one passenger at a time is slow and expensive per person. A bus that waits a few seconds to fill up moves far more people for the same fuel. LLM servers &#39;batch&#39; many user requests together on one GPU for the same reason: much better throughput and lower cost per request.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Self-hosting open models (Llama, Qwen, Mistral) needs GPUs, and GPUs are expensive. Inference servers like vLLM or TGI maximise GPU use with continuous batching (adding new requests mid-flight) and efficient memory for the conversation cache. Key metrics: time to first token (how fast the reply starts), tokens per second, p95 latency and cost per 1,000 requests. Quantisation shrinks models to fit cheaper GPUs, caching repeated prompts saves money, and an LLM gateway in front routes traffic, enforces budgets and falls back between providers.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>An auto-rickshaw carrying one passenger at a time is slow and expensive per person. A bus that waits a few seconds to fill up moves far more people for the same fuel. LLM servers &#39;batch&#39; many user requests together on one GPU for the same reason: much better throughput and lower cost per request.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Self-hosting open models (Llama, Qwen, Mistral) needs GPUs, and GPUs are expensive. Inference servers like vLLM or TGI maximise GPU use with continuous batching (adding new requests mid-flight) and efficient memory for the conversation cache. Key metrics: time to first token (how fast the reply starts), tokens per second, p95 latency and cost per 1,000 requests. Quantisation shrinks models to fit cheaper GPUs, caching repeated prompts saves money, and an LLM gateway in front routes traffic, enforces budgets and falls back between providers.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Batching</dt><dd>Processing many requests together to use the GPU fully.</dd></div><div><dt>Time to first token</dt><dd>How quickly the first words of a reply appear.</dd></div><div><dt>p95 latency</dt><dd>95% of requests are faster than this. It captures the slow tail.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Batching</dt><dd>Processing many requests together to use the GPU fully.</dd></div><div data-read><dt>Time to first token</dt><dd>How quickly the first words of a reply appear.</dd></div><div data-read><dt>p95 latency</dt><dd>95% of requests are faster than this. It captures the slow tail.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">bash</span><pre><code>pip install vllm
@@ -138,14 +145,14 @@ vllm serve Qwen/Qwen2.5-7B-Instruct --max-model-len 8192
 # → OpenAI-compatible API on :8000 with continuous batching built in
 
 # Track: time-to-first-token, tokens/sec, p95 latency, GPU utilisation, ₹ per 1k requests</code></pre></div>
-        <p class="small muted">One command gives you a batched, production-style LLM server.</p>
+        <p class="small muted" data-read>One command gives you a batched, production-style LLM server.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Your GPU sits at 20% utilisation while users wait. What helps most?</p>
-        <ol type="A"><li>A bigger model</li><li>An inference server with continuous batching</li><li>Buy more GPUs</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Your GPU sits at 20% utilisation while users wait. What helps most?</p>
+        <ol type="A"><li data-read data-read-text="Option A: A bigger model">A bigger model</li><li data-read data-read-text="Option B: An inference server with continuous batching">An inference server with continuous batching</li><li data-read data-read-text="Option C: Buy more GPUs">Buy more GPUs</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. An inference server with continuous batching</strong>: Batching packs more requests onto the same GPU, raising utilisation and throughput.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Batch requests, measure latency and cost, and quantise and cache where you can.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Batch requests, measure latency and cost, and quantise and cache where you can.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="docker.html">← Docker: packaging your app so it runs anywhere</a>
@@ -160,6 +167,8 @@ vllm serve Qwen/Qwen2.5-7B-Instruct --max-model-len 8192
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

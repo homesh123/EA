@@ -128,14 +128,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 7 min read</p>
-        <h1>🎯 Problem framing: should AI solve this, and how?</h1>
+        <h1 data-read>🎯 Problem framing: should AI solve this, and how?</h1>
         <p class="lang-switch"><span>English</span><a href="hi/problem-framing.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>A patient walks into a clinic and says &#39;give me antibiotics&#39;. A good doctor first asks what the symptoms are, since when, and what has been tried. Often the real need is different from the request. When a client says &#39;we need an AI chatbot&#39;, a good AI professional diagnoses before prescribing.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Start from the problem, not the technology. Ask who has the problem, how often, and what it costs today. Define success as a measurable metric (&#39;cut average ticket handling time from 9 to 5 minutes&#39;). Check whether the data and workflow exist to support a solution. Then pick the simplest approach that works, which might be a rule, a dashboard, a classic ML model, an LLM feature or an agent. AI is a good fit when the task is frequent, pattern-based, tolerant of occasional errors and backed by data. It&#39;s a poor fit when every mistake is costly and rules already work.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A patient walks into a clinic and says &#39;give me antibiotics&#39;. A good doctor first asks what the symptoms are, since when, and what has been tried. Often the real need is different from the request. When a client says &#39;we need an AI chatbot&#39;, a good AI professional diagnoses before prescribing.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Start from the problem, not the technology. Ask who has the problem, how often, and what it costs today. Define success as a measurable metric (&#39;cut average ticket handling time from 9 to 5 minutes&#39;). Check whether the data and workflow exist to support a solution. Then pick the simplest approach that works, which might be a rule, a dashboard, a classic ML model, an LLM feature or an agent. AI is a good fit when the task is frequent, pattern-based, tolerant of occasional errors and backed by data. It&#39;s a poor fit when every mistake is costly and rules already work.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Success metric</dt><dd>A number that shows whether the solution worked.</dd></div><div><dt>Baseline</dt><dd>How things perform today, without the new solution.</dd></div><div><dt>Simplest viable approach</dt><dd>The least complex solution that meets the goal.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Success metric</dt><dd>A number that shows whether the solution worked.</dd></div><div data-read><dt>Baseline</dt><dd>How things perform today, without the new solution.</dd></div><div data-read><dt>Simplest viable approach</dt><dd>The least complex solution that meets the goal.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Ask: &quot;Build an AI chatbot for our support team&quot;
@@ -143,14 +150,14 @@ Discovery: 60% of tickets are &#39;where is my order?&#39;
 Baseline:  9 min average handling, 30k tickets/month
 Better fix: auto-reply with live order status (API) + LLM drafts for the rest
 Metric:    handling time 9 → 5 min, CSAT ≥ 4.3</code></pre></div>
-        <p class="small muted">Diagnosis changed the solution, and made it cheaper and more effective.</p>
+        <p class="small muted" data-read>Diagnosis changed the solution, and made it cheaper and more effective.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">A client asks for &#39;AI to stop customers leaving&#39;. What&#39;s the best first step?</p>
-        <ol type="A"><li>Build a chatbot</li><li>Train a deep learning model right away</li><li>Define &#39;leaving&#39;, measure the baseline and check what data exists</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">A client asks for &#39;AI to stop customers leaving&#39;. What&#39;s the best first step?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Build a chatbot">Build a chatbot</li><li data-read data-read-text="Option B: Train a deep learning model right away">Train a deep learning model right away</li><li data-read data-read-text="Option C: Define &#39;leaving&#39;, measure the baseline and check what data exists">Define &#39;leaving&#39;, measure the baseline and check what data exists</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Define &#39;leaving&#39;, measure the baseline and check what data exists</strong>: Without a clear definition, baseline and data, any model is a guess.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Problem → metric → data → simplest solution. Diagnose before you prescribe.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Problem → metric → data → simplest solution. Diagnose before you prescribe.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="llm-safety.html">← AI safety in products: hallucinations, prompt injection and guardrails</a>
@@ -165,6 +172,8 @@ Metric:    handling time 9 → 5 min, CSAT ≥ 4.3</code></pre></div>
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

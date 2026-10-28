@@ -123,14 +123,21 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 6 min padhne mein</p>
-        <h1>🧱 Low-code tools se AI ideas ka prototype banaana</h1>
+        <h1 data-read>🧱 Low-code tools se AI ideas ka prototype banaana</h1>
         <p class="lang-switch"><a href="../no-code-prototyping.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Restaurant kholne se pehle samajhdaar owners weekend food stall lagaate hain, yeh dekhne ke liye ki logon ko menu pasand aata hai ya nahi. No-code AI prototype wahi food stall hai: engineering ke mahine lagaane se pehle, ek din mein test kar sakte ho ki idea kaam ka hai ya nahi.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>PMs, analysts aur domain experts ab bina zyaada coding ke asli AI workflows ka prototype bana sakte hain. RAG-style Q&amp;A idea test karne ke liye documents upload karke AI assistant projects use karo. Automation tools (n8n, Zapier, Make) mein AI steps jodkar triggers chain karo, jaise &#39;nayi email&#39; → classify → reply draft → sheet mein log. Clickable demo ke liye Streamlit ya simple templates use karo. 5–10 asli users aur asli data ke saath test karo, aur note karo ki kahan fail hota hai. Working prototype requirements ko saaf karta hai, logon ka saath jeetta hai, aur engineers ko clear target deta hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Restaurant kholne se pehle samajhdaar owners weekend food stall lagaate hain, yeh dekhne ke liye ki logon ko menu pasand aata hai ya nahi. No-code AI prototype wahi food stall hai: engineering ke mahine lagaane se pehle, ek din mein test kar sakte ho ki idea kaam ka hai ya nahi.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>PMs, analysts aur domain experts ab bina zyaada coding ke asli AI workflows ka prototype bana sakte hain. RAG-style Q&amp;A idea test karne ke liye documents upload karke AI assistant projects use karo. Automation tools (n8n, Zapier, Make) mein AI steps jodkar triggers chain karo, jaise &#39;nayi email&#39; → classify → reply draft → sheet mein log. Clickable demo ke liye Streamlit ya simple templates use karo. 5–10 asli users aur asli data ke saath test karo, aur note karo ki kahan fail hota hai. Working prototype requirements ko saaf karta hai, logon ka saath jeetta hai, aur engineers ko clear target deta hai.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Prototype</dt><dd>Idea test karne ke liye jaldi bana kaccha version.</dd></div><div><dt>Workflow automation</dt><dd>Apps ko jodna taaki trigger pe steps apne aap chalein.</dd></div><div><dt>User testing</dt><dd>Asli users ko prototype use karte dekhna, taaki pata chale kya kaam karta hai.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Prototype</dt><dd>Idea test karne ke liye jaldi bana kaccha version.</dd></div><div data-read><dt>Workflow automation</dt><dd>Apps ko jodna taaki trigger pe steps apne aap chalein.</dd></div><div data-read><dt>User testing</dt><dd>Asli users ko prototype use karte dekhna, taaki pata chale kya kaam karta hai.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Idea: auto-triage HR emails
@@ -139,14 +146,14 @@ Day 1 prototype (no code):
   AI step: classify → leave | payroll | policy | other; draft a reply
   Action:  add a row to a Google Sheet for HR to review
 Week 1: 200 emails, 84% classified right, payroll drafts need work → clear spec for engineering</code></pre></div>
-        <p class="small muted">Ek din ke test se asli numbers aur zyaada saaf spec mila.</p>
+        <p class="small muted" data-read>Ek din ke test se asli numbers aur zyaada saaf spec mila.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">No-code AI prototype ka main purpose kya hai?</p>
-        <ol type="A"><li>Production system ko replace karna</li><li>Asli users aur data ke saath jaldi test karna ki idea kaam ka hai ya nahi</li><li>Users se baat karne se bachna</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">No-code AI prototype ka main purpose kya hai?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Production system ko replace karna">Production system ko replace karna</li><li data-read data-read-text="Option B: Asli users aur data ke saath jaldi test karna ki idea kaam ka hai ya nahi">Asli users aur data ke saath jaldi test karna ki idea kaam ka hai ya nahi</li><li data-read data-read-text="Option C: Users se baat karne se bachna">Users se baat karne se bachna</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Asli users aur data ke saath jaldi test karna ki idea kaam ka hai ya nahi</strong>: Prototypes bade investment se pehle jaldi aur saste mein seekhkar risk kam karte hain.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>Dino mein prototype, asli users ke saath test, phir spec likho.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Dino mein prototype, asli users ke saath test, phir spec likho.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="llm-prompting.html">← Prompting: LLM ko saaf instructions dena</a>
@@ -161,6 +168,8 @@ Week 1: 200 emails, 84% classified right, payroll drafts need work → clear spe
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

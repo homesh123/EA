@@ -123,14 +123,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 6 min read</p>
-        <h1>🌲 Decision trees, random forests and boosting</h1>
+        <h1 data-read>🌲 Decision trees, random forests and boosting</h1>
         <p class="lang-switch"><span>English</span><a href="hi/ml-trees.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>A bank officer decides on a loan by asking a series of questions: Is salary above ₹50k? Any past defaults? Job for more than 2 years? That flowchart is a decision tree. Asking 100 officers who each saw slightly different files, then taking a vote, is a random forest. Boosting is like a coaching class where each new tutor focuses on the questions previous students got wrong.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>A decision tree splits data with simple yes/no questions, which makes it easy to explain but prone to overfitting. A random forest trains many trees on random samples and averages their votes, which is more accurate and stable. Gradient boosting (XGBoost, LightGBM) builds trees one after another, each fixing the errors of the last. On tabular business data, like spreadsheets of customers or transactions, boosted trees are often the best-performing models, beating deep learning.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A bank officer decides on a loan by asking a series of questions: Is salary above ₹50k? Any past defaults? Job for more than 2 years? That flowchart is a decision tree. Asking 100 officers who each saw slightly different files, then taking a vote, is a random forest. Boosting is like a coaching class where each new tutor focuses on the questions previous students got wrong.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>A decision tree splits data with simple yes/no questions, which makes it easy to explain but prone to overfitting. A random forest trains many trees on random samples and averages their votes, which is more accurate and stable. Gradient boosting (XGBoost, LightGBM) builds trees one after another, each fixing the errors of the last. On tabular business data, like spreadsheets of customers or transactions, boosted trees are often the best-performing models, beating deep learning.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Decision tree</dt><dd>A flowchart of yes/no questions that leads to a prediction.</dd></div><div><dt>Random forest</dt><dd>Many trees voting together for a steadier answer.</dd></div><div><dt>Gradient boosting</dt><dd>Trees built in sequence, each correcting earlier mistakes.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Decision tree</dt><dd>A flowchart of yes/no questions that leads to a prediction.</dd></div><div data-read><dt>Random forest</dt><dd>Many trees voting together for a steadier answer.</dd></div><div data-read><dt>Gradient boosting</dt><dd>Trees built in sequence, each correcting earlier mistakes.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">python</span><pre><code>from xgboost import XGBClassifier
@@ -138,14 +145,14 @@ model = XGBClassifier(n_estimators=300, max_depth=4, learning_rate=0.05)
 model.fit(X_train, y_train)
 print(model.score(X_test, y_test))
 # feature_importances_ shows which inputs mattered most</code></pre></div>
-        <p class="small muted">A strong default for spreadsheet-style data.</p>
+        <p class="small muted" data-read>A strong default for spreadsheet-style data.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">For predicting customer churn from a table of 30 columns, a strong first choice is…</p>
-        <ol type="A"><li>A huge deep neural network</li><li>A chatbot</li><li>Gradient-boosted trees</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">For predicting customer churn from a table of 30 columns, a strong first choice is…</p>
+        <ol type="A"><li data-read data-read-text="Option A: A huge deep neural network">A huge deep neural network</li><li data-read data-read-text="Option B: A chatbot">A chatbot</li><li data-read data-read-text="Option C: Gradient-boosted trees">Gradient-boosted trees</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Gradient-boosted trees</strong>: Boosted trees are fast, accurate and explainable on tabular data. Try them before deep learning.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Tables → try boosted trees first.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Tables → try boosted trees first.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="ml-features.html">← Feature engineering: turning raw data into useful inputs</a>
@@ -160,6 +167,8 @@ print(model.score(X_test, y_test))
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

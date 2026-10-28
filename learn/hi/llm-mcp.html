@@ -123,14 +123,21 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 6 min padhne mein</p>
-        <h1>🔗 MCP: AI tools ke liye universal plug</h1>
+        <h1 data-read>🔗 MCP: AI tools ke liye universal plug</h1>
         <p class="lang-switch"><a href="../llm-mcp.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>USB-C se pehle har phone ka apna charger hota tha. Ab ek cable lagbhag sab cheezon mein lag jaati hai. Model Context Protocol (MCP) AI ke liye yahi karta hai: apne tool ya data ka connector ek baar banao, aur bahut saari AI apps aur agents usmein plug ho sakte hain.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>MCP AI applications ko tools aur data se jodne ka ek open standard hai. MCP server tools (actions), resources (padhne ka data) aur prompts ek standard format mein deta hai. MCP client, jaise AI assistant ya agent, unhe dhoondhkar use karta hai. Isliye har AI app ke liye custom integration code likhne ki jagah, aap ek MCP server likhte ho, jaise company ke ticketing system ke liye. Engineers ke liye MCP server banaana ek practical, demand wali skill hai, jo dikhaati hai ki aap tool use, auth aur security samajhte ho.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>USB-C se pehle har phone ka apna charger hota tha. Ab ek cable lagbhag sab cheezon mein lag jaati hai. Model Context Protocol (MCP) AI ke liye yahi karta hai: apne tool ya data ka connector ek baar banao, aur bahut saari AI apps aur agents usmein plug ho sakte hain.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>MCP AI applications ko tools aur data se jodne ka ek open standard hai. MCP server tools (actions), resources (padhne ka data) aur prompts ek standard format mein deta hai. MCP client, jaise AI assistant ya agent, unhe dhoondhkar use karta hai. Isliye har AI app ke liye custom integration code likhne ki jagah, aap ek MCP server likhte ho, jaise company ke ticketing system ke liye. Engineers ke liye MCP server banaana ek practical, demand wali skill hai, jo dikhaati hai ki aap tool use, auth aur security samajhte ho.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>MCP server</dt><dd>Program jo tools aur data ko MCP format mein AI apps ko deta hai.</dd></div><div><dt>MCP client</dt><dd>AI app ya agent jo MCP servers se judta hai.</dd></div><div><dt>Resource</dt><dd>Read-only data jo server share karta hai, jaise file ya record.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>MCP server</dt><dd>Program jo tools aur data ko MCP format mein AI apps ko deta hai.</dd></div><div data-read><dt>MCP client</dt><dd>AI app ya agent jo MCP servers se judta hai.</dd></div><div data-read><dt>Resource</dt><dd>Read-only data jo server share karta hai, jaise file ya record.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">python</span><pre><code>from mcp.server.fastmcp import FastMCP
@@ -142,14 +149,14 @@ def open_tickets(team: str) -&gt; list[dict]:
     return db.query(&quot;SELECT id, title FROM tickets WHERE team=? AND open=1&quot;, team)
 
 mcp.run()</code></pre></div>
-        <p class="small muted">Ek chhota server, aur ab koi bhi MCP-compatible assistant tickets list kar sakta hai.</p>
+        <p class="small muted" data-read>Ek chhota server, aur ab koi bhi MCP-compatible assistant tickets list kar sakta hai.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">MCP ka main faayda kya hai?</p>
-        <ol type="A"><li>Models ko smart banata hai</li><li>Tool connector ek baar banao aur AI apps mein reuse karo</li><li>Databases ko replace karta hai</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">MCP ka main faayda kya hai?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Models ko smart banata hai">Models ko smart banata hai</li><li data-read data-read-text="Option B: Tool connector ek baar banao aur AI apps mein reuse karo">Tool connector ek baar banao aur AI apps mein reuse karo</li><li data-read data-read-text="Option C: Databases ko replace karta hai">Databases ko replace karta hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Tool connector ek baar banao aur AI apps mein reuse karo</strong>: MCP standard banata hai ki tools kaise expose hon, jaise AI integrations ke liye USB-C.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>MCP = AI apps aur aapke tools/data ke beech ek standard plug.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>MCP = AI apps aur aapke tools/data ke beech ek standard plug.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="llm-agents.html">← AI agents: plan, act, observe, repeat</a>
@@ -164,6 +171,8 @@ mcp.run()</code></pre></div>
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

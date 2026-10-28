@@ -128,28 +128,35 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 6 min padhne mein</p>
-        <h1>🔗 Correlation vs causation, aur sampling bias</h1>
+        <h1 data-read>🔗 Correlation vs causation, aur sampling bias</h1>
         <p class="lang-switch"><a href="../stats-correlation.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Garmiyon mein ice-cream ki sales aur doobne ke cases dono badhte hain. Dono correlated hain, lekin ice-cream doobne ki wajah nahi hai. Garmi dono ki wajah hai. Aur agar aap fitness habits ka survey sirf gym wale logon se karoge, to result poore shehar ko represent nahi karega. Yeh hai sampling bias.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Correlation ka matlab hai do cheezein saath-saath badalti hain. Causation ka matlab hai ek cheez sach mein doosri ko cause karti hai. ML models correlations dhoondhne mein bahut ache hain, lekin khud causation prove nahi kar sakte, isliye &#39;feature X causes Y&#39; jaise claims mein savdhaan raho. Sampling bias tab hota hai jab aapka data real duniya ko represent nahi karta, aur biased data pe train hua model biased predictions karega. Kisi bhi result pe bharosa karne se pehle poocho: is data mein kaun missing hai, aur is pattern ko aur kya explain kar sakta hai?</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Garmiyon mein ice-cream ki sales aur doobne ke cases dono badhte hain. Dono correlated hain, lekin ice-cream doobne ki wajah nahi hai. Garmi dono ki wajah hai. Aur agar aap fitness habits ka survey sirf gym wale logon se karoge, to result poore shehar ko represent nahi karega. Yeh hai sampling bias.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Correlation ka matlab hai do cheezein saath-saath badalti hain. Causation ka matlab hai ek cheez sach mein doosri ko cause karti hai. ML models correlations dhoondhne mein bahut ache hain, lekin khud causation prove nahi kar sakte, isliye &#39;feature X causes Y&#39; jaise claims mein savdhaan raho. Sampling bias tab hota hai jab aapka data real duniya ko represent nahi karta, aur biased data pe train hua model biased predictions karega. Kisi bhi result pe bharosa karne se pehle poocho: is data mein kaun missing hai, aur is pattern ko aur kya explain kar sakta hai?</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Correlation</dt><dd>Do variables saath-saath badalte hain.</dd></div><div><dt>Causation</dt><dd>Ek cheez seedha doosri ko cause karti hai.</dd></div><div><dt>Sampling bias</dt><dd>Aisa data jo poori population ko represent nahi karta.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Correlation</dt><dd>Do variables saath-saath badalte hain.</dd></div><div data-read><dt>Causation</dt><dd>Ek cheez seedha doosri ko cause karti hai.</dd></div><div data-read><dt>Sampling bias</dt><dd>Aisa data jo poori population ko represent nahi karta.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Finding: users who use the app&#39;s dark mode spend more money.
 ❌ &#39;Dark mode makes people spend more&#39; (causation claim)
 ✅ Maybe power users like dark mode AND spend more.
    Test it: an A/B experiment that randomly switches dark mode on.</code></pre></div>
-        <p class="small muted">Correlation se causation tak pahunchne ka tareeka randomised experiment hai.</p>
+        <p class="small muted" data-read>Correlation se causation tak pahunchne ka tareeka randomised experiment hai.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Hiring model sirf ek city ke purane hires pe train hua hai. Risk kya hai?</p>
-        <ol type="A"><li>Woh slow hoga</li><li>Koi risk nahi</li><li>Sampling bias: doosri cities ke logon ko galat score de sakta hai</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Hiring model sirf ek city ke purane hires pe train hua hai. Risk kya hai?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Woh slow hoga">Woh slow hoga</li><li data-read data-read-text="Option B: Koi risk nahi">Koi risk nahi</li><li data-read data-read-text="Option C: Sampling bias: doosri cities ke logon ko galat score de sakta hai">Sampling bias: doosri cities ke logon ko galat score de sakta hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Sampling bias: doosri cities ke logon ko galat score de sakta hai</strong>: Training data un sab logon ko represent nahi karta jinhe model judge karega.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>Correlation causation nahi hai, aur biased data se biased AI banta hai.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Correlation causation nahi hai, aur biased data se biased AI banta hai.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="stats-probability.html">← Probability aur distributions</a>
@@ -164,6 +171,8 @@
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

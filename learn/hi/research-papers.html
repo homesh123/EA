@@ -123,28 +123,35 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 6 min padhne mein</p>
-        <h1>📄 Research papers padhna aur reproduce karna</h1>
+        <h1 data-read>📄 Research papers padhna aur reproduce karna</h1>
         <p class="lang-switch"><a href="../research-papers.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Food blogger kehta hai 10 minute mein biryani ban jaati hai. Aap tab tak nahi maanoge jab tak unke exact steps se khud na banao. Paper reproduce karna bhi aisa hi hai: method follow karo, code chalao, aur dekho ki unke results aate hain ya nahi. Aapne sach mein samjha hai, iska yahi sabse accha saboot hai.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Pehli baar mein paper shuru se aakhir tak mat padho. Abstract padho, figures dekho, aur conclusion padho. Poocho: yeh kaunsi problem solve karta hai, aur key idea kya hai? Doosri baar method dhyaan se padho, aur datasets, metrics aur baselines note karo. Reproduce karne ke liye sabse chhote experiment se shuru karo, unki settings match karo, aur har run log karo. Agar aapke numbers alag aayein to wajah dhoondho: asli seekhna wahin hota hai. Apna reproduction code ke saath GitHub pe likho; research roles mein yeh ek mini-publication jaisa count hota hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Food blogger kehta hai 10 minute mein biryani ban jaati hai. Aap tab tak nahi maanoge jab tak unke exact steps se khud na banao. Paper reproduce karna bhi aisa hi hai: method follow karo, code chalao, aur dekho ki unke results aate hain ya nahi. Aapne sach mein samjha hai, iska yahi sabse accha saboot hai.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Pehli baar mein paper shuru se aakhir tak mat padho. Abstract padho, figures dekho, aur conclusion padho. Poocho: yeh kaunsi problem solve karta hai, aur key idea kya hai? Doosri baar method dhyaan se padho, aur datasets, metrics aur baselines note karo. Reproduce karne ke liye sabse chhote experiment se shuru karo, unki settings match karo, aur har run log karo. Agar aapke numbers alag aayein to wajah dhoondho: asli seekhna wahin hota hai. Apna reproduction code ke saath GitHub pe likho; research roles mein yeh ek mini-publication jaisa count hota hai.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Abstract</dt><dd>Paper ki chhoti summary: problem, idea aur result.</dd></div><div><dt>Baseline</dt><dd>Pichhla best method jisse paper compare karta hai.</dd></div><div><dt>Ablation</dt><dd>Ek hissa hata kar dekhna ki woh kitna zaroori tha.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Abstract</dt><dd>Paper ki chhoti summary: problem, idea aur result.</dd></div><div data-read><dt>Baseline</dt><dd>Pichhla best method jisse paper compare karta hai.</dd></div><div data-read><dt>Ablation</dt><dd>Ek hissa hata kar dekhna ki woh kitna zaroori tha.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Pass 1 (15 min):  title → abstract → figures → conclusion
 Pass 2 (1–2 h):   method, datasets, metrics, baselines
 Reproduce:        smallest experiment → match settings → log runs
 Share:            repo + README: &#39;their result vs mine, and why&#39;</code></pre></div>
-        <p class="small muted">Ek repeatable routine jo kisi bhi ML paper ke liye kaam karta hai.</p>
+        <p class="small muted" data-read>Ek repeatable routine jo kisi bhi ML paper ke liye kaam karta hai.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Naya paper kholte hi sabse pehle kya padhna chahiye?</p>
-        <ol type="A"><li>Har equation order mein</li><li>Abstract, figures aur conclusion</li><li>Appendix</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Naya paper kholte hi sabse pehle kya padhna chahiye?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Har equation order mein">Har equation order mein</li><li data-read data-read-text="Option B: Abstract, figures aur conclusion">Abstract, figures aur conclusion</li><li data-read data-read-text="Option C: Appendix">Appendix</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Abstract, figures aur conclusion</strong>: Pehla jaldi wala pass batata hai ki paper gehraai se padhne laayak hai ya nahi.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>Pehle skim, phir gehraai mein, phir reproduce. Reproduction hi saboot hai.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>Pehle skim, phir gehraai mein, phir reproduce. Reproduction hi saboot hai.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="dl-fine-tuning.html">← Fine-tuning aur LoRA: model ko specialise karna</a>
@@ -159,6 +166,8 @@ Share:            repo + README: &#39;their result vs mine, and why&#39;</code><
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
