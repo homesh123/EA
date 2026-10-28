@@ -14,7 +14,8 @@ const TASKS = "tasks";
 const PREP = "prep";
 const PRACTICE = "practice";
 const RESUME = "resume";
-const CAREER_VIEWS = [TASKS, PREP, PRACTICE, RESUME];
+const GLOSSARY = "glossary";
+const CAREER_VIEWS = [TASKS, PREP, PRACTICE, RESUME, GLOSSARY];
 
 const store = {
   get(key) { try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; } },
@@ -137,6 +138,7 @@ function render() {
     : lessonId === PREP ? `${t("prepGuide")} · ${ROLES[course].title}`
     : lessonId === PRACTICE ? `${t("scoredPractice")} · ${ROLES[course].title}`
     : lessonId === RESUME ? `${t("resumeBuilder")} · ${ROLES[course].title}`
+    : lessonId === GLOSSARY ? `${t("dictionary")} · ${ROLES[course].title}`
     : `${L(LESSON_TOPICS[lessonId].title)} · ${ROLES[course].title}`;
   document.title = `${title} | AI Path Finder`;
   bind(app);
@@ -151,6 +153,7 @@ function render() {
     role: course, embedded: true, lang,
     lessonLink: tp => `href="?course=${course}&lesson=${tp}${lang === "hi" ? "&lang=hi" : ""}" data-lesson="${tp}"`
   });
+  if (lessonId === GLOSSARY && typeof Glossary !== "undefined") Glossary.enhance(app, { lang });
   const rb = app.querySelector("#rbMount");
   if (rb && typeof ResumeBuilder !== "undefined") ResumeBuilder.mount(rb, { role: course, embedded: true, lang });
   // People who ask their device to reduce motion get still diagrams (SMIL dots included).
@@ -180,7 +183,8 @@ function pickerView() {
         </button></li>`;
       }).join("")}
     </ul>
-    ${me ? "" : `<p class="small"><a href="./#app">${esc(t("takeQuiz"))} →</a></p>`}`;
+    ${me ? "" : `<p class="small"><a href="./#app">${esc(t("takeQuiz"))} →</a></p>`}
+    <p class="small">📖 <a href="glossary/">${esc(t("dictionary"))}</a>: ${esc(t("dictionaryBlurb"))}</p>`;
 }
 
 function outlineItem(id, label, icon, done) {
@@ -203,6 +207,7 @@ function courseView() {
   else if (lessonId === PREP) article = prepView();
   else if (lessonId === PRACTICE) article = careerHead("🎤", t("scoredPractice")) + `<div id="ivMount"></div>` + careerNav();
   else if (lessonId === RESUME) article = careerHead("🧰", t("resumeBuilder")) + `<div id="rbMount"></div>` + careerNav();
+  else if (lessonId === GLOSSARY) article = glossaryView();
   else article = lessonView(list, fast);
   return `
     <div class="learn-bar">
@@ -220,7 +225,7 @@ function courseView() {
     <button type="button" class="outline-toggle" aria-expanded="false" aria-controls="outline">📚 ${esc(t("outline"))} · ${doneCount}/${list.length}</button>
     <div class="learn-grid">
       <nav class="outline" id="outline" aria-label="${esc(t("outline"))}">
-        <div class="ol-step"><ol>${outlineItem(OVERVIEW, t("overview"), "🗺️", doneCount > 0)}</ol></div>
+        <div class="ol-step"><ol>${outlineItem(OVERVIEW, t("overview"), "🗺️", doneCount > 0)}${typeof Glossary !== "undefined" ? outlineItem(GLOSSARY, t("dictionary"), "📖", false) : ""}</ol></div>
         ${LEARN_TRACKS[course].map(([step, topics]) => `
           <div class="ol-step">
             <p class="ol-step-head"><span class="ol-num">${step === 0 ? "★" : step}</span><span>${esc(stepName(course, step))}</span>${fast.has(step) ? `<span class="badge-fast">${esc(t("youMayKnow"))}</span>` : ""}</p>
@@ -403,6 +408,14 @@ function careerNav() {
 // because the interview itself is in English.
 const prepHi = q => lang === "hi" && typeof INTERVIEW_PREP_HI !== "undefined" ? INTERVIEW_PREP_HI[q.id] : null;
 const prepMeta = () => lang === "hi" && typeof INTERVIEW_PREP_HI_META !== "undefined" ? INTERVIEW_PREP_HI_META : null;
+
+// The AI dictionary inside the course: lesson links open in place.
+function glossaryView() {
+  return `<p class="lesson-meta">📖 ${esc(t("dictionary"))}</p>
+    <h2 class="lesson-title"><span class="lesson-icon" aria-hidden="true">📖</span>${esc(t("dictionary"))}</h2>
+    <p class="muted">${esc(t("dictionaryBlurb"))}</p>
+    ${Glossary.html({ lang, lessonLink: id => `href="?course=${course}&lesson=${id}${lang === "hi" ? "&lang=hi" : ""}" data-lesson="${id}"`, lessonName: id => LESSON_TOPICS[id].title })}`;
+}
 
 function prepView() {
   const qs = prepQuestions(course);

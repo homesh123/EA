@@ -202,3 +202,26 @@ test("resume score: 100 point rubric, samples score well, impact lines carry num
   assert.match(html, /href="https:\/\/linkedin\.com\/in\/a"/);
   assert.match(html, /class="rs-tech">Python, SQL</);
 });
+
+test("AI dictionary: 100+ terms, A to Z, both languages, valid lesson links and related terms", () => {
+  const T = [1, 2, 3].flatMap(i => require(`../content/glossary-${i}.js`).GLOSSARY_TERMS);
+  const { Glossary } = require("../glossary.js");
+  assert.ok(T.length >= 100, `has ${T.length} terms`);
+  const names = T.map(t => t.term.toLowerCase());
+  assert.equal(new Set(names).size, names.length, "no duplicate terms");
+  T.forEach(t => {
+    ["short", "detail", "example"].forEach(k => both(t[k], `${t.term} ${k}`));
+    assert.ok(t.detail[0].split(/\s+/).length >= 25, `${t.term}: detailed explanation`);
+    assert.ok(Glossary.CATS[t.cat], `${t.term}: category`);
+    t.lessons.forEach(id => assert.ok(LESSON_TOPICS[id], `${t.term}: unknown lesson ${id}`));
+  });
+  const sorted = Glossary.terms(T).map(t => t.term);
+  assert.deepEqual(sorted, sorted.slice().sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" })), "alphabetical");
+  const html = Glossary.html({ lang: "both", list: T, lessonLink: id => `href="../learn/${id}.html"`, lessonName: id => LESSON_TOPICS[id].title });
+  assert.match(html, /id="term-rag"/);
+  const page = fs.readFileSync(path.join(__dirname, "..", "glossary", "index.html"), "utf8");
+  assert.match(page, /"@type": "DefinedTermSet"/);
+  assert.equal((page.match(/class="gl-term"/g) || []).length, T.length, "every term on the page");
+  const related = (html.match(/data-gl-jump="([^"]+)"/g) || []).map(x => x.slice(14, -1));
+  related.forEach(id => assert.match(html, new RegExp(`id="${id}"`), `related link ${id} resolves`));
+});

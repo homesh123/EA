@@ -124,6 +124,15 @@ belong to each course and step is set in `content/learn-tracks.js`. The tests ch
 languages are complete, quiz answers are valid, every roadmap step has lessons, and prerequisites
 come first.
 
+## AI dictionary (A to Z)
+
+`glossary/index.html` (generated) and the Learn view "AI dictionary" list 138 AI terms A to Z, from
+A/B test to Zero shot: each with a one line meaning, a detailed explanation, an everyday example, its
+category, related terms and the lessons that teach it, in English and Hinglish. Search (word start,
+both languages), category filters, an A to Z bar, "open all", read aloud per term and links like
+`glossary/#term-rag`. Content is in `content/glossary-*.js`, rendering in `glossary.js` (also used by
+the build). The page carries DefinedTermSet structured data, and every term is listed in `llms.txt`.
+
 ## AI for kids (ages 5+)
 
 `kids/` has a playful section for children: a hub with Robo's adventure map and six levels

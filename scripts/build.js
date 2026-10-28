@@ -25,6 +25,8 @@ const { INTERVIEW } = require("../content/interview.js");
 const { RESUMES } = require("../content/resumes.js");
 const { INTERVIEW_PREP } = require("../content/interview-prep.js");
 const { KIDS } = require("../content/kids.js");
+const GLOSSARY_TERMS = [1, 2, 3].flatMap(i => require(`../content/glossary-${i}.js`).GLOSSARY_TERMS);
+const { Glossary } = require("../glossary.js");
 const { optionOrder } = require("../content/shuffle.js");
 const { LessonReader } = require("../tts.js");
 
@@ -125,7 +127,7 @@ function footerLinks(p, home = false) {
   return `<nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul>${ids.map(id => `<li><a href="${p}roles/${ROLES[id].slug}.html">${esc(ROLES[id].title)}</a></li>`).join("")}</ul></div>
       <div><h2>AI careers by background</h2><ul>${AUDIENCES.map(a => `<li><a href="${p}for/${a.slug}.html">${esc(a.short)}</a></li>`).join("")}</ul></div>
-      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}kids/">AI for kids (ages 5+)</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}glossary/">AI dictionary (A to Z)</a></li><li><a href="${p}kids/">AI for kids (ages 5+)</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
     </nav>`;
 }
 
@@ -695,7 +697,7 @@ ${jsonLd(graph)}`;
 function learnCatalog() {
   return `    <section class="catalog" aria-labelledby="catalogTitle">
       <h2 id="catalogTitle">Browse every lesson</h2>
-      <p class="muted small">${LESSON_IDS.length} lessons across ${ids.length} courses, each with a real-life example, key terms, a worked example and a quick check. Every lesson is also available in <a href="learn/hi/what-is-ai.html" hreflang="hi">Hinglish</a>.</p>
+      <p class="muted small">${LESSON_IDS.length} lessons across ${ids.length} courses, each with a real-life example, key terms, a worked example and a quick check. Every lesson is also available in <a href="learn/hi/what-is-ai.html" hreflang="hi">Hinglish</a>. New words? See the <a href="glossary/">AI dictionary (A to Z)</a>.</p>
       <div class="catalog-grid">
 ${ids.map(r => `        <div>
           <h3><a href="learn.html?course=${r}">${esc(ROLES[r].title)}</a></h3>
@@ -1098,6 +1100,46 @@ function kidsLevelPage(l, i) {
   return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: KIDS_FONT + "\n" + jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page kids-page">');
 }
 
+// ---------- AI dictionary (glossary/index.html) ----------
+const GLOSSARY_URL = `${SITE}glossary/`;
+function glossaryPage() {
+  const T = Glossary.terms(GLOSSARY_TERMS);
+  const url = GLOSSARY_URL;
+  const title = `AI Dictionary: ${T.length} AI Terms Explained Simply, A to Z (${YEAR})`;
+  const description = `${T.length} AI, machine learning and LLM terms explained in plain English and Hinglish, A to Z: RAG, embeddings, agents, fine tuning, tokens, overfitting, MLOps and more, each with an example and the lesson to learn it.`;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description),
+      breadcrumb(url, [[SITE_NAME, SITE], ["AI dictionary", url]]),
+      { "@type": "DefinedTermSet", "@id": `${url}#set`, name: "AI dictionary", url, inLanguage: ["en", "hi-Latn"],
+        hasDefinedTerm: T.map(t => ({ "@type": "DefinedTerm", name: t.term, ...(t.aka ? { alternateName: t.aka } : {}), description: t.short[0], url: `${url}#${Glossary.slug(t.term)}`, inDefinedTermSet: `${url}#set` })) }
+    ]
+  };
+  const body = `  <main class="container article glossary-main">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["AI dictionary"]])}
+    <header class="gl-hero">
+      <div>
+        <p class="eyebrow">Free · English and Hinglish · Updated <time datetime="${UPDATED}">${prettyDate(UPDATED)}</time></p>
+        <h1><span data-l="en">AI dictionary: every AI term explained simply</span><span data-l="hi" lang="hi-Latn">AI dictionary: har AI shabd aasaan bhasha mein</span></h1>
+        <p class="lead"><span data-l="en">${T.length} words you'll meet while learning AI and building an AI career, A to Z. Each has a one line meaning, a detailed explanation, an everyday example, related terms and the lesson that teaches it.</span><span data-l="hi" lang="hi-Latn">AI seekhte aur AI career banaate waqt milne wale ${T.length} shabd, A se Z. Har ek ka ek line mein matlab, vistaar se samjhaana, rozmarra ka example, jude shabd aur use sikhaane wala lesson.</span></p>
+      </div>
+      <div class="lang-toggle page-lang" role="group" aria-label="Language"><button type="button" data-site-lang="en">English</button><button type="button" data-site-lang="hi">Hinglish</button></div>
+    </header>
+    <div id="glossaryPage">
+${Glossary.html({ lang: "both", list: GLOSSARY_TERMS, lessonLink: id => `href="../learn/${id}.html"`, lessonName: id => LESSON_TOPICS[id].title })}
+    </div>
+    <section class="cta-box">
+      <h2>Learn these step by step</h2>
+      <p>Every term links to a lesson. Follow a full course for your target AI role, in English or Hinglish, with diagrams, practice tasks, interview prep and a resume builder.</p>
+      <a class="button btn-primary" href="../learn.html">Start learning free</a>
+    </section>
+  </main>
+  <script src="../tts.js" defer></script>
+  <script src="../glossary.js" defer></script>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page glossary-page">');
+}
+
 // ---------- homepage: learn hub (pick a role → brief → learn) ----------
 function learnHub() {
   return `    <section class="learnhub" id="learn-hub" aria-labelledby="hubTitle">
@@ -1137,7 +1179,7 @@ ${ids.map(id => {
         </div>
       </div>`;
   }).join("\n")}
-      <p class="hub-kids">🧒 Teaching a child? Try <a href="kids/">AI for Kids</a>: six read-aloud game levels for ages 5+, in English and Hinglish.</p>
+      <p class="hub-kids">📖 New to the words? Read the <a href="glossary/">AI dictionary</a>: ${GLOSSARY_TERMS.length} AI terms, A to Z, explained simply.<br>🧒 Teaching a child? Try <a href="kids/">AI for Kids</a>: six read-aloud game levels for ages 5+, in English and Hinglish.</p>
     </section>`;
 }
 
@@ -1209,6 +1251,7 @@ function sitemap() {
     { loc: `${SITE}resumes/`, pri: "0.8" },
     { loc: `${SITE}resume-builder.html`, pri: "0.8" },
     { loc: KIDS_URL, pri: "0.8" },
+    { loc: GLOSSARY_URL, pri: "0.8" },
     ...KIDS.levels.map(l => ({ loc: kidsLevelUrl(l), pri: "0.6" })),
     ...ids.map(id => ({ loc: interviewPageUrl(id), pri: "0.7" })),
     ...ids.map(id => ({ loc: resumeUrl(id), pri: "0.7" })),
@@ -1262,6 +1305,10 @@ ${ids.map(id => `- [${ROLES[id].title} interview questions and answers](${interv
 - [All resume samples](${SITE}resumes/): editable in the browser, downloadable as Word, PDF or text, with a live ATS keyword checklist.
 ${ids.map(id => `- [${ROLES[id].title} resume sample](${resumeUrl(id)}): keywords ${RESUMES[id].keywords.join(", ")}`).join("\n")}
 
+## AI dictionary (A to Z)
+- [AI dictionary](${GLOSSARY_URL}): ${Glossary.terms(GLOSSARY_TERMS).length} AI terms explained in English and Hinglish, each with an example and a lesson link.
+${Glossary.terms(GLOSSARY_TERMS).map(t => `- [${t.term}](${GLOSSARY_URL}#${Glossary.slug(t.term)}): ${t.short[0]}`).join("\n")}
+
 ## AI for kids (ages 5+)
 - [AI for Kids](${KIDS_URL}): free, read-aloud game levels in English and Hinglish with Robo the robot, stars, badges and a printable certificate. ${KIDS_INTRO[0][0]}
 ${KIDS.levels.map((l, i) => `- [Level ${i + 1}: ${l.title[0]}](${kidsLevelUrl(l)}): ${l.remember[0]}`).join("\n")}
@@ -1295,6 +1342,7 @@ function outputs() {
   });
   files["resumes/index.html"] = resumesIndex();
   files["kids/index.html"] = kidsHubPage();
+  files["glossary/index.html"] = glossaryPage();
   KIDS.levels.forEach((l, i) => { files[`kids/${l.id}.html`] = kidsLevelPage(l, i); });
   let ivHtml = fs.readFileSync(path.join(ROOT, "interview.html"), "utf8");
   ivHtml = replaceRegion(ivHtml, "sitenav", "  " + siteNav(""));
