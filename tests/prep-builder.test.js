@@ -123,3 +123,30 @@ test("every sample resume converts into the builder with all its ATS keywords", 
     RESUMES[id].keywords.forEach(k => assert.ok(text.includes(k.toLowerCase()), `${id}: "${k}" lost when loading the sample`));
   }
 });
+
+test("AI for kids: six complete levels with valid games in both languages", () => {
+  const { KIDS } = require("../content/kids.js");
+  assert.equal(KIDS.levels.length, 6);
+  const types = new Set();
+  KIDS.levels.forEach(l => {
+    both(l.title, `${l.id} title`);
+    both(l.remember, `${l.id} remember`);
+    both(l.fact, `${l.id} fact`);
+    assert.ok(l.story.length >= 3, `${l.id}: story`);
+    l.story.forEach((s, i) => both(s, `${l.id} story ${i + 1}`));
+    assert.ok(l.badge && l.badge.e, `${l.id}: badge`);
+    const g = l.game;
+    types.add(g.type);
+    both(g.prompt, `${l.id} prompt`);
+    if (g.type === "sort") assert.ok(g.items.some(x => x.ai) && g.items.some(x => !x.ai), `${l.id}: both kinds of items`);
+    if (g.type === "safe") g.items.forEach(x => { both(x.q, `${l.id} q`); both(x.why, `${l.id} why`); });
+    if (g.type === "teach") g.test.forEach(x => assert.ok(g.train.some(tr => tr.family === x.family && tr.fruit === x.fruit), `${l.id}: test item ${x.e} has a matching taught example`));
+    if (g.type === "pattern" || g.type === "prompt") g.rounds.forEach(r => assert.ok(r.answer >= 0 && r.answer < r.options.length, `${l.id}: answer index`));
+    if (g.type === "match") g.pairs.forEach(x => { both(x.job, `${l.id} job`); });
+  });
+  assert.deepEqual([...types].sort(), ["match", "pattern", "prompt", "safe", "sort", "teach"]);
+  for (const f of ["index.html", ...KIDS.levels.map(l => `${l.id}.html`)]) {
+    const html = fs.readFileSync(path.join(__dirname, "..", "kids", f), "utf8");
+    assert.ok(html.includes("kids.js") && html.includes("data-reader"), `kids/${f}: game script and Listen bar`);
+  }
+});

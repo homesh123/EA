@@ -142,6 +142,20 @@ var LessonReader = (function () {
     updateBar();
   }
 
+  // Read one short text aloud (a game prompt, a card), stopping any lesson reading first.
+  function say(text, lang = "en") {
+    if (current) stop();
+    if (!supported) return false;
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(clean(text));
+    const voice = pickVoice(lang);
+    if (voice) u.voice = voice;
+    u.lang = voice ? voice.lang : lang === "hi" ? "hi-IN" : "en-IN";
+    u.rate = Math.min(rate, 1);
+    synth.speak(u);
+    return true;
+  }
+
   if (typeof window !== "undefined") window.addEventListener("pagehide", () => synth && synth.cancel());
   // Some browsers load voices asynchronously; touching the list early makes them available sooner.
   if (supported) { synth.getVoices(); if (synth.addEventListener) synth.addEventListener("voiceschanged", () => {}); }
@@ -159,7 +173,7 @@ var LessonReader = (function () {
     </div>`;
   }
 
-  return { attach, stop, supported, sentences, clean, barHtml };
+  return { attach, stop, say, supported, sentences, clean, barHtml };
 })();
 
 if (typeof module !== "undefined" && module.exports) module.exports = { LessonReader };

@@ -118,6 +118,15 @@ Last updated: 2026-10-28
 - [AI Forward Deployed Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-forward-deployed-engineer.html): keywords Python, LLM, RAG, Solution Architecture, Stakeholder Management, Client facing, API Integration, SSO, Security, Compliance, HIPAA, Prototyping, Requirements Gathering, Cloud
 - [AI Product Manager resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-product-manager.html): keywords Product Management, AI Product Strategy, LLM, Generative AI, PRD, Evaluation, A/B Testing, SQL, Stakeholder Management, Roadmap, User Research, Metrics, Responsible AI, Prototyping
 
+## AI for kids (ages 5+)
+- [AI for Kids](https://homesh123.github.io/ai-career-advisor/kids/): free, read-aloud game levels in English and Hinglish with Robo the robot, stars, badges and a printable certificate. AI means Artificial Intelligence. It's a computer brain that can learn from examples, a bit like you learn by seeing and trying.
+- [Level 1: What is AI?](https://homesh123.github.io/ai-career-advisor/kids/what-is-ai.html): AI is a computer brain that learns from examples.
+- [Level 2: How does AI learn?](https://homesh123.github.io/ai-career-advisor/kids/how-ai-learns.html): AI learns from examples, so the examples must be correct.
+- [Level 3: AI loves patterns](https://homesh123.github.io/ai-career-advisor/kids/patterns.html): AI finds patterns in information to guess what comes next.
+- [Level 4: AI helpers all around us](https://homesh123.github.io/ai-career-advisor/kids/ai-helpers.html): AI is a helper that makes people better at their jobs.
+- [Level 5: Talking to AI](https://homesh123.github.io/ai-career-advisor/kids/talking-to-ai.html): Clear questions help AI give better answers.
+- [Level 6: Be smart and safe with AI](https://homesh123.github.io/ai-career-advisor/kids/safe-and-smart.html): Check AI's answers, and keep your private things private.
+
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
 - Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.
