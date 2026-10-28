@@ -150,6 +150,13 @@ Every story and prompt can be read aloud (🔊), so children who can't read yet 
 Stars, badges and an "AI Champion" printable certificate are saved in the browser only. English and
 Hinglish, with sound effects that can be turned off, and a note for parents with free next steps.
 
+## Light and dark appearance, Apple style design
+
+- **Automatic, Light or Dark.** The round button in the header cycles Automatic (follows the device), Light and Dark. The choice is saved in `localStorage` (`aipf:theme`) and applied by a tiny inline script in `<head>` before the page paints, so there is no flash of the wrong theme. `scripts/build.js` (`THEME_HEAD`) writes it into every page.
+- **Design tokens.** All colours live as CSS variables on `:root` in `styles.css`, with a dark set under `@media (prefers-color-scheme:dark)` and `:root[data-theme="dark"]`. They follow Apple's system colours (grouped background, labels, separators, blue tint). Resume paper and the kids certificate stay white in both themes, and printing always uses the light palette.
+- **Apple Human Interface Guidelines.** System font and an Apple text style scale, a translucent sticky header with the current section highlighted, segmented controls for language switches, 44 point touch targets on touch screens, visible focus rings, and support for Reduce Motion and Increase Contrast.
+- **Organised homepage.** An "Everything you can do here" panel lists the six tools (find your role, learn, interview prep, resume builder, AI dictionary, AI for kids), and the header nav has the same order on every page.
+
 ## Roles covered
 
 AI Foundations (freshers) · ML Engineer · Data Engineer (AI) · AI Product Engineer ·
