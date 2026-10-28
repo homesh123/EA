@@ -102,6 +102,13 @@ function faqFor(role, t) {
 }
 
 // ---------- shared layout ----------
+// Appearance (Auto / Light / Dark) and current page marking. Inline in <head> so the saved theme
+// applies before the first paint (no flash of the wrong theme). The toggle lives in the site header.
+const THEME_HEAD = `<meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161617" />
+  <script>(function(){var d=document.documentElement,k="aipf:theme",L={auto:"Appearance: automatic (matches your device)",light:"Appearance: light",dark:"Appearance: dark"};function g(){try{return localStorage.getItem(k)||"auto"}catch(e){return"auto"}}function a(t){if(t==="auto")d.removeAttribute("data-theme");else d.setAttribute("data-theme",t);var b=document.querySelectorAll("[data-theme-toggle]");for(var i=0;i<b.length;i++){b[i].setAttribute("data-mode",t);b[i].setAttribute("aria-label",L[t]);b[i].title=L[t]}}a(g());document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-theme-toggle]");if(!b)return;var n={auto:"light",light:"dark",dark:"auto"}[g()];try{localStorage.setItem(k,n)}catch(x){}a(n)});document.addEventListener("DOMContentLoaded",function(){a(g());var r=document.querySelector(".site-header .brand");if(!r)return;var root=new URL(r.getAttribute("href"),location.href).pathname,seg=location.pathname.slice(root.length).split("/")[0].replace(/\\.html$/,""),m={learn:"learn",interview:"interview",resumes:"resume","resume-builder":"resume",glossary:"glossary",kids:"kids",roles:"roles","for":"roles",guide:"roles"}[seg],x=m&&document.querySelector('.site-nav a[data-nav="'+m+'"]');if(x)x.setAttribute("aria-current","page")})})();</script>`;
+
 // `p` is the relative prefix back to the site root ("" for root-level pages, "../" one level down).
 // Links to homepage sections (#paths, #app…) need the homepage in front of them, except on the
 // homepage itself.
@@ -111,14 +118,17 @@ function siteNav(p, home = false) {
   return `<header class="site-header">
     <a class="brand" href="${p || "./"}">${SITE_NAME}</a>
     <nav class="site-nav" aria-label="Main">
-      <a href="${h}#paths">AI roles</a>
-      <a href="${p}learn.html">Learn</a>
-      <a href="${p}interview.html">Interview prep</a>
-      <a href="${p}resume-builder.html">Resume builder</a>
-      <a href="${p}${GUIDE_PATH}">How to choose</a>
-      <a href="${p}kids/">AI for kids</a>
+      <a href="${h}#paths" data-nav="roles">AI roles</a>
+      <a href="${p}learn.html" data-nav="learn">Learn</a>
+      <a href="${p}interview.html" data-nav="interview">Interview prep</a>
+      <a href="${p}resume-builder.html" data-nav="resume">Resume builder</a>
+      <a href="${p}glossary/" data-nav="glossary">AI dictionary</a>
+      <a href="${p}kids/" data-nav="kids">AI for kids</a>
     </nav>
-    <a class="button btn-primary btn-small" href="${h}#app">Free consultation</a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Appearance"><svg class="ti ti-auto" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><svg class="ti ti-light" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="ti ti-dark" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg></button>
+      <a class="button btn-primary btn-small" href="${h}#app">Free consultation</a>
+    </div>
   </header>`;
 }
 
@@ -143,7 +153,7 @@ function pageShell({ title, description, url, head, body, p = "../", type = "art
   <link rel="canonical" href="${url}" />
   <link rel="icon" href="${p}favicon.svg" type="image/svg+xml" />
   <link rel="sitemap" type="application/xml" href="${p}sitemap.xml" />
-  <meta name="theme-color" content="#f5f5f7" />
+  ${THEME_HEAD}
   <meta property="og:type" content="${type}" />
   <meta property="og:site_name" content="${SITE_NAME}" />
   <meta property="og:locale" content="en_US" />
@@ -1380,6 +1390,10 @@ function outputs() {
   index = replaceRegion(index, "faq", faqLd(index));
   index = index.replace(/(<meta property="article:modified_time" content=")[^"]*(")/, `$1${UPDATED}$2`);
   files["index.html"] = index;
+  for (const f of ["index.html", "learn.html", "interview.html", "resume-builder.html", "404.html"]) {
+    const src = files[f] || fs.readFileSync(path.join(ROOT, f), "utf8");
+    files[f] = replaceRegion(src, "theme", "  " + THEME_HEAD);
+  }
   files["sitemap.xml"] = sitemap();
   files["llms.txt"] = llmsTxt();
   return files;

@@ -8,7 +8,7 @@ const { ROLES } = require("../roles.js");
 
 const ROOT = path.join(__dirname, "..");
 const read = rel => fs.readFileSync(path.join(ROOT, rel), "utf8");
-const pages = Object.keys(outputs()).filter(f => f.endsWith(".html"));
+const pages = Object.keys(outputs()).filter(f => f.endsWith(".html") && f !== "404.html"); // 404 is noindex
 
 test("generated files are up to date (run `npm run build`)", () => {
   for (const [rel, content] of Object.entries(outputs())) assert.equal(read(rel), content, rel);

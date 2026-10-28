@@ -7,6 +7,12 @@
   <title>Page not found | AI Path Finder</title>
   <link rel="icon" href="/ai-career-advisor/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/ai-career-advisor/styles.css" />
+  <!-- build:theme -->
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161617" />
+  <script>(function(){var d=document.documentElement,k="aipf:theme",L={auto:"Appearance: automatic (matches your device)",light:"Appearance: light",dark:"Appearance: dark"};function g(){try{return localStorage.getItem(k)||"auto"}catch(e){return"auto"}}function a(t){if(t==="auto")d.removeAttribute("data-theme");else d.setAttribute("data-theme",t);var b=document.querySelectorAll("[data-theme-toggle]");for(var i=0;i<b.length;i++){b[i].setAttribute("data-mode",t);b[i].setAttribute("aria-label",L[t]);b[i].title=L[t]}}a(g());document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-theme-toggle]");if(!b)return;var n={auto:"light",light:"dark",dark:"auto"}[g()];try{localStorage.setItem(k,n)}catch(x){}a(n)});document.addEventListener("DOMContentLoaded",function(){a(g());var r=document.querySelector(".site-header .brand");if(!r)return;var root=new URL(r.getAttribute("href"),location.href).pathname,seg=location.pathname.slice(root.length).split("/")[0].replace(/\.html$/,""),m={learn:"learn",interview:"interview",resumes:"resume","resume-builder":"resume",glossary:"glossary",kids:"kids",roles:"roles","for":"roles",guide:"roles"}[seg],x=m&&document.querySelector('.site-nav a[data-nav="'+m+'"]');if(x)x.setAttribute("aria-current","page")})})();</script>
+  <!-- /build:theme -->
 </head>
 <body class="page">
   <main class="container article" style="text-align:center;padding-top:80px">
