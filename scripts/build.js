@@ -24,6 +24,7 @@ const { ROLE_TASKS } = require("../content/tasks.js");
 const { INTERVIEW } = require("../content/interview.js");
 const { RESUMES } = require("../content/resumes.js");
 const { INTERVIEW_PREP } = require("../content/interview-prep.js");
+const { KIDS } = require("../content/kids.js");
 const { optionOrder } = require("../content/shuffle.js");
 const { LessonReader } = require("../tts.js");
 
@@ -113,6 +114,7 @@ function siteNav(p, home = false) {
       <a href="${p}interview.html">Interview prep</a>
       <a href="${p}resume-builder.html">Resume builder</a>
       <a href="${p}${GUIDE_PATH}">How to choose</a>
+      <a href="${p}kids/">AI for kids</a>
     </nav>
     <a class="button btn-primary btn-small" href="${h}#app">Free consultation</a>
   </header>`;
@@ -123,7 +125,7 @@ function footerLinks(p, home = false) {
   return `<nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul>${ids.map(id => `<li><a href="${p}roles/${ROLES[id].slug}.html">${esc(ROLES[id].title)}</a></li>`).join("")}</ul></div>
       <div><h2>AI careers by background</h2><ul>${AUDIENCES.map(a => `<li><a href="${p}for/${a.slug}.html">${esc(a.short)}</a></li>`).join("")}</ul></div>
-      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="${p}${GUIDE_PATH}">How to choose an AI role</a></li><li><a href="${p}${METHOD_PATH}">How the consultation works</a></li><li><a href="${h}#app">Free AI career consultation</a></li><li><a href="${p}learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="${p}interview.html">Interview practice</a></li><li><a href="${p}resume-builder.html">Resume builder (upload, edit, PDF or Word)</a></li><li><a href="${p}resumes/">ATS resume samples</a></li><li><a href="${p}kids/">AI for kids (ages 5+)</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
     </nav>`;
 }
 
@@ -966,6 +968,133 @@ ${ids.map(id => `        <li><a href="interview/${ROLES[id].slug}.html">${esc(RO
     </section>`;
 }
 
+
+// ---------- AI for kids (kids/index.html, kids/<level>.html) ----------
+const KIDS_URL = `${SITE}kids/`;
+const kidsLevelUrl = l => `${SITE}kids/${l.id}.html`;
+// Both languages are in the page; kids.js shows the one the child picked (Hinglish via html.kids-hi).
+const bi = pair => `<span data-l="en">${esc(pair[0])}</span><span data-l="hi" lang="hi-Latn">${esc(pair[1])}</span>`;
+const KIDS_FONT = `  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&amp;display=swap" />`;
+const kidsTools = `<div class="kids-tools">
+          <div class="lang-toggle" role="group" aria-label="Language"><button type="button" data-kids-lang="en">English</button><button type="button" data-kids-lang="hi">Hinglish</button></div>
+          <button type="button" class="link-btn small" data-kids-sound>🔔 Sound on</button>
+        </div>`;
+const kidsReader = () => LessonReader.barHtml({ listen: "Listen", pause: "Pause", resume: "Resume", stop: "Stop", speed: "Speed", reading: "Reading aloud…", paused: "Paused", unsupported: "This browser can't read aloud" });
+const kidsScripts = `
+  <script src="../content/kids.js" defer></script>
+  <script src="../tts.js" defer></script>
+  <script src="../kids.js" defer></script>`;
+const KIDS_INTRO = [
+  ["AI means Artificial Intelligence. It's a computer brain that can learn from examples, a bit like you learn by seeing and trying.", "AI ka matlab hai Artificial Intelligence. Yeh ek computer dimaag hai jo examples se seekh sakta hai, thoda waise hi jaise aap dekh kar aur try karke seekhte ho."],
+  ["Play six short levels with Robo the robot. Win stars ⭐ and badges 🏅, and finish all six to print your own AI Explorer certificate!", "Robo robot ke saath chhe chhote levels khelo. Stars ⭐ aur badges 🏅 jeeto, aur saare chhe poore karke apna AI Explorer certificate print karo!"]
+];
+
+function kidsHubPage() {
+  const url = KIDS_URL;
+  const title = `AI for Kids: What Is AI? Fun Games to Learn AI (Ages 5+)`;
+  const description = "Free, fun AI lessons for kids aged 5 and up. Six short game levels with Robo the robot explain what AI is, how it learns, patterns, AI helpers, asking good questions and staying safe. Read aloud, English and Hinglish.";
+  const levels = KIDS.levels;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description),
+      breadcrumb(url, [[SITE_NAME, SITE], ["AI for kids", url]]),
+      { "@type": "LearningResource", "@id": `${url}#course`, name: "AI for Kids", url, description, isAccessibleForFree: true,
+        educationalLevel: "Beginner", typicalAgeRange: "5-12", inLanguage: ["en", "hi-Latn"], learningResourceType: "Game",
+        audience: { "@type": "EducationalAudience", educationalRole: "student" }, provider: { "@id": `${SITE}#org` },
+        hasPart: levels.map(l => ({ "@type": "LearningResource", name: l.title[0], url: kidsLevelUrl(l) })) },
+      faqPage(url, [
+        ["What is AI, explained for kids?", KIDS_INTRO[0][0]],
+        ["Why should kids learn about AI?", KIDS.why.map(w => w[0]).join(" ")],
+        ["What age is AI for Kids for?", KIDS.parents.slice(0, 2).map(w => w[0]).join(" ")]
+      ])
+    ]
+  };
+  const body = `  <main class="container kids-main">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["AI for kids"]])}
+    <header class="kids-hero">
+      <div class="kids-robo" aria-hidden="true">🤖</div>
+      <div>
+        <p class="eyebrow">${bi(["Ages 5+ · Free · No sign up", "5+ saal · Free · Koi sign up nahi"])}</p>
+        <h1>${bi(["AI for Kids", "Bachchon ke liye AI"])}</h1>
+        <p class="kids-sub">${bi(["Learn what AI is with Robo the robot, by playing!", "Robo robot ke saath khel khel mein seekho AI kya hai!"])}</p>
+        ${kidsTools}
+      </div>
+    </header>
+    <section class="kids-story">
+      ${kidsReader()}
+      ${KIDS_INTRO.map(x => `<p data-read>${bi(x)}</p>`).join("\n      ")}
+    </section>
+    <section aria-labelledby="mapTitle">
+      <h2 id="mapTitle">🗺️ ${bi(["Robo's adventure map", "Robo ka adventure map"])}</h2>
+      <div id="kidsHub">
+        <ol class="kid-map">${levels.map((l, i) => `<li><a class="kid-level" href="${l.id}.html" style="--c:${l.color}"><span class="kid-level-num">Level ${i + 1}</span><span class="kid-level-icon" aria-hidden="true">${l.icon}</span><strong>${bi(l.title)}</strong><span class="small">${bi(l.tagline)}</span></a></li>`).join("")}</ol>
+      </div>
+    </section>
+    <section class="kids-why">
+      <h2>🚀 ${bi(["Why should kids learn AI?", "Bachchon ko AI kyun seekhna chahiye?"])}</h2>
+      <ul>${KIDS.why.map(w => `<li>${bi(w)}</li>`).join("")}</ul>
+    </section>
+    <section class="kids-parents">
+      <h2>👪 ${bi(["For parents and teachers", "Parents aur teachers ke liye"])}</h2>
+      <ul>${KIDS.parents.map(w => `<li>${bi(w)}</li>`).join("")}</ul>
+      <h3>${bi(["Next steps for curious kids (free, with a grown-up)", "Curious bachchon ke liye next steps (free, kisi bade ke saath)"])}</h3>
+      <ul class="kids-links">${KIDS.nextSteps.map(([name, href, d]) => `<li><a href="${href}" rel="noopener" target="_blank">${esc(name)}</a>: ${bi(d)}</li>`).join("")}</ul>
+      <p class="small muted">${bi(["Grown-ups exploring an AI career can take our free", "AI career explore karne wale bade hamara free"])} <a href="../#app">AI career consultation</a>.</p>
+    </section>
+  </main>${kidsScripts}`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: KIDS_FONT + "\n" + jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page kids-page">');
+}
+
+function kidsLevelPage(l, i) {
+  const levels = KIDS.levels;
+  const url = kidsLevelUrl(l);
+  const title = `${l.title[0]} AI for Kids, Level ${i + 1}: ${l.tagline[0]}`;
+  const description = `${l.story.slice(0, 2).map(x => x[0]).join(" ")} A fun, free game for kids aged 5+, read aloud, in English and Hinglish.`.slice(0, 300);
+  const prev = levels[i - 1], next = levels[i + 1];
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description),
+      breadcrumb(url, [[SITE_NAME, SITE], ["AI for kids", KIDS_URL], [l.title[0], url]]),
+      { "@type": "LearningResource", "@id": `${url}#lesson`, name: l.title[0], url, description, isAccessibleForFree: true,
+        typicalAgeRange: "5-12", educationalLevel: "Beginner", learningResourceType: "Game", inLanguage: ["en", "hi-Latn"],
+        isPartOf: { "@id": `${KIDS_URL}#course` }, provider: { "@id": `${SITE}#org` } }
+    ]
+  };
+  const body = `  <main class="container kids-main">
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["AI for kids", "./"], [l.title[0]]])}
+    <header class="kids-hero level" style="--c:${l.color}">
+      <div class="kids-robo" aria-hidden="true">${l.icon}</div>
+      <div>
+        <p class="eyebrow">${bi([`Level ${i + 1} of ${levels.length}`, `Level ${i + 1} / ${levels.length}`])}</p>
+        <h1>${bi(l.title)}</h1>
+        <p class="kids-sub">${bi(l.tagline)}</p>
+        ${kidsTools}
+      </div>
+    </header>
+    <section class="kids-story" style="--c:${l.color}">
+      ${kidsReader()}
+      <div class="kids-bubble"><span class="kids-bubble-robo" aria-hidden="true">🤖</span><div>
+        ${l.story.map(x => `<p data-read>${bi(x)}</p>`).join("\n        ")}
+      </div></div>
+      <p class="kids-fact" data-read>💡 <strong>${bi(["Fun fact:", "Mazedaar baat:"])}</strong> ${bi(l.fact)}</p>
+    </section>
+    <section class="kids-game-wrap" aria-labelledby="gameTitle">
+      <h2 id="gameTitle">🎮 ${bi(["Let's play!", "Chalo khelte hain!"])}</h2>
+      <div id="kidsGame" data-level="${l.id}" aria-live="polite"><noscript><p>Turn on JavaScript to play the game.</p></noscript></div>
+    </section>
+    <p class="kids-remember-static">📌 ${bi(l.remember)}</p>
+    <nav class="lesson-pager" aria-label="Levels">
+      ${prev ? `<a href="${prev.id}.html">← ${prev.icon} ${bi(prev.title)}</a>` : `<a href="./">← 🗺️ ${bi(["Adventure map", "Adventure map"])}</a>`}
+      ${next ? `<a href="${next.id}.html">${next.icon} ${bi(next.title)} →</a>` : `<a href="./">🏆 ${bi(["Get your certificate", "Apna certificate lo"])} →</a>`}
+    </nav>
+  </main>${kidsScripts}`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: KIDS_FONT + "\n" + jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page kids-page">');
+}
+
 // ---------- homepage: learn hub (pick a role → brief → learn) ----------
 function learnHub() {
   return `    <section class="learnhub" id="learn-hub" aria-labelledby="hubTitle">
@@ -1005,6 +1134,7 @@ ${ids.map(id => {
         </div>
       </div>`;
   }).join("\n")}
+      <p class="hub-kids">🧒 Teaching a child? Try <a href="kids/">AI for Kids</a>: six read-aloud game levels for ages 5+, in English and Hinglish.</p>
     </section>`;
 }
 
@@ -1075,6 +1205,8 @@ function sitemap() {
     { loc: `${SITE}interview.html`, pri: "0.8" },
     { loc: `${SITE}resumes/`, pri: "0.8" },
     { loc: `${SITE}resume-builder.html`, pri: "0.8" },
+    { loc: KIDS_URL, pri: "0.8" },
+    ...KIDS.levels.map(l => ({ loc: kidsLevelUrl(l), pri: "0.6" })),
     ...ids.map(id => ({ loc: interviewPageUrl(id), pri: "0.7" })),
     ...ids.map(id => ({ loc: resumeUrl(id), pri: "0.7" })),
     ...LESSON_IDS.flatMap(id => [{ loc: lessonUrl(id, "en"), pri: "0.6" }, { loc: lessonUrl(id, "hi"), pri: "0.5" }])
@@ -1127,6 +1259,10 @@ ${ids.map(id => `- [${ROLES[id].title} interview questions and answers](${interv
 - [All resume samples](${SITE}resumes/): editable in the browser, downloadable as Word, PDF or text, with a live ATS keyword checklist.
 ${ids.map(id => `- [${ROLES[id].title} resume sample](${resumeUrl(id)}): keywords ${RESUMES[id].keywords.join(", ")}`).join("\n")}
 
+## AI for kids (ages 5+)
+- [AI for Kids](${KIDS_URL}): free, read-aloud game levels in English and Hinglish with Robo the robot, stars, badges and a printable certificate. ${KIDS_INTRO[0][0]}
+${KIDS.levels.map((l, i) => `- [Level ${i + 1}: ${l.title[0]}](${kidsLevelUrl(l)}): ${l.remember[0]}`).join("\n")}
+
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
 - Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.
@@ -1155,6 +1291,8 @@ function outputs() {
     files[`interview/${ROLES[id].slug}.html`] = interviewPage(id);
   });
   files["resumes/index.html"] = resumesIndex();
+  files["kids/index.html"] = kidsHubPage();
+  KIDS.levels.forEach((l, i) => { files[`kids/${l.id}.html`] = kidsLevelPage(l, i); });
   let ivHtml = fs.readFileSync(path.join(ROOT, "interview.html"), "utf8");
   ivHtml = replaceRegion(ivHtml, "sitenav", "  " + siteNav(""));
   ivHtml = replaceRegion(ivHtml, "footerlinks", "    " + footerLinks(""));
