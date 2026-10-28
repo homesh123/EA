@@ -93,6 +93,30 @@ Last updated: 2026-10-28
 - [Metrics and A/B testing for AI features](https://homesh123.github.io/ai-career-advisor/learn/ab-testing.html) · [Hinglish](https://homesh123.github.io/ai-career-advisor/learn/hi/ab-testing.html): Define success and guardrails first, then randomise and wait for significance.
 - [Writing an AI product spec (PRD) with an eval plan](https://homesh123.github.io/ai-career-advisor/learn/ai-prd.html) · [Hinglish](https://homesh123.github.io/ai-career-advisor/learn/hi/ai-prd.html): Problem, metric, scope, UX for failure, eval plan, risks, launch bar.
 
+## Interview practice
+- [Interview practice with scoring](https://homesh123.github.io/ai-career-advisor/interview.html): role-specific questions (multiple-choice scored automatically, open questions self-checked against model answers). The report gives a score per skill area, explains each mistake and links the lessons for every gap.
+- [AI Foundations Path interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-foundations-beginner.html) (21 questions)
+- [ML Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ml-engineer.html) (27 questions)
+- [Data Engineer (AI focus) interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html) (26 questions)
+- [AI Product Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-product-engineer.html) (24 questions)
+- [MLOps / AI Platform Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html) (16 questions)
+- [LLM / Agent Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/llm-agent-engineer.html) (22 questions)
+- [AI Research Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-research-engineer.html) (18 questions)
+- [AI Forward Deployed Engineer interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-forward-deployed-engineer.html) (23 questions)
+- [AI Product Manager interview questions and answers](https://homesh123.github.io/ai-career-advisor/interview/ai-product-manager.html) (24 questions)
+
+## ATS-friendly resume samples
+- [All resume samples](https://homesh123.github.io/ai-career-advisor/resumes/): editable in the browser, downloadable as Word, PDF or text, with a live ATS keyword checklist.
+- [AI Foundations Path resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-foundations-beginner.html): keywords Python, SQL, Machine Learning, scikit-learn, Pandas, NumPy, Statistics, Git, Classification, Regression, LLM, Streamlit, Data Cleaning, Feature Engineering
+- [ML Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ml-engineer.html): keywords Python, PyTorch, scikit-learn, XGBoost, Feature Engineering, Model Deployment, FastAPI, Docker, MLflow, MLOps, SQL, AWS, A/B Testing, Model Monitoring
+- [Data Engineer (AI focus) resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-data-engineer.html): keywords SQL, Python, Apache Airflow, dbt, Apache Spark, Kafka, Data Modeling, ETL, Data Quality, Snowflake, Vector Database, Embeddings, RAG, Data Pipelines
+- [AI Product Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-product-engineer.html): keywords TypeScript, React, Next.js, Node.js, Python, LLM, RAG, Vector Database, Prompt Engineering, LLM Evaluation, Streaming, Vercel AI SDK, A/B Testing, FastAPI
+- [MLOps / AI Platform Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/mlops-engineer.html): keywords Kubernetes, Docker, Helm, Terraform, CI/CD, MLOps, MLflow, vLLM, GPU, Prometheus, Grafana, Python, AWS, Model Serving, Observability
+- [LLM / Agent Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/llm-agent-engineer.html): keywords Python, LLM, AI Agents, LangGraph, Tool Calling, MCP, RAG, FastAPI, Pydantic, Evaluation, Prompt Engineering, Guardrails, Observability, Java
+- [AI Research Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-research-engineer.html): keywords PyTorch, Deep Learning, Transformers, Fine-tuning, LoRA, PEFT, Hugging Face, Distributed Training, Python, Linear Algebra, Experiment Tracking, NLP, Evaluation, CUDA
+- [AI Forward Deployed Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-forward-deployed-engineer.html): keywords Python, LLM, RAG, Solution Architecture, Stakeholder Management, Client-facing, API Integration, SSO, Security, Compliance, HIPAA, Prototyping, Requirements Gathering, Cloud
+- [AI Product Manager resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-product-manager.html): keywords Product Management, AI Product Strategy, LLM, Generative AI, PRD, Evaluation, A/B Testing, SQL, Stakeholder Management, Roadmap, User Research, Metrics, Responsible AI, Prototyping
+
 ## Quick answers
 - Which AI role should a software engineer choose? It depends on current work. Backend developers often fit LLM / Agent Engineer, frontend and full-stack developers fit AI Product Engineer, DevOps engineers fit MLOps / AI Platform Engineer, data engineers fit Data Engineer (AI), and senior client-facing engineers fit AI Forward Deployed Engineer.
 - Is there an AI role for people who don't code? Yes. AI Product Manager suits PMs, business analysts and domain experts such as accountants, teachers and healthcare professionals.

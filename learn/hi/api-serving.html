@@ -131,10 +131,10 @@
     <a class="brand" href="../../">AI Path Finder</a>
     <nav class="site-nav" aria-label="Main">
       <a href="../../#paths">AI roles</a>
-      <a href="../../#backgrounds">By background</a>
-      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
-      <a href="../../guide/how-it-works.html">How it works</a>
       <a href="../../learn.html">Learn</a>
+      <a href="../../interview.html">Interview prep</a>
+      <a href="../../resumes/">Resumes</a>
+      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
     </nav>
     <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
   </header>
@@ -148,6 +148,7 @@
       </header>
       <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Restaurant ki kitchen (aapka model) ko seedha customers se order nahi lena chahiye. Waiter (API) menu se saaf order leta hai, kitchen tak pahunchaata hai, aur dish wapas laata hai. Doosri apps, jaise website ya mobile app, aapke model se sirf isi waiter ke through baat karti hain.</p></section>
       <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Notebook mein pada model kisi ke kaam ka nahi. Use web API mein wrap karne se koi bhi app use use kar sakti hai. FastAPI popular Python framework hai: aap ek endpoint define karte ho (jaise POST /predict), input ko Pydantic model se describe karte ho (jo types automatically validate karta hai), model ko startup pe ek baar load karte ho, aur JSON response lautaate ho. FastAPI /docs pe interactive docs bhi bana deta hai. Health-check endpoint, input validation, timeouts aur logging jodo. Inhi se woh production-ready banta hai.</p></section>
+      <section class="ls ls-visual"><h2>🎬 Dekho kaise kaam karta hai</h2><div class="viz"><svg viewBox="0 0 640 210" role="img" aria-label="An app sends a request with flat details to a FastAPI endpoint, which calls the model and returns a price as JSON" focusable="false"><defs><marker id="ah-api" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><g class=""><rect x="16" y="70" width="110" height="64" rx="10" class="b"/><text x="71" y="107" text-anchor="middle" class="">📱 App</text></g><g class=""><rect x="260" y="60" width="130" height="84" rx="10" class="ba"/><text x="325" y="100" text-anchor="middle" class="">FastAPI</text><text x="325" y="117" text-anchor="middle" class="tm ts">POST /predict</text></g><g class=""><rect x="514" y="70" width="110" height="64" rx="10" class="bo"/><text x="569" y="107" text-anchor="middle" class="">🧠 model.pkl</text></g><path d="M128 88 H254" class="ln la " marker-end="url(#ah-api)"/><path d="M394 92 H508" class="ln " marker-end="url(#ah-api)"/><path d="M508 114 H398" class="ln " marker-end="url(#ah-api)"/><path d="M254 118 H132" class="ln la " marker-end="url(#ah-api)"/><text x="192" y="78" text-anchor="middle" class="ts">{area: 900, bhk: 2}</text><text x="192" y="140" text-anchor="middle" class="ts ok">{price_lakh: 70.2}</text><circle r="6" class="dot"><animateMotion dur="4s" repeatCount="indefinite" path="M128 88 H254 M394 92 H508 M508 114 H398 M254 118 H132"/></circle><text x="320" y="186" text-anchor="middle" class="tm ts">validate input · load model once · log every request</text></svg></div><p class="viz-caption">Apps model ko seedha nahi chhooti. Woh API endpoint ko request bhejti hain, API model chalati hai, aur JSON response wapas aata hai.</p></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
         <dl class="terms"><div><dt>Endpoint</dt><dd>URL aur method jo ek kaam karta hai, jaise POST /predict.</dd></div><div><dt>Pydantic model</dt><dd>Class jo expected input describe karti hai, automatic validation ke saath.</dd></div><div><dt>Latency</dt><dd>Request ka response aane mein kitna time lagta hai.</dd></div></dl>
       </section>
@@ -171,7 +172,7 @@ def predict(flat: Flat):
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
         <p class="quiz-q">Model ko predict function ke andar ki jagah startup pe load kyun karte hain?</p>
-        <ol type="A"><li>Python mein zaroori hai</li><li>Har request pe load karne se har request slow ho jaayegi</li><li>Disk kam lagti hai</li></ol>
+        <ol type="A"><li>Disk kam lagti hai</li><li>Har request pe load karne se har request slow ho jaayegi</li><li>Python mein zaroori hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Har request pe load karne se har request slow ho jaayegi</strong>: Model load hone mein seconds lag sakte hain. Ek baar karo aur har request ke liye reuse karo.</p></details>
       </section>
       <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>Model → API endpoint → koi bhi app use kare. Inputs validate karo aur sab log karo.</p></section>
@@ -193,7 +194,7 @@ def predict(flat: Flat):
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
       <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
-      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../interview.html">Interview practice</a></li><li><a href="../../resumes/">ATS resume samples</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
     </nav>
     <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
   </footer>

@@ -45,8 +45,8 @@ test("every page can be reached by following links from the homepage (no orphan 
   while (queue.length) {
     const rel = queue.shift();
     const base = path.dirname(rel);
-    for (const m of read(rel).matchAll(/href="([^"#:?]+\.html)(?:[?#][^"]*)?"/g)) {
-      const target = path.normalize(path.join(base, m[1]));
+    for (const m of read(rel).matchAll(/href="([^"#:?]+(?:\.html|\/))(?:[?#][^"]*)?"/g)) {
+      const target = path.normalize(path.join(base, m[1].endsWith("/") ? m[1] + "index.html" : m[1]));
       if (!seen.has(target) && fs.existsSync(path.join(ROOT, target))) { seen.add(target); queue.push(target); }
     }
   }
@@ -88,9 +88,9 @@ test("FAQ structured data matches the visible FAQ on the home page", () => {
 test("sitemap lists every page and llms.txt links every content page", () => {
   const sitemap = read("sitemap.xml"), llms = read("llms.txt");
   pages.forEach(p => {
-    const loc = p === "index.html" ? "https://homesh123.github.io/ai-career-advisor/</loc>" : p;
+    const loc = p === "index.html" ? "https://homesh123.github.io/ai-career-advisor/</loc>" : p.replace(/index\.html$/, "") + "</loc>";
     assert.ok(sitemap.includes(loc), `sitemap missing ${p}`);
-    if (p !== "index.html") assert.ok(llms.includes(p), `llms.txt missing ${p}`);
+    if (p !== "index.html") assert.ok(llms.includes(p.replace(/index\.html$/, "")), `llms.txt missing ${p}`);
   });
   assert.match(read("robots.txt"), /Sitemap: https:\/\/homesh123\.github\.io\/ai-career-advisor\/sitemap\.xml/);
 });

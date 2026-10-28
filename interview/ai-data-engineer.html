@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Engineer (AI focus) Interview Questions and Answers (2026): 26 Questions With Explanations | AI Path Finder</title>
+  <meta name="description" content="26 Data Engineer (AI focus) interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Data Engineer (AI focus) Interview Questions and Answers (2026): 26 Questions With Explanations | AI Path Finder" />
+  <meta property="og:description" content="26 Data Engineer (AI focus) interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Data Engineer (AI focus) Interview Questions and Answers (2026): 26 Questions With Explanations | AI Path Finder" />
+  <meta name="twitter:description" content="26 Data Engineer (AI focus) interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../styles.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html",
+      "url": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html",
+      "name": "Data Engineer (AI focus) Interview Questions and Answers (2026): 26 Questions With Explanations",
+      "description": "26 Data Engineer (AI focus) interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free.",
+      "inLanguage": "en",
+      "datePublished": "2026-10-27",
+      "dateModified": "2026-10-28",
+      "isPartOf": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#website"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html#breadcrumb"
+      },
+      "primaryImageOfPage": "https://homesh123.github.io/ai-career-advisor/og-image.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Interview practice",
+          "item": "https://homesh123.github.io/ai-career-advisor/interview.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Data Engineer (AI focus) interview questions",
+          "item": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/ai-data-engineer.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does len({'a': 1, 'b': 2, 'a': 3}) return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2. Dictionary keys are unique. The second 'a' overwrites the first, leaving 2 keys."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "You need to check whether 1 million IDs are in a collection of 1 million known IDs. What's the efficient approach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Put the known IDs in a set and use `in`. Membership checks in a set are O(1) on average, but O(n) in a list. With a list this becomes about a trillion comparisons."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does df.groupby('city')['amount'].mean() return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One average amount per city. groupby splits the rows by city, then mean() averages 'amount' within each group, giving a Series indexed by city."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Salaries in a team are mostly around ₹8 LPA, with one executive at ₹2 crore. Which best describes a typical salary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The median. One extreme value pulls the mean up a lot. The median, the middle value, isn't affected by outliers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Users who turned on a new 'focus mode' spend 30% more time in the app. Can you say focus mode caused it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. People who opt in may already be more engaged, so run a randomised A/B test. This is self-selection: the opt-in group differs from everyone else. Only random assignment isolates the feature's effect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "You want only the cities with more than 100 orders. Which clause filters those groups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "HAVING COUNT(*) > 100. WHERE filters rows before grouping. HAVING filters groups after aggregation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you find customers who have never placed an order?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LEFT JOIN orders and keep rows where the order id IS NULL. A LEFT JOIN keeps every customer. Those with no match have NULL order columns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Joining 1M orders to a customers table returns 3M rows. What's the most likely cause?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Duplicate customer IDs in the customers table, so each order matches several rows. A join multiplies rows when the key isn't unique on one side. Check uniqueness before you join."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which expression gives each store's running revenue total, ordered by date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SUM(amount) OVER (PARTITION BY store_id ORDER BY sale_date). A window function with PARTITION BY store and ORDER BY date accumulates the sum row by row within each store."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Training accuracy is 98% and test accuracy is 65%. What's happening, and what's a reasonable fix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Overfitting, so simplify the model, regularise or get more data. A large train/test gap means the model memorised the training data. Reduce its complexity, regularise, or add data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A fraud model uses 'refund_issued' as a feature and scores 0.99 AUC in testing. What's the problem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data leakage: refunds happen after fraud is confirmed, so this information isn't available at prediction time. Features must only use information available at the moment of prediction. Otherwise test scores are inflated."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "For a churn model on a 30-column customer table, what's a strong first choice after a baseline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gradient-boosted trees such as XGBoost or LightGBM. Boosted trees are usually the most accurate, fastest and most explainable option for tabular data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A model's accuracy has dropped slowly over six months with no code changes. What's the most likely cause?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data or concept drift: the real world changed, so monitor the inputs and retrain. Models are frozen snapshots of the past. When the input data or its relationships change, quality degrades silently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Your RAG assistant gives wrong answers. The right document exists but is never retrieved. What do you fix first?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Retrieval: chunking, embeddings, hybrid search or re-ranking. If the right text never reaches the prompt, no LLM can answer correctly. Measure retrieval separately from generation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Company policies change every week and answers must be current. What's the right approach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RAG over the latest documents. RAG keeps answers current without retraining. Fine-tuning teaches style and skills, not changing facts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Semantic search fails to find exact product codes like 'SKU-88213'. What helps most?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hybrid search: combine keyword (BM25) and vector search. Embeddings capture meaning but are weak on exact identifiers. Keyword search catches those, and hybrid gets both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What problem does Docker mainly solve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "'Works on my machine' problems, by packaging the app with its exact environment. A container image carries the code, runtime and libraries, so the app runs the same everywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does it mean for a pipeline to be idempotent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Running it again for the same period gives the same result, with no duplicates. Re-runs are routine after failures, and idempotency (for example overwrite-by-partition or upserts) prevents double counting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which use case most needs streaming rather than nightly batch processing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Blocking a fraudulent payment as it happens. When decisions must happen in seconds, batch is too late."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is the cheapest place to catch bad data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Early in the pipeline, with automated checks that fail the run. The earlier you catch it, the fewer downstream systems it pollutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "In Kafka, what does a consumer group let you do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Spread a topic's partitions across several consumers, so each message is processed once by the group. Consumers in a group share the work. Separate groups each get their own full copy of the stream."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tell me about yourself and why you're moving into this AI role.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I'm a backend engineer with 8 years in fintech, building payment APIs that handle about 2 million requests a day. Over the last six months I've been moving into LLM engineering: I built a support-triage agent with tool calling and an eval suite, which raised correct routing from 71% to 89% on 200 real tickets. This role fits because it combines what I'm already good at, reliable APIs and production debugging, with the agent work I enjoy most. In the first months I'd bring production discipline: tracing, evals and cost controls for your agents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Walk me through an AI or ML project you built end to end.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I built a policy assistant for branch staff who spent about 25 minutes a day searching PDFs. I indexed 140 policy documents with chunking and metadata, used hybrid search, and required citations with a 'not found' rule. I chose RAG over fine-tuning because the policies change monthly. On a 60-question eval set built with staff, correct-and-cited answers went from 68% to 90% after I added re-ranking. It's deployed as an internal web app. The main failure was tables in PDFs; next I'd add table-aware parsing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tell me about a time something you built failed. What did you do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our nightly data pipeline silently loaded duplicate orders for three days, inflating revenue on a dashboard by 12%. I owned that pipeline. I traced it to a retry that re-appended a partial load, so the job wasn't idempotent. I fixed the data, switched the load to overwrite-by-partition, and added a uniqueness check that fails the run. Since then we've had no duplicate incidents, and I now design every pipeline to be safely re-runnable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Design a 'chat with company documents' assistant for 10,000 employees.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Documents flow from SharePoint and Confluence through a parser into chunks carrying metadata: source, section, updated date and access groups. A change-detection job re-indexes only what changed. At query time I'd authenticate via SSO, filter the search by the user's groups, run hybrid keyword-plus-vector search and re-rank the top results. The prompt asks the model to answer only from the provided sources, cite them, and say when it doesn't know. I'd mask PII and log every question, retrieved documents and answer for audit. Quality comes from a 100-question eval set built with real users, plus thumbs-up/down feedback. Cost and latency are managed with response caching and a smaller model for simple questions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Design a pipeline that keeps a RAG index fresh as documents change.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sources emit change events through webhooks or periodic scans comparing content hashes. Changed documents are parsed, chunked with overlap and tagged with source, section, timestamp and access groups. Only changed chunks are re-embedded and upserted, and chunks from deleted documents are removed. Jobs are idempotent and keyed by document version, so retries and backfills are safe. I'd monitor freshness lag, failed parses and the share of chunks with missing metadata, and run a nightly retrieval check against a small eval set."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../#paths">AI roles</a>
+      <a href="../learn.html">Learn</a>
+      <a href="../interview.html">Interview prep</a>
+      <a href="../resumes/">Resumes</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
+  </header>
+  <main class="container article">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">AI Path Finder</a> › <a href="../interview.html">Interview practice</a> › <span aria-current="page">Data Engineer (AI focus) interview questions</span></nav>
+    <article>
+      <header>
+        <p class="eyebrow">Interview preparation · Updated <time datetime="2026-10-28">28 October 2026</time></p>
+        <h1>Data Engineer (AI focus) interview questions and answers</h1>
+        <p class="lead">26 questions that come up in Data Engineer (AI focus) interviews, grouped by skill area, with answers, explanations and the lesson to study for each. For a scored session with your gaps explained, use <a href="../interview.html?role=data-engineer-ai">interview practice</a>.</p>
+      </header>
+      <nav class="toc" aria-label="Skill areas"><strong>Skill areas</strong><ol><li><a href="#area-1">Python &amp; coding</a> (3)</li><li><a href="#area-2">Statistics &amp; data</a> (2)</li><li><a href="#area-3">SQL &amp; data modelling</a> (4)</li><li><a href="#area-4">ML fundamentals</a> (3)</li><li><a href="#area-5">Serving &amp; MLOps</a> (2)</li><li><a href="#area-6">RAG &amp; retrieval</a> (3)</li><li><a href="#area-7">Data engineering</a> (5)</li><li><a href="#area-8">Communication</a> (3)</li><li><a href="#area-9">AI system design</a> (1)</li></ol></nav>
+      <section id="area-1">
+        <h2>Python &amp; coding</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">What does len({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;a&#39;: 3}) return?</p>
+          <ol type="A"><li>It raises an error</li><li>2</li><li>3</li><li>1</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>2</strong>. Dictionary keys are unique. The second &#39;a&#39; overwrites the first, leaving 2 keys.</p><p class="small">Learn: <a href="../learn/py-collections.html">Lists and dictionaries: storing many values</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">You need to check whether 1 million IDs are in a collection of 1 million known IDs. What&#39;s the efficient approach?</p>
+          <ol type="A"><li>Keep the known IDs in a list and use `in`</li><li>Sort both lists and compare index by index in a nested loop</li><li>Convert the IDs to strings first</li><li>Put the known IDs in a set and use `in`</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Put the known IDs in a set and use `in`</strong>. Membership checks in a set are O(1) on average, but O(n) in a list. With a list this becomes about a trillion comparisons.</p><p class="small">Learn: <a href="../learn/py-collections.html">Lists and dictionaries: storing many values</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What does df.groupby(&#39;city&#39;)[&#39;amount&#39;].mean() return?</p>
+          <ol type="A"><li>The overall mean amount</li><li>The cities sorted by amount</li><li>One average amount per city</li><li>A count of rows per city</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>One average amount per city</strong>. groupby splits the rows by city, then mean() averages &#39;amount&#39; within each group, giving a Series indexed by city.</p><p class="small">Learn: <a href="../learn/pandas.html">Pandas: working with tables of data</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-2">
+        <h2>Statistics &amp; data</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Salaries in a team are mostly around ₹8 LPA, with one executive at ₹2 crore. Which best describes a typical salary?</p>
+          <ol type="A"><li>The median</li><li>The mean</li><li>The sum divided by 2</li><li>The maximum</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>The median</strong>. One extreme value pulls the mean up a lot. The median, the middle value, isn&#39;t affected by outliers.</p><p class="small">Learn: <a href="../learn/stats-center-spread.html">Averages and spread: mean, median, variance</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Users who turned on a new &#39;focus mode&#39; spend 30% more time in the app. Can you say focus mode caused it?</p>
+          <ol type="A"><li>Yes, if the sample has more than 1,000 users</li><li>No. People who opt in may already be more engaged, so run a randomised A/B test</li><li>No, time-in-app can never be measured</li><li>Yes, the difference is large</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>No. People who opt in may already be more engaged, so run a randomised A/B test</strong>. This is self-selection: the opt-in group differs from everyone else. Only random assignment isolates the feature&#39;s effect.</p><p class="small">Learn: <a href="../learn/stats-correlation.html">Correlation vs causation, and sampling bias</a> · <a href="../learn/ab-testing.html">Metrics and A/B testing for AI features</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-3">
+        <h2>SQL &amp; data modelling</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">You want only the cities with more than 100 orders. Which clause filters those groups?</p>
+          <ol type="A"><li>HAVING COUNT(*) &gt; 100</li><li>ORDER BY COUNT(*) &gt; 100</li><li>LIMIT 100</li><li>WHERE COUNT(*) &gt; 100</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>HAVING COUNT(*) &gt; 100</strong>. WHERE filters rows before grouping. HAVING filters groups after aggregation.</p><p class="small">Learn: <a href="../learn/sql-basics.html">SQL basics: asking a database questions</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">How do you find customers who have never placed an order?</p>
+          <ol type="A"><li>INNER JOIN orders and keep the matches</li><li>SELECT DISTINCT customer_id FROM orders</li><li>GROUP BY customer_id HAVING COUNT(*) &gt; 0</li><li>LEFT JOIN orders and keep rows where the order id IS NULL</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>LEFT JOIN orders and keep rows where the order id IS NULL</strong>. A LEFT JOIN keeps every customer. Those with no match have NULL order columns.</p><p class="small">Learn: <a href="../learn/sql-joins.html">SQL JOINs: combining tables</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Joining 1M orders to a customers table returns 3M rows. What&#39;s the most likely cause?</p>
+          <ol type="A"><li>The database is corrupted</li><li>Orders are counted twice by default</li><li>Duplicate customer IDs in the customers table, so each order matches several rows</li><li>The join should have been a LEFT JOIN</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Duplicate customer IDs in the customers table, so each order matches several rows</strong>. A join multiplies rows when the key isn&#39;t unique on one side. Check uniqueness before you join.</p><p class="small">Learn: <a href="../learn/sql-joins.html">SQL JOINs: combining tables</a> · <a href="../learn/data-quality.html">Data quality: catching bad data early</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Which expression gives each store&#39;s running revenue total, ordered by date?</p>
+          <ol type="A"><li>MAX(amount) OVER (ORDER BY store_id)</li><li>COUNT(*) OVER ()</li><li>SUM(amount) GROUP BY store_id</li><li>SUM(amount) OVER (PARTITION BY store_id ORDER BY sale_date)</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>SUM(amount) OVER (PARTITION BY store_id ORDER BY sale_date)</strong>. A window function with PARTITION BY store and ORDER BY date accumulates the sum row by row within each store.</p><p class="small">Learn: <a href="../learn/data-modeling.html">Data modelling: designing tables for analysis</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-4">
+        <h2>ML fundamentals</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Training accuracy is 98% and test accuracy is 65%. What&#39;s happening, and what&#39;s a reasonable fix?</p>
+          <ol type="A"><li>Underfitting, so add more layers</li><li>Everything is fine</li><li>Overfitting, so simplify the model, regularise or get more data</li><li>The test set is wrong, so delete it</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Overfitting, so simplify the model, regularise or get more data</strong>. A large train/test gap means the model memorised the training data. Reduce its complexity, regularise, or add data.</p><p class="small">Learn: <a href="../learn/ml-train-test.html">Train/test split and overfitting</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">A fraud model uses &#39;refund_issued&#39; as a feature and scores 0.99 AUC in testing. What&#39;s the problem?</p>
+          <ol type="A"><li>Data leakage: refunds happen after fraud is confirmed, so this information isn&#39;t available at prediction time</li><li>The feature needs scaling</li><li>AUC can&#39;t exceed 0.95</li><li>Nothing, it&#39;s a strong feature</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Data leakage: refunds happen after fraud is confirmed, so this information isn&#39;t available at prediction time</strong>. Features must only use information available at the moment of prediction. Otherwise test scores are inflated.</p><p class="small">Learn: <a href="../learn/ml-features.html">Feature engineering: turning raw data into useful inputs</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">For a churn model on a 30-column customer table, what&#39;s a strong first choice after a baseline?</p>
+          <ol type="A"><li>A chatbot</li><li>Gradient-boosted trees such as XGBoost or LightGBM</li><li>A large transformer</li><li>K-means clustering</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Gradient-boosted trees such as XGBoost or LightGBM</strong>. Boosted trees are usually the most accurate, fastest and most explainable option for tabular data.</p><p class="small">Learn: <a href="../learn/ml-trees.html">Decision trees, random forests and boosting</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-5">
+        <h2>Serving &amp; MLOps</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">A model&#39;s accuracy has dropped slowly over six months with no code changes. What&#39;s the most likely cause?</p>
+          <ol type="A"><li>The GPU is overheating</li><li>Too many unit tests</li><li>A memory leak</li><li>Data or concept drift: the real world changed, so monitor the inputs and retrain</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Data or concept drift: the real world changed, so monitor the inputs and retrain</strong>. Models are frozen snapshots of the past. When the input data or its relationships change, quality degrades silently.</p><p class="small">Learn: <a href="../learn/mlops-monitoring.html">Monitoring models: drift and silent failures</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What problem does Docker mainly solve?</p>
+          <ol type="A"><li>&#39;Works on my machine&#39; problems, by packaging the app with its exact environment</li><li>GPU pricing</li><li>Model accuracy</li><li>Writing SQL</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>&#39;Works on my machine&#39; problems, by packaging the app with its exact environment</strong>. A container image carries the code, runtime and libraries, so the app runs the same everywhere.</p><p class="small">Learn: <a href="../learn/docker.html">Docker: packaging your app so it runs anywhere</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-6">
+        <h2>RAG &amp; retrieval</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Your RAG assistant gives wrong answers. The right document exists but is never retrieved. What do you fix first?</p>
+          <ol type="A"><li>Switch to a bigger LLM</li><li>Raise the temperature</li><li>Retrieval: chunking, embeddings, hybrid search or re-ranking</li><li>Shorten the system prompt</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Retrieval: chunking, embeddings, hybrid search or re-ranking</strong>. If the right text never reaches the prompt, no LLM can answer correctly. Measure retrieval separately from generation.</p><p class="small">Learn: <a href="../learn/rag.html">RAG: letting an LLM answer from your documents</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Company policies change every week and answers must be current. What&#39;s the right approach?</p>
+          <ol type="A"><li>Pre-train a new model</li><li>Fine-tune a model every week</li><li>RAG over the latest documents</li><li>Put every policy in the system prompt forever</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>RAG over the latest documents</strong>. RAG keeps answers current without retraining. Fine-tuning teaches style and skills, not changing facts.</p><p class="small">Learn: <a href="../learn/rag.html">RAG: letting an LLM answer from your documents</a> · <a href="../learn/dl-fine-tuning.html">Fine-tuning and LoRA: specialising a model</a> · <a href="../learn/build-vs-buy.html">AI literacy for decisions: build vs buy, cost and limits</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Semantic search fails to find exact product codes like &#39;SKU-88213&#39;. What helps most?</p>
+          <ol type="A"><li>Lowering the temperature</li><li>Removing product codes from documents</li><li>A bigger embedding model only</li><li>Hybrid search: combine keyword (BM25) and vector search</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Hybrid search: combine keyword (BM25) and vector search</strong>. Embeddings capture meaning but are weak on exact identifiers. Keyword search catches those, and hybrid gets both.</p><p class="small">Learn: <a href="../learn/embeddings.html">Embeddings and vector databases: searching by meaning</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-7">
+        <h2>Data engineering</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">What does it mean for a pipeline to be idempotent?</p>
+          <ol type="A"><li>It doesn&#39;t need a schedule</li><li>It runs only once</li><li>Running it again for the same period gives the same result, with no duplicates</li><li>It never fails</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Running it again for the same period gives the same result, with no duplicates</strong>. Re-runs are routine after failures, and idempotency (for example overwrite-by-partition or upserts) prevents double counting.</p><p class="small">Learn: <a href="../learn/data-pipelines.html">Data pipelines: ETL, Airflow, dbt and Spark</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Which use case most needs streaming rather than nightly batch processing?</p>
+          <ol type="A"><li>A yearly HR summary</li><li>A monthly finance report</li><li>Blocking a fraudulent payment as it happens</li><li>Archiving old logs</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Blocking a fraudulent payment as it happens</strong>. When decisions must happen in seconds, batch is too late.</p><p class="small">Learn: <a href="../learn/streaming.html">Streaming data: Kafka and real-time pipelines</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Where is the cheapest place to catch bad data?</p>
+          <ol type="A"><li>In the CEO&#39;s dashboard</li><li>In customer complaints</li><li>After the model is retrained</li><li>Early in the pipeline, with automated checks that fail the run</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Early in the pipeline, with automated checks that fail the run</strong>. The earlier you catch it, the fewer downstream systems it pollutes.</p><p class="small">Learn: <a href="../learn/data-quality.html">Data quality: catching bad data early</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">In Kafka, what does a consumer group let you do?</p>
+          <ol type="A"><li>Merge topics</li><li>Delete messages after reading</li><li>Spread a topic&#39;s partitions across several consumers, so each message is processed once by the group</li><li>Encrypt producers</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Spread a topic&#39;s partitions across several consumers, so each message is processed once by the group</strong>. Consumers in a group share the work. Separate groups each get their own full copy of the stream.</p><p class="small">Learn: <a href="../learn/streaming.html">Streaming data: Kafka and real-time pipelines</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Design a pipeline that keeps a RAG index fresh as documents change. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>Change detection (content hashes, CDC or webhooks)</li><li>Parsing and chunking with metadata, including permissions</li><li>Embedding, then upserting changed chunks and deleting removed ones</li><li>Idempotency, retries and backfills</li><li>Quality and freshness monitoring</li><li>Cost control (only re-embed what changed)</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>Sources emit change events through webhooks or periodic scans comparing content hashes. Changed documents are parsed, chunked with overlap and tagged with source, section, timestamp and access groups. Only changed chunks are re-embedded and upserted, and chunks from deleted documents are removed. Jobs are idempotent and keyed by document version, so retries and backfills are safe. I&#39;d monitor freshness lag, failed parses and the share of chunks with missing metadata, and run a nightly retrieval check against a small eval set.</p><p class="small">Learn: <a href="../learn/data-pipelines.html">Data pipelines: ETL, Airflow, dbt and Spark</a> · <a href="../learn/embeddings.html">Embeddings and vector databases: searching by meaning</a> · <a href="../learn/data-quality.html">Data quality: catching bad data early</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-8">
+        <h2>Communication</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Tell me about yourself and why you&#39;re moving into this AI role. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>Current role and years of experience in one or two lines</li><li>2–3 transferable skills that matter for this AI role</li><li>A concrete AI project, with a measurable result</li><li>Why this specific role fits you (not just &#39;AI is hot&#39;)</li><li>What you&#39;ll bring to the team in the first months</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>I&#39;m a backend engineer with 8 years in fintech, building payment APIs that handle about 2 million requests a day. Over the last six months I&#39;ve been moving into LLM engineering: I built a support-triage agent with tool calling and an eval suite, which raised correct routing from 71% to 89% on 200 real tickets. This role fits because it combines what I&#39;m already good at, reliable APIs and production debugging, with the agent work I enjoy most. In the first months I&#39;d bring production discipline: tracing, evals and cost controls for your agents.</p><p class="small">Learn: <a href="../learn/job-search.html">Landing the AI role: resume, applications and interviews</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Walk me through an AI or ML project you built end to end. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>The problem and who it was for</li><li>The data: source, size and cleaning</li><li>The approach, and why you chose it over alternatives</li><li>How you evaluated it, with numbers</li><li>How it was deployed or used</li><li>What failed, and what you&#39;d improve next</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>I built a policy assistant for branch staff who spent about 25 minutes a day searching PDFs. I indexed 140 policy documents with chunking and metadata, used hybrid search, and required citations with a &#39;not found&#39; rule. I chose RAG over fine-tuning because the policies change monthly. On a 60-question eval set built with staff, correct-and-cited answers went from 68% to 90% after I added re-ranking. It&#39;s deployed as an internal web app. The main failure was tables in PDFs; next I&#39;d add table-aware parsing.</p><p class="small">Learn: <a href="../learn/portfolio.html">Building a portfolio project that gets interviews</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Tell me about a time something you built failed. What did you do? <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>The situation, briefly (STAR format)</li><li>Your own responsibility, without blaming others</li><li>How you diagnosed it, step by step</li><li>The outcome, with numbers if possible</li><li>What you changed so it doesn&#39;t happen again</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>Our nightly data pipeline silently loaded duplicate orders for three days, inflating revenue on a dashboard by 12%. I owned that pipeline. I traced it to a retry that re-appended a partial load, so the job wasn&#39;t idempotent. I fixed the data, switched the load to overwrite-by-partition, and added a uniqueness check that fails the run. Since then we&#39;ve had no duplicate incidents, and I now design every pipeline to be safely re-runnable.</p><p class="small">Learn: <a href="../learn/job-search.html">Landing the AI role: resume, applications and interviews</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-9">
+        <h2>AI system design</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Design a &#39;chat with company documents&#39; assistant for 10,000 employees. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>Ingestion: parsing, chunking with metadata, and keeping the index fresh</li><li>Permission-aware retrieval (access filters applied before the LLM)</li><li>Hybrid search plus re-ranking</li><li>A prompt that requires citations and says &#39;not found&#39; when unsure</li><li>Evals and a user feedback loop</li><li>Security: PII handling, audit logs, data residency</li><li>Latency and cost controls (caching, model choice)</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>Documents flow from SharePoint and Confluence through a parser into chunks carrying metadata: source, section, updated date and access groups. A change-detection job re-indexes only what changed. At query time I&#39;d authenticate via SSO, filter the search by the user&#39;s groups, run hybrid keyword-plus-vector search and re-rank the top results. The prompt asks the model to answer only from the provided sources, cite them, and say when it doesn&#39;t know. I&#39;d mask PII and log every question, retrieved documents and answer for audit. Quality comes from a 100-question eval set built with real users, plus thumbs-up/down feedback. Cost and latency are managed with response caching and a smaller model for simple questions.</p><p class="small">Learn: <a href="../learn/rag.html">RAG: letting an LLM answer from your documents</a> · <a href="../learn/security-compliance.html">Enterprise AI: integration, security and compliance</a> · <a href="../learn/llm-evals.html">Evaluating AI: how to know it actually works</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section>
+        <h2>More questions to prepare</h2>
+        <ul><li>Batch vs streaming: when do you choose each?</li><li>How would you design slowly changing dimensions?</li><li>Explain partitioning and clustering in a warehouse.</li><li>How do you backfill a year of data safely?</li><li>What data contracts would you set with upstream teams?</li><li>How do you monitor data freshness?</li></ul>
+      </section>
+      <section class="cta-box">
+        <h2>Practise with a score and gap analysis</h2>
+        <p>Answer these as a timed practice session. Multiple-choice answers are scored automatically, open answers are self-checked against key points, and your report links the exact lessons for every gap.</p>
+        <a class="button btn-primary" href="../interview.html?role=data-engineer-ai">Start Data Engineer (AI focus) interview practice</a>
+      </section>
+      <section>
+        <h2>Also for Data Engineer (AI focus)</h2>
+        <ul class="related"><li><a href="../resumes/ai-data-engineer.html">ATS-friendly Data Engineer (AI focus) resume sample</a></li><li><a href="../learn.html?course=data-engineer-ai">Free Data Engineer (AI focus) course</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus) roadmap and salary</a></li></ul>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>

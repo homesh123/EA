@@ -33,6 +33,29 @@ Live: https://homesh123.github.io/ai-career-advisor/
    - progress tracking saved in the browser;
    - export to a calendar (.ics) file.
 
+## Learn → practise → interview → resume
+
+Each role has a complete path: **Overview → Lessons → Practice tasks → Interview practice → Sample resume**.
+The homepage section "Learn for your target AI role" lets people pick a role, read what it involves
+and who it suits, then start.
+
+- **Animated diagrams** (`content/visuals.js`): 21 lessons include an animated SVG diagram, for
+  example a ball rolling down the loss curve, attention arcs, the RAG pipeline, the agent loop and
+  pods scaling. They're animated like GIFs but stay sharp, weigh a few KB, and become still images
+  when the device asks for reduced motion.
+- **Practice tasks** (`content/tasks.js`): 3 per role (starter, core, portfolio), each with steps,
+  a deliverable and "done when" criteria, in English and Hinglish.
+- **Interview practice** (`interview.html`, `content/interview.js`): role-specific question sets.
+  - Multiple-choice questions are scored automatically, with options shuffled per attempt.
+  - Open questions are self-checked against key points and a model answer.
+  - The report shows a score per skill area, explains every mistake, links the lessons for each gap,
+    and offers "retry only what I missed".
+  - Static Q&A pages per role (`interview/<slug>.html`) help with search.
+- **Sample resumes** (`resumes/`, `content/resumes.js`): one ATS-friendly sample per role.
+  - Editable in the browser, with a live keyword checklist.
+  - Downloads as Word (.doc), PDF (print) or plain text.
+  - Tests check every ATS keyword appears in the resume and every experience bullet has a number.
+
 ## Learn section (English and Hinglish)
 
 `learn.html` has a free course for each of the 9 roles. Each course follows that role's
@@ -83,6 +106,9 @@ AI Forward Deployed Engineer · AI Product Manager
 | `content/` | Hand-written copy: background pages, the guide, and the lesson library and course structure for Learn |
 | `learn.html`, `learn.js` | The Learn section (interactive courses) |
 | `learn/*.html`, `learn/hi/*.html` | Generated static lesson pages in English and Hinglish |
+| `interview.html`, `interview.js` | Scored interview practice; `interview/*.html` are generated Q&A pages |
+| `resumes/*.html`, `resume.js` | Generated, editable ATS resume samples |
+| `home.js` | Homepage role picker ("Learn for your target AI role") |
 | `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
 | `tests/` | Persona tests for the recommendation logic, plus SEO / site checks |
 

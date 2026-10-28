@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLOps / AI Platform Engineer Interview Questions and Answers (2026): 16 Questions With Explanations | AI Path Finder</title>
+  <meta name="description" content="16 MLOps / AI Platform Engineer interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="MLOps / AI Platform Engineer Interview Questions and Answers (2026): 16 Questions With Explanations | AI Path Finder" />
+  <meta property="og:description" content="16 MLOps / AI Platform Engineer interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MLOps / AI Platform Engineer Interview Questions and Answers (2026): 16 Questions With Explanations | AI Path Finder" />
+  <meta name="twitter:description" content="16 MLOps / AI Platform Engineer interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free." />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../styles.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html",
+      "url": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html",
+      "name": "MLOps / AI Platform Engineer Interview Questions and Answers (2026): 16 Questions With Explanations",
+      "description": "16 MLOps / AI Platform Engineer interview questions with answers and explanations, grouped by skill area, plus model answers for open questions. Practise with scoring and get your gaps explained, free.",
+      "inLanguage": "en",
+      "datePublished": "2026-10-27",
+      "dateModified": "2026-10-28",
+      "isPartOf": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#website"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "breadcrumb": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html#breadcrumb"
+      },
+      "primaryImageOfPage": "https://homesh123.github.io/ai-career-advisor/og-image.png"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Interview practice",
+          "item": "https://homesh123.github.io/ai-career-advisor/interview.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "MLOps / AI Platform Engineer interview questions",
+          "item": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/interview/mlops-engineer.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does len({'a': 1, 'b': 2, 'a': 3}) return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2. Dictionary keys are unique. The second 'a' overwrites the first, leaving 2 keys."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's wrong with `def add(item, basket=[]): basket.append(item); return basket`?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The default list is created once and shared between calls, so items leak across calls. Default values are evaluated once, when the function is defined. Use `basket=None` and create a new list inside the function."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Training accuracy is 98% and test accuracy is 65%. What's happening, and what's a reasonable fix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Overfitting, so simplify the model, regularise or get more data. A large train/test gap means the model memorised the training data. Reduce its complexity, regularise, or add data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A model's accuracy has dropped slowly over six months with no code changes. What's the most likely cause?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data or concept drift: the real world changed, so monitor the inputs and retrain. Models are frozen snapshots of the past. When the input data or its relationships change, quality degrades silently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should an LLM API key live in your app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In an environment variable or a secrets manager. Keys in code end up in Git history and get stolen. Load them from the environment or a secrets manager."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "In a model API, where should the model be loaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Once at startup, then reused for every request. Loading can take seconds. Doing it per request makes every request slow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What problem does Docker mainly solve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "'Works on my machine' problems, by packaging the app with its exact environment. A container image carries the code, runtime and libraries, so the app runs the same everywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a Kubernetes HorizontalPodAutoscaler do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Adds or removes pod replicas based on load metrics. The HPA watches CPU, memory or custom metrics and changes the replica count."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Your LLM GPU runs at 20% utilisation while users wait. What helps most?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An inference server with continuous batching, such as vLLM. Batching packs many requests onto the GPU at once, which raises throughput and cuts cost per request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the main benefit of a model registry?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Versioned, approved models with stages, so deployments are traceable and rollback is instant. You always know which model is in production and can switch back to the previous version in one step."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does 'p95 latency = 800 ms' mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "95% of requests finish in 800 ms or less. Percentiles describe the slow tail, which is what users notice. Averages hide it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why add a readiness probe to a model-serving pod?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "So traffic is only sent once the model has loaded and the pod can serve. Without it, requests hit pods that are still loading the model and fail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tell me about yourself and why you're moving into this AI role.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I'm a backend engineer with 8 years in fintech, building payment APIs that handle about 2 million requests a day. Over the last six months I've been moving into LLM engineering: I built a support-triage agent with tool calling and an eval suite, which raised correct routing from 71% to 89% on 200 real tickets. This role fits because it combines what I'm already good at, reliable APIs and production debugging, with the agent work I enjoy most. In the first months I'd bring production discipline: tracing, evals and cost controls for your agents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Walk me through an AI or ML project you built end to end.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I built a policy assistant for branch staff who spent about 25 minutes a day searching PDFs. I indexed 140 policy documents with chunking and metadata, used hybrid search, and required citations with a 'not found' rule. I chose RAG over fine-tuning because the policies change monthly. On a 60-question eval set built with staff, correct-and-cited answers went from 68% to 90% after I added re-ranking. It's deployed as an internal web app. The main failure was tables in PDFs; next I'd add table-aware parsing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tell me about a time something you built failed. What did you do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our nightly data pipeline silently loaded duplicate orders for three days, inflating revenue on a dashboard by 12%. I owned that pipeline. I traced it to a retry that re-appended a partial load, so the job wasn't idempotent. I fixed the data, switched the load to overwrite-by-partition, and added a uniqueness check that fails the run. Since then we've had no duplicate incidents, and I now design every pipeline to be safely re-runnable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Design an LLM serving platform shared by multiple product teams.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Teams call a single gateway that handles authentication, per-team quotas and budgets, and routing: to self-hosted models on vLLM for high-volume workloads, and to external APIs as a fallback or for frontier capability. Self-hosted models run on GPU node pools in Kubernetes, autoscaled on queue depth, with continuous batching to keep utilisation high. A semantic or exact-match cache absorbs repeated prompts. Dashboards show time to first token, tokens per second, p95 latency, error rate and cost per team. New model versions roll out as canaries with automatic rollback if errors or latency regress."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../#paths">AI roles</a>
+      <a href="../learn.html">Learn</a>
+      <a href="../interview.html">Interview prep</a>
+      <a href="../resumes/">Resumes</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
+  </header>
+  <main class="container article">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">AI Path Finder</a> › <a href="../interview.html">Interview practice</a> › <span aria-current="page">MLOps / AI Platform Engineer interview questions</span></nav>
+    <article>
+      <header>
+        <p class="eyebrow">Interview preparation · Updated <time datetime="2026-10-28">28 October 2026</time></p>
+        <h1>MLOps / AI Platform Engineer interview questions and answers</h1>
+        <p class="lead">16 questions that come up in MLOps / AI Platform Engineer interviews, grouped by skill area, with answers, explanations and the lesson to study for each. For a scored session with your gaps explained, use <a href="../interview.html?role=mlops-engineer">interview practice</a>.</p>
+      </header>
+      <nav class="toc" aria-label="Skill areas"><strong>Skill areas</strong><ol><li><a href="#area-1">Python &amp; coding</a> (2)</li><li><a href="#area-2">ML fundamentals</a> (1)</li><li><a href="#area-3">Serving &amp; MLOps</a> (8)</li><li><a href="#area-4">LLMs &amp; prompting</a> (1)</li><li><a href="#area-5">Communication</a> (3)</li><li><a href="#area-6">AI system design</a> (1)</li></ol></nav>
+      <section id="area-1">
+        <h2>Python &amp; coding</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">What does len({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;a&#39;: 3}) return?</p>
+          <ol type="A"><li>It raises an error</li><li>2</li><li>3</li><li>1</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>2</strong>. Dictionary keys are unique. The second &#39;a&#39; overwrites the first, leaving 2 keys.</p><p class="small">Learn: <a href="../learn/py-collections.html">Lists and dictionaries: storing many values</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What&#39;s wrong with `def add(item, basket=[]): basket.append(item); return basket`?</p>
+          <ol type="A"><li>Nothing, it&#39;s idiomatic</li><li>The default list is created once and shared between calls, so items leak across calls</li><li>append returns None, so the function always returns None</li><li>Lists can&#39;t be default arguments</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>The default list is created once and shared between calls, so items leak across calls</strong>. Default values are evaluated once, when the function is defined. Use `basket=None` and create a new list inside the function.</p><p class="small">Learn: <a href="../learn/py-logic.html">Python logic: if/else, loops and functions</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-2">
+        <h2>ML fundamentals</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Training accuracy is 98% and test accuracy is 65%. What&#39;s happening, and what&#39;s a reasonable fix?</p>
+          <ol type="A"><li>Underfitting, so add more layers</li><li>Everything is fine</li><li>Overfitting, so simplify the model, regularise or get more data</li><li>The test set is wrong, so delete it</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Overfitting, so simplify the model, regularise or get more data</strong>. A large train/test gap means the model memorised the training data. Reduce its complexity, regularise, or add data.</p><p class="small">Learn: <a href="../learn/ml-train-test.html">Train/test split and overfitting</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-3">
+        <h2>Serving &amp; MLOps</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">A model&#39;s accuracy has dropped slowly over six months with no code changes. What&#39;s the most likely cause?</p>
+          <ol type="A"><li>The GPU is overheating</li><li>Too many unit tests</li><li>A memory leak</li><li>Data or concept drift: the real world changed, so monitor the inputs and retrain</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Data or concept drift: the real world changed, so monitor the inputs and retrain</strong>. Models are frozen snapshots of the past. When the input data or its relationships change, quality degrades silently.</p><p class="small">Learn: <a href="../learn/mlops-monitoring.html">Monitoring models: drift and silent failures</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">In a model API, where should the model be loaded?</p>
+          <ol type="A"><li>Once at startup, then reused for every request</li><li>Only during testing</li><li>Inside the predict function, on every request</li><li>In the browser</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Once at startup, then reused for every request</strong>. Loading can take seconds. Doing it per request makes every request slow.</p><p class="small">Learn: <a href="../learn/api-serving.html">Serving a model as an API with FastAPI</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What problem does Docker mainly solve?</p>
+          <ol type="A"><li>&#39;Works on my machine&#39; problems, by packaging the app with its exact environment</li><li>GPU pricing</li><li>Model accuracy</li><li>Writing SQL</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>&#39;Works on my machine&#39; problems, by packaging the app with its exact environment</strong>. A container image carries the code, runtime and libraries, so the app runs the same everywhere.</p><p class="small">Learn: <a href="../learn/docker.html">Docker: packaging your app so it runs anywhere</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What does a Kubernetes HorizontalPodAutoscaler do?</p>
+          <ol type="A"><li>Encrypts secrets</li><li>Builds Docker images</li><li>Adds or removes pod replicas based on load metrics</li><li>Restarts the cluster nightly</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Adds or removes pod replicas based on load metrics</strong>. The HPA watches CPU, memory or custom metrics and changes the replica count.</p><p class="small">Learn: <a href="../learn/kubernetes.html">Kubernetes: running containers at scale</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Your LLM GPU runs at 20% utilisation while users wait. What helps most?</p>
+          <ol type="A"><li>A bigger model</li><li>Buying more GPUs</li><li>An inference server with continuous batching, such as vLLM</li><li>Turning off caching</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>An inference server with continuous batching, such as vLLM</strong>. Batching packs many requests onto the GPU at once, which raises throughput and cuts cost per request.</p><p class="small">Learn: <a href="../learn/gpu-serving.html">Serving LLMs efficiently: GPUs, batching and cost</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What&#39;s the main benefit of a model registry?</p>
+          <ol type="A"><li>Versioned, approved models with stages, so deployments are traceable and rollback is instant</li><li>Automatic feature engineering</li><li>Free GPUs</li><li>Faster training</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>Versioned, approved models with stages, so deployments are traceable and rollback is instant</strong>. You always know which model is in production and can switch back to the previous version in one step.</p><p class="small">Learn: <a href="../learn/mlops-tracking.html">MLOps: experiment tracking and model registries</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">What does &#39;p95 latency = 800 ms&#39; mean?</p>
+          <ol type="A"><li>The server handles 95 requests a second</li><li>The average request takes 800 ms</li><li>5% of requests fail</li><li>95% of requests finish in 800 ms or less</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>95% of requests finish in 800 ms or less</strong>. Percentiles describe the slow tail, which is what users notice. Averages hide it.</p><p class="small">Learn: <a href="../learn/gpu-serving.html">Serving LLMs efficiently: GPUs, batching and cost</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Why add a readiness probe to a model-serving pod?</p>
+          <ol type="A"><li>To delete old logs</li><li>To pick the GPU type</li><li>So traffic is only sent once the model has loaded and the pod can serve</li><li>To make the image smaller</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>So traffic is only sent once the model has loaded and the pod can serve</strong>. Without it, requests hit pods that are still loading the model and fail.</p><p class="small">Learn: <a href="../learn/kubernetes.html">Kubernetes: running containers at scale</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-4">
+        <h2>LLMs &amp; prompting</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Where should an LLM API key live in your app?</p>
+          <ol type="A"><li>Hard-coded in the source</li><li>In an environment variable or a secrets manager</li><li>In a public config.json</li><li>In the README</li></ol>
+          <details class="answer-reveal"><summary>Show answer</summary><p><strong>In an environment variable or a secrets manager</strong>. Keys in code end up in Git history and get stolen. Load them from the environment or a secrets manager.</p><p class="small">Learn: <a href="../learn/llm-api.html">Calling an LLM API: keys, requests and costs</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-5">
+        <h2>Communication</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Tell me about yourself and why you&#39;re moving into this AI role. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>Current role and years of experience in one or two lines</li><li>2–3 transferable skills that matter for this AI role</li><li>A concrete AI project, with a measurable result</li><li>Why this specific role fits you (not just &#39;AI is hot&#39;)</li><li>What you&#39;ll bring to the team in the first months</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>I&#39;m a backend engineer with 8 years in fintech, building payment APIs that handle about 2 million requests a day. Over the last six months I&#39;ve been moving into LLM engineering: I built a support-triage agent with tool calling and an eval suite, which raised correct routing from 71% to 89% on 200 real tickets. This role fits because it combines what I&#39;m already good at, reliable APIs and production debugging, with the agent work I enjoy most. In the first months I&#39;d bring production discipline: tracing, evals and cost controls for your agents.</p><p class="small">Learn: <a href="../learn/job-search.html">Landing the AI role: resume, applications and interviews</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Walk me through an AI or ML project you built end to end. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>The problem and who it was for</li><li>The data: source, size and cleaning</li><li>The approach, and why you chose it over alternatives</li><li>How you evaluated it, with numbers</li><li>How it was deployed or used</li><li>What failed, and what you&#39;d improve next</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>I built a policy assistant for branch staff who spent about 25 minutes a day searching PDFs. I indexed 140 policy documents with chunking and metadata, used hybrid search, and required citations with a &#39;not found&#39; rule. I chose RAG over fine-tuning because the policies change monthly. On a 60-question eval set built with staff, correct-and-cited answers went from 68% to 90% after I added re-ranking. It&#39;s deployed as an internal web app. The main failure was tables in PDFs; next I&#39;d add table-aware parsing.</p><p class="small">Learn: <a href="../learn/portfolio.html">Building a portfolio project that gets interviews</a></p></details>
+        </li>
+        <li class="iv-static">
+          <p class="quiz-q">Tell me about a time something you built failed. What did you do? <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>The situation, briefly (STAR format)</li><li>Your own responsibility, without blaming others</li><li>How you diagnosed it, step by step</li><li>The outcome, with numbers if possible</li><li>What you changed so it doesn&#39;t happen again</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>Our nightly data pipeline silently loaded duplicate orders for three days, inflating revenue on a dashboard by 12%. I owned that pipeline. I traced it to a retry that re-appended a partial load, so the job wasn&#39;t idempotent. I fixed the data, switched the load to overwrite-by-partition, and added a uniqueness check that fails the run. Since then we&#39;ve had no duplicate incidents, and I now design every pipeline to be safely re-runnable.</p><p class="small">Learn: <a href="../learn/job-search.html">Landing the AI role: resume, applications and interviews</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section id="area-6">
+        <h2>AI system design</h2>
+        <ol class="iv-list">
+        <li class="iv-static">
+          <p class="quiz-q">Design an LLM serving platform shared by multiple product teams. <span class="badge-time">open question</span></p>
+          <p class="small"><strong>A strong answer covers:</strong></p>
+          <ul class="small"><li>Inference servers with batching (e.g. vLLM) on GPU node pools</li><li>Autoscaling on queue depth or GPU metrics</li><li>A gateway: auth, per-team rate limits and budgets, routing and fallback across models or providers</li><li>Caching for repeated prompts</li><li>Observability: time to first token, p95, errors and cost per team</li><li>Model versioning and safe rollouts (canary)</li></ul>
+          <details class="answer-reveal"><summary>Show model answer</summary><p>Teams call a single gateway that handles authentication, per-team quotas and budgets, and routing: to self-hosted models on vLLM for high-volume workloads, and to external APIs as a fallback or for frontier capability. Self-hosted models run on GPU node pools in Kubernetes, autoscaled on queue depth, with continuous batching to keep utilisation high. A semantic or exact-match cache absorbs repeated prompts. Dashboards show time to first token, tokens per second, p95 latency, error rate and cost per team. New model versions roll out as canaries with automatic rollback if errors or latency regress.</p><p class="small">Learn: <a href="../learn/gpu-serving.html">Serving LLMs efficiently: GPUs, batching and cost</a> · <a href="../learn/kubernetes.html">Kubernetes: running containers at scale</a> · <a href="../learn/mlops-monitoring.html">Monitoring models: drift and silent failures</a></p></details>
+        </li>
+        </ol>
+      </section>
+      <section>
+        <h2>More questions to prepare</h2>
+        <ul><li>How would you roll out a new model version safely?</li><li>What metrics would you put on an LLM serving dashboard?</li><li>How do you schedule GPU workloads in Kubernetes?</li><li>What&#39;s your approach to secrets in CI/CD?</li><li>How would you cut inference cost on GPUs?</li><li>How do you make training pipelines reproducible?</li></ul>
+      </section>
+      <section class="cta-box">
+        <h2>Practise with a score and gap analysis</h2>
+        <p>Answer these as a timed practice session. Multiple-choice answers are scored automatically, open answers are self-checked against key points, and your report links the exact lessons for every gap.</p>
+        <a class="button btn-primary" href="../interview.html?role=mlops-engineer">Start MLOps / AI Platform Engineer interview practice</a>
+      </section>
+      <section>
+        <h2>Also for MLOps / AI Platform Engineer</h2>
+        <ul class="related"><li><a href="../resumes/mlops-engineer.html">ATS-friendly MLOps / AI Platform Engineer resume sample</a></li><li><a href="../learn.html?course=mlops-engineer">Free MLOps / AI Platform Engineer course</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer roadmap and salary</a></li></ul>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../interview.html">Interview practice</a></li><li><a href="../resumes/">ATS resume samples</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>
