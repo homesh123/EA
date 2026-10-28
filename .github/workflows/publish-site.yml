@@ -1,0 +1,45 @@
+# Publishes only the built, minified website to the public site repository.
+# Use it from a PRIVATE copy of this repository, so the source code is never public:
+#   1. Create a private repository and push this code to it.
+#   2. In the private repo's settings, add a secret SITE_DEPLOY_TOKEN (a fine-grained token with
+#      "Contents: read and write" on the public site repo) and a variable SITE_REPO (for example
+#      homesh123/ai-career-advisor).
+#   3. Push to main: tests run, the site is built and minified into dist/, and dist/ replaces the
+#      public repository's contents as a single commit. GitHub Pages keeps serving the same URL.
+# In a public repository this job is skipped, so it is safe to keep here.
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.event.repository.private == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+      - run: node scripts/build.js --check
+      - run: npm run dist
+      - name: Replace the public site repository with dist/
+        env:
+          TOKEN: ${{ secrets.SITE_DEPLOY_TOKEN }}
+          SITE_REPO: ${{ vars.SITE_REPO }}
+        run: |
+          test -n "$TOKEN" && test -n "$SITE_REPO" || { echo "Set SITE_DEPLOY_TOKEN and SITE_REPO first"; exit 1; }
+          cd dist
+          git init -q -b main
+          git config user.name "site-publisher"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Publish site ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${SITE_REPO}.git" main

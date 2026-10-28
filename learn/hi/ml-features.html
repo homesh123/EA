@@ -155,11 +155,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Cricket selector sirf &#39;kitne runs banaaye&#39; nahi dekhta. Woh strike rate, fast bowlers ke against average, aur pichhle 5 matches ki form calculate karta hai. Yeh calculated numbers raw totals se kahin better future performance predict karte hain. Aise kaam ke inputs banaana feature engineering hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Cricket selector sirf &#39;kitne runs banaaye&#39; nahi dekhta. Woh strike rate, fast bowlers ke against average, aur pichhle 5 matches ki form calculate karta hai. Yeh calculated numbers raw totals se kahin better future performance predict karte hain. Aise kaam ke inputs banaana feature engineering hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Model sirf woh numbers dekhta hai jo aap usse dete ho, isliye better features aksar better algorithm ko hara dete hain. Common techniques: dates ke hisse nikaalo (week ka din, tyohaar ka season), ratios banao (amount ÷ average amount), aur categories ko numbers mein badlo (one-hot encoding). Numeric features scale karo taaki bade numbers baaki sab pe haavi na hon. Missing values samajhdaari se bharo, chahe to ek &#39;missing tha&#39; flag bhi jodo. Domain knowledge, yaani business ki samajh, yahan aapka sabse bada advantage hai. Kabhi bhi future ki information, jaise &#39;refund hua tha&#39;, past predict karne ke liye mat use karo. Yeh data leakage hai.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Domain experts ke saath brainstorm karo: aaj woh decide karne ke liye kaunse signals dekhte hain?</li><li data-read>Ratios aur differences banao: EMI aur income ka ratio, pichhle mahine se kharch mein badlaav.</li><li data-read>Time features banao: last login se kitne din, hafte ka din, festival season flag.</li><li data-read>Categories encode karo (one hot ya target encoding), missing values sambhalo aur model ko zaroorat ho to numbers scale karo.</li><li data-read>Jo features validation score sudhaarein unhe rakho; baaki hata do taaki model simple rahe.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>One-hot encoding</dt><dd>City jaisi category ko 0/1 columns mein badalna.</dd></div><div data-read><dt>Scaling</dt><dd>Numeric features ko milti-julti range mein laana.</dd></div><div data-read><dt>Data leakage</dt><dd>Galti se model ko aisi info dena jo prediction ke waqt uske paas nahi hogi.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -170,8 +170,8 @@ df = pd.get_dummies(df, columns=[&quot;city&quot;])     # one-hot encode city</c
         <p class="small muted" data-read>&#39;Amount vs is user ka usual amount&#39; ek classic fraud feature hai.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Leakage: future ki information ya khud answer se bane features.</li><li data-read>Training aur live app mein features alag tarah se banana. Ek hi shared function ya pipeline use karo.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Loan default predict karne ke liye aap &#39;agle 6 mahine mein miss hui payments&#39; include karte ho. Galat kya hai?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Loan default predict karne ke liye aap &#39;agle 6 mahine mein miss hui payments&#39; include karte ho. Galat kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Kuch nahi, yeh great feature hai">Kuch nahi, yeh great feature hai</li><li data-read data-read-text="Option B: Isse scale karna padega">Isse scale karna padega</li><li data-read data-read-text="Option C: Data leakage: yeh future ki information hai">Data leakage: yeh future ki information hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Data leakage: yeh future ki information hai</strong>: Decision ke waqt future ki missed payments pata nahi hoti. Model testing mein shandaar dikhega aur real use mein fail hoga.</p></details>
       </section>

@@ -150,11 +150,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Achha restaurant sabziyaan kitchen tak pahunchne se pehle hi back door pe check karta hai. Wahan pakde gaye sade tamatar ka koi nuksaan nahi; customer ki plate pe pakde gaye to restaurant ki izzat ka nuksaan. Data quality checks data ke liye wahi back-door inspection hain.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Achha restaurant sabziyaan kitchen tak pahunchne se pehle hi back door pe check karta hai. Wahan pakde gaye sade tamatar ka koi nuksaan nahi; customer ki plate pe pakde gaye to restaurant ki izzat ka nuksaan. Data quality checks data ke liye wahi back-door inspection hain.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Kharab data chupchaap models aur dashboards tod deta hai. Pipeline ke har stage pe data automatically check karo: completeness (unexpected nulls nahi), validity (umar 0 se 120 ke beech, sahi email format), uniqueness (duplicate order IDs nahi), consistency (totals unke line items se match karein), aur freshness (data time pe aaya). Great Expectations ya dbt tests jaise tools in rules ko code mein likhte hain, aur rule tootne pe pipeline fail karte hain ya alert bhejte hain. ML ke liye label quality aur class balance bhi check karo, aur upstream teams ke saath data contract rakho, taaki schema changes achanak pareshaan na karein.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Schema check karo: expected columns aur types aaye.</li><li data-read>Volume check karo: row counts haal ke dino ke mukaable normal range mein.</li><li data-read>Values check karo: required fields mein NULL nahi, values allowed range mein, unique keys sach mein unique.</li><li data-read>Freshness check karo: sabse naya data kaafi recent hai.</li><li data-read>Fail hone pe kya hoga tay karo: critical issues pe pipeline roko, chhote pe alert, aur data use karne walon ko batao.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Validation rule</dt><dd>Check jo data ko pass karna hi hai, jaise amount ≥ 0.</dd></div><div data-read><dt>Freshness</dt><dd>Data utna naya hai ya nahi jitna hona chahiye.</dd></div><div data-read><dt>Data contract</dt><dd>Data bhejne aur use karne wali teams ke beech schema aur quality ka agreement.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -173,8 +173,8 @@ models:
         <p class="small muted" data-read>Rules data ke saath rehte hain aur har pipeline run pe chalte hain.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Quality sirf aakhir mein check karna. Problems wahin pakdo jahan data aata hai, failne se pehle.</li><li data-read>Har data source ka owner nahi, jisse failures teams ke beech ghoomte rehte hain.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Kharab value pakadne ki sabse sasti jagah kaunsi hai?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Kharab value pakadne ki sabse sasti jagah kaunsi hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: CEO ke dashboard mein">CEO ke dashboard mein</li><li data-read data-read-text="Option B: Pipeline mein jaldi, automated checks se">Pipeline mein jaldi, automated checks se</li><li data-read data-read-text="Option C: Model retrain hone ke baad">Model retrain hone ke baad</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Pipeline mein jaldi, automated checks se</strong>: Jitna jaldi pakdoge, utne kam systems usse kharab honge.</p></details>
       </section>

@@ -74,9 +74,10 @@
 <head><meta charset="utf-8"><title>Resume</title>
 <style>
   @page { margin: 1.8cm 2cm; }
-  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #000; line-height: 1.25; }
-  h2 { font-size: 20pt; margin: 0; }
-  h3 { font-size: 11.5pt; text-transform: uppercase; letter-spacing: .5pt; border-bottom: 1px solid #777; margin: 12pt 0 4pt; padding-bottom: 2pt; }
+  body { font-family: Calibri, Carlito, Arial, sans-serif; font-size: 10.5pt; color: #111; line-height: 1.28; }
+  .rs-head { text-align: center; }
+  h2 { font-size: 16pt; margin: 0; }
+  h3 { font-size: 11.5pt; text-transform: uppercase; letter-spacing: .4pt; border-bottom: 1px solid #111; margin: 10pt 0 4pt; padding-bottom: 1pt; }
   p { margin: 0 0 4pt; } ul { margin: 2pt 0 6pt 18pt; padding: 0; } li { margin: 0 0 2pt; }
   .rs-title { font-size: 12pt; font-weight: bold; } .rs-contact { font-size: 10pt; }
   .rs-entry-head { margin-top: 6pt; } .rs-dates { float: right; }

@@ -791,7 +791,7 @@ function resumePage(id) {
           <button type="button" class="button btn-ghost btn-small" data-act="reset">↺ Reset</button>
           <span id="resumeStatus" class="small muted" role="status"></span>
         </div>
-        <article id="resume" class="resume-sheet" data-role="${id}" aria-label="Resume">
+        <article id="resume" class="resume-sheet tpl-harvard" data-role="${id}" aria-label="Resume">
       ${resumeSheet(id)}
         </article>
       </div>
@@ -823,7 +823,10 @@ function resumePage(id) {
     </section>
   </main>
   <script src="../resume.js" defer></script>`;
-  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page resume-page">');
+  const fonts = `  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&amp;display=swap" />`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: fonts + "\n" + jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page resume-page">');
 }
 
 function resumesIndex() {

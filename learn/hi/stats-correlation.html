@@ -155,11 +155,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Garmiyon mein ice-cream ki sales aur doobne ke cases dono badhte hain. Dono correlated hain, lekin ice-cream doobne ki wajah nahi hai. Garmi dono ki wajah hai. Aur agar aap fitness habits ka survey sirf gym wale logon se karoge, to result poore shehar ko represent nahi karega. Yeh hai sampling bias.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Garmiyon mein ice-cream ki sales aur doobne ke cases dono badhte hain. Dono correlated hain, lekin ice-cream doobne ki wajah nahi hai. Garmi dono ki wajah hai. Aur agar aap fitness habits ka survey sirf gym wale logon se karoge, to result poore shehar ko represent nahi karega. Yeh hai sampling bias.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Correlation ka matlab hai do cheezein saath-saath badalti hain. Causation ka matlab hai ek cheez sach mein doosri ko cause karti hai. ML models correlations dhoondhne mein bahut ache hain, lekin khud causation prove nahi kar sakte, isliye &#39;feature X causes Y&#39; jaise claims mein savdhaan raho. Sampling bias tab hota hai jab aapka data real duniya ko represent nahi karta, aur biased data pe train hua model biased predictions karega. Kisi bhi result pe bharosa karne se pehle poocho: is data mein kaun missing hai, aur is pattern ko aur kya explain kar sakta hai?</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Correlation naapta hai do cheezein saath kaise chalti hain, −1 (ulta) se 0 (koi rishta nahi) se +1 (saath) tak.</li><li data-read>Teesra factor (confounder) dhoondo: chhatri ki bikri aur traffic jam dono baarish ki wajah se badhte hain.</li><li data-read>Dekho data mein kaun hai (sampling bias): app users ka survey un logon ke baare mein kuch nahi batata jinhone app hata diya.</li><li data-read>Cause prove karne ke liye randomised experiment (A/B test) karo: users ko randomly baanto taaki farak sirf aapke change ka ho.</li><li data-read>Jab experiment na ho sake, shabd dhyaan se chuno: &#39;causes&#39; nahi, &#39;is associated with&#39; bolo.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Correlation</dt><dd>Do variables saath-saath badalte hain.</dd></div><div data-read><dt>Causation</dt><dd>Ek cheez seedha doosri ko cause karti hai.</dd></div><div data-read><dt>Sampling bias</dt><dd>Aisa data jo poori population ko represent nahi karta.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -170,8 +170,8 @@
         <p class="small muted" data-read>Correlation se causation tak pahunchne ka tareeka randomised experiment hai.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Yeh maan lena ki feature kaam karta hai kyunki uske users zyaada khush hain. Engaged users feature chunte hain, ulta nahi.</li><li data-read>Biased samples pe model train karna, jaise sirf approved loans. Model reject hue logon ke baare mein kabhi nahi seekhta.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Hiring model sirf ek city ke purane hires pe train hua hai. Risk kya hai?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Hiring model sirf ek city ke purane hires pe train hua hai. Risk kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Woh slow hoga">Woh slow hoga</li><li data-read data-read-text="Option B: Koi risk nahi">Koi risk nahi</li><li data-read data-read-text="Option C: Sampling bias: doosri cities ke logon ko galat score de sakta hai">Sampling bias: doosri cities ke logon ko galat score de sakta hai</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Sampling bias: doosri cities ke logon ko galat score de sakta hai</strong>: Training data un sab logon ko represent nahi karta jinhe model judge karega.</p></details>
       </section>

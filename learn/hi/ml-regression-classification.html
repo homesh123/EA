@@ -155,11 +155,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Swiggy app do alag tarah ke sawaalon ke jawaab deta hai. &#39;Delivery mein kitne minute lagenge?&#39; ka jawaab ek number hai: yeh regression hai. &#39;Kya yeh order late hoga: haan ya na?&#39; order ko category mein daalta hai: yeh classification hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Swiggy app do alag tarah ke sawaalon ke jawaab deta hai. &#39;Delivery mein kitne minute lagenge?&#39; ka jawaab ek number hai: yeh regression hai. &#39;Kya yeh order late hoga: haan ya na?&#39; order ko category mein daalta hai: yeh classification hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Regression ek continuous number predict karta hai, jaise price, temperature ya delivery time. Linear regression, jo classic starting point hai, features aur number ke beech sabse acchi seedhi line ka rishta banata hai. Classification ek category predict karta hai, jaise spam/not spam, fraud/genuine, ya 10 product types mein se kaunsa. Logistic regression, naam ke bawajood, ek simple classification model hai jo probability deta hai. Decision trees dono kar sakte hain. Kuch complex try karne se pehle hamesha in simple models se shuru karo.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Poochho jawaab kaisa dikhta hai. Number (keemat, delivery din) matlab regression. Category (spam ya nahi, kaunsa product type) matlab classification.</li><li data-read>Regression ke liye linear regression se shuru karo; error asli units mein naapo (MAE: average ₹1,200 ka fark).</li><li data-read>Classification ke liye logistic regression se shuru karo; yeh probability deta hai jis pe threshold laga sakte ho.</li><li data-read>Ek seedhe baseline se compare karo: hamesha average predict karo, ya hamesha sabse common class.</li><li data-read>Phir strong models try karo (random forest, gradient boosting) aur sabse simple jo saaf jeete use rakho.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Regression</dt><dd>Number predict karna, jaise ghar ka price.</dd></div><div data-read><dt>Classification</dt><dd>Category predict karna, jaise spam hai ya nahi.</dd></div><div data-read><dt>Baseline</dt><dd>Sabse simple prediction, jise aapke model ko beat karna hai.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -173,8 +173,8 @@ clf.predict_proba(X_new)    # → [[0.8, 0.2]] → 20% chance of being late</cod
         <p class="small muted" data-read>Same features, do alag sawaal, do alag model types.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Categories ko numbers maan lena, jaise city codes 1, 2, 3, to model sochta hai city 3 city 1 se &#39;zyaada&#39; hai. One hot encoding use karo.</li><li data-read>Regression ke liye accuracy ya classification ke liye MAE use karna. Har type ke apne metrics hain.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Kal website pe kitne visitors aayenge, yeh predict karna kya hai?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Kal website pe kitne visitors aayenge, yeh predict karna kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Regression">Regression</li><li data-read data-read-text="Option B: Clustering">Clustering</li><li data-read data-read-text="Option C: Classification">Classification</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Regression</strong>: Jawaab ek number hai (visitors ki ginti), isliye yeh regression hai.</p></details>
       </section>

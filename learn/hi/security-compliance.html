@@ -150,11 +150,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Hospital visiting specialist ko andar aane deta hai, lekin aise visitor badge ke saath jo sirf kuch darwaaze kholta hai, har entry log hoti hai, aur koi patient file building se bahar nahi jaati. Company mein AI laana bhi aise hi kaam karta hai: woh legacy systems se controlled darwaazon ke through judta hai, har user ko sirf wahi dikhata hai jo use dekhne ki permission hai, aur audit trail chhodta hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Hospital visiting specialist ko andar aane deta hai, lekin aise visitor badge ke saath jo sirf kuch darwaaze kholta hai, har entry log hoti hai, aur koi patient file building se bahar nahi jaati. Company mein AI laana bhi aise hi kaam karta hai: woh legacy systems se controlled darwaazon ke through judta hai, har user ko sirf wahi dikhata hai jo use dekhne ki permission hai, aur audit trail chhodta hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Enterprise AI projects model se nahi, integration aur bharose se safal ya fail hote hain. Existing systems (CRMs, ERPs, document stores) se unki APIs ke through, sahi authentication (SSO, OAuth, service accounts) ke saath judo. RAG ko permission-aware banao: sirf woh documents retrieve karo jo poochne wale user ko dekhne ki permission hai. Personal data (PII) ko model tak pahunchne se pehle mask karke bachao, aur pata rakho ki data kahan store aur process hota hai (data residency). Audits ke liye har prompt, tool call aur jawaab log karo. Client ki security team ke saath shuru mein hi requirements ko GDPR, India ke DPDP Act, HIPAA ya SOC 2 jaise frameworks se map karo.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Data ka map banao: AI system kaunsa personal ya confidential data chhoota hai, aur woh kahan jaata hai?</li><li data-read>Rules poore karne wale deployment aur vendors chuno: data residency, aapke data pe training nahi, signed agreements.</li><li data-read>Company ka identity system (SSO) aur permissions use karo, taaki AI users ko kabhi usse zyaada na dikhaye jitna woh pehle dekh sakte the.</li><li data-read>Jahan zaroori na ho wahan personal data mask ya hatao, aur secrets vault mein rakho.</li><li data-read>AI ke actions aur decisions ke audit logs rakho, aur reviews ke liye risks aur controls document karo.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>PII</dt><dd>Personally identifiable information: naam, phone number, Aadhaar, address.</dd></div><div data-read><dt>Permission-aware retrieval</dt><dd>Search jo har user ke access rights ka dhyaan rakhe.</dd></div><div data-read><dt>Audit log</dt><dd>Kisne kab kya kiya, iska aisa record jise badla na ja sake.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -166,8 +166,8 @@
         <p class="small muted" data-read>Security system lagaata hai. Model ke mana karne ki ummeed pe nahi chhodi jaati.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Security review aakhir tak chhodna. Security aur legal teams ko jaldi shaamil karo; mahine bachte hain.</li><li data-read>Prototyping ke dauraan customer data unapproved AI tools ko bhejna.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Do employees same RAG bot se confidential plans ke baare mein poochte hain. Kya alag hona chahiye?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Do employees same RAG bot se confidential plans ke baare mein poochte hain. Kya alag hona chahiye?</p>
         <ol type="A"><li data-read data-read-text="Option A: Sirf font">Sirf font</li><li data-read data-read-text="Option B: Har insaan ki permissions ke hisaab se retrieve hone wale documents">Har insaan ki permissions ke hisaab se retrieve hone wale documents</li><li data-read data-read-text="Option C: Kuch nahi, dono ko same jawaab">Kuch nahi, dono ko same jawaab</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Har insaan ki permissions ke hisaab se retrieve hone wale documents</strong>: Permission-aware retrieval yeh pakka karta hai ki har user sirf wahi content dekhe jiski use permission hai.</p></details>
       </section>

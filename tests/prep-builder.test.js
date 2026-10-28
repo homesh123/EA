@@ -150,3 +150,55 @@ test("AI for kids: six complete levels with valid games in both languages", () =
     assert.ok(html.includes("kids.js") && html.includes("data-reader"), `kids/${f}: game script and Listen bar`);
   }
 });
+
+test("Hinglish: every prep question, practice question, step name and role overview is translated", () => {
+  const H = Object.assign({}, ...[1, 2, 3].map(i => require(`../content/interview-prep-hi-${i}.js`).INTERVIEW_PREP_HI));
+  const { INTERVIEW_PREP_HI_META: META } = require("../content/interview-prep-hi-1.js");
+  INTERVIEW_PREP.questions.forEach(q => {
+    const h = H[q.id];
+    assert.ok(h && h.q && h.answer && h.check, `${q.id}: Hinglish prep missing`);
+    assert.equal(h.points.length, q.points.length, `${q.id}: points must match one to one`);
+    assert.notEqual(h.answer, q.answer, `${q.id}: Hinglish answer is a copy`);
+  });
+  INTERVIEW_PREP.stages.forEach(st => assert.ok(META.stages[st.id], `stage ${st.id}`));
+  roleIds.forEach(r => assert.equal(META.rounds[r].length, INTERVIEW_PREP.rounds[r].length, `${r}: rounds`));
+  const { INTERVIEW } = require("../content/interview.js");
+  const { INTERVIEW_HI: IH } = require("../content/interview-hi.js");
+  INTERVIEW.questions.forEach(q => {
+    const h = IH.questions[q.id];
+    assert.ok(h && h.q, `${q.id}: Hinglish practice missing`);
+    if (q.type === "mcq") { assert.equal(h.options.length, q.options.length, `${q.id}: options`); assert.ok(h.why, `${q.id}: why`); }
+    else { assert.equal(h.points.length, q.points.length, `${q.id}: points`); assert.ok(h.model, `${q.id}: model`); }
+    assert.ok(IH.areas[q.area], `area ${q.area}`);
+  });
+  roleIds.forEach(r => assert.equal(IH.extra[r].length, INTERVIEW.extra[r].length, `${r}: extra`));
+  const { ROLES_HI } = require("../content/roles-hi.js");
+  roleIds.forEach(r => {
+    assert.equal(ROLES_HI[r].steps.length, ROLES[r].roadmap.length, `${r}: step names`);
+    ["tagline", "why", "bestFor"].forEach(k => assert.ok(ROLES_HI[r][k], `${r}: ${k}`));
+  });
+  ["learn.html"].forEach(f => {
+    const html = fs.readFileSync(path.join(__dirname, "..", f), "utf8");
+    ["interview-prep-hi-1.js", "interview-prep-hi-2.js", "interview-prep-hi-3.js", "interview-hi.js", "roles-hi.js"].forEach(s => assert.ok(html.includes(s), `${f} loads ${s}`));
+  });
+  ["interview.html", "resume-builder.html"].forEach(f => assert.match(fs.readFileSync(path.join(__dirname, "..", f), "utf8"), /data-site-lang="hi"/, `${f}: language switch`));
+});
+
+test("resume score: 100 point rubric, samples score well, impact lines carry numbers", () => {
+  for (const id of roleIds) {
+    const doc = ResumeBuilder.sampleDoc(id);
+    const sc = ResumeBuilder.scoreResume(doc, id);
+    const max = Object.values(sc.parts).reduce((t, [, m]) => t + m, 0);
+    assert.equal(max, 100, "rubric adds up to 100");
+    assert.ok(sc.total >= 80 && sc.total <= 100, `${id}: sample scores ${sc.total}`);
+    Object.entries(sc.parts).forEach(([k, [g, m]]) => assert.ok(g >= 0 && g <= m, `${id}: ${k} within range`));
+    const impact = doc.impact.split("\n").filter(Boolean);
+    assert.ok(impact.length >= 1 && impact.length <= 3 && impact.every(l => /\d/.test(l)), `${id}: impact lines with numbers`);
+  }
+  const weak = { name: "Your Name", headline: "", contact: "", summary: "", skills: "", impact: "", sections: [{ id: "experience", title: "Experience", text: "Developer | Acme\n• Responsible for many things" }] };
+  assert.ok(ResumeBuilder.scoreResume(weak, "ml-engineer").total < 40, "a weak resume scores low");
+  const html = ResumeBuilder.sheetHtml({ name: "A", headline: "", contact: "a@b.com · linkedin.com/in/a", summary: "", skills: "", impact: "", sections: [{ id: "experience", title: "Experience", text: "Dev | X | 2020 to Present\nTech: Python, SQL\n• Built a thing used by 50 people" }] });
+  assert.match(html, /href="mailto:a@b\.com"/);
+  assert.match(html, /href="https:\/\/linkedin\.com\/in\/a"/);
+  assert.match(html, /class="rs-tech">Python, SQL</);
+});

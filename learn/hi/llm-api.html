@@ -165,11 +165,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Zomato pe order karna: aap request bhejte ho (kya chahiye, kahan chahiye), restaurant use process karta hai, aur aapko response milta hai (khaana). Har order ka paisa lagta hai, aur account login batata hai ki aap kaun ho. LLM API bhi aisa hi hai: aapka code messages ke saath request bhejta hai, model jawaab deta hai, billing tokens ke hisaab se hoti hai, aur API key aapka login hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Zomato pe order karna: aap request bhejte ho (kya chahiye, kahan chahiye), restaurant use process karta hai, aur aapko response milta hai (khaana). Har order ka paisa lagta hai, aur account login batata hai ki aap kaun ho. LLM API bhi aisa hi hai: aapka code messages ke saath request bhejta hai, model jawaab deta hai, billing tokens ke hisaab se hoti hai, aur API key aapka login hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Anthropic aur OpenAI jaise providers apne models internet pe API ke through use karne dete hain. Aap messages ki list (system aur user) aur settings jaise model ka naam, max tokens aur temperature bhejte ho, aur generated text wapas milta hai. API keys secret rakho: environment variables mein daalo, code ya GitHub mein kabhi nahi. Errors aur rate limits ke liye retries aur timeouts ka plan rakho. Streaming jawaab word by word bhejta hai, taaki user ko wait na karna pade. Cost track karo: input tokens plus output tokens, guna price per token.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Provider ke console mein API key banao aur use environment variable mein rakho, code mein kabhi nahi.</li><li data-read>Model ka naam, system message (instructions) aur user messages ke saath request bhejo; response se text padho.</li><li data-read>Input aur output token counts log karo. Cost = tokens × per token price, isse per user cost ka andaaza lagta hai.</li><li data-read>Failures sambhalo: timeout set karo, rate limit (429) aur server errors pe exponential backoff ke saath retry karo, aur sab retries fail hon to friendly message dikhao.</li><li data-read>Lambe jawaab stream karo taaki users ko turant text dikhe, aur cost control ke liye max token limit lagao.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>API key</dt><dd>Secret password jo API ko aapka account batata hai.</dd></div><div data-read><dt>Rate limit</dt><dd>Ek minute mein maximum kitni requests allowed hain.</dd></div><div data-read><dt>Streaming</dt><dd>Jawaab ko banate-banate tukdon mein receive karna.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -187,8 +187,8 @@ print(msg.usage)   # input/output tokens → cost</code></pre></div>
         <p class="small muted" data-read>Key environment variable se aati hai, code mein kabhi paste nahi hoti.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>API keys GitHub pe commit karna. Bots minuton mein dhoondh lete hain; aisa ho to turant key badlo.</li><li data-read>Browser code se API call karna, jisse key khul jaati hai. Apne server se call karo.</li><li data-read>Koi usage limit nahi. Ek bug ya misuse bahut bada bill bana sakta hai; budgets aur per user limits lagao.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Aapki API key kahan honi chahiye?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Aapki API key kahan honi chahiye?</p>
         <ol type="A"><li data-read data-read-text="Option A: Environment variable ya secret manager mein">Environment variable ya secret manager mein</li><li data-read data-read-text="Option B: README mein">README mein</li><li data-read data-read-text="Option C: app.py mein hard-coded">app.py mein hard-coded</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Environment variable ya secret manager mein</strong>: Code mein rakhi keys GitHub pe pahunch kar chori ho jaati hain. Environment variables ya secrets manager use karo.</p></details>
       </section>

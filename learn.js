@@ -35,7 +35,11 @@ const L = pair => (Array.isArray(pair) ? pair[lang === "hi" ? 1 : 0] : pair);
 
 const courseLessons = roleId => LEARN_TRACKS[roleId].flatMap(([step, topics]) => topics.map(id => ({ step, id })));
 const courseMinutes = roleId => courseLessons(roleId).reduce((sum, l) => sum + LESSON_TOPICS[l.id].mins, 0);
-const stepName = (roleId, step) => step === 0 ? t("startHere") : ROLES[roleId].roadmap.find(s => s.step === step).title;
+// Role text in the chosen language (content/roles-hi.js holds the Hinglish).
+const roleHi = roleId => lang === "hi" && typeof ROLES_HI !== "undefined" ? ROLES_HI[roleId] : null;
+const roleText = (roleId, key) => (roleHi(roleId) || ROLES[roleId])[key];
+const stepName = (roleId, step) => step === 0 ? t("startHere")
+  : (roleHi(roleId) ? roleHi(roleId).steps[step - 1] : null) || ROLES[roleId].roadmap.find(s => s.step === step).title;
 const stepTitle = (roleId, step) => step === 0 ? t("startHere") : `${t("step")} ${step}: ${stepName(roleId, step)}`;
 const prepQuestions = roleId => typeof INTERVIEW_PREP !== "undefined" ? INTERVIEW_PREP.forRole(roleId) : [];
 // Interview question counts per role (content/interview.js).
@@ -169,7 +173,7 @@ function pickerView() {
         return `<li><button type="button" class="course-card${me && me.top === id ? " recommended" : ""}" data-course="${id}">
           ${me && me.top === id ? `<span class="badge-next">${esc(t("recommended"))}</span>` : ""}
           <span class="course-title">${esc(ROLES[id].title)}</span>
-          <span class="course-tag">${esc(ROLES[id].tagline)}</span>
+          <span class="course-tag">${esc(roleText(id, "tagline"))}</span>
           <span class="course-meta">${list.length} ${esc(t("lessons"))} · ~${courseMinutes(id)} ${esc(t("minutes"))} · ${ROLE_TASKS[id].length} ${esc(t("tasksWord"))} · ${interviewCount(id) + prepQuestions(id).length} ${esc(t("questionsWord"))}</span>
           ${done ? `<span class="course-progress">${meter((done / list.length) * 100)}<span class="small">${done}/${list.length}</span></span>` : ""}
           <span class="course-cta">${esc(done ? t("continueCourse") : t("startCourse"))} →</span>
@@ -243,9 +247,9 @@ function overviewView() {
     ? AUDIENCES.filter(a => Scoring.rankRoles(a.profile).results.slice(0, 3).some(r => r.id === course && r.fit >= 30)) : [];
   return `
     <p class="lesson-meta">${esc(t("overview"))} · ${list.length} ${esc(t("lessons"))} · ~${courseMinutes(course)} ${esc(t("minutes"))}</p>
-    <h2 class="lesson-title"><span class="lesson-icon" aria-hidden="true">🗺️</span>${esc(role.title)}: ${esc(role.tagline)}</h2>
-    <section class="ls ls-explain"><h3>💼 ${esc(t("whatYouDo"))}</h3><p>${esc(role.why)}</p></section>
-    <section class="ls ls-analogy"><h3>🙋 ${esc(t("suitableFor"))}</h3><p>${esc(role.bestFor)}.</p>
+    <h2 class="lesson-title"><span class="lesson-icon" aria-hidden="true">🗺️</span>${esc(role.title)}: ${esc(roleText(course, "tagline"))}</h2>
+    <section class="ls ls-explain"><h3>💼 ${esc(t("whatYouDo"))}</h3><p>${esc(roleText(course, "why"))}</p></section>
+    <section class="ls ls-analogy"><h3>🙋 ${esc(t("suitableFor"))}</h3><p>${esc(roleText(course, "bestFor"))}.</p>
       ${movers.length ? `<p class="small" style="margin-top:8px">${esc(t("usuallyMoveIn"))}: ${movers.map(a => `<a href="for/${a.slug}.html">${esc(a.short)}</a>`).join(" · ")}</p>` : ""}
     </section>
     <section class="ls"><h3>🧾 ${esc(t("roleFacts"))}</h3>
@@ -395,6 +399,11 @@ function careerNav() {
     ${last ? "<span></span>" : `<button type="button" class="button btn-primary" data-act="next">${esc(t("next"))} →</button>`}</div>`;
 }
 
+// Interview prep text in the chosen language. In Hinglish, the English answer stays one tap away,
+// because the interview itself is in English.
+const prepHi = q => lang === "hi" && typeof INTERVIEW_PREP_HI !== "undefined" ? INTERVIEW_PREP_HI[q.id] : null;
+const prepMeta = () => lang === "hi" && typeof INTERVIEW_PREP_HI_META !== "undefined" ? INTERVIEW_PREP_HI_META : null;
+
 function prepView() {
   const qs = prepQuestions(course);
   const done = qs.filter(q => learn.prep.includes(q.id)).length;
@@ -403,7 +412,7 @@ function prepView() {
   return `${careerHead("📝", t("prepGuide"))}
     <p>${esc(t("prepIntro"))}</p>
     <section class="ls ls-explain"><h3>🗓️ ${esc(t("roundsTitle"))}</h3>
-      <ol class="path-list">${INTERVIEW_PREP.rounds[course].map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+      <ol class="path-list">${(prepMeta() ? prepMeta().rounds[course] : INTERVIEW_PREP.rounds[course]).map(r => `<li>${esc(r)}</li>`).join("")}</ol>
       <p class="tiny muted">${esc(t("roundsNote"))}</p></section>
     <div class="prep-bar">
       <div class="course-stats"><span class="small">${esc(t("preparedCount", { done, total: qs.length }))}</span>${meter((done / qs.length) * 100)}</div>
@@ -417,18 +426,22 @@ function prepView() {
       const start = n;
       n += list.length;
       return `<section class="prep-stage">
-        <h3>${st.icon} ${esc(st.title)}</h3>
-        <p class="small muted">${esc(st.blurb)}</p>
+        <h3>${st.icon} ${esc(prepMeta() ? prepMeta().stages[st.id][0] : st.title)}</h3>
+        <p class="small muted">${esc(prepMeta() ? prepMeta().stages[st.id][1] : st.blurb)}</p>
         <ol class="prep-list" start="${start + 1}">${shown.map(q => {
           const ok = learn.prep.includes(q.id);
+          const h = prepHi(q);
+          const x = h || q;
+          const ln = h ? "hi-Latn" : "en";
           return `<li class="prep-q${ok ? " prepared" : ""}" id="pq-${q.id}">
-            <details><summary><span class="prep-n">${start + list.indexOf(q) + 1}</span><span>${esc(q.q)}</span>${ok ? `<span class="badge-fast">✓</span>` : ""}</summary>
+            <details><summary><span class="prep-n">${start + list.indexOf(q) + 1}</span><span lang="${ln}">${esc(x.q)}</span>${ok ? `<span class="badge-fast">✓</span>` : ""}</summary>
               <div class="prep-body">
                 <p class="prep-label">💬 ${esc(t("easyAnswer"))}</p>
-                <p lang="en">${esc(q.answer)}</p>
+                <p lang="${ln}">${esc(x.answer)}</p>
+                ${h ? `<details class="prep-en"><summary>🗣️ ${esc(t("sayInEnglish"))}</summary><p class="small muted" lang="en"><strong>${esc(q.q)}</strong></p><p lang="en">${esc(q.answer)}</p></details>` : ""}
                 <p class="prep-label">✅ ${esc(t("strongCovers"))}</p>
-                <ul lang="en">${q.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
-                <p class="prep-check"><strong>${esc(t("theyCheck"))}:</strong> <span lang="en">${esc(q.check)}</span></p>
+                <ul lang="${ln}">${x.points.map(p => `<li>${esc(p)}</li>`).join("")}</ul>
+                <p class="prep-check"><strong>${esc(t("theyCheck"))}:</strong> <span lang="${ln}">${esc(x.check)}</span></p>
                 ${q.topics.length ? `<p class="small">📖 ${esc(t("learnIt"))}: ${q.topics.map(inAppLessonLink).join(" · ")}</p>` : ""}
                 <button type="button" class="button ${ok ? "btn-secondary" : "btn-primary"} btn-small" data-prep="${q.id}">${esc(ok ? t("unmarkPrepared") : t("markPrepared"))}</button>
               </div>

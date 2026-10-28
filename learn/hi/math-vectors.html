@@ -155,11 +155,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Ek phone ko numbers se describe karo: [price, battery, camera MP, weight] = [20000, 5000, 50, 190]. Yeh list ek vector hai, aur milte-julte vectors wale do phones milte-julte phones hain. 100 phones ki spreadsheet, jismein har row ek vector hai, ek matrix hai. AI models zyaadatar bahut saari fast vector aur matrix maths hi hain.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Ek phone ko numbers se describe karo: [price, battery, camera MP, weight] = [20000, 5000, 50, 190]. Yeh list ek vector hai, aur milte-julte vectors wale do phones milte-julte phones hain. 100 phones ki spreadsheet, jismein har row ek vector hai, ek matrix hai. AI models zyaadatar bahut saari fast vector aur matrix maths hi hain.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Vector numbers ki ordered list hai jo kisi cheez ko represent karti hai: data ki row, image, ya kisi word ka matlab. Matrix numbers ka grid hai, yaani bahut saare vectors ek ke upar ek. Key operations: dot product batata hai ki do vectors kitne ek hi direction mein hain (similarity search ka base), aur matrix multiplication vectors ko transform karta hai (har neural-network layer yahi karti hai). Eigenvectors data mein variation ki main directions batate hain. Inhe haath se calculate nahi karna padta; NumPy aur PyTorch kar dete hain. Lekin inka matlab samajhne se papers aur models padhne laayak ho jaate hain.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Vector numbers ki list hai: ek ghar jaise [3 bedrooms, 1200 sq ft, centre se 8 km].</li><li data-read>Matrix numbers ki table hai: bahut saare ghar, har ek ki ek row.</li><li data-read>Dot product matching numbers ko multiply karke jodta hai. Model ka prediction aksar features aur weights ka dot product hota hai.</li><li data-read>Matrix multiplication ek saath bahut saare dot products karta hai. GPUs isi mein tez hain, isliye AI unpe chalta hai.</li><li data-read>Cosine similarity do vectors ki direction compare karti hai. Milte julte matlab ki direction milti julti hoti hai, isi se semantic search chalta hai.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Vector</dt><dd>Numbers ki ordered list jo ek cheez ko describe kare.</dd></div><div data-read><dt>Dot product</dt><dd>Matching numbers multiply karke jodo. Zyaada value matlab zyaada aligned.</dd></div><div data-read><dt>Matrix multiplication</dt><dd>Ek saath bahut saare vectors transform karna. Neural layer ka core kaam.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -172,8 +172,8 @@ print(you @ vikas)   # 9  → quite different</code></pre></div>
         <p class="small muted" data-read>Dot product ek simple &#39;pasand ki similarity&#39; score ki tarah. Recommenders yahi idea use karte hain.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Shapes mein gadbad. (3×2) matrix sirf 2 rows wali cheez se multiply ho sakti hai. Debug karte waqt shapes print karo.</li><li data-read>Bahut alag scale wale vectors (rupees vs counts) bina scaling compare karna. Ek feature distance pe haavi ho jaata hai.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Do vectors ka dot product bada positive hai. Woh shayad…</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Do vectors ka dot product bada positive hai. Woh shayad…</p>
         <ol type="A"><li data-read data-read-text="Option A: Similar hain / same direction mein hain">Similar hain / same direction mein hain</li><li data-read data-read-text="Option B: Khaali hain">Khaali hain</li><li data-read data-read-text="Option C: Bilkul alag hain">Bilkul alag hain</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. Similar hain / same direction mein hain</strong>: Bada positive dot product matlab vectors milti-julti direction mein point karte hain, yaani similar hain.</p></details>
       </section>

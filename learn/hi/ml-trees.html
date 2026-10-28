@@ -150,11 +150,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Bank officer loan ka faisla sawaalon ki series se karta hai: salary ₹50k se zyaada hai? Pehle koi default? Naukri 2 saal se zyaada? Yeh flowchart decision tree hai. 100 officers se poochna, jinhone thodi alag files dekhi hain, aur phir vote lena random forest hai. Boosting ek coaching class jaisa hai jahan har naya tutor un sawaalon pe focus karta hai jo pichhle students se galat hue the.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Bank officer loan ka faisla sawaalon ki series se karta hai: salary ₹50k se zyaada hai? Pehle koi default? Naukri 2 saal se zyaada? Yeh flowchart decision tree hai. 100 officers se poochna, jinhone thodi alag files dekhi hain, aur phir vote lena random forest hai. Boosting ek coaching class jaisa hai jahan har naya tutor un sawaalon pe focus karta hai jo pichhle students se galat hue the.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Decision tree data ko simple yes/no sawaalon se split karta hai. Isse explain karna aasaan hai, lekin overfitting ka risk rehta hai. Random forest random samples pe bahut saare trees train karta hai aur unke votes ka average leta hai, jo zyaada accurate aur stable hai. Gradient boosting (XGBoost, LightGBM) trees ek ke baad ek banata hai, har naya tree pichhle ki galtiyaan theek karta hai. Tabular business data pe, jaise customers ya transactions ki spreadsheets, boosted trees aksar sabse accha perform karte hain, deep learning ko bhi peeche chhod dete hain.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Decision tree haan/nahi sawaal poochta hai: income &gt; ₹50k hai? Customer ne payment miss kiya? Har jawaab agle sawaal tak le jaata hai, aakhir mein prediction.</li><li data-read>Ek gehra tree data ratt leta hai (overfit). Depth ya har leaf ke minimum examples limit karo.</li><li data-read>Random forest: random samples pe sainkdon trees train karo aur unke votes ka average lo. Zyaada stable.</li><li data-read>Gradient boosting (XGBoost, LightGBM): chhote trees ek ke baad ek banao, har ek pichhli galtiyaan sudhaarta hai. Tables pe aksar sabse accurate.</li><li data-read>Kuch key settings (trees ki ginti, depth, learning rate) validation data aur early stopping se tune karo.</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Decision tree</dt><dd>Yes/no sawaalon ka flowchart jo prediction tak le jaata hai.</dd></div><div data-read><dt>Random forest</dt><dd>Bahut saare trees milkar vote karte hain, taaki jawaab zyaada stable ho.</dd></div><div data-read><dt>Gradient boosting</dt><dd>Trees sequence mein bante hain, har ek pichhli galtiyaan sudhaarta hai.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -166,8 +166,8 @@ print(model.score(X_test, y_test))
         <p class="small muted" data-read>Spreadsheet jaise data ke liye ek strong default.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Early stopping ke bina bahut saare boosting rounds, jo overfit karta hai.</li><li data-read>Default feature importance pe aankh band karke bharosa; yeh zyaada unique values wale features ko favour kar sakta hai. SHAP ya permutation importance se cross check karo.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">30 columns wali table se customer churn predict karne ke liye ek strong pehla choice kya hai?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">30 columns wali table se customer churn predict karne ke liye ek strong pehla choice kya hai?</p>
         <ol type="A"><li data-read data-read-text="Option A: Ek bahut bada deep neural network">Ek bahut bada deep neural network</li><li data-read data-read-text="Option B: Chatbot">Chatbot</li><li data-read data-read-text="Option C: Gradient-boosted trees">Gradient-boosted trees</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Gradient-boosted trees</strong>: Tabular data pe boosted trees fast, accurate aur explainable hain. Deep learning se pehle inhe try karo.</p></details>
       </section>

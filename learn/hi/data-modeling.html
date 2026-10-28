@@ -150,11 +150,11 @@
       <span class="small muted" data-tts="status" role="status"></span>
     </div>
       </header>
-      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Supermarket ka bill batata hai kya hua: items, quantity, amount. Yeh &#39;fact&#39; hai. Alag se store products (brand, category) aur stores (city, size) ki details rakhta hai. Yeh &#39;dimensions&#39; hain. Bills ko halka rakhna aur details ko unki apni tables mein rakhna har report ko fast aur saaf banata hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Asli zindagi ki misaal</h2><p>Supermarket ka bill batata hai kya hua: items, quantity, amount. Yeh &#39;fact&#39; hai. Alag se store products (brand, category) aur stores (city, size) ki details rakhta hai. Yeh &#39;dimensions&#39; hain. Bills ko halka rakhna aur details ko unki apni tables mein rakhna har report ko fast aur saaf banata hai.</p></section>
       <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Analytics databases (BigQuery ya Snowflake jaise data warehouses) app databases se alag design hote hain. Classic design star schema hai: beech mein events (sales, clicks, trips) ki fact table, numeric measures ke saath, aur uske chaaron taraf dimension tables jo kaun, kya, kahan aur kab describe karti hain. Window functions, jaise running totals, ranks aur &#39;pichhli value&#39;, bina messy self-joins ke sequences analyse karne dete hain. Achha model common sawaalon ko aasaan aur galat jawaabon ko mushkil bana deta hai.</p></section>
       
       <section class="ls ls-steps"><h2>🪜 Step by step</h2><ol class="deep-steps"><li data-read>Grain tay karo: ek row ka matlab kya hai? Ek order, ek order line, ya har din ek customer?</li><li data-read>Events aur numbers ke liye fact table banao (order_id, date_id, product_id, quantity, amount).</li><li data-read>Descriptions ke liye dimension tables banao (product naam aur category, customer city, calendar dates).</li><li data-read>Inhe keys se star shape mein jodo: beech mein facts, chaaron taraf dimensions.</li><li data-read>Har table aur column document karo, aur tests lagao (unique keys, jahan allowed nahi wahan NULL nahi).</li></ol></section>
-      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+      <section class="ls ls-terms"><h2>🔑 Zaroori shabd</h2>
         <dl class="terms"><div data-read><dt>Fact table</dt><dd>Numbers wale events, jaise har sale aur uska amount.</dd></div><div data-read><dt>Dimension table</dt><dd>Describe karne wali details, jaise product ka naam ya store ki city.</dd></div><div data-read><dt>Window function</dt><dd>Related rows pe calculation, jaise rank ya running total.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
@@ -164,8 +164,8 @@ FROM fact_sales;</code></pre></div>
         <p class="small muted" data-read>Har store ka running total, bina self-join ke.</p>
       </section>
       <section class="ls ls-mistakes"><h2>⚠️ Aam galtiyaan jinse bachna hai</h2><ul class="deep-mistakes"><li data-read>Ek table mein alag grains mix karna, jaise daily totals aur individual orders saath. Sums galat ho jaate hain.</li><li data-read>History overwrite karna: customer ki city badli aur aapne overwrite kar di, to purani sales bhi nayi city dikhayengi. Jahan zaroori ho history rakho.</li></ul></section>
-      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q" data-read data-read-prefix="Quick check">Star schema mein &#39;product category&#39; column kahan hona chahiye?</p>
+      <section class="ls ls-quiz"><h2>✅ Jaldi se check karo</h2>
+        <p class="quiz-q" data-read data-read-prefix="Jaldi se check karo">Star schema mein &#39;product category&#39; column kahan hona chahiye?</p>
         <ol type="A"><li data-read data-read-text="Option A: Har table mein repeat">Har table mein repeat</li><li data-read data-read-text="Option B: Fact table mein">Fact table mein</li><li data-read data-read-text="Option C: Product dimension table mein">Product dimension table mein</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Product dimension table mein</strong>: Category product ko describe karti hai, isliye woh product dimension mein rehti hai, jisse fact table judti hai.</p></details>
       </section>
