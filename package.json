@@ -1,10 +1,14 @@
 {
   "name": "ai-career-advisor",
   "private": true,
-  "description": "AI Path Finder — questionnaire that recommends an AI role and personalised learning roadmap",
+  "description": "AI Path Finder: AI career consultation, courses, interview prep and resume builder",
   "scripts": {
     "build": "node scripts/build.js",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "dist": "node scripts/dist.js"
   },
-  "license": "MIT"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "terser": "^5.31.6"
+  }
 }

@@ -118,6 +118,147 @@ Last updated: 2026-10-28
 - [AI Forward Deployed Engineer resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-forward-deployed-engineer.html): keywords Python, LLM, RAG, Solution Architecture, Stakeholder Management, Client facing, API Integration, SSO, Security, Compliance, HIPAA, Prototyping, Requirements Gathering, Cloud
 - [AI Product Manager resume sample](https://homesh123.github.io/ai-career-advisor/resumes/ai-product-manager.html): keywords Product Management, AI Product Strategy, LLM, Generative AI, PRD, Evaluation, A/B Testing, SQL, Stakeholder Management, Roadmap, User Research, Metrics, Responsible AI, Prototyping
 
+## AI dictionary (A to Z)
+- [AI dictionary](https://homesh123.github.io/ai-career-advisor/glossary/): 138 AI terms explained in English and Hinglish, each with an example and a lesson link.
+- [A/B test](https://homesh123.github.io/ai-career-advisor/glossary/#term-a-b-test): Randomly showing two versions to different users to see which one really works better.
+- [Ablation study](https://homesh123.github.io/ai-career-advisor/glossary/#term-ablation-study): Removing one part of a system at a time to see how much each part really helps.
+- [Accuracy](https://homesh123.github.io/ai-career-advisor/glossary/#term-accuracy): The share of all predictions that were correct.
+- [Activation function](https://homesh123.github.io/ai-career-advisor/glossary/#term-activation-function): A small maths function inside each neuron that lets neural networks learn curves, not just straight lines.
+- [Agent (AI agent)](https://homesh123.github.io/ai-career-advisor/glossary/#term-agent): An LLM that works in a loop: plans a step, uses a tool, looks at the result, and decides the next step until the goal is done.
+- [AI (artificial intelligence)](https://homesh123.github.io/ai-career-advisor/glossary/#term-ai): Computer systems that do things we'd normally call smart: understand language, recognise images, make decisions.
+- [AI engineer](https://homesh123.github.io/ai-career-advisor/glossary/#term-ai-engineer): A software engineer who builds products and systems using AI models, especially LLMs.
+- [Alignment](https://homesh123.github.io/ai-career-advisor/glossary/#term-alignment): Making AI models behave the way people intend: helpful, honest and safe.
+- [Annotation (labelling)](https://homesh123.github.io/ai-career-advisor/glossary/#term-annotation): Adding the correct answers (labels) to data so a model can learn from it.
+- [API](https://homesh123.github.io/ai-career-advisor/glossary/#term-api): A defined way for one program to ask another program for data or an action.
+- [Attention (self attention)](https://homesh123.github.io/ai-career-advisor/glossary/#term-attention): The mechanism in transformers that lets each word look at every other word to understand its meaning in context.
+- [AUC (ROC AUC, PR AUC)](https://homesh123.github.io/ai-career-advisor/glossary/#term-auc): A single number summarising how well a model separates positives from negatives across all thresholds.
+- [Autoscaling](https://homesh123.github.io/ai-career-advisor/glossary/#term-autoscaling): Automatically adding or removing servers as traffic goes up or down.
+- [Backpropagation](https://homesh123.github.io/ai-career-advisor/glossary/#term-backpropagation): The method neural networks use to work out how much each weight contributed to the error, so it can be adjusted.
+- [Baseline](https://homesh123.github.io/ai-career-advisor/glossary/#term-baseline): A simple reference result that any new model must beat to be worth using.
+- [Batch inference](https://homesh123.github.io/ai-career-advisor/glossary/#term-batch-inference): Running a model on many records at once on a schedule, instead of one request at a time.
+- [Batch size](https://homesh123.github.io/ai-career-advisor/glossary/#term-batch-size): How many examples a model processes together in one training step.
+- [Benchmark](https://homesh123.github.io/ai-career-advisor/glossary/#term-benchmark): A standard test set used to compare models fairly.
+- [Bias (in data and models)](https://homesh123.github.io/ai-career-advisor/glossary/#term-bias): When a model's results are systematically unfair or skewed, often because of skewed training data.
+- [Bias variance trade off](https://homesh123.github.io/ai-career-advisor/glossary/#term-bias-variance-trade-off): The balance between a model that's too simple (misses patterns) and too complex (memorises noise).
+- [BM25 (keyword search)](https://homesh123.github.io/ai-career-advisor/glossary/#term-bm25): A classic search method that ranks documents by matching words, used with vector search in hybrid search.
+- [Chain of thought](https://homesh123.github.io/ai-career-advisor/glossary/#term-chain-of-thought): Asking a model to reason step by step before giving the final answer.
+- [Chatbot](https://homesh123.github.io/ai-career-advisor/glossary/#term-chatbot): A program you talk with in natural language; modern chatbots are usually powered by LLMs.
+- [Chunking](https://homesh123.github.io/ai-career-advisor/glossary/#term-chunking): Splitting documents into smaller pieces before embedding them for search and RAG.
+- [CI/CD](https://homesh123.github.io/ai-career-advisor/glossary/#term-ci-cd): Automatically testing and releasing code (and models) every time something changes.
+- [Citations](https://homesh123.github.io/ai-career-advisor/glossary/#term-citations): Showing which document or passage an AI answer came from, so people can check it.
+- [Classification](https://homesh123.github.io/ai-career-advisor/glossary/#term-classification): Predicting a category, like spam or not spam, or which department a ticket belongs to.
+- [Clustering](https://homesh123.github.io/ai-career-advisor/glossary/#term-clustering): Grouping similar items together without any labels.
+- [Computer vision](https://homesh123.github.io/ai-career-advisor/glossary/#term-computer-vision): AI that understands images and video: recognising objects, faces, text and scenes.
+- [Concept drift](https://homesh123.github.io/ai-career-advisor/glossary/#term-concept-drift): When the relationship between inputs and the right answer changes over time, so a trained model gets worse.
+- [Confusion matrix](https://homesh123.github.io/ai-career-advisor/glossary/#term-confusion-matrix): A 2×2 (or bigger) table showing correct and wrong predictions for each class.
+- [Context window](https://homesh123.github.io/ai-career-advisor/glossary/#term-context-window): The maximum amount of text (in tokens) an LLM can consider at once, including its answer.
+- [Cosine similarity](https://homesh123.github.io/ai-career-advisor/glossary/#term-cosine-similarity): A measure of how similar two vectors point, used to compare the meaning of embeddings.
+- [Cross entropy](https://homesh123.github.io/ai-career-advisor/glossary/#term-cross-entropy): The standard loss function for classification: it punishes confident wrong answers heavily.
+- [Cross validation](https://homesh123.github.io/ai-career-advisor/glossary/#term-cross-validation): Rotating which part of the data is used for validation to get a more reliable score.
+- [Data drift](https://homesh123.github.io/ai-career-advisor/glossary/#term-data-drift): When the data a live model receives starts to look different from its training data.
+- [Data leakage](https://homesh123.github.io/ai-career-advisor/glossary/#term-data-leakage): When information that won't exist at prediction time sneaks into training, making test scores falsely high.
+- [Data pipeline](https://homesh123.github.io/ai-career-advisor/glossary/#term-data-pipeline): Automated steps that move data from sources, clean and transform it, and deliver it for reports or models.
+- [Data warehouse](https://homesh123.github.io/ai-career-advisor/glossary/#term-data-warehouse): A database designed for analysing large amounts of historical data with SQL.
+- [Dataset](https://homesh123.github.io/ai-career-advisor/glossary/#term-dataset): A collection of examples used to train, validate or test a model.
+- [Decision tree](https://homesh123.github.io/ai-career-advisor/glossary/#term-decision-tree): A model that predicts by asking a series of yes or no questions about the input.
+- [Deep learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-deep-learning): Machine learning with neural networks of many layers, great for images, speech and text.
+- [Deployment](https://homesh123.github.io/ai-career-advisor/glossary/#term-deployment): Making a model available for real use, usually as an API or a scheduled job.
+- [Diffusion model](https://homesh123.github.io/ai-career-advisor/glossary/#term-diffusion-model): A generative model that creates images by starting from noise and removing it step by step.
+- [Docker](https://homesh123.github.io/ai-career-advisor/glossary/#term-docker): A tool that packages an app with everything it needs so it runs the same everywhere.
+- [DPO](https://homesh123.github.io/ai-career-advisor/glossary/#term-dpo): A way to fine tune LLMs on pairs of preferred and rejected answers, simpler than RLHF.
+- [Dropout](https://homesh123.github.io/ai-career-advisor/glossary/#term-dropout): Randomly switching off some neurons during training so the network doesn't rely on any single one.
+- [Early stopping](https://homesh123.github.io/ai-career-advisor/glossary/#term-early-stopping): Stopping training when the validation score stops improving, to avoid overfitting.
+- [Embedding](https://homesh123.github.io/ai-career-advisor/glossary/#term-embedding): A list of numbers that captures the meaning of text, images or items, so similar meanings are close together.
+- [Epoch](https://homesh123.github.io/ai-career-advisor/glossary/#term-epoch): One full pass of the training algorithm over the entire training dataset.
+- [ETL and ELT](https://homesh123.github.io/ai-career-advisor/glossary/#term-etl-and-elt): Ways to move data: transform before loading (ETL) or load raw data then transform inside the warehouse (ELT).
+- [Evals (evaluation)](https://homesh123.github.io/ai-career-advisor/glossary/#term-evals): A repeatable set of test cases and scoring rules that measures whether an AI system works well.
+- [Explainability](https://homesh123.github.io/ai-career-advisor/glossary/#term-explainability): Understanding and showing why a model made a particular prediction.
+- [F1 score](https://homesh123.github.io/ai-career-advisor/glossary/#term-f1-score): One number that balances precision and recall.
+- [Feature](https://homesh123.github.io/ai-career-advisor/glossary/#term-feature): One input the model uses to make a prediction, like age, income or number of logins.
+- [Feature engineering](https://homesh123.github.io/ai-career-advisor/glossary/#term-feature-engineering): Turning raw data into useful model inputs, often using domain knowledge.
+- [Feature store](https://homesh123.github.io/ai-career-advisor/glossary/#term-feature-store): A shared system that stores ready-made features for both training and live predictions.
+- [Few shot prompting](https://homesh123.github.io/ai-career-advisor/glossary/#term-few-shot-prompting): Showing an LLM a few examples of the task inside the prompt so it copies the pattern.
+- [Fine tuning](https://homesh123.github.io/ai-career-advisor/glossary/#term-fine-tuning): Further training a pretrained model on your own examples to specialise its behaviour.
+- [Foundation model](https://homesh123.github.io/ai-career-advisor/glossary/#term-foundation-model): A large model trained on broad data that can be adapted to many tasks.
+- [GenAI (generative AI)](https://homesh123.github.io/ai-career-advisor/glossary/#term-genai): AI that creates new content: text, images, audio, video or code.
+- [GPU](https://homesh123.github.io/ai-career-advisor/glossary/#term-gpu): A chip that does thousands of maths operations in parallel, which makes training and running AI fast.
+- [Gradient](https://homesh123.github.io/ai-career-advisor/glossary/#term-gradient): The direction and steepness in which the error grows; models step the opposite way to improve.
+- [Gradient boosting](https://homesh123.github.io/ai-career-advisor/glossary/#term-gradient-boosting): Building many small decision trees one after another, each fixing the previous ones' mistakes.
+- [Gradient descent](https://homesh123.github.io/ai-career-advisor/glossary/#term-gradient-descent): The training method that repeatedly adjusts weights in small steps to reduce error.
+- [Grounding](https://homesh123.github.io/ai-career-advisor/glossary/#term-grounding): Making an LLM base its answer on provided sources or tool results, not just its memory.
+- [Guardrail metric](https://homesh123.github.io/ai-career-advisor/glossary/#term-guardrail-metric): A metric that must not get worse while you improve the main metric.
+- [Guardrails](https://homesh123.github.io/ai-career-advisor/glossary/#term-guardrails): Rules and checks around an AI system that block unsafe, wrong or costly behaviour.
+- [Hallucination](https://homesh123.github.io/ai-career-advisor/glossary/#term-hallucination): When an AI confidently states something false or made up.
+- [Human in the loop](https://homesh123.github.io/ai-career-advisor/glossary/#term-human-in-the-loop): Keeping a person involved to review or approve AI output before it takes effect.
+- [Hybrid search](https://homesh123.github.io/ai-career-advisor/glossary/#term-hybrid-search): Combining keyword search and vector search to get the best of both.
+- [Hyperparameter](https://homesh123.github.io/ai-career-advisor/glossary/#term-hyperparameter): A setting you choose before training, like learning rate or tree depth, rather than something the model learns.
+- [Idempotency](https://homesh123.github.io/ai-career-advisor/glossary/#term-idempotency): A job is idempotent if running it twice gives the same result as running it once.
+- [Inference](https://homesh123.github.io/ai-career-advisor/glossary/#term-inference): Using a trained model to make predictions on new data.
+- [Instruction tuning](https://homesh123.github.io/ai-career-advisor/glossary/#term-instruction-tuning): Fine tuning a base model on instruction and answer examples so it follows requests helpfully.
+- [K means](https://homesh123.github.io/ai-career-advisor/glossary/#term-k-means): A clustering method that groups items around K centre points.
+- [Kubernetes](https://homesh123.github.io/ai-career-advisor/glossary/#term-kubernetes): A system that runs and manages many containers across many servers: starting, scaling and healing them.
+- [KV cache](https://homesh123.github.io/ai-career-advisor/glossary/#term-kv-cache): Memory that stores past attention keys and values so an LLM doesn't recompute them for every new token.
+- [Label](https://homesh123.github.io/ai-career-advisor/glossary/#term-label): The correct answer for an example, which a supervised model learns to predict.
+- [Latency](https://homesh123.github.io/ai-career-advisor/glossary/#term-latency): How long a request takes from asking to getting the answer.
+- [Learning rate](https://homesh123.github.io/ai-career-advisor/glossary/#term-learning-rate): How big a step the model takes when updating its weights during training.
+- [LLM (large language model)](https://homesh123.github.io/ai-career-advisor/glossary/#term-llm): A very large neural network trained on huge amounts of text to predict the next word, which lets it write, answer and reason.
+- [LLM as judge](https://homesh123.github.io/ai-career-advisor/glossary/#term-llm-as-judge): Using an LLM with a rubric to grade another model's answers.
+- [LoRA](https://homesh123.github.io/ai-career-advisor/glossary/#term-lora): A cheap fine tuning method that trains small add-on matrices instead of the whole model.
+- [Loss function](https://homesh123.github.io/ai-career-advisor/glossary/#term-loss-function): A formula that measures how wrong the model's predictions are; training tries to make it small.
+- [Lost in the middle](https://homesh123.github.io/ai-career-advisor/glossary/#term-lost-in-the-middle): LLMs tend to use information at the start and end of a long prompt better than information in the middle.
+- [Machine learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-machine-learning): The part of AI where computers learn patterns from examples instead of following hand written rules.
+- [MCP (Model Context Protocol)](https://homesh123.github.io/ai-career-advisor/glossary/#term-mcp): An open standard for connecting AI apps to tools and data, like a universal plug.
+- [Metric](https://homesh123.github.io/ai-career-advisor/glossary/#term-metric): A number you track to judge whether something is working.
+- [MLOps](https://homesh123.github.io/ai-career-advisor/glossary/#term-mlops): The practices and tools for putting ML models into production and keeping them healthy.
+- [Model](https://homesh123.github.io/ai-career-advisor/glossary/#term-model): The learned function that turns inputs into predictions or generated output.
+- [Model registry](https://homesh123.github.io/ai-career-advisor/glossary/#term-model-registry): A catalogue of trained model versions with their metrics and stage (testing, production).
+- [Monitoring](https://homesh123.github.io/ai-career-advisor/glossary/#term-monitoring): Continuously checking a live system's health, data and results, with alerts when something goes wrong.
+- [Multimodal](https://homesh123.github.io/ai-career-advisor/glossary/#term-multimodal): Models that understand or generate more than one type of data: text, images, audio, video.
+- [Neural network](https://homesh123.github.io/ai-career-advisor/glossary/#term-neural-network): A model made of layers of simple connected units (neurons) that learn by adjusting connection weights.
+- [NLP (natural language processing)](https://homesh123.github.io/ai-career-advisor/glossary/#term-nlp): The field of AI that works with human language: understanding, translating, summarising and generating text.
+- [Normalisation](https://homesh123.github.io/ai-career-advisor/glossary/#term-normalisation): Rescaling numbers to a standard range so models train stably.
+- [Open weights model](https://homesh123.github.io/ai-career-advisor/glossary/#term-open-weights-model): A model whose trained weights are published so anyone can download, run and fine tune it.
+- [Overfitting](https://homesh123.github.io/ai-career-advisor/glossary/#term-overfitting): When a model memorises its training data, including noise, and does badly on new data.
+- [Parameter](https://homesh123.github.io/ai-career-advisor/glossary/#term-parameter): A number inside a model that is learned during training; LLMs have billions of them.
+- [Precision](https://homesh123.github.io/ai-career-advisor/glossary/#term-precision): Of everything the model flagged as positive, the share that really was positive.
+- [Prompt](https://homesh123.github.io/ai-career-advisor/glossary/#term-prompt): The text you give an LLM: instructions, context and the question.
+- [Prompt engineering](https://homesh123.github.io/ai-career-advisor/glossary/#term-prompt-engineering): Designing and testing prompts so an LLM gives reliable, useful output.
+- [Prompt injection](https://homesh123.github.io/ai-career-advisor/glossary/#term-prompt-injection): An attack where text in user input or documents tries to override the AI's instructions.
+- [PyTorch](https://homesh123.github.io/ai-career-advisor/glossary/#term-pytorch): The most popular framework for building and training neural networks in Python.
+- [Quantisation](https://homesh123.github.io/ai-career-advisor/glossary/#term-quantisation): Storing model weights with fewer bits so models use less memory and run faster.
+- [RAG (retrieval augmented generation)](https://homesh123.github.io/ai-career-advisor/glossary/#term-rag): Letting an LLM answer from your documents: search for relevant passages first, then generate an answer from them with citations.
+- [Random forest](https://homesh123.github.io/ai-career-advisor/glossary/#term-random-forest): Many decision trees trained on random samples whose votes are averaged.
+- [Recall](https://homesh123.github.io/ai-career-advisor/glossary/#term-recall): Of all the real positives, the share the model caught.
+- [Regression](https://homesh123.github.io/ai-career-advisor/glossary/#term-regression): Predicting a number, like a price, a delivery time or demand.
+- [Regularisation](https://homesh123.github.io/ai-career-advisor/glossary/#term-regularisation): Techniques that keep a model simpler so it generalises better and overfits less.
+- [Reinforcement learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-reinforcement-learning): Learning by trial and error: an agent takes actions and learns from rewards.
+- [Reranking](https://homesh123.github.io/ai-career-advisor/glossary/#term-reranking): A second step in search that re-scores the top results more accurately.
+- [RLHF](https://homesh123.github.io/ai-career-advisor/glossary/#term-rlhf): Training an LLM to prefer answers that people rate as better.
+- [Sampling bias](https://homesh123.github.io/ai-career-advisor/glossary/#term-sampling-bias): When the data you collected doesn't represent the people or situations the model will face.
+- [Scaling laws](https://homesh123.github.io/ai-career-advisor/glossary/#term-scaling-laws): Patterns showing model quality improves predictably as you increase model size, data and compute.
+- [Semantic search](https://homesh123.github.io/ai-career-advisor/glossary/#term-semantic-search): Searching by meaning rather than exact words, using embeddings.
+- [Softmax](https://homesh123.github.io/ai-career-advisor/glossary/#term-softmax): A function that turns a list of scores into probabilities that add up to 1.
+- [Streaming (responses)](https://homesh123.github.io/ai-career-advisor/glossary/#term-streaming): Showing an LLM's answer word by word as it's generated, instead of waiting for all of it.
+- [Structured output](https://homesh123.github.io/ai-career-advisor/glossary/#term-structured-output): Making an LLM return data in a fixed format, like JSON with defined fields, so code can use it.
+- [Supervised learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-supervised-learning): Learning from examples that come with the correct answers (labels).
+- [System prompt](https://homesh123.github.io/ai-career-advisor/glossary/#term-system-prompt): Instructions given to an LLM before the conversation that set its role, rules and format.
+- [Temperature](https://homesh123.github.io/ai-career-advisor/glossary/#term-temperature): A setting that controls how random or creative an LLM's word choices are.
+- [Test set](https://homesh123.github.io/ai-career-advisor/glossary/#term-test-set): Data kept aside until the very end to get an honest measure of how a model performs on new data.
+- [Threshold](https://homesh123.github.io/ai-career-advisor/glossary/#term-threshold): The cut off that turns a model's probability into a yes or no decision.
+- [Token](https://homesh123.github.io/ai-career-advisor/glossary/#term-token): A chunk of text, often part of a word, that LLMs read and write; pricing and limits are counted in tokens.
+- [Tool calling](https://homesh123.github.io/ai-career-advisor/glossary/#term-tool-calling): Letting an LLM request actions or data from your code, like looking up an order or sending an email.
+- [Training](https://homesh123.github.io/ai-career-advisor/glossary/#term-training): The process where a model learns its parameters from data.
+- [Training serving skew](https://homesh123.github.io/ai-career-advisor/glossary/#term-training-serving-skew): When features are computed differently in training and in production, quietly hurting the model.
+- [Transfer learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-transfer-learning): Starting from a model trained on one task and adapting it to another, so you need far less data.
+- [Transformer](https://homesh123.github.io/ai-career-advisor/glossary/#term-transformer): The neural network architecture behind modern LLMs, built around attention.
+- [Underfitting](https://homesh123.github.io/ai-career-advisor/glossary/#term-underfitting): When a model is too simple to capture the real patterns, so it does badly even on training data.
+- [Unsupervised learning](https://homesh123.github.io/ai-career-advisor/glossary/#term-unsupervised-learning): Finding structure in data that has no labels, like groups or unusual items.
+- [Validation set](https://homesh123.github.io/ai-career-advisor/glossary/#term-validation-set): Data used while building a model to compare options and tune settings.
+- [Vector](https://homesh123.github.io/ai-career-advisor/glossary/#term-vector): An ordered list of numbers; in AI, a way to represent anything (a house, a word, an image) as numbers.
+- [Vector database](https://homesh123.github.io/ai-career-advisor/glossary/#term-vector-database): A database built to store embeddings and quickly find the ones closest in meaning to a query.
+- [Workflow (AI workflow)](https://homesh123.github.io/ai-career-advisor/glossary/#term-workflow): A fixed sequence of steps where some steps call an LLM, as opposed to a free running agent.
+- [Zero shot](https://homesh123.github.io/ai-career-advisor/glossary/#term-zero-shot): Asking a model to do a task with instructions only, without giving examples.
+
 ## AI for kids (ages 5+)
 - [AI for Kids](https://homesh123.github.io/ai-career-advisor/kids/): free, read-aloud game levels in English and Hinglish with Robo the robot, stars, badges and a printable certificate. AI means Artificial Intelligence. It's a computer brain that can learn from examples, a bit like you learn by seeing and trying.
 - [Level 1: What is AI?](https://homesh123.github.io/ai-career-advisor/kids/what-is-ai.html): AI is a computer brain that learns from examples.

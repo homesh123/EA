@@ -68,8 +68,15 @@ and who it suits, then start.
      the browser and never uploaded.
   2. Target role and skills: ATS keyword match for the chosen role, tick missing skills to add them,
      use the role's headline and a summary idea.
-  3. Template: Classic, Modern or Compact, all single column with standard headings.
-  4. Edit and download: form editor with live preview, a "human tone" check (dashes, hyphenated
+  3. Template: Harvard Classic, Executive Serif, Modern Minimal, Impact (with a Selected Impact
+     strip) or Compact. All single column with standard headings, sized in points to the Harvard
+     spec (10.5pt body, 16pt name, 11.5pt headings, 0.75in margins), shown as an A4 preview with
+     page breaks. Design rules follow popular open source Claude resume skills
+     (dabydat/resume-builder-skill, Shehabov/pm-resume-builder-skill).
+  4. Edit and download: a 100 point resume score (keywords 25, placement 10, title 5, ATS safe
+     sections 10, numbers 15, bullet quality 10, progression 10, length 5, human tone 5, hygiene 5)
+     with the top fixes, a bullet coach (Accomplished X, measured by Y, by doing Z), optional
+     "Tech:" lines under roles, clickable email and profile links, form editor with live preview, a "human tone" check (dashes, hyphenated
      words, buzzwords, bullets without numbers, with one click fixes), PDF (print of the resume only)
      or Word download.
   - "Use my resume for the career questionnaire" pre-fills the answers the resume clearly shows
@@ -117,6 +124,15 @@ belong to each course and step is set in `content/learn-tracks.js`. The tests ch
 languages are complete, quiz answers are valid, every roadmap step has lessons, and prerequisites
 come first.
 
+## AI dictionary (A to Z)
+
+`glossary/index.html` (generated) and the Learn view "AI dictionary" list 138 AI terms A to Z, from
+A/B test to Zero shot: each with a one line meaning, a detailed explanation, an everyday example, its
+category, related terms and the lessons that teach it, in English and Hinglish. Search (word start,
+both languages), category filters, an A to Z bar, "open all", read aloud per term and links like
+`glossary/#term-rag`. Content is in `content/glossary-*.js`, rendering in `glossary.js` (also used by
+the build). The page carries DefinedTermSet structured data, and every term is listed in `llms.txt`.
+
 ## AI for kids (ages 5+)
 
 `kids/` has a playful section for children: a hub with Robo's adventure map and six levels
@@ -158,7 +174,9 @@ AI Forward Deployed Engineer · AI Product Manager
 | `tts.js` | "Listen" read-aloud player for lessons (Web Speech API) |
 | `learn/*.html`, `learn/hi/*.html` | Generated static lesson pages in English and Hinglish |
 | `interview.html`, `interview.js` | Scored interview practice (`InterviewApp`, also mounted in Learn); `interview/*.html` are generated prep guides and Q&A pages |
-| `resume-builder.html`, `resume-builder.js` | Resume builder (`ResumeBuilder`, also mounted in Learn) |
+| `resume-builder.html`, `resume-builder.js` | Resume builder (`ResumeBuilder`, also mounted in Learn): 5 templates, A4 preview, 100 point score |
+| `content/*-hi*.js`, `content/roles-hi.js` | Hinglish for the interview prep, scored practice, role overviews and step names |
+| `scripts/dist.js` | Production build (minified) for publishing |
 | `resumes/*.html`, `resume.js` | Generated, editable ATS resume samples |
 | `home.js` | Homepage role picker ("Learn for your target AI role") |
 | `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
@@ -205,6 +223,17 @@ When you change weights in `scoring.js` or add a role, add or adjust a persona i
 `tests/personas.js` that describes who the change is for. The tests also run 20,000
 random answer sets to check that nothing crashes and every role can still be recommended.
 
+## Production build and code protection
+
+- `npm run dist` builds `dist/`: the public site only, with JavaScript minified and mangled
+  (Terser), CSS minified and HTML comments removed. Source, tests, scripts and docs are left out.
+- `.github/workflows/publish-site.yml` lets the source live in a **private** repository and
+  publishes only `dist/` to the public site repository (same GitHub Pages URL). It is skipped in a
+  public repository. Setup steps are at the top of the file.
+- Code that runs in a browser can always be viewed by a determined person; minification, a private
+  source repository and the licence below make copying much harder and clearly not permitted.
+
 ## License
 
-MIT
+Proprietary, all rights reserved. See [LICENSE](LICENSE). Versions published before
+28 October 2026 were MIT licensed.

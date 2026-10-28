@@ -60,7 +60,13 @@ let role = null;
 let root = null; // element the app renders into
 let embedded = false;
 let customLessonLink = null; // (topic) => attributes string for an <a>, when embedded
-const roleQuestions = r => INTERVIEW.questions.filter(q => q.roles.includes(r));
+// Questions in the chosen language: content/interview-hi.js overlays the English (same option order).
+const HI = () => lang === "hi" && typeof INTERVIEW_HI !== "undefined" ? INTERVIEW_HI : null;
+const localise = q => {
+  const h = HI() && HI().questions[q.id];
+  return h ? Object.assign({}, q, h, { area: HI().areas[q.area] || q.area }) : q;
+};
+const roleQuestions = r => INTERVIEW.questions.filter(q => q.roles.includes(r)).map(localise);
 const results = () => store.get(LS_RESULTS) || {};
 const defaultLessonHref = (r, topic) => LEARN_TRACKS[r].some(([, ids]) => ids.includes(topic))
   ? `learn.html?course=${r}&lesson=${topic}${lang === "hi" ? "&lang=hi" : ""}`
@@ -88,7 +94,7 @@ function newSession(onlyIds) {
   store.set(LS_SESSION, session);
 }
 const saveSession = () => store.set(LS_SESSION, session);
-const qById = id => INTERVIEW.questions.find(q => q.id === id);
+const qById = id => localise(INTERVIEW.questions.find(q => q.id === id));
 
 // ---------- scoring ----------
 function scoreOf(q, a) {
@@ -251,7 +257,7 @@ function reportView() {
         }).join("")}` : ""}
 
       <h3>📝 ${esc(UI.more)}</h3>
-      <ul>${(INTERVIEW.extra[role] || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <ul>${((HI() && HI().extra[role]) || INTERVIEW.extra[role] || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
 
       <div class="lesson-nav">
         ${missedIds.length ? `<button type="button" class="button btn-secondary" data-act="retry-wrong" data-ids="${missedIds.join(",")}">${esc(UI.retryWrong)} (${missedIds.length})</button>` : "<span></span>"}
@@ -340,5 +346,16 @@ return { mount };
 
 if (typeof document !== "undefined" && document.getElementById("interviewApp")) {
   const r = new URLSearchParams(location.search).get("role");
-  InterviewApp.mount(document.getElementById("interviewApp"), { role: r });
+  const el = document.getElementById("interviewApp");
+  InterviewApp.mount(el, { role: r });
+  // Page language switch (English / Hinglish), shared with the rest of the site.
+  const paint = l => document.querySelectorAll("[data-site-lang]").forEach(b => { b.classList.toggle("active", b.dataset.siteLang === l); b.setAttribute("aria-pressed", b.dataset.siteLang === l); });
+  let cur = (() => { try { return JSON.parse(localStorage.getItem("aipf:lang")) === "hi" ? "hi" : "en"; } catch (e) { return "en"; } })();
+  paint(cur);
+  document.querySelectorAll("[data-site-lang]").forEach(b => b.addEventListener("click", () => {
+    cur = b.dataset.siteLang;
+    try { localStorage.setItem("aipf:lang", JSON.stringify(cur)); } catch (e) { /* private mode */ }
+    paint(cur);
+    InterviewApp.mount(el, { role: new URLSearchParams(location.search).get("role"), lang: cur });
+  }));
 }
