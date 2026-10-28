@@ -143,14 +143,21 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 8 min padhne mein</p>
-        <h1>🔁 Python logic: if/else, loops aur functions</h1>
+        <h1 data-read>🔁 Python logic: if/else, loops aur functions</h1>
         <p class="lang-switch"><a href="../py-logic.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Traffic signal decision leta hai: agar red hai to ruko, warna agar green hai to chalo. Yeh hai if/else. Washing machine ek hi rinse cycle kai baar repeat karti hai. Yeh hai loop. Aur mummy ki chai ki recipe ek baar likhi hui hai aur roz subah reuse hoti hai. Yeh hai function: steps ko ek baar pack karo aur jab chahiye tab call karo.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Programs ko decisions lene padte hain, kaam repeat karna padta hai aur organised rehna padta hai. &#39;if / elif / else&#39; condition ke hisaab se alag code chalata hai. &#39;for&#39; loop collection ke har item ke liye code repeat karta hai, aur &#39;while&#39; loop tab tak repeat karta hai jab tak condition false na ho jaaye. Function (&#39;def&#39; se banta hai) steps ko ek naam ke neeche bundle karta hai, inputs (parameters) leta hai aur &#39;return&#39; se output deta hai. Achhe functions ek hi clear kaam karte hain, isliye code ko test aur reuse karna aasaan hota hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Traffic signal decision leta hai: agar red hai to ruko, warna agar green hai to chalo. Yeh hai if/else. Washing machine ek hi rinse cycle kai baar repeat karti hai. Yeh hai loop. Aur mummy ki chai ki recipe ek baar likhi hui hai aur roz subah reuse hoti hai. Yeh hai function: steps ko ek baar pack karo aur jab chahiye tab call karo.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Programs ko decisions lene padte hain, kaam repeat karna padta hai aur organised rehna padta hai. &#39;if / elif / else&#39; condition ke hisaab se alag code chalata hai. &#39;for&#39; loop collection ke har item ke liye code repeat karta hai, aur &#39;while&#39; loop tab tak repeat karta hai jab tak condition false na ho jaaye. Function (&#39;def&#39; se banta hai) steps ko ek naam ke neeche bundle karta hai, inputs (parameters) leta hai aur &#39;return&#39; se output deta hai. Achhe functions ek hi clear kaam karte hain, isliye code ko test aur reuse karna aasaan hota hai.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Condition</dt><dd>Aisa sawaal jiska jawaab True/False ho, jaise price &gt; 100.</dd></div><div><dt>Loop</dt><dd>Code jo har item ke liye, ya condition badalne tak, repeat hota hai.</dd></div><div><dt>Function</dt><dd>Naam wala, reusable code block jismein inputs aur ek output hota hai.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Condition</dt><dd>Aisa sawaal jiska jawaab True/False ho, jaise price &gt; 100.</dd></div><div data-read><dt>Loop</dt><dd>Code jo har item ke liye, ya condition badalne tak, repeat hota hai.</dd></div><div data-read><dt>Function</dt><dd>Naam wala, reusable code block jismein inputs aur ek output hota hai.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">python</span><pre><code>def bill(amount):
@@ -162,14 +169,14 @@ orders = [120, 650, 300]
 for o in orders:
     print(o, &quot;→&quot;, bill(o))
 # 120 → 120, 650 → 585.0, 300 → 300</code></pre></div>
-        <p class="small muted">Kirana store ka discount rule ek baar likha aur har order ke liye use kiya.</p>
+        <p class="small muted" data-read>Kirana store ka discount rule ek baar likha aur har order ke liye use kiya.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Aapko 1,000 orders pe same discount rule lagaana hai. Kya use karoge?</p>
-        <ol type="A"><li>Code 1,000 baar copy-paste karna</li><li>Sirf ek if statement</li><li>Loop ke andar function</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Aapko 1,000 orders pe same discount rule lagaana hai. Kya use karoge?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Code 1,000 baar copy-paste karna">Code 1,000 baar copy-paste karna</li><li data-read data-read-text="Option B: Sirf ek if statement">Sirf ek if statement</li><li data-read data-read-text="Option C: Loop ke andar function">Loop ke andar function</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>C. Loop ke andar function</strong>: Rule ko ek baar function mein likho, phir orders pe loop chala kar har ek ke liye call karo.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>if = decide karo, loop = repeat karo, function = reuse karo.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>if = decide karo, loop = repeat karo, function = reuse karo.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="py-basics.html">← Python basics: variables aur data types</a>
@@ -184,6 +191,8 @@ for o in orders:
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

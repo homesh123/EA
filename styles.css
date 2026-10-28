@@ -854,6 +854,21 @@ body:not([data-view="intro"]) .hero h1{font-size:1.75rem;margin-bottom:0}
   @page{margin:1.6cm 1.8cm}
 }
 
+/* ---------- Listen (read aloud) ---------- */
+.listen-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-6px 0 16px}
+.listen-btn,.listen-stop{
+  font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;border-radius:999px;padding:7px 14px;
+  border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+}
+.listen-btn:hover{background:var(--accent-soft)}
+.listen-bar.is-reading .listen-btn{background:var(--accent);color:#fff}
+.listen-btn:disabled{opacity:.5;cursor:not-allowed}
+.listen-stop{border-color:var(--border);color:var(--muted)}
+.listen-rate select{font:inherit;font-size:.82rem;border:1px solid var(--border-light);border-radius:8px;padding:5px 6px;background:#fff;color:var(--text)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[data-read].reading{box-shadow:0 0 0 3px rgba(0,102,214,.35);border-radius:10px;transition:box-shadow .2s ease}
+.lang-switch + .listen-bar{margin-top:0}
+
 /* ---------- responsive ---------- */
 @media (max-width:700px){
   .container{padding:24px 16px}
@@ -918,7 +933,7 @@ body:not([data-view="intro"]) .hero h1{font-size:1.75rem;margin-bottom:0}
 
 @media print{
   body{background:#fff}
-  .hero,.site-header,.how,.backgrounds,.outline,.outline-toggle,.lang-toggle,.lesson-nav,.copy-btn,.kbd-hint,.faq-section,.footer,.actions,.all-roles,.step-check input,.kbd-hint,.result-nav,.pace,.rm-actions,.up-next-actions,.rm-toolbar .link-btn,.hero-cta,.paths,.answer-box{display:none !important}
+  .hero,.site-header,.how,.backgrounds,.listen-bar,.outline,.outline-toggle,.lang-toggle,.lesson-nav,.copy-btn,.kbd-hint,.faq-section,.footer,.actions,.all-roles,.step-check input,.kbd-hint,.result-nav,.pace,.rm-actions,.up-next-actions,.rm-toolbar .link-btn,.hero-cta,.paths,.answer-box{display:none !important}
   .card{border:none;box-shadow:none;padding:0}
   .view-result > section{padding:16px 0}
   .stay{display:none}

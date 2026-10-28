@@ -128,28 +128,35 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 6 min read</p>
-        <h1>🔗 Correlation vs causation, and sampling bias</h1>
+        <h1 data-read>🔗 Correlation vs causation, and sampling bias</h1>
         <p class="lang-switch"><span>English</span><a href="hi/stats-correlation.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Ice-cream sales and drowning cases both rise in summer. They&#39;re correlated, but ice cream doesn&#39;t cause drowning. Hot weather causes both. And if you survey only people at a gym about fitness habits, your results won&#39;t represent the whole city. That&#39;s sampling bias.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Correlation means two things move together. Causation means one actually makes the other happen. ML models are excellent at finding correlations but cannot, on their own, prove causation, so be careful with claims like &#39;feature X causes Y&#39;. Sampling bias happens when your data doesn&#39;t represent the real world, and a model trained on biased data will make biased predictions. Before trusting any result, ask who is missing from this data and what else could explain the pattern.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Ice-cream sales and drowning cases both rise in summer. They&#39;re correlated, but ice cream doesn&#39;t cause drowning. Hot weather causes both. And if you survey only people at a gym about fitness habits, your results won&#39;t represent the whole city. That&#39;s sampling bias.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Correlation means two things move together. Causation means one actually makes the other happen. ML models are excellent at finding correlations but cannot, on their own, prove causation, so be careful with claims like &#39;feature X causes Y&#39;. Sampling bias happens when your data doesn&#39;t represent the real world, and a model trained on biased data will make biased predictions. Before trusting any result, ask who is missing from this data and what else could explain the pattern.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Correlation</dt><dd>Two variables tend to move together.</dd></div><div><dt>Causation</dt><dd>One thing directly causes the other.</dd></div><div><dt>Sampling bias</dt><dd>Data that doesn&#39;t represent the full population.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Correlation</dt><dd>Two variables tend to move together.</dd></div><div data-read><dt>Causation</dt><dd>One thing directly causes the other.</dd></div><div data-read><dt>Sampling bias</dt><dd>Data that doesn&#39;t represent the full population.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Finding: users who use the app&#39;s dark mode spend more money.
 ❌ &#39;Dark mode makes people spend more&#39; (causation claim)
 ✅ Maybe power users like dark mode AND spend more.
    Test it: an A/B experiment that randomly switches dark mode on.</code></pre></div>
-        <p class="small muted">A randomised experiment is how you move from correlation to causation.</p>
+        <p class="small muted" data-read>A randomised experiment is how you move from correlation to causation.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">A hiring model is trained only on past hires from one city. What&#39;s the risk?</p>
-        <ol type="A"><li>It will be slower</li><li>No risk at all</li><li>Sampling bias: it may unfairly score people from other cities</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">A hiring model is trained only on past hires from one city. What&#39;s the risk?</p>
+        <ol type="A"><li data-read data-read-text="Option A: It will be slower">It will be slower</li><li data-read data-read-text="Option B: No risk at all">No risk at all</li><li data-read data-read-text="Option C: Sampling bias: it may unfairly score people from other cities">Sampling bias: it may unfairly score people from other cities</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>C. Sampling bias: it may unfairly score people from other cities</strong>: The training data doesn&#39;t represent everyone the model will judge.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Correlation is not causation, and biased data gives biased AI.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Correlation is not causation, and biased data gives biased AI.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="stats-probability.html">← Probability and distributions</a>
@@ -164,6 +171,8 @@
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

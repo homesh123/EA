@@ -168,7 +168,17 @@ const LEARN_I18N = {
     markTaskUndone: "Mark as not done",
     whatsNext: "What's next",
     interviewBlurb: "{n} real interview questions. Get a score, see your mistakes explained, and find the lessons to revise.",
-    resumeBlurb: "An ATS-friendly sample for this role. Edit it in your browser, then download as Word, PDF or text."
+    resumeBlurb: "An ATS-friendly sample for this role. Edit it in your browser, then download as Word, PDF or text.",
+    listen: "Listen",
+    pause: "Pause",
+    resumeReading: "Resume",
+    stop: "Stop",
+    speed: "Reading speed",
+    readingAloud: "Reading aloud…",
+    pausedReading: "Paused",
+    ttsUnsupported: "Your browser can't read aloud",
+    diagram: "Diagram",
+    option: "Option"
   },
   hi: {
     langName: "Hinglish",
@@ -249,7 +259,17 @@ const LEARN_I18N = {
     markTaskUndone: "Not done mark karo",
     whatsNext: "Aage kya",
     interviewBlurb: "{n} asli interview sawaal. Score pao, apni galtiyon ka explanation dekho, aur revise karne wale lessons jaano.",
-    resumeBlurb: "Is role ke liye ATS-friendly sample. Browser mein edit karo, phir Word, PDF ya text mein download karo."
+    resumeBlurb: "Is role ke liye ATS-friendly sample. Browser mein edit karo, phir Word, PDF ya text mein download karo.",
+    listen: "Suno",
+    pause: "Roko",
+    resumeReading: "Phir chalao",
+    stop: "Band karo",
+    speed: "Padhne ki speed",
+    readingAloud: "Padh kar suna raha hai…",
+    pausedReading: "Ruka hua",
+    ttsUnsupported: "Aapka browser padh kar nahi suna sakta",
+    diagram: "Diagram",
+    option: "Option"
   }
 };
 

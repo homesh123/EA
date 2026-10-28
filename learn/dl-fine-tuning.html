@@ -123,14 +123,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 7 min read</p>
-        <h1>🎛️ Fine-tuning and LoRA: specialising a model</h1>
+        <h1 data-read>🎛️ Fine-tuning and LoRA: specialising a model</h1>
         <p class="lang-switch"><span>English</span><a href="hi/dl-fine-tuning.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>An MBBS doctor already knows general medicine. To become a cardiologist they don&#39;t redo school. They spend a few focused years on hearts. Fine-tuning is the same: take a model that already knows language and train it a little more on your specific task. LoRA is like learning cardiology from compact notes instead of rewriting every textbook.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Pre-training a large model from scratch costs millions. Fine-tuning starts from a pre-trained open model (Llama, Mistral, Qwen) and continues training on your examples, such as support tickets with ideal replies. Full fine-tuning updates every weight, which is expensive. LoRA and other PEFT (parameter-efficient fine-tuning) methods freeze the original weights and train small add-on matrices, so you can fine-tune on a single GPU. QLoRA also compresses (quantises) the base model. Always compare against prompting and RAG first, because they&#39;re cheaper and often enough.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>An MBBS doctor already knows general medicine. To become a cardiologist they don&#39;t redo school. They spend a few focused years on hearts. Fine-tuning is the same: take a model that already knows language and train it a little more on your specific task. LoRA is like learning cardiology from compact notes instead of rewriting every textbook.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Pre-training a large model from scratch costs millions. Fine-tuning starts from a pre-trained open model (Llama, Mistral, Qwen) and continues training on your examples, such as support tickets with ideal replies. Full fine-tuning updates every weight, which is expensive. LoRA and other PEFT (parameter-efficient fine-tuning) methods freeze the original weights and train small add-on matrices, so you can fine-tune on a single GPU. QLoRA also compresses (quantises) the base model. Always compare against prompting and RAG first, because they&#39;re cheaper and often enough.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Pre-trained model</dt><dd>A model already trained on huge general data.</dd></div><div><dt>LoRA / PEFT</dt><dd>Training small add-on weights instead of the whole model.</dd></div><div><dt>Quantisation</dt><dd>Storing weights with fewer bits to save memory.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Pre-trained model</dt><dd>A model already trained on huge general data.</dd></div><div data-read><dt>LoRA / PEFT</dt><dd>Training small add-on weights instead of the whole model.</dd></div><div data-read><dt>Quantisation</dt><dd>Storing weights with fewer bits to save memory.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">python</span><pre><code>from peft import LoraConfig, get_peft_model
@@ -138,14 +145,14 @@ config = LoraConfig(r=16, lora_alpha=32, target_modules=[&quot;q_proj&quot;, &qu
 model = get_peft_model(base_model, config)
 model.print_trainable_parameters()
 # trainable: 0.1% of all parameters → fits on one GPU</code></pre></div>
-        <p class="small muted">Only a tiny fraction of the weights are trained.</p>
+        <p class="small muted" data-read>Only a tiny fraction of the weights are trained.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">You want a model to answer from your company&#39;s latest policy documents, which change weekly. What should you try first?</p>
-        <ol type="A"><li>Fine-tune every week</li><li>RAG: retrieve the documents at question time</li><li>Pre-train a new model</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">You want a model to answer from your company&#39;s latest policy documents, which change weekly. What should you try first?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Fine-tune every week">Fine-tune every week</li><li data-read data-read-text="Option B: RAG: retrieve the documents at question time">RAG: retrieve the documents at question time</li><li data-read data-read-text="Option C: Pre-train a new model">Pre-train a new model</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. RAG: retrieve the documents at question time</strong>: Fine-tuning teaches style and skills. For fresh, changing facts, RAG is cheaper and stays up to date.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Prompting → RAG → fine-tuning, in that order of cost.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Prompting → RAG → fine-tuning, in that order of cost.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="dl-transformers.html">← Transformers and attention: how LLMs read</a>
@@ -160,6 +167,8 @@ model.print_trainable_parameters()
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

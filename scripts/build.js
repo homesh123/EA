@@ -24,6 +24,7 @@ const { ROLE_TASKS } = require("../content/tasks.js");
 const { INTERVIEW } = require("../content/interview.js");
 const { RESUMES } = require("../content/resumes.js");
 const { optionOrder } = require("../content/shuffle.js");
+const { LessonReader } = require("../tts.js");
 
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://homesh123.github.io/ai-career-advisor/";
@@ -642,25 +643,26 @@ ${jsonLd(graph)}`;
     <article lang="${hi ? "hi-Latn" : "en"}">
       <header>
         <p class="eyebrow">${hi ? "Lesson · Hinglish" : "Lesson"} · ⏱ ${x.mins} ${esc(ui("readTime"))}</p>
-        <h1>${x.icon} ${esc(pick(x.title))}</h1>
+        <h1 data-read>${x.icon} ${esc(pick(x.title))}</h1>
         <p class="lang-switch">${hi ? `<a href="../${id}.html" hreflang="en" lang="en">English</a><span>Hinglish</span>` : `<span>English</span><a href="hi/${id}.html" hreflang="hi" lang="hi-Latn">Hinglish</a>`}</p>
+        ${LessonReader.barHtml({ listen: ui("listen"), pause: ui("pause"), resume: ui("resumeReading"), stop: ui("stop"), speed: ui("speed"), reading: ui("readingAloud"), paused: ui("pausedReading"), unsupported: ui("ttsUnsupported") })}
       </header>
-      <section class="ls ls-analogy"><h2>🏠 ${esc(ui("realLife"))}</h2><p>${esc(pick(x.analogy))}</p></section>
-      <section class="ls ls-explain"><h2>💡 ${esc(ui("simpleWords"))}</h2><p>${esc(pick(x.explain))}</p></section>
-      ${LESSON_VISUALS[id] ? `<section class="ls ls-visual"><h2>🎬 ${esc(ui("howItWorks"))}</h2><div class="viz">${LESSON_VISUALS[id].svg}</div><p class="viz-caption">${esc(pick(LESSON_VISUALS[id].caption))}</p></section>` : ""}
+      <section class="ls ls-analogy" data-read><h2>🏠 ${esc(ui("realLife"))}</h2><p>${esc(pick(x.analogy))}</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 ${esc(ui("simpleWords"))}</h2><p>${esc(pick(x.explain))}</p></section>
+      ${LESSON_VISUALS[id] ? `<section class="ls ls-visual"><h2>🎬 ${esc(ui("howItWorks"))}</h2><div class="viz">${LESSON_VISUALS[id].svg}</div><p class="viz-caption" data-read data-read-prefix="${esc(ui("diagram"))}">${esc(pick(LESSON_VISUALS[id].caption))}</p></section>` : ""}
       <section class="ls ls-terms"><h2>🔑 ${esc(ui("keyTerms"))}</h2>
-        <dl class="terms">${x.terms.map(([term, en, hin]) => `<div><dt>${esc(term)}</dt><dd>${esc(hi ? hin : en)}</dd></div>`).join("")}</dl>
+        <dl class="terms">${x.terms.map(([term, en, hin]) => `<div data-read><dt>${esc(term)}</dt><dd>${esc(hi ? hin : en)}</dd></div>`).join("")}</dl>
       </section>
       <section class="ls ls-example"><h2>👀 ${esc(ui("seeItInAction"))}</h2>
         <div class="code-wrap"><span class="code-lang">${esc(x.example.lang)}</span><pre><code>${esc(x.example.code)}</code></pre></div>
-        <p class="small muted">${esc(pick(x.example.note))}</p>
+        <p class="small muted" data-read>${esc(pick(x.example.note))}</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ ${esc(ui("quickCheck"))}</h2>
-        <p class="quiz-q">${esc(pick(x.quiz.q))}</p>
-        <ol type="A">${optionOrder(id, x.quiz.options.length).map(i => `<li>${esc(pick(x.quiz.options[i]))}</li>`).join("")}</ol>
+        <p class="quiz-q" data-read data-read-prefix="${esc(ui("quickCheck"))}">${esc(pick(x.quiz.q))}</p>
+        <ol type="A">${optionOrder(id, x.quiz.options.length).map((i, pos) => `<li data-read data-read-text="${esc(`${ui("option")} ${"ABC"[pos]}: ${pick(x.quiz.options[i])}`)}">${esc(pick(x.quiz.options[i]))}</li>`).join("")}</ol>
         <details class="answer-reveal"><summary>${hi ? "Jawaab dekho" : "Show answer"}</summary><p><strong>${"ABC"[optionOrder(id, x.quiz.options.length).indexOf(x.quiz.answer)]}. ${esc(pick(x.quiz.options[x.quiz.answer]))}</strong>: ${esc(pick(x.quiz.why))}</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
 
       <nav class="lesson-pager" aria-label="${hi ? "Lessons" : "Lessons"}">
         ${prevId ? `<a href="${prevId}.html">← ${esc(pick(LESSON_TOPICS[prevId].title))}</a>` : "<span></span>"}
@@ -677,7 +679,10 @@ ${jsonLd(graph)}`;
       </section>
     </article>
   </main>`;
-  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head, body, p });
+  const reader = `
+  <script src="${p}tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "${lang}"));</script>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head, body: body + reader, p });
 }
 
 function learnCatalog() {

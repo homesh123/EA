@@ -133,14 +133,21 @@
     <article lang="hi-Latn">
       <header>
         <p class="eyebrow">Lesson · Hinglish · ⏱ 8 min padhne mein</p>
-        <h1>🐼 Pandas: data ki tables ke saath kaam karna</h1>
+        <h1 data-read>🐼 Pandas: data ki tables ke saath kaam karna</h1>
         <p class="lang-switch"><a href="../pandas.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+        <div class="listen-bar" data-reader data-listen="Suno" data-pause="Roko" data-resume="Phir chalao" data-reading="Padh kar suna raha hai…" data-paused="Ruka hua" data-unsupported="Aapka browser padh kar nahi suna sakta">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Suno</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Band karo</button>
+      <label class="listen-rate"><span class="sr-only">Padhne ki speed</span><select data-tts="rate" aria-label="Padhne ki speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Agar aapne Excel use kiya hai, to idea aapko pehle se pata hai: rows, columns, filters aur totals. Pandas Python ke andar Excel hai. Fark yeh hai ki yeh lakhon rows handle kar leta hai, badi files pe crash nahi hota, aur har baar aapke steps bilkul same tarah repeat karta hai.</p></section>
-      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai. Kuch hi lines mein aap CSV load kar sakte ho, pehli rows dekh sakte ho, filter aur sort kar sakte ho, missing values bhar sakte ho, aur data group karke totals ya averages nikaal sakte ho. Koi bhi ML model seekhne se pehle data lagbhag hamesha Pandas mein hi clean aur shape kiya jaata hai. NumPy, jis pe Pandas bana hai, numbers ke arrays pe fast maths karta hai.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Agar aapne Excel use kiya hai, to idea aapko pehle se pata hai: rows, columns, filters aur totals. Pandas Python ke andar Excel hai. Fark yeh hai ki yeh lakhon rows handle kar leta hai, badi files pe crash nahi hota, aur har baar aapke steps bilkul same tarah repeat karta hai.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 Aasaan shabdon mein</h2><p>Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai. Kuch hi lines mein aap CSV load kar sakte ho, pehli rows dekh sakte ho, filter aur sort kar sakte ho, missing values bhar sakte ho, aur data group karke totals ya averages nikaal sakte ho. Koi bhi ML model seekhne se pehle data lagbhag hamesha Pandas mein hi clean aur shape kiya jaata hai. NumPy, jis pe Pandas bana hai, numbers ke arrays pe fast maths karta hai.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>DataFrame</dt><dd>Rows aur naam wale columns wali table.</dd></div><div><dt>Missing value (NaN)</dt><dd>Khaali cell. Modelling se pehle isse handle karna zaroori hai.</dd></div><div><dt>groupby</dt><dd>Rows ko groups mein baanto aur har group ka summary nikaalo, jaise har city ki sales.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>DataFrame</dt><dd>Rows aur naam wale columns wali table.</dd></div><div data-read><dt>Missing value (NaN)</dt><dd>Khaali cell. Modelling se pehle isse handle karna zaroori hai.</dd></div><div data-read><dt>groupby</dt><dd>Rows ko groups mein baanto aur har group ka summary nikaalo, jaise har city ki sales.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 Example dekho</h2>
         <div class="code-wrap"><span class="code-lang">python</span><pre><code>import pandas as pd
@@ -150,14 +157,14 @@ print(df.head())                     # first 5 rows
 df = df.dropna(subset=[&quot;amount&quot;])   # drop rows with no amount
 by_city = df.groupby(&quot;city&quot;)[&quot;amount&quot;].sum().sort_values(ascending=False)
 print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
-        <p class="small muted">Load → clean → summarise. Data kaam ka roz ka loop.</p>
+        <p class="small muted" data-read>Load → clean → summarise. Data kaam ka roz ka loop.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Aapko har city ki total sales chahiye. Kaunsa Pandas tool sahi hai?</p>
-        <ol type="A"><li>groupby()</li><li>read_csv()</li><li>head()</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Aapko har city ki total sales chahiye. Kaunsa Pandas tool sahi hai?</p>
+        <ol type="A"><li data-read data-read-text="Option A: groupby()">groupby()</li><li data-read data-read-text="Option B: read_csv()">read_csv()</li><li data-read data-read-text="Option C: head()">head()</li></ol>
         <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>A. groupby()</strong>: groupby rows ko city ke hisaab se baantta hai, phir sum() har group ki sales jodta hai.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>DataFrame = table. Zyaadatar AI projects load → clean → groupby se shuru hote hain.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Yaad rakho</h2><p>DataFrame = table. Zyaadatar AI projects load → clean → groupby se shuru hote hain.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="git-github.html">← Git aur GitHub: apna kaam save aur share karna</a>
@@ -172,6 +179,8 @@ print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
       </section>
     </article>
   </main>
+  <script src="../../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "hi"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

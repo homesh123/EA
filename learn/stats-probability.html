@@ -133,14 +133,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 7 min read</p>
-        <h1>🎲 Probability and distributions</h1>
+        <h1 data-read>🎲 Probability and distributions</h1>
         <p class="lang-switch"><span>English</span><a href="hi/stats-probability.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>The weather app says &#39;70% chance of rain&#39;. That doesn&#39;t mean it rains for 70% of the day. It means that on days like this, it rained 7 times out of 10. AI models talk the same way: &#39;92% likely spam&#39; is a probability, not a certainty.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Probability is a number from 0 (impossible) to 1 (certain) that says how likely something is. A distribution describes how likely each possible value is. The normal distribution, or bell curve, is common: heights, exam scores and measurement errors cluster around the average and thin out at the extremes. Many ML models output probabilities, and you choose a threshold, say 0.5, to turn them into decisions. Conditional probability, P(A given B), is the chance of A when you already know B happened.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>The weather app says &#39;70% chance of rain&#39;. That doesn&#39;t mean it rains for 70% of the day. It means that on days like this, it rained 7 times out of 10. AI models talk the same way: &#39;92% likely spam&#39; is a probability, not a certainty.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Probability is a number from 0 (impossible) to 1 (certain) that says how likely something is. A distribution describes how likely each possible value is. The normal distribution, or bell curve, is common: heights, exam scores and measurement errors cluster around the average and thin out at the extremes. Many ML models output probabilities, and you choose a threshold, say 0.5, to turn them into decisions. Conditional probability, P(A given B), is the chance of A when you already know B happened.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Probability</dt><dd>How likely something is, from 0 to 1.</dd></div><div><dt>Normal distribution</dt><dd>The bell-shaped curve where most values sit near the average.</dd></div><div><dt>Threshold</dt><dd>The cut-off that turns a probability into a yes/no decision.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Probability</dt><dd>How likely something is, from 0 to 1.</dd></div><div data-read><dt>Normal distribution</dt><dd>The bell-shaped curve where most values sit near the average.</dd></div><div data-read><dt>Threshold</dt><dd>The cut-off that turns a probability into a yes/no decision.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>Model says: P(fraud) = 0.83 for this UPI transaction
@@ -148,14 +155,14 @@ Threshold 0.5  → flag it  ✅
 Threshold 0.9  → let it pass
 
 Lower threshold = catch more fraud, but annoy more honest customers.</code></pre></div>
-        <p class="small muted">Choosing a threshold is a business decision, not just a maths one.</p>
+        <p class="small muted" data-read>Choosing a threshold is a business decision, not just a maths one.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">A model says an email is &#39;spam with probability 0.6&#39;. What does that mean?</p>
-        <ol type="A"><li>60% of the email is spam</li><li>It&#39;s more likely spam than not, but not certain</li><li>It is definitely spam</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">A model says an email is &#39;spam with probability 0.6&#39;. What does that mean?</p>
+        <ol type="A"><li data-read data-read-text="Option A: 60% of the email is spam">60% of the email is spam</li><li data-read data-read-text="Option B: It&#39;s more likely spam than not, but not certain">It&#39;s more likely spam than not, but not certain</li><li data-read data-read-text="Option C: It is definitely spam">It is definitely spam</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. It&#39;s more likely spam than not, but not certain</strong>: 0.6 means that out of many similar emails, about 6 in 10 would be spam. It&#39;s likely, not certain.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Model outputs are usually probabilities, and you pick the threshold.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Model outputs are usually probabilities, and you pick the threshold.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="stats-center-spread.html">← Averages and spread: mean, median, variance</a>
@@ -170,6 +177,8 @@ Lower threshold = catch more fraud, but annoy more honest customers.</code></pre
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

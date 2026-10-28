@@ -123,14 +123,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 8 min read</p>
-        <h1>🔐 Enterprise AI: integration, security and compliance</h1>
+        <h1 data-read>🔐 Enterprise AI: integration, security and compliance</h1>
         <p class="lang-switch"><span>English</span><a href="hi/security-compliance.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>A hospital lets a visiting specialist in, but with a visitor badge that opens only certain doors, every entry logged, and no patient files leaving the building. Bringing AI into a company works the same way: it connects to legacy systems through controlled doors, sees only what each user is allowed to see, and leaves an audit trail.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Enterprise AI projects succeed or fail on integration and trust, not the model. Connect to existing systems (CRMs, ERPs, document stores) through their APIs with proper authentication (SSO, OAuth, service accounts). Make RAG permission-aware: retrieve only documents the asking user is allowed to see. Protect personal data (PII) by masking it before it reaches the model, and know where data is stored and processed (data residency). Log every prompt, tool call and answer for audits. Map requirements to frameworks like GDPR, India&#39;s DPDP Act, HIPAA or SOC 2 with the client&#39;s security team early.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>A hospital lets a visiting specialist in, but with a visitor badge that opens only certain doors, every entry logged, and no patient files leaving the building. Bringing AI into a company works the same way: it connects to legacy systems through controlled doors, sees only what each user is allowed to see, and leaves an audit trail.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Enterprise AI projects succeed or fail on integration and trust, not the model. Connect to existing systems (CRMs, ERPs, document stores) through their APIs with proper authentication (SSO, OAuth, service accounts). Make RAG permission-aware: retrieve only documents the asking user is allowed to see. Protect personal data (PII) by masking it before it reaches the model, and know where data is stored and processed (data residency). Log every prompt, tool call and answer for audits. Map requirements to frameworks like GDPR, India&#39;s DPDP Act, HIPAA or SOC 2 with the client&#39;s security team early.</p></section>
       
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>PII</dt><dd>Personally identifiable information: names, phone numbers, Aadhaar, addresses.</dd></div><div><dt>Permission-aware retrieval</dt><dd>Search that respects each user&#39;s access rights.</dd></div><div><dt>Audit log</dt><dd>A tamper-resistant record of who did what, and when.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>PII</dt><dd>Personally identifiable information: names, phone numbers, Aadhaar, addresses.</dd></div><div data-read><dt>Permission-aware retrieval</dt><dd>Search that respects each user&#39;s access rights.</dd></div><div data-read><dt>Audit log</dt><dd>A tamper-resistant record of who did what, and when.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">text</span><pre><code>HR assistant asks: &quot;What is Priya&#39;s salary?&quot;
@@ -138,14 +145,14 @@
   2. Retrieval filter: only documents this role can read → salary files excluded
   3. Answer: &quot;I can&#39;t share individual salary details.&quot;
   4. Audit log: user, question, documents checked, answer, timestamp</code></pre></div>
-        <p class="small muted">Security is enforced by the system, not by hoping the model refuses.</p>
+        <p class="small muted" data-read>Security is enforced by the system, not by hoping the model refuses.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">Two employees ask the same RAG bot about confidential plans. What should differ?</p>
-        <ol type="A"><li>Only the font</li><li>The documents retrieved, based on each person&#39;s permissions</li><li>Nothing, same answer for both</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">Two employees ask the same RAG bot about confidential plans. What should differ?</p>
+        <ol type="A"><li data-read data-read-text="Option A: Only the font">Only the font</li><li data-read data-read-text="Option B: The documents retrieved, based on each person&#39;s permissions">The documents retrieved, based on each person&#39;s permissions</li><li data-read data-read-text="Option C: Nothing, same answer for both">Nothing, same answer for both</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. The documents retrieved, based on each person&#39;s permissions</strong>: Permission-aware retrieval ensures each user only sees content they&#39;re allowed to.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Enforce access, mask PII, log everything, and involve security early.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>Enforce access, mask PII, log everything, and involve security early.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="api-serving.html">← Serving a model as an API with FastAPI</a>
@@ -160,6 +167,8 @@
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>

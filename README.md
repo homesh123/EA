@@ -70,6 +70,10 @@ roadmap step by step, starting with a "Start here" lesson.
   - a one-line takeaway.
 - **Two languages:** every lesson and the course screens can be read in English or Hinglish
   (Hindi in Roman script, with technical terms kept in English).
+- **Listen (read aloud):** every lesson has a 🔊 Listen button that reads it aloud with the
+  browser's built-in speech (no server, works offline), highlighting the part being read. It has
+  pause/resume, stop and 0.75×–1.5× speed. Hinglish uses a Hindi (India) voice when the device has
+  one. Code blocks and the quiz answer are not read.
 - **Connected to the roadmap:** the course recommends the user's best-fit role and marks
   steps they already know. Finishing all lessons in a step offers to tick that step on their roadmap.
   The results page links each roadmap step to its lessons.
@@ -105,6 +109,7 @@ AI Forward Deployed Engineer · AI Product Manager
 | `guide/*.html` | Generated guide ("How to choose the right AI role") and methodology page |
 | `content/` | Hand-written copy: background pages, the guide, and the lesson library and course structure for Learn |
 | `learn.html`, `learn.js` | The Learn section (interactive courses) |
+| `tts.js` | "Listen" read-aloud player for lessons (Web Speech API) |
 | `learn/*.html`, `learn/hi/*.html` | Generated static lesson pages in English and Hinglish |
 | `interview.html`, `interview.js` | Scored interview practice; `interview/*.html` are generated Q&A pages |
 | `resumes/*.html`, `resume.js` | Generated, editable ATS resume samples |

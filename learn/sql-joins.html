@@ -128,14 +128,21 @@
     <article lang="en">
       <header>
         <p class="eyebrow">Lesson · ⏱ 7 min read</p>
-        <h1>🧩 SQL JOINs: combining tables</h1>
+        <h1 data-read>🧩 SQL JOINs: combining tables</h1>
         <p class="lang-switch"><span>English</span><a href="hi/sql-joins.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+        <div class="listen-bar" data-reader data-listen="Listen" data-pause="Pause" data-resume="Resume" data-reading="Reading aloud…" data-paused="Paused" data-unsupported="Your browser can't read aloud">
+      <button type="button" class="listen-btn" data-tts="play" aria-pressed="false">🔊 Listen</button>
+      <button type="button" class="listen-stop" data-tts="stop" hidden>⏹ Stop</button>
+      <label class="listen-rate"><span class="sr-only">Reading speed</span><select data-tts="rate" aria-label="Reading speed">
+        <option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+      <span class="small muted" data-tts="status" role="status"></span>
+    </div>
       </header>
-      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Your school kept one register for student names and roll numbers, and another for marks by roll number. To print &#39;name + marks&#39;, you match the two registers on roll number. A JOIN does that matching for database tables.</p></section>
-      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>Databases split data into separate tables to avoid repetition, such as customers and orders, linked by a key like customer_id. A JOIN brings them back together. An INNER JOIN keeps only rows that match in both tables. A LEFT JOIN keeps every row from the left table, with blanks where there&#39;s no match, which is perfect for questions like &#39;customers who never ordered&#39;. Joining on the wrong key, or getting duplicate matches, is the most common source of wrong numbers.</p></section>
-      <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Venn diagram of customers and orders, highlighting the overlap for INNER JOIN and the whole customers circle for LEFT JOIN" focusable="false"><defs><marker id="ah-sj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><defs><clipPath id="sj-clip"><circle cx="250" cy="125" r="90"/></clipPath></defs><g class="alt1"><circle cx="390" cy="125" r="90" class="hl" clip-path="url(#sj-clip)"/><text x="320" y="26" text-anchor="middle" class="tb">INNER JOIN · only matching rows</text></g><g class="alt2"><circle cx="250" cy="125" r="90" class="hl"/><text x="320" y="26" text-anchor="middle" class="tb">LEFT JOIN · every customer + matches</text></g><circle cx="250" cy="125" r="90" class="ring"/><circle cx="390" cy="125" r="90" class="ring"/><text x="200" y="130" text-anchor="middle" class="">customers</text><text x="445" y="130" text-anchor="middle" class="">orders</text><text x="320" y="130" text-anchor="middle" class="ts">match</text></svg></div><p class="viz-caption">INNER JOIN keeps only customers who have orders (the overlap). LEFT JOIN keeps every customer, with or without orders.</p></section>
+      <section class="ls ls-analogy" data-read><h2>🏠 Real-life example</h2><p>Your school kept one register for student names and roll numbers, and another for marks by roll number. To print &#39;name + marks&#39;, you match the two registers on roll number. A JOIN does that matching for database tables.</p></section>
+      <section class="ls ls-explain" data-read><h2>💡 In simple words</h2><p>Databases split data into separate tables to avoid repetition, such as customers and orders, linked by a key like customer_id. A JOIN brings them back together. An INNER JOIN keeps only rows that match in both tables. A LEFT JOIN keeps every row from the left table, with blanks where there&#39;s no match, which is perfect for questions like &#39;customers who never ordered&#39;. Joining on the wrong key, or getting duplicate matches, is the most common source of wrong numbers.</p></section>
+      <section class="ls ls-visual"><h2>🎬 See how it works</h2><div class="viz"><svg viewBox="0 0 640 230" role="img" aria-label="Venn diagram of customers and orders, highlighting the overlap for INNER JOIN and the whole customers circle for LEFT JOIN" focusable="false"><defs><marker id="ah-sj" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs><defs><clipPath id="sj-clip"><circle cx="250" cy="125" r="90"/></clipPath></defs><g class="alt1"><circle cx="390" cy="125" r="90" class="hl" clip-path="url(#sj-clip)"/><text x="320" y="26" text-anchor="middle" class="tb">INNER JOIN · only matching rows</text></g><g class="alt2"><circle cx="250" cy="125" r="90" class="hl"/><text x="320" y="26" text-anchor="middle" class="tb">LEFT JOIN · every customer + matches</text></g><circle cx="250" cy="125" r="90" class="ring"/><circle cx="390" cy="125" r="90" class="ring"/><text x="200" y="130" text-anchor="middle" class="">customers</text><text x="445" y="130" text-anchor="middle" class="">orders</text><text x="320" y="130" text-anchor="middle" class="ts">match</text></svg></div><p class="viz-caption" data-read data-read-prefix="Diagram">INNER JOIN keeps only customers who have orders (the overlap). LEFT JOIN keeps every customer, with or without orders.</p></section>
       <section class="ls ls-terms"><h2>🔑 Key terms</h2>
-        <dl class="terms"><div><dt>Primary / foreign key</dt><dd>An ID that uniquely identifies a row, and the column in another table that points to it.</dd></div><div><dt>INNER JOIN</dt><dd>Only rows that match in both tables.</dd></div><div><dt>LEFT JOIN</dt><dd>All rows from the left table, plus matches from the right if there are any.</dd></div></dl>
+        <dl class="terms"><div data-read><dt>Primary / foreign key</dt><dd>An ID that uniquely identifies a row, and the column in another table that points to it.</dd></div><div data-read><dt>INNER JOIN</dt><dd>Only rows that match in both tables.</dd></div><div data-read><dt>LEFT JOIN</dt><dd>All rows from the left table, plus matches from the right if there are any.</dd></div></dl>
       </section>
       <section class="ls ls-example"><h2>👀 See it in action</h2>
         <div class="code-wrap"><span class="code-lang">sql</span><pre><code>-- Customers who have never placed an order
@@ -143,14 +150,14 @@ SELECT c.name
 FROM customers c
 LEFT JOIN orders o ON o.customer_id = c.id
 WHERE o.id IS NULL;</code></pre></div>
-        <p class="small muted">A LEFT JOIN plus &#39;IS NULL&#39; finds the rows with no match.</p>
+        <p class="small muted" data-read>A LEFT JOIN plus &#39;IS NULL&#39; finds the rows with no match.</p>
       </section>
       <section class="ls ls-quiz"><h2>✅ Quick check</h2>
-        <p class="quiz-q">You need every product, including ones that never sold. Which join?</p>
-        <ol type="A"><li>LEFT JOIN from products to sales</li><li>INNER JOIN products with sales</li><li>No join is needed</li></ol>
+        <p class="quiz-q" data-read data-read-prefix="Quick check">You need every product, including ones that never sold. Which join?</p>
+        <ol type="A"><li data-read data-read-text="Option A: LEFT JOIN from products to sales">LEFT JOIN from products to sales</li><li data-read data-read-text="Option B: INNER JOIN products with sales">INNER JOIN products with sales</li><li data-read data-read-text="Option C: No join is needed">No join is needed</li></ol>
         <details class="answer-reveal"><summary>Show answer</summary><p><strong>A. LEFT JOIN from products to sales</strong>: A LEFT JOIN keeps all products even when no sales row matches. An INNER JOIN would drop them.</p></details>
       </section>
-      <section class="ls ls-remember"><h2>📌 Remember</h2><p>INNER = only matches. LEFT = keep everything on the left.</p></section>
+      <section class="ls ls-remember" data-read><h2>📌 Remember</h2><p>INNER = only matches. LEFT = keep everything on the left.</p></section>
 
       <nav class="lesson-pager" aria-label="Lessons">
         <a href="sql-basics.html">← SQL basics: asking a database questions</a>
@@ -165,6 +172,8 @@ WHERE o.id IS NULL;</code></pre></div>
       </section>
     </article>
   </main>
+  <script src="../tts.js" defer></script>
+  <script>addEventListener("DOMContentLoaded", () => LessonReader.attach(document.querySelector("[data-reader]"), document.querySelector(".lesson-page article"), "en"));</script>
   <footer class="footer">
     <nav class="footer-links" aria-label="Site">
       <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
