@@ -31,7 +31,7 @@ for (const rel of pages) {
   test(`${rel}: internal links resolve to real files`, () => {
     const html = read(rel);
     const base = path.dirname(path.join(ROOT, rel));
-    const links = [...html.matchAll(/(?:href|src)="([^"#:]+)(?:#[^"]*)?"/g)].map(m => m[1]).filter(h => !h.startsWith("/") && h !== "");
+    const links = [...html.matchAll(/(?:href|src)="([^"#:?]+)(?:[?#][^"]*)?"/g)].map(m => m[1]).filter(h => !h.startsWith("/") && h !== "");
     for (const l of links) {
       const target = path.resolve(base, l.endsWith("/") ? l + "index.html" : l);
       assert.ok(fs.existsSync(target), `${rel} links to missing ${l}`);
@@ -39,9 +39,27 @@ for (const rel of pages) {
   });
 }
 
-test("every page is linked from the homepage (no orphan pages)", () => {
-  const home = read("index.html");
-  pages.filter(p => p !== "index.html").forEach(p => assert.ok(home.includes(`href="${p}"`), `homepage doesn't link ${p}`));
+test("every page can be reached by following links from the homepage (no orphan pages)", () => {
+  const seen = new Set(["index.html"]);
+  const queue = ["index.html"];
+  while (queue.length) {
+    const rel = queue.shift();
+    const base = path.dirname(rel);
+    for (const m of read(rel).matchAll(/href="([^"#:?]+\.html)(?:[?#][^"]*)?"/g)) {
+      const target = path.normalize(path.join(base, m[1]));
+      if (!seen.has(target) && fs.existsSync(path.join(ROOT, target))) { seen.add(target); queue.push(target); }
+    }
+  }
+  pages.forEach(p => assert.ok(seen.has(p), `${p} is not reachable from the homepage`));
+});
+
+test("English and Hinglish lesson pages point to each other with hreflang", () => {
+  pages.filter(p => /^learn\/(hi\/)?[^/]+\.html$/.test(p)).forEach(p => {
+    const html = read(p);
+    const id = path.basename(p, ".html");
+    assert.match(html, new RegExp(`hreflang="en" href="[^"]+/learn/${id}\\.html"`), p);
+    assert.match(html, new RegExp(`hreflang="hi" href="[^"]+/learn/hi/${id}\\.html"`), p);
+  });
 });
 
 test("audience pages recommend roles that match the scoring engine", () => {

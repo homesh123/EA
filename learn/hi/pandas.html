@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pandas: data ki tables ke saath kaam karna: Hinglish mein aasaan explanation | AI Path Finder</title>
+  <meta name="description" content="Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pandas: data ki tables ke saath kaam karna: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta property="og:description" content="Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai." />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pandas: data ki tables ke saath kaam karna: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta name="twitter:description" content="Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai." />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="alternate" hreflang="en" href="https://homesh123.github.io/ai-career-advisor/learn/pandas.html" />
+  <link rel="alternate" hreflang="hi" href="https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html" />
+  <link rel="alternate" hreflang="x-default" href="https://homesh123.github.io/ai-career-advisor/learn/pandas.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html#lesson",
+      "url": "https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html",
+      "name": "Pandas: data ki tables ke saath kaam karna",
+      "description": "Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai.",
+      "inLanguage": "hi-Latn",
+      "learningResourceType": "Lesson",
+      "educationalLevel": "Beginner",
+      "timeRequired": "PT8M",
+      "isAccessibleForFree": true,
+      "teaches": [
+        "DataFrame",
+        "Missing value (NaN)",
+        "groupby"
+      ],
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28",
+      "provider": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "isPartOf": [
+        {
+          "@type": "Course",
+          "name": "AI Foundations Path course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-fresher"
+        },
+        {
+          "@type": "Course",
+          "name": "ML Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ml-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "Data Engineer (AI focus) course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=data-engineer-ai"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learn",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Pandas: data ki tables ke saath kaam karna",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/pandas.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Aapko har city ki total sales chahiye. Kaunsa Pandas tool sahi hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "groupby(). groupby rows ko city ke hisaab se baantta hai, phir sum() har group ki sales jodta hai."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../../#paths">AI roles</a>
+      <a href="../../#backgrounds">By background</a>
+      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
+      <a href="../../guide/how-it-works.html">How it works</a>
+      <a href="../../learn.html">Learn</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
+  </header>
+  <main class="container article lesson-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">AI Path Finder</a> › <a href="../../learn.html">Learn</a> › <span aria-current="page">Pandas: data ki tables ke saath kaam karna</span></nav>
+    <article lang="hi-Latn">
+      <header>
+        <p class="eyebrow">Lesson · Hinglish · ⏱ 8 min padhne mein</p>
+        <h1>🐼 Pandas: data ki tables ke saath kaam karna</h1>
+        <p class="lang-switch"><a href="../pandas.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+      </header>
+      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Agar aapne Excel use kiya hai, to idea aapko pehle se pata hai: rows, columns, filters aur totals. Pandas Python ke andar Excel hai. Fark yeh hai ki yeh lakhon rows handle kar leta hai, badi files pe crash nahi hota, aur har baar aapke steps bilkul same tarah repeat karta hai.</p></section>
+      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Pandas tabular data ke liye standard Python library hai. DataFrame ek table hai, aur uska har column ek Series hai. Kuch hi lines mein aap CSV load kar sakte ho, pehli rows dekh sakte ho, filter aur sort kar sakte ho, missing values bhar sakte ho, aur data group karke totals ya averages nikaal sakte ho. Koi bhi ML model seekhne se pehle data lagbhag hamesha Pandas mein hi clean aur shape kiya jaata hai. NumPy, jis pe Pandas bana hai, numbers ke arrays pe fast maths karta hai.</p></section>
+      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+        <dl class="terms"><div><dt>DataFrame</dt><dd>Rows aur naam wale columns wali table.</dd></div><div><dt>Missing value (NaN)</dt><dd>Khaali cell. Modelling se pehle isse handle karna zaroori hai.</dd></div><div><dt>groupby</dt><dd>Rows ko groups mein baanto aur har group ka summary nikaalo, jaise har city ki sales.</dd></div></dl>
+      </section>
+      <section class="ls ls-example"><h2>👀 Example dekho</h2>
+        <div class="code-wrap"><span class="code-lang">python</span><pre><code>import pandas as pd
+
+df = pd.read_csv(&quot;orders.csv&quot;)     # city, item, amount
+print(df.head())                     # first 5 rows
+df = df.dropna(subset=[&quot;amount&quot;])   # drop rows with no amount
+by_city = df.groupby(&quot;city&quot;)[&quot;amount&quot;].sum().sort_values(ascending=False)
+print(by_city.head(3))               # top 3 cities by sales</code></pre></div>
+        <p class="small muted">Load → clean → summarise. Data kaam ka roz ka loop.</p>
+      </section>
+      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
+        <p class="quiz-q">Aapko har city ki total sales chahiye. Kaunsa Pandas tool sahi hai?</p>
+        <ol type="A"><li>head()</li><li>groupby()</li><li>read_csv()</li></ol>
+        <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. groupby()</strong>: groupby rows ko city ke hisaab se baantta hai, phir sum() har group ki sales jodta hai.</p></details>
+      </section>
+      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>DataFrame = table. Zyaadatar AI projects load → clean → groupby se shuru hote hain.</p></section>
+
+      <nav class="lesson-pager" aria-label="Lessons">
+        <a href="git-github.html">← Git aur GitHub: apna kaam save aur share karna</a>
+        <a href="stats-center-spread.html">Average aur spread: mean, median, variance →</a>
+      </nav>
+
+      <section class="cta-box">
+        <h2>Poora course, aapke roadmap ke hisaab se</h2>
+        <p>Progress tracking, quick checks aur step-by-step order ke saath. Yeh lesson in courses ka hissa hai:</p>
+        <p><a href="../../learn.html?course=ai-fresher&amp;lesson=pandas&amp;lang=hi">AI Foundations Path</a> · <a href="../../learn.html?course=ml-engineer&amp;lesson=pandas&amp;lang=hi">ML Engineer</a> · <a href="../../learn.html?course=data-engineer-ai&amp;lesson=pandas&amp;lang=hi">Data Engineer (AI focus)</a></p>
+        <a class="button btn-primary" href="../../learn.html?course=ai-fresher&amp;lesson=pandas&amp;lang=hi">Course mein seekho</a>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>

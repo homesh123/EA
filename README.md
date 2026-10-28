@@ -33,6 +33,34 @@ Live: https://homesh123.github.io/ai-career-advisor/
    - progress tracking saved in the browser;
    - export to a calendar (.ics) file.
 
+## Learn section (English and Hinglish)
+
+`learn.html` has a free course for each of the 9 roles. Each course follows that role's
+roadmap step by step, starting with a "Start here" lesson.
+
+- **54 lessons**, each with:
+  - a real-life analogy (chai stall, Swiggy, cricket, kirana store…);
+  - a plain-language explanation;
+  - key terms;
+  - a worked example (code or scenario) with a copy button;
+  - a quick check with instant feedback;
+  - a one-line takeaway.
+- **Two languages:** every lesson and the course screens can be read in English or Hinglish
+  (Hindi in Roman script, with technical terms kept in English).
+- **Connected to the roadmap:** the course recommends the user's best-fit role and marks
+  steps they already know. Finishing all lessons in a step offers to tick that step on their roadmap.
+  The results page links each roadmap step to its lessons.
+- **Saved progress:** completed lessons, quiz answers, language and last lesson are stored
+  in the browser. Arrow keys move between lessons.
+- **Crawlable copies:** every lesson also has a static page in both languages
+  (`learn/<id>.html`, `learn/hi/<id>.html`) with `hreflang` links between them, so search
+  engines and AI assistants can find and cite them.
+
+Lesson content lives in `content/lessons-*.js` (`[English, Hinglish]` pairs). Which lessons
+belong to each course and step is set in `content/learn-tracks.js`. The tests check that both
+languages are complete, quiz answers are valid, every roadmap step has lessons, and prerequisites
+come first.
+
 ## Roles covered
 
 AI Foundations (freshers) · ML Engineer · Data Engineer (AI) · AI Product Engineer ·
@@ -52,7 +80,9 @@ AI Forward Deployed Engineer · AI Product Manager
 | `roles/*.html` | Generated landing page per AI role (do not edit by hand) |
 | `for/*.html` | Generated "best AI roles for <background>" pages, ranked by the real scoring engine |
 | `guide/*.html` | Generated guide ("How to choose the right AI role") and methodology page |
-| `content/` | Hand-written copy for the background pages and the guide |
+| `content/` | Hand-written copy: background pages, the guide, and the lesson library and course structure for Learn |
+| `learn.html`, `learn.js` | The Learn section (interactive courses) |
+| `learn/*.html`, `learn/hi/*.html` | Generated static lesson pages in English and Hinglish |
 | `sitemap.xml`, `llms.txt` | Generated; `robots.txt`, `og-image.png`, `favicon.svg` are static |
 | `tests/` | Persona tests for the recommendation logic, plus SEO / site checks |
 

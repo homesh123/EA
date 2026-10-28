@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM kya hai? Tokens, context aur temperature: Hinglish mein aasaan explanation | AI Path Finder</title>
+  <meta name="description" content="LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte…" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="LLM kya hai? Tokens, context aur temperature: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta property="og:description" content="LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte…" />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LLM kya hai? Tokens, context aur temperature: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta name="twitter:description" content="LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte…" />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="alternate" hreflang="en" href="https://homesh123.github.io/ai-career-advisor/learn/llm-what.html" />
+  <link rel="alternate" hreflang="hi" href="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html" />
+  <link rel="alternate" hreflang="x-default" href="https://homesh123.github.io/ai-career-advisor/learn/llm-what.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html#lesson",
+      "url": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html",
+      "name": "LLM kya hai? Tokens, context aur temperature",
+      "description": "LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte…",
+      "inLanguage": "hi-Latn",
+      "learningResourceType": "Lesson",
+      "educationalLevel": "Beginner",
+      "timeRequired": "PT7M",
+      "isAccessibleForFree": true,
+      "teaches": [
+        "Token",
+        "Context window",
+        "Hallucination"
+      ],
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28",
+      "provider": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "isPartOf": [
+        {
+          "@type": "Course",
+          "name": "AI Foundations Path course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-fresher"
+        },
+        {
+          "@type": "Course",
+          "name": "AI Product Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-product-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "LLM / Agent Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=llm-agent-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "AI Forward Deployed Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-forward-deployed-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "AI Product Manager course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-product-manager"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learn",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LLM kya hai? Tokens, context aur temperature",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-what.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "LLM galat fact bhi bharose se kyun bol sakta hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Woh likely-sounding text banata hai aur khud facts check nahi karta. LLMs plausible text predict karte hain. Retrieval ya tools ke bina unke paas fact-check ka koi step nahi hota."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../../#paths">AI roles</a>
+      <a href="../../#backgrounds">By background</a>
+      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
+      <a href="../../guide/how-it-works.html">How it works</a>
+      <a href="../../learn.html">Learn</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
+  </header>
+  <main class="container article lesson-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">AI Path Finder</a> › <a href="../../learn.html">Learn</a> › <span aria-current="page">LLM kya hai? Tokens, context aur temperature</span></nav>
+    <article lang="hi-Latn">
+      <header>
+        <p class="eyebrow">Lesson · Hinglish · ⏱ 7 min padhne mein</p>
+        <h1>💬 LLM kya hai? Tokens, context aur temperature</h1>
+        <p class="lang-switch"><a href="../llm-what.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+      </header>
+      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Typing karte waqt phone ka keyboard agla word suggest karta hai. LLM (large language model) wahi idea hai, lekin bahut bada: internet ke bahut bade hisse ke text pe train hokar woh agla word itni acchi tarah predict karta hai ki poore essays, code aur jawaab ban jaate hain. &#39;Context window&#39; yeh hai ki woh ek baar mein conversation ka kitna hissa yaad rakh sakta hai, jaise whiteboard ka size.</p></section>
+      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>LLMs tokens mein padhte aur likhte hain: text ke tukde, English mein lagbhag ¾ word. Hindi aur doosri languages mein aksar ek word ke zyaada tokens lagte hain. Aap tokens ke hisaab se pay karte ho, aur limit bhi tokens ki hi hoti hai. Context window maximum tokens hain (aapka prompt, documents aur jawaab milakar) jo model ek baar mein handle kar sakta hai. Temperature randomness control karta hai: low (0–0.3) focused, repeatable jawaab deta hai, aur zyaada value zyaada creative hoti hai. Jab tak aap tools ya documents na do, LLMs kuch &#39;look up&#39; nahi karte. Woh likely text generate karte hain, isliye confidently galat bhi ho sakte hain (hallucinate).</p></section>
+      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+        <dl class="terms"><div><dt>Token</dt><dd>Woh unit jisse LLM padhta hai aur billing hoti hai, word ka tukda.</dd></div><div><dt>Context window</dt><dd>Maximum text jo model ek baar mein dhyaan mein rakh sakta hai.</dd></div><div><dt>Hallucination</dt><dd>Bharose se bola gaya jawaab jo banaaya hua ya galat hai.</dd></div></dl>
+      </section>
+      <section class="ls ls-example"><h2>👀 Example dekho</h2>
+        <div class="code-wrap"><span class="code-lang">text</span><pre><code>Prompt: &quot;Suggest a name for my chai startup&quot;
+temperature 0.0 → &quot;Chai Point&quot; (same every time)
+temperature 1.0 → &quot;Kettle &amp; Kulhad&quot;, &quot;Brew Bandhu&quot;, &quot;Sip Sutra&quot;… (varies)
+
+Tokens: &quot;Suggest a name for my chai startup&quot; ≈ 8 tokens</code></pre></div>
+        <p class="small muted">Facts aur code ke liye low temperature, brainstorming ke liye zyaada.</p>
+      </section>
+      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
+        <p class="quiz-q">LLM galat fact bhi bharose se kyun bol sakta hai?</p>
+        <ol type="A"><li>Woh jaan-boojhkar jhooth bol raha hai</li><li>Woh likely-sounding text banata hai aur khud facts check nahi karta</li><li>Uska internet slow hai</li></ol>
+        <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Woh likely-sounding text banata hai aur khud facts check nahi karta</strong>: LLMs plausible text predict karte hain. Retrieval ya tools ke bina unke paas fact-check ka koi step nahi hota.</p></details>
+      </section>
+      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>LLM = super-powered next-word predictor. Tokens, context aur temperature ka dhyaan rakho.</p></section>
+
+      <nav class="lesson-pager" aria-label="Lessons">
+        <a href="ml-metrics.html">← Models ko measure karna: accuracy, precision aur recall</a>
+        <a href="llm-prompting.html">Prompting: LLM ko saaf instructions dena →</a>
+      </nav>
+
+      <section class="cta-box">
+        <h2>Poora course, aapke roadmap ke hisaab se</h2>
+        <p>Progress tracking, quick checks aur step-by-step order ke saath. Yeh lesson in courses ka hissa hai:</p>
+        <p><a href="../../learn.html?course=ai-fresher&amp;lesson=llm-what&amp;lang=hi">AI Foundations Path</a> · <a href="../../learn.html?course=ai-product-engineer&amp;lesson=llm-what&amp;lang=hi">AI Product Engineer</a> · <a href="../../learn.html?course=llm-agent-engineer&amp;lesson=llm-what&amp;lang=hi">LLM / Agent Engineer</a> · <a href="../../learn.html?course=ai-forward-deployed-engineer&amp;lesson=llm-what&amp;lang=hi">AI Forward Deployed Engineer</a> · <a href="../../learn.html?course=ai-product-manager&amp;lesson=llm-what&amp;lang=hi">AI Product Manager</a></p>
+        <a class="button btn-primary" href="../../learn.html?course=ai-fresher&amp;lesson=llm-what&amp;lang=hi">Course mein seekho</a>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>

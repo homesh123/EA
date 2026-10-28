@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streaming data: Kafka and real-time pipelines: Explained Simply With Real-Life Examples | AI Path Finder</title>
+  <meta name="description" content="In streaming, events (a click, a payment, a GPS ping) flow continuously. Apache Kafka is the standard backbone: producers write events to topics, Kafka…" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/learn/streaming.html" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Streaming data: Kafka and real-time pipelines: Explained Simply With Real-Life Examples | AI Path Finder" />
+  <meta property="og:description" content="In streaming, events (a click, a payment, a GPS ping) flow continuously. Apache Kafka is the standard backbone: producers write events to topics, Kafka…" />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/learn/streaming.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Streaming data: Kafka and real-time pipelines: Explained Simply With Real-Life Examples | AI Path Finder" />
+  <meta name="twitter:description" content="In streaming, events (a click, a payment, a GPS ping) flow continuously. Apache Kafka is the standard backbone: producers write events to topics, Kafka…" />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="alternate" hreflang="en" href="https://homesh123.github.io/ai-career-advisor/learn/streaming.html" />
+  <link rel="alternate" hreflang="hi" href="https://homesh123.github.io/ai-career-advisor/learn/hi/streaming.html" />
+  <link rel="alternate" hreflang="x-default" href="https://homesh123.github.io/ai-career-advisor/learn/streaming.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/streaming.html#lesson",
+      "url": "https://homesh123.github.io/ai-career-advisor/learn/streaming.html",
+      "name": "Streaming data: Kafka and real-time pipelines",
+      "description": "In streaming, events (a click, a payment, a GPS ping) flow continuously. Apache Kafka is the standard backbone: producers write events to topics, Kafka…",
+      "inLanguage": "en",
+      "learningResourceType": "Lesson",
+      "educationalLevel": "Beginner",
+      "timeRequired": "PT7M",
+      "isAccessibleForFree": true,
+      "teaches": [
+        "Event",
+        "Topic",
+        "Consumer"
+      ],
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28",
+      "provider": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "isPartOf": [
+        {
+          "@type": "Course",
+          "name": "Data Engineer (AI focus) course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=data-engineer-ai"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/streaming.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learn",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Streaming data: Kafka and real-time pipelines",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn/streaming.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/streaming.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which use case most needs streaming instead of a nightly batch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Blocking a fraudulent payment as it happens. Fraud must be stopped in seconds. A report tomorrow is too late."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../#paths">AI roles</a>
+      <a href="../#backgrounds">By background</a>
+      <a href="../guide/how-to-choose-an-ai-role.html">How to choose</a>
+      <a href="../guide/how-it-works.html">How it works</a>
+      <a href="../learn.html">Learn</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../#app">Free consultation</a>
+  </header>
+  <main class="container article lesson-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">AI Path Finder</a> › <a href="../learn.html">Learn</a> › <span aria-current="page">Streaming data: Kafka and real-time pipelines</span></nav>
+    <article lang="en">
+      <header>
+        <p class="eyebrow">Lesson · ⏱ 7 min read</p>
+        <h1>🌊 Streaming data: Kafka and real-time pipelines</h1>
+        <p class="lang-switch"><span>English</span><a href="hi/streaming.html" hreflang="hi" lang="hi-Latn">Hinglish</a></p>
+      </header>
+      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Batch processing is like reading the morning newspaper: yesterday&#39;s news, all at once. Streaming is like a live cricket score app: every ball updates instantly. Fraud detection, live delivery tracking and real-time recommendations need the live-score approach.</p></section>
+      <section class="ls ls-explain"><h2>💡 In simple words</h2><p>In streaming, events (a click, a payment, a GPS ping) flow continuously. Apache Kafka is the standard backbone: producers write events to topics, Kafka stores them durably in order, and consumers read them at their own pace. Stream processors (Spark Structured Streaming, Flink) compute things on the fly, such as rolling counts and features for fraud models. Streaming adds complexity: late or duplicate events, ordering and exactly-once guarantees. Start with batch, and add streaming only where freshness truly matters.</p></section>
+      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+        <dl class="terms"><div><dt>Event</dt><dd>A single fact that happened at a time, e.g. &#39;payment of ₹499 at 10:02&#39;.</dd></div><div><dt>Topic</dt><dd>A named stream of events in Kafka.</dd></div><div><dt>Consumer</dt><dd>A service that reads and processes events from a topic.</dd></div></dl>
+      </section>
+      <section class="ls ls-example"><h2>👀 See it in action</h2>
+        <div class="code-wrap"><span class="code-lang">text</span><pre><code>UPI app ──payment event──▶ Kafka topic &#39;payments&#39;
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+   fraud scorer            live dashboard          warehouse loader
+   (reacts in &lt; 1 s)       (updates per second)    (hourly batch)</code></pre></div>
+        <p class="small muted">One stream, many independent consumers, each at its own speed.</p>
+      </section>
+      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
+        <p class="quiz-q">Which use case most needs streaming instead of a nightly batch?</p>
+        <ol type="A"><li>Monthly finance report</li><li>Blocking a fraudulent payment as it happens</li><li>Yearly HR summary</li></ol>
+        <details class="answer-reveal"><summary>Show answer</summary><p><strong>B. Blocking a fraudulent payment as it happens</strong>: Fraud must be stopped in seconds. A report tomorrow is too late.</p></details>
+      </section>
+      <section class="ls ls-remember"><h2>📌 Remember</h2><p>Batch = periodic, simpler. Streaming = real-time, more complex. Use it when seconds matter.</p></section>
+
+      <nav class="lesson-pager" aria-label="Lessons">
+        <a href="rag.html">← RAG: letting an LLM answer from your documents</a>
+        <a href="portfolio.html">Building a portfolio project that gets interviews →</a>
+      </nav>
+
+      <section class="cta-box">
+        <h2>Learn this as part of a full course</h2>
+        <p>Track your progress, take the quick checks and follow the lessons in the right order. This lesson is part of:</p>
+        <p><a href="../learn.html?course=data-engineer-ai&amp;lesson=streaming">Data Engineer (AI focus)</a></p>
+        <a class="button btn-primary" href="../learn.html?course=data-engineer-ai&amp;lesson=streaming">Continue in the course</a>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../for/software-testers-qa.html">QA / testers</a></li><li><a href="../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../guide/how-it-works.html">How the consultation works</a></li><li><a href="../#app">Free AI career consultation</a></li><li><a href="../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>

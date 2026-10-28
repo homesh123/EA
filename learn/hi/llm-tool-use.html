@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tool use (function calling): LLM ko action lene dena: Hinglish mein aasaan explanation | AI Path Finder</title>
+  <meta name="description" content="Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <link rel="canonical" href="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" type="application/xml" href="../../sitemap.xml" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="AI Path Finder" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Tool use (function calling): LLM ko action lene dena: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta property="og:description" content="Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein." />
+  <meta property="og:url" content="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html" />
+  <meta property="og:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:modified_time" content="2026-10-28" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tool use (function calling): LLM ko action lene dena: Hinglish mein aasaan explanation | AI Path Finder" />
+  <meta name="twitter:description" content="Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein." />
+  <meta name="twitter:image" content="https://homesh123.github.io/ai-career-advisor/og-image.png" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="alternate" hreflang="en" href="https://homesh123.github.io/ai-career-advisor/learn/llm-tool-use.html" />
+  <link rel="alternate" hreflang="hi" href="https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html" />
+  <link rel="alternate" hreflang="x-default" href="https://homesh123.github.io/ai-career-advisor/learn/llm-tool-use.html" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LearningResource",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html#lesson",
+      "url": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html",
+      "name": "Tool use (function calling): LLM ko action lene dena",
+      "description": "Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein.",
+      "inLanguage": "hi-Latn",
+      "learningResourceType": "Lesson",
+      "educationalLevel": "Beginner",
+      "timeRequired": "PT8M",
+      "isAccessibleForFree": true,
+      "teaches": [
+        "Tool / function",
+        "JSON schema",
+        "Human-in-the-loop"
+      ],
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28",
+      "provider": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "publisher": {
+        "@id": "https://homesh123.github.io/ai-career-advisor/#org"
+      },
+      "isPartOf": [
+        {
+          "@type": "Course",
+          "name": "AI Product Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-product-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "LLM / Agent Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=llm-agent-engineer"
+        },
+        {
+          "@type": "Course",
+          "name": "AI Forward Deployed Engineer course",
+          "url": "https://homesh123.github.io/ai-career-advisor/learn.html?course=ai-forward-deployed-engineer"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI Path Finder",
+          "item": "https://homesh123.github.io/ai-career-advisor/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learn",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Tool use (function calling): LLM ko action lene dena",
+          "item": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://homesh123.github.io/ai-career-advisor/learn/hi/llm-tool-use.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Tool call asal mein kaun execute karta hai?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aapka application code. Model sirf call request karta hai. Code aapka chalata hai, isliye permissions aur safety aapke control mein hain."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="page">
+  <header class="site-header">
+    <a class="brand" href="../../">AI Path Finder</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="../../#paths">AI roles</a>
+      <a href="../../#backgrounds">By background</a>
+      <a href="../../guide/how-to-choose-an-ai-role.html">How to choose</a>
+      <a href="../../guide/how-it-works.html">How it works</a>
+      <a href="../../learn.html">Learn</a>
+    </nav>
+    <a class="button btn-primary btn-small" href="../../#app">Free consultation</a>
+  </header>
+  <main class="container article lesson-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">AI Path Finder</a> › <a href="../../learn.html">Learn</a> › <span aria-current="page">Tool use (function calling): LLM ko action lene dena</span></nav>
+    <article lang="hi-Latn">
+      <header>
+        <p class="eyebrow">Lesson · Hinglish · ⏱ 8 min padhne mein</p>
+        <h1>🧰 Tool use (function calling): LLM ko action lene dena</h1>
+        <p class="lang-switch"><a href="../llm-tool-use.html" hreflang="en" lang="en">English</a><span>Hinglish</span></p>
+      </header>
+      <section class="ls ls-analogy"><h2>🏠 Real-life example</h2><p>Smart receptionist khud doctor ka calendar nahi dekh sakti, lekin calendar system ko call kar sakti hai: &#39;Kya Dr. Mehta 4 baje free hain?&#39; Phir jawaab ke hisaab se aapko reply karti hai. Tool use LLM ko yahi power deta hai. Woh khud live data nahi la sakta, lekin aapke code se function chalwa sakta hai aur result use kar sakta hai.</p></section>
+      <section class="ls ls-explain"><h2>💡 Aasaan shabdon mein</h2><p>Aap model ko tools describe karte ho: naam, har tool kya karta hai, aur uske input parameters JSON schema mein. Jab sawaal ke liye tool chahiye, model text ki jagah tool call reply karta hai (&#39;get_order_status&#39;, order_id=&#39;A123&#39;). Aapka code asli function chalata hai aur result wapas bhejta hai, aur model usse final jawaab likhta hai. Chatbots aise hi orders check karte hain, tickets book karte hain ya databases query karte hain. Control aapke code ke paas rehta hai: inputs validate karo, permissions check karo, aur refund jaise risky actions ke liye insaan ki approval rakho.</p></section>
+      <section class="ls ls-terms"><h2>🔑 Key terms</h2>
+        <dl class="terms"><div><dt>Tool / function</dt><dd>Action jo aapka code model ko deta hai, jaise search ya calculator.</dd></div><div><dt>JSON schema</dt><dd>Tool ke inputs aur unke types ka description.</dd></div><div><dt>Human-in-the-loop</dt><dd>Important actions hone se pehle insaan approve karta hai.</dd></div></dl>
+      </section>
+      <section class="ls ls-example"><h2>👀 Example dekho</h2>
+        <div class="code-wrap"><span class="code-lang">text</span><pre><code>User:   &quot;Where is my order A123?&quot;
+Model → tool_call: get_order_status(order_id=&quot;A123&quot;)
+Your code runs it → {&quot;status&quot;: &quot;out for delivery&quot;, &quot;eta&quot;: &quot;7:40 pm&quot;}
+Model:  &quot;Your order is out for delivery and should arrive by 7:40 pm 🛵&quot;</code></pre></div>
+        <p class="small muted">Tool kab use karna hai, yeh model decide karta hai. Asli kaam aapka code karta hai.</p>
+      </section>
+      <section class="ls ls-quiz"><h2>✅ Quick check</h2>
+        <p class="quiz-q">Tool call asal mein kaun execute karta hai?</p>
+        <ol type="A"><li>LLM khud, model ke andar</li><li>Aapka application code</li><li>User</li></ol>
+        <details class="answer-reveal"><summary>Jawaab dekho</summary><p><strong>B. Aapka application code</strong>: Model sirf call request karta hai. Code aapka chalata hai, isliye permissions aur safety aapke control mein hain.</p></details>
+      </section>
+      <section class="ls ls-remember"><h2>📌 Yaad rakho</h2><p>Model poochta hai, aapka code karta hai. Sab kuch validate karo.</p></section>
+
+      <nav class="lesson-pager" aria-label="Lessons">
+        <a href="ai-ux.html">← AI features ke liye UX: uncertainty ke hisaab se design</a>
+        <a href="portfolio.html">Aisa portfolio project banaana jo interviews dilaaye →</a>
+      </nav>
+
+      <section class="cta-box">
+        <h2>Poora course, aapke roadmap ke hisaab se</h2>
+        <p>Progress tracking, quick checks aur step-by-step order ke saath. Yeh lesson in courses ka hissa hai:</p>
+        <p><a href="../../learn.html?course=ai-product-engineer&amp;lesson=llm-tool-use&amp;lang=hi">AI Product Engineer</a> · <a href="../../learn.html?course=llm-agent-engineer&amp;lesson=llm-tool-use&amp;lang=hi">LLM / Agent Engineer</a> · <a href="../../learn.html?course=ai-forward-deployed-engineer&amp;lesson=llm-tool-use&amp;lang=hi">AI Forward Deployed Engineer</a></p>
+        <a class="button btn-primary" href="../../learn.html?course=ai-product-engineer&amp;lesson=llm-tool-use&amp;lang=hi">Course mein seekho</a>
+      </section>
+    </article>
+  </main>
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Site">
+      <div><h2>AI career paths</h2><ul><li><a href="../../roles/ai-foundations-beginner.html">AI Foundations Path</a></li><li><a href="../../roles/ml-engineer.html">ML Engineer</a></li><li><a href="../../roles/ai-data-engineer.html">Data Engineer (AI focus)</a></li><li><a href="../../roles/ai-product-engineer.html">AI Product Engineer</a></li><li><a href="../../roles/mlops-engineer.html">MLOps / AI Platform Engineer</a></li><li><a href="../../roles/llm-agent-engineer.html">LLM / Agent Engineer</a></li><li><a href="../../roles/ai-research-engineer.html">AI Research Engineer</a></li><li><a href="../../roles/ai-forward-deployed-engineer.html">AI Forward Deployed Engineer</a></li><li><a href="../../roles/ai-product-manager.html">AI Product Manager</a></li></ul></div>
+      <div><h2>AI careers by background</h2><ul><li><a href="../../for/software-testers-qa.html">QA / testers</a></li><li><a href="../../for/java-dotnet-backend-developers.html">Backend developers</a></li><li><a href="../../for/frontend-full-stack-developers.html">Frontend / full-stack</a></li><li><a href="../../for/devops-cloud-engineers.html">DevOps / cloud</a></li><li><a href="../../for/data-engineers-analysts.html">Data / BI</a></li><li><a href="../../for/freshers-mca-bca-graduates.html">Freshers / MCA</a></li><li><a href="../../for/non-it-professionals.html">Non-IT professionals</a></li><li><a href="../../for/product-managers-business-analysts.html">PMs / BAs</a></li><li><a href="../../for/senior-engineers-tech-leads.html">Senior engineers</a></li></ul></div>
+      <div><h2>Guides</h2><ul><li><a href="../../guide/how-to-choose-an-ai-role.html">How to choose an AI role</a></li><li><a href="../../guide/how-it-works.html">How the consultation works</a></li><li><a href="../../#app">Free AI career consultation</a></li><li><a href="../../learn.html">Free AI courses (English &amp; Hinglish)</a></li><li><a href="../../llms.txt">llms.txt</a></li></ul></div>
+    </nav>
+    <p>AI Path Finder: free AI career consultation and guidance. Last updated <time datetime="2026-10-28">28 October 2026</time>. Guidance, not a job guarantee.</p>
+  </footer>
+</body>
+</html>
