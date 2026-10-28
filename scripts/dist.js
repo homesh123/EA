@@ -12,7 +12,7 @@ const { minify } = require("terser");
 
 const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "dist");
-const SKIP_DIRS = new Set(["node_modules", "dist", "scripts", "tests", ".git", ".github", ".claude"]);
+const SKIP_DIRS = new Set(["node_modules", "dist", "scripts", "tests", "shots", ".git", ".github", ".claude"]);
 const SKIP_FILES = new Set(["package.json", "package-lock.json", "README.md", "LICENSE", ".gitignore"]);
 const PUBLIC_EXT = new Set([".html", ".js", ".css", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".xml", ".txt", ".json", ".webmanifest"]);
 
