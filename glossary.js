@@ -10,9 +10,9 @@ var Glossary = (function () {
   };
   const UI = {
     search: ["Search terms, like RAG, overfitting or tokens", "Shabd dhoondho, jaise RAG, overfitting ya tokens"],
-    all: ["All", "Sab"], meaning: ["In one line", "Ek line mein"], detail: ["Explained", "Vistaar se"], example: ["Example", "Example"],
+    all: ["All", "Sab"], meaning: ["In one line", "Ek line mein"], detail: ["Explained", "Vistaar se"], example: ["Real example", "Asli example"],
     learn: ["Learn it", "Seekho"], related: ["Related", "Jude hue shabd"], also: ["Also called", "Ise yeh bhi kehte hain"],
-    hear: ["Hear it", "Suno"], none: ["No matching terms. Try another word.", "Koi match nahi. Koi aur shabd try karo."],
+    hear: ["Hear it", "Suno"], simple: ["Think of it like", "Aise samjho"], page: ["Open the full page", "Poora page kholo"], none: ["No matching terms. Try another word.", "Koi match nahi. Koi aur shabd try karo."],
     count: ["{n} terms", "{n} shabd"], open: ["Open all", "Sab kholo"], close: ["Close all", "Sab band karo"]
   };
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -22,7 +22,8 @@ var Glossary = (function () {
 
   function terms(list) {
     const src = list || (typeof GLOSSARY_TERMS !== "undefined" ? GLOSSARY_TERMS : []);
-    return src.slice().sort((a, b) => a.term.localeCompare(b.term, "en", { sensitivity: "base" }));
+    const simple = typeof GLOSSARY_SIMPLE !== "undefined" ? GLOSSARY_SIMPLE : {};
+    return src.map(t => simple[t.term] && !t.simple ? Object.assign({}, t, { simple: simple[t.term] }) : t).sort((a, b) => a.term.localeCompare(b.term, "en", { sensitivity: "base" }));
   }
   // Find a term by its name, its short name ("LLM" for "LLM (large language model)") or an alias.
   function resolver(T) {
@@ -34,7 +35,7 @@ var Glossary = (function () {
 
   // lang: "en", "hi" or "both" (both languages in the page, shown by html.lang-hi).
   // lessonLink(id) returns the attributes for a link to a lesson; lessonName(id) its title pair.
-  function html({ lang = "en", lessonLink, lessonName, list } = {}) {
+  function html({ lang = "en", lessonLink, lessonName, termLink, list } = {}) {
     const T = terms(list);
     const find = resolver(T);
     const pick = pair => lang === "hi" ? pair[1] : pair[0];
@@ -59,16 +60,18 @@ var Glossary = (function () {
         <h2 class="gl-letter-head">${L}</h2>
         ${T.filter(t => letterOf(t.term) === L).map(t => {
           // Words separated by single spaces, so search can match from the start of a word ("rag" ≠ "average").
-          const search = " " + [t.term, t.aka, ...t.short, ...t.detail].join(" ").toLowerCase().replace(/[^a-z0-9₹%]+/g, " ").trim() + " ";
+          const search = " " + [t.term, t.aka, ...t.short, ...(t.simple || []), ...t.detail].join(" ").toLowerCase().replace(/[^a-z0-9₹%]+/g, " ").trim() + " ";
           const related = t.related.map(find).filter(Boolean).filter((r, i, a) => r !== t && a.indexOf(r) === i);
           return `<details class="gl-term" id="${slug(t.term)}" data-gl-cat-of="${t.cat}" data-gl-text="${esc(search)}">
           <summary><span class="gl-name">${esc(t.term)}</span><span class="gl-short">${txt(t.short)}</span></summary>
           <div class="gl-body">
             <p class="gl-tags"><span class="chip">${txt(CATS[t.cat])}</span>${t.aka ? ` <span class="small muted">${ui("also")}: ${esc(t.aka)}</span>` : ""}
-              <button type="button" class="kid-hear gl-hear" data-say="${esc(sayText(t.term, t.detail))}" data-say-hi="${esc(`${t.term}. ${t.detail[1]}`)}" aria-label="${esc(UI.hear[0])}">🔊</button></p>
+              <button type="button" class="kid-hear gl-hear" data-say="${esc(sayText(t.term, t.simple ? [t.simple[0] + " " + t.detail[0], t.simple[1] + " " + t.detail[1]] : t.detail))}" data-say-hi="${esc(`${t.term}. ${t.simple ? t.simple[1] + " " : ""}${t.detail[1]}`)}" aria-label="${esc(UI.hear[0])}">🔊</button></p>
+            ${t.simple ? `<p class="gl-simple"><strong>🧸 ${ui("simple")}:</strong> ${txt(t.simple)}</p>` : ""}
             <p class="gl-detail">${txt(t.detail)}</p>
             <p class="gl-example"><strong>💡 ${ui("example")}:</strong> ${txt(t.example)}</p>
             ${t.lessons.length && lessonLink ? `<p class="small">📖 <strong>${ui("learn")}:</strong> ${t.lessons.map(id => `<a ${lessonLink(id)}>${lessonName ? txt(lessonName(id)) : esc(id)}</a>`).join(" · ")}</p>` : ""}
+            ${termLink ? `<p class="small"><a href="${termLink(t)}">${ui("page")} →</a></p>` : ""}
             ${related.length ? `<p class="small">🔗 <strong>${ui("related")}:</strong> ${related.map(r => `<a href="#${slug(r.term)}" data-gl-jump="${slug(r.term)}">${esc(r.term)}</a>`).join(" · ")}</p>` : ""}
           </div>
         </details>`;
@@ -155,5 +158,10 @@ if (typeof document !== "undefined" && document.getElementById("glossaryPage")) 
     setLang(b.dataset.siteLang);
   }));
   Glossary.enhance(root, { lang: "both" });
+  // A single term page has no search box; its read aloud button is wired here.
+  if (root.hasAttribute("data-term-page")) root.querySelectorAll(".gl-hear").forEach(b => b.addEventListener("click", () => {
+    const hi = document.documentElement.classList.contains("lang-hi");
+    if (typeof LessonReader !== "undefined") LessonReader.say(hi ? b.dataset.sayHi : b.dataset.say, hi ? "hi" : "en");
+  }));
   setLang(getLang());
 }

@@ -225,3 +225,21 @@ test("AI dictionary: 100+ terms, A to Z, both languages, valid lesson links and 
   const related = (html.match(/data-gl-jump="([^"]+)"/g) || []).map(x => x.slice(14, -1));
   related.forEach(id => assert.match(html, new RegExp(`id="${id}"`), `related link ${id} resolves`));
 });
+
+test("AI dictionary: everyday comparisons match real terms, and every term has its own answer page", () => {
+  const T = [1, 2, 3].flatMap(i => require(`../content/glossary-${i}.js`).GLOSSARY_TERMS);
+  const { GLOSSARY_SIMPLE } = require("../content/glossary-simple.js");
+  const names = new Set(T.map(t => t.term));
+  Object.entries(GLOSSARY_SIMPLE).forEach(([k, v]) => { assert.ok(names.has(k), `unknown term ${k}`); both(v, `${k} simple`); });
+  assert.ok(Object.keys(GLOSSARY_SIMPLE).length >= T.length * 0.9, "most terms have an everyday comparison");
+  const rag = fs.readFileSync(path.join(__dirname, "..", "glossary", "rag.html"), "utf8");
+  assert.match(rag, /<h1><span data-l="en">What is RAG\?<\/span>/);
+  assert.match(rag, /"@type": "DefinedTerm"/);
+  assert.match(rag, /"@type": "FAQPage"/);
+  assert.match(rag, /Think of it like/);
+  assert.match(rag, /open book exam/);
+  T.forEach(t => {
+    const file = t.term.toLowerCase().replace(/\(.*?\)/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") + ".html";
+    assert.ok(fs.existsSync(path.join(__dirname, "..", "glossary", file)), `page for ${t.term}`);
+  });
+});

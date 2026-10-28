@@ -26,6 +26,7 @@ const { RESUMES } = require("../content/resumes.js");
 const { INTERVIEW_PREP } = require("../content/interview-prep.js");
 const { KIDS } = require("../content/kids.js");
 const GLOSSARY_TERMS = [1, 2, 3].flatMap(i => require(`../content/glossary-${i}.js`).GLOSSARY_TERMS);
+global.GLOSSARY_SIMPLE = require("../content/glossary-simple.js").GLOSSARY_SIMPLE; // read by Glossary.terms()
 const { Glossary } = require("../glossary.js");
 const { optionOrder } = require("../content/shuffle.js");
 const { LessonReader } = require("../tts.js");
@@ -682,7 +683,10 @@ ${jsonLd(graph)}`;
       </section>
       <section class="ls ls-faq"><h2>🙋 ${esc(ui("peopleAsk"))}</h2>${deep.faq.map(([q, ans]) => `<details class="deep-faq"><summary data-read>${esc(pick(q))}</summary><p data-read>${esc(pick(ans))}</p></details>`).join("")}</section>
       <section class="ls ls-remember" data-read><h2>📌 ${esc(ui("remember"))}</h2><p>${esc(pick(x.remember))}</p></section>
-
+${(() => {
+        const words = Glossary.terms(GLOSSARY_TERMS).filter(t => t.lessons.includes(id));
+        return words.length ? `      <section class="ls ls-words"><h2>📖 ${hi ? "Is lesson ke shabd (AI dictionary)" : "Words from this lesson (AI dictionary)"}</h2><ul class="chips plain">${words.map(t => `<li><a class="chip" href="${p}glossary/${termFile(t)}" title="${esc(pick(t.short))}">${esc(termShort(t))}</a></li>`).join("")}</ul></section>\n` : "";
+      })()}
       <nav class="lesson-pager" aria-label="${hi ? "Lessons" : "Lessons"}">
         ${prevId ? `<a href="${prevId}.html">← ${esc(pick(LESSON_TOPICS[prevId].title))}</a>` : "<span></span>"}
         ${nextId ? `<a href="${nextId}.html">${esc(pick(LESSON_TOPICS[nextId].title))} →</a>` : ""}
@@ -1110,8 +1114,78 @@ function kidsLevelPage(l, i) {
   return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: KIDS_FONT + "\n" + jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page kids-page">');
 }
 
-// ---------- AI dictionary (glossary/index.html) ----------
+// ---------- AI dictionary (glossary/index.html and one page per term) ----------
 const GLOSSARY_URL = `${SITE}glossary/`;
+const termFile = t => Glossary.slug(t.term).replace(/^term-/, "") + ".html";
+const termUrl = t => `${GLOSSARY_URL}${termFile(t)}`;
+// "RAG (retrieval augmented generation)" → "RAG"; used in questions like "What is RAG?"
+const termShort = t => t.term.replace(/\s*\(.*\)$/, "");
+const plain = s => s.replace(/\s+/g, " ").trim();
+
+function glossaryTermPage(t, i, T) {
+  const url = termUrl(t), name = termShort(t);
+  const find = n => T.find(x => x.term.toLowerCase() === n.toLowerCase() || termShort(x).toLowerCase() === n.toLowerCase() || (x.aka || "").toLowerCase().split(/,\s*/).includes(n.toLowerCase()));
+  const related = t.related.map(find).filter((r, k, a) => r && r !== t && a.indexOf(r) === k);
+  const prev = T[i - 1], next = T[i + 1];
+  const title = `What is ${name}? Meaning in simple words, with example`;
+  const lead = t.short[0].replace(/\.$/, "");
+  let description = `${name} meaning: ${lead}.${t.simple ? " " + t.simple[0] : ""}`;
+  if (description.length > 158) description = description.slice(0, 155).replace(/\s\S*$/, "") + "…";
+  if (description.length < 70) description += ` Explained in English and Hinglish with an example.`;
+  const faq = [
+    [`What is ${name}?`, plain(`${t.short[0]} ${t.detail[0]}`)],
+    ...(t.simple ? [[`How can I understand ${name} in simple words?`, t.simple[0]]] : []),
+    [`What is an example of ${name}?`, t.example[0]],
+    [`${name} ka matlab kya hai?`, plain(`${t.short[1]} ${t.simple ? t.simple[1] : t.detail[1]}`)]
+  ];
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPage(url, title, description, { about: { "@id": `${url}#term` } }),
+      breadcrumb(url, [[SITE_NAME, SITE], ["AI dictionary", GLOSSARY_URL], [name, url]]),
+      { "@type": "DefinedTerm", "@id": `${url}#term`, name: t.term, ...(t.aka ? { alternateName: t.aka.split(/,\s*/) } : {}), description: t.short[0], url, inDefinedTermSet: `${GLOSSARY_URL}#set` },
+      faqPage(url, faq)
+    ]
+  };
+  const bi = pair => `<span data-l="en">${esc(pair[0])}</span><span data-l="hi" lang="hi-Latn">${esc(pair[1])}</span>`;
+  const lessons = t.lessons.filter(id => LESSON_TOPICS[id]);
+  const body = `  <main class="container article glossary-main term-page" id="glossaryPage" data-term-page>
+    ${crumbsHtml("../", [[SITE_NAME, "../"], ["AI dictionary", "./"], [name]])}
+    <header class="gl-hero">
+      <div>
+        <p class="eyebrow">AI dictionary · ${esc(Glossary.CATS[t.cat][0])}</p>
+        <h1><span data-l="en">What is ${esc(name)}?</span><span data-l="hi" lang="hi-Latn">${esc(name)} kya hai?</span></h1>
+        ${t.aka ? `<p class="small muted">Also called: ${esc(t.aka)}</p>` : ""}
+      </div>
+      <div class="lang-toggle page-lang" role="group" aria-label="Language"><button type="button" data-site-lang="en">English</button><button type="button" data-site-lang="hi">Hinglish</button></div>
+    </header>
+    <section class="answer-box term-answer" aria-label="Short answer">
+      <p class="term-lead"><strong>${esc(name)}:</strong> ${bi(t.short)}
+        <button type="button" class="kid-hear gl-hear" data-say="${esc(`${name}. ${t.short[0]} ${t.simple ? t.simple[0] + " " : ""}${t.detail[0]}`)}" data-say-hi="${esc(`${name}. ${t.short[1]} ${t.simple ? t.simple[1] + " " : ""}${t.detail[1]}`)}" aria-label="Hear it">🔊</button></p>
+    </section>
+    ${t.simple ? `<section class="term-sec"><h2>🧸 <span data-l="en">Think of it like</span><span data-l="hi" lang="hi-Latn">Aise samjho</span></h2>
+      <p class="gl-simple">${bi(t.simple)}</p></section>` : ""}
+    <section class="term-sec"><h2>📘 <span data-l="en">Explained</span><span data-l="hi" lang="hi-Latn">Vistaar se</span></h2>
+      <p class="gl-detail">${bi(t.detail)}</p></section>
+    <section class="term-sec"><h2>💡 <span data-l="en">Real example</span><span data-l="hi" lang="hi-Latn">Asli example</span></h2>
+      <p class="gl-example">${bi(t.example)}</p></section>
+    ${lessons.length ? `<section class="term-sec"><h2>📖 <span data-l="en">Learn it step by step</span><span data-l="hi" lang="hi-Latn">Step by step seekho</span></h2>
+      <ul class="term-links">${lessons.map(id => `<li><a href="../learn/${id}.html" data-l="en">${esc(LESSON_TOPICS[id].title[0])}</a><a href="../learn/hi/${id}.html" data-l="hi" lang="hi-Latn">${esc(LESSON_TOPICS[id].title[1])}</a></li>`).join("")}</ul></section>` : ""}
+    ${related.length ? `<section class="term-sec"><h2>🔗 <span data-l="en">Related terms</span><span data-l="hi" lang="hi-Latn">Jude hue shabd</span></h2>
+      <ul class="term-related">${related.map(r => `<li><a href="${termFile(r)}"><strong>${esc(termShort(r))}</strong><span>${bi(r.short)}</span></a></li>`).join("")}</ul></section>` : ""}
+    <section class="faq-section term-sec"><h2>Questions people ask</h2>
+${faq.map(([q, a]) => `      <details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("\n")}
+    </section>
+    <nav class="lesson-pager" aria-label="Dictionary">
+      ${prev ? `<a href="${termFile(prev)}">← ${esc(termShort(prev))}</a>` : `<a href="./">← AI dictionary</a>`}
+      ${next ? `<a href="${termFile(next)}">${esc(termShort(next))} →</a>` : `<a href="./">AI dictionary →</a>`}
+    </nav>
+    <p class="small"><a href="./#${Glossary.slug(t.term)}">See ${esc(name)} in the full A to Z dictionary</a> · <a href="../learn.html">Start a free AI course</a></p>
+  </main>
+  <script src="../tts.js" defer></script>
+  <script src="../glossary.js" defer></script>`;
+  return pageShell({ title: `${title} | ${SITE_NAME}`, description, url, head: jsonLd(graph), body, p: "../" }).replace('<body class="page">', '<body class="page glossary-page">');
+}
 function glossaryPage() {
   const T = Glossary.terms(GLOSSARY_TERMS);
   const url = GLOSSARY_URL;
@@ -1123,7 +1197,7 @@ function glossaryPage() {
       webPage(url, title, description),
       breadcrumb(url, [[SITE_NAME, SITE], ["AI dictionary", url]]),
       { "@type": "DefinedTermSet", "@id": `${url}#set`, name: "AI dictionary", url, inLanguage: ["en", "hi-Latn"],
-        hasDefinedTerm: T.map(t => ({ "@type": "DefinedTerm", name: t.term, ...(t.aka ? { alternateName: t.aka } : {}), description: t.short[0], url: `${url}#${Glossary.slug(t.term)}`, inDefinedTermSet: `${url}#set` })) }
+        hasDefinedTerm: T.map(t => ({ "@type": "DefinedTerm", name: t.term, ...(t.aka ? { alternateName: t.aka } : {}), description: t.short[0], url: termUrl(t), inDefinedTermSet: `${url}#set` })) }
     ]
   };
   const body = `  <main class="container article glossary-main">
@@ -1137,7 +1211,7 @@ function glossaryPage() {
       <div class="lang-toggle page-lang" role="group" aria-label="Language"><button type="button" data-site-lang="en">English</button><button type="button" data-site-lang="hi">Hinglish</button></div>
     </header>
     <div id="glossaryPage">
-${Glossary.html({ lang: "both", list: GLOSSARY_TERMS, lessonLink: id => `href="../learn/${id}.html"`, lessonName: id => LESSON_TOPICS[id].title })}
+${Glossary.html({ lang: "both", list: GLOSSARY_TERMS, lessonLink: id => `href="../learn/${id}.html"`, lessonName: id => LESSON_TOPICS[id].title, termLink: t => `${termFile(t)}` })}
     </div>
     <section class="cta-box">
       <h2>Learn these step by step</h2>
@@ -1262,6 +1336,7 @@ function sitemap() {
     { loc: `${SITE}resume-builder.html`, pri: "0.8" },
     { loc: KIDS_URL, pri: "0.8" },
     { loc: GLOSSARY_URL, pri: "0.8" },
+    ...Glossary.terms(GLOSSARY_TERMS).map(t => ({ loc: termUrl(t), pri: "0.6" })),
     ...KIDS.levels.map(l => ({ loc: kidsLevelUrl(l), pri: "0.6" })),
     ...ids.map(id => ({ loc: interviewPageUrl(id), pri: "0.7" })),
     ...ids.map(id => ({ loc: resumeUrl(id), pri: "0.7" })),
@@ -1317,7 +1392,7 @@ ${ids.map(id => `- [${ROLES[id].title} resume sample](${resumeUrl(id)}): keyword
 
 ## AI dictionary (A to Z)
 - [AI dictionary](${GLOSSARY_URL}): ${Glossary.terms(GLOSSARY_TERMS).length} AI terms explained in English and Hinglish, each with an example and a lesson link.
-${Glossary.terms(GLOSSARY_TERMS).map(t => `- [${t.term}](${GLOSSARY_URL}#${Glossary.slug(t.term)}): ${t.short[0]}`).join("\n")}
+${Glossary.terms(GLOSSARY_TERMS).map(t => `- [What is ${termShort(t)}?](${termUrl(t)}): ${t.short[0]}${t.simple ? ` Simply put: ${t.simple[0]}` : ""}`).join("\n")}
 
 ## AI for kids (ages 5+)
 - [AI for Kids](${KIDS_URL}): free, read-aloud game levels in English and Hinglish with Robo the robot, stars, badges and a printable certificate. ${KIDS_INTRO[0][0]}
@@ -1353,6 +1428,7 @@ function outputs() {
   files["resumes/index.html"] = resumesIndex();
   files["kids/index.html"] = kidsHubPage();
   files["glossary/index.html"] = glossaryPage();
+  Glossary.terms(GLOSSARY_TERMS).forEach((t, i, T) => { files[`glossary/${termFile(t)}`] = glossaryTermPage(t, i, T); });
   KIDS.levels.forEach((l, i) => { files[`kids/${l.id}.html`] = kidsLevelPage(l, i); });
   let ivHtml = fs.readFileSync(path.join(ROOT, "interview.html"), "utf8");
   ivHtml = replaceRegion(ivHtml, "sitenav", "  " + siteNav(""));

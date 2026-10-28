@@ -1292,9 +1292,9 @@ html.lang-hi [data-l="hi"]{display:inline}
 .gl-az a:hover{background:var(--accent-soft)}
 .gl-az span{color:var(--faint)}
 .gl-meta{margin:6px 0 0}
-.gl-letter{scroll-margin-top:110px}
+.gl-letter{scroll-margin-top:240px}
 .gl-letter-head{font-size:1.5rem;color:var(--accent);margin:18px 0 6px;border-bottom:2px solid var(--accent-soft);padding-bottom:2px}
-.gl-term{border:1px solid var(--border-light);border-radius:var(--radius);background:var(--card);margin:0 0 8px;scroll-margin-top:110px}
+.gl-term{border:1px solid var(--border-light);border-radius:var(--radius);background:var(--card);margin:0 0 8px;scroll-margin-top:240px}
 .gl-term summary{cursor:pointer;list-style:none;padding:10px 14px;display:flex;flex-direction:column;gap:2px}
 .gl-term summary::-webkit-details-marker{display:none}
 .gl-name{font-weight:700;font-size:1.05rem}
@@ -1307,7 +1307,7 @@ html.lang-hi [data-l="hi"]{display:inline}
 .gl-tags .gl-hear{margin-left:auto}
 .gl-detail{line-height:1.6}
 .gl-example{background:var(--warn-soft);border-radius:8px;padding:8px 10px}
-@media (max-width:640px){.gl-letter,.gl-term{scroll-margin-top:220px}.gl-tools{position:static}}
+@media (max-width:700px){.gl-letter,.gl-term{scroll-margin-top:16px}.gl-tools{position:static}}
 
 /* ---------- Apple style chrome: translucent header, appearance switch, current page ---------- */
 .site-header{
@@ -1392,3 +1392,18 @@ html.lang-hi [data-l="hi"]{display:inline}
   }
   .site-header{position:static;background:none;border:none;-webkit-backdrop-filter:none;backdrop-filter:none}
 }
+
+/* ---------- AI dictionary: everyday comparison and one page per term ---------- */
+.gl-simple{background:var(--accent-softer);border-left:3px solid var(--accent);border-radius:8px;padding:8px 12px;line-height:1.55}
+.term-page .term-answer{margin:8px 0 20px}
+.term-lead{margin:0;font-size:var(--fs-title3);line-height:1.45}
+.term-lead .gl-hear{vertical-align:middle;margin-left:6px}
+.term-sec{margin:22px 0}
+.term-sec h2{font-size:var(--fs-title3);margin:0 0 8px}
+.term-sec p{margin:0;line-height:1.6}
+.term-links{margin:0;padding-left:18px;display:grid;gap:4px}
+.term-related{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.term-related a{display:grid;gap:2px;height:100%;padding:12px 14px;border-radius:var(--radius);background:var(--card);border:1px solid var(--border-light);text-decoration:none;color:var(--text)}
+.term-related a:hover{box-shadow:var(--shadow-hover);color:var(--text)}
+.term-related span{color:var(--muted);font-size:var(--fs-subhead);line-height:1.4}
+@media (max-width:700px){.term-related{grid-template-columns:1fr}}
